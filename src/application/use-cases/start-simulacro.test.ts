@@ -2,37 +2,37 @@ import { describe, it, expect, vi } from 'vitest';
 import { startSimulacro } from './start-simulacro';
 import type { ContentPort } from '../ports/content-port';
 import type { SessionConfig } from '../../domain/exam/session';
-import type { DirectQuestion } from '../../domain/question/question';
+import type { ReactivoDirecto } from '../../domain/question/question';
 
 // ---------------------------------------------------------------------------
-// Fakes helpers
+// Fakes helpers — modelo v2
 // ---------------------------------------------------------------------------
 
-function makeDirectQuestion(id: string, subarea: string): DirectQuestion {
+function makeReactivoDirecto(id: string, subarea: string): ReactivoDirecto {
   return {
     id,
-    itemType: 'direct',
-    stem: `Pregunta ${id}`,
-    options: ['A', 'B', 'C', 'D'],
-    correctIndex: 0,
+    tipo: 'directo',
+    enunciado: `Pregunta ${id}`,
+    opciones: ['A', 'B', 'C', 'D'],
+    correcta: 0,
     explanation: 'Explicación.',
-    officialTag: { area: 'A', subarea: subarea as 'A1' },
-    originTag: { area: 'Administración', subarea: 'Conceptos' },
+    area: 'A',
+    subarea: subarea as 'A1',
   };
 }
 
-/** Banco mínimo con 5 preguntas en A1 */
-function makeSeedBank(n = 5): DirectQuestion[] {
-  return Array.from({ length: n }, (_, i) => makeDirectQuestion(`q${i + 1}`, 'A1'));
+/** Banco mínimo con 5 reactivos en A1 */
+function makeSeedBank(n = 5): ReactivoDirecto[] {
+  return Array.from({ length: n }, (_, i) => makeReactivoDirecto(`q${i + 1}`, 'A1'));
 }
 
-function makeFakePort(questions: DirectQuestion[]): ContentPort {
+function makeFakePort(questions: ReactivoDirecto[]): ContentPort {
   return {
     loadBank: vi.fn().mockResolvedValue(questions),
   };
 }
 
-const rngFixed = () => 0.5; // rng determinista
+const rngFixed = () => 0.5;
 
 // ---------------------------------------------------------------------------
 // Tests
@@ -64,9 +64,8 @@ describe('startSimulacro', () => {
   });
 
   it('propaga bankWarnings cuando el banco es insuficiente', async () => {
-    // Solo 1 reactivo disponible para A1; blueprint de 20 pide más
     const config: SessionConfig = { size: 20, timer: { mode: 'limited', minutes: 58 } };
-    const port = makeFakePort([makeDirectQuestion('q1', 'A1')]);
+    const port = makeFakePort([makeReactivoDirecto('q1', 'A1')]);
 
     const session = await startSimulacro(config, port, rngFixed);
 

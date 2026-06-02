@@ -1,116 +1,105 @@
 import { describe, it, expect } from 'vitest';
 import type {
-  DirectQuestion,
-  CompletionQuestion,
-  OrderingQuestion,
-  ColumnMatchQuestion,
-  CaseQuestion,
-  Question,
+  ReactivoDirecto,
+  ReactivoCompletamiento,
+  ReactivoOrdenamiento,
+  ReactivoRelacion,
+  Reactivo,
 } from './question';
 import { assertNever, getItemCount } from './question';
 
-const baseFields = {
+// ---------------------------------------------------------------------------
+// Fixtures — modelo v2
+// ---------------------------------------------------------------------------
+
+const base = {
   id: 'q1',
-  officialTag: { area: 'A' as const, subarea: 'A1' as const },
-  originTag: { area: 'Administración', subarea: 'Conceptos generales' },
+  area: 'A' as const,
+  subarea: 'A1' as const,
   explanation: 'Explicación de prueba',
 };
 
-const direct: DirectQuestion = {
-  ...baseFields,
-  itemType: 'direct',
-  stem: '¿Cuál es el proceso administrativo?',
-  options: ['Planear', 'Organizar', 'Dirigir', 'Controlar'],
-  correctIndex: 0,
+const directo: ReactivoDirecto = {
+  ...base,
+  tipo: 'directo',
+  enunciado: '¿Cuál es el proceso administrativo?',
+  opciones: ['Planear', 'Organizar', 'Dirigir', 'Controlar'],
+  correcta: 0,
 };
 
-const completion: CompletionQuestion = {
-  ...baseFields,
-  itemType: 'completion',
-  stem: 'La ___ es la primera etapa del proceso.',
-  options: ['planeación', 'organización', 'dirección', 'control'],
-  correctIndex: 0,
+const completamiento: ReactivoCompletamiento = {
+  ...base,
+  tipo: 'completamiento',
+  enunciado: 'La ___ es la primera etapa del proceso.',
+  opciones: ['planeación', 'organización', 'dirección', 'control'],
+  correcta: 0,
 };
 
-const ordering: OrderingQuestion = {
-  ...baseFields,
-  itemType: 'ordering',
-  stem: 'Ordena las etapas del proceso',
-  items: ['Controlar', 'Planear', 'Dirigir', 'Organizar'],
-  correctOrder: [1, 3, 2, 0],
+const ordenamiento: ReactivoOrdenamiento = {
+  ...base,
+  tipo: 'ordenamiento',
+  enunciado: 'Ordena las etapas del proceso',
+  elementos: ['Controlar', 'Planear', 'Dirigir', 'Organizar'],
+  ordenCorrecto: [1, 3, 2, 0],
 };
 
-const match: ColumnMatchQuestion = {
-  ...baseFields,
-  itemType: 'match',
-  stem: 'Relaciona conceptos',
-  leftColumn: ['Planear', 'Organizar'],
-  rightColumn: ['Definir objetivos', 'Estructurar recursos', 'Opciones extra'],
-  correctMatches: [
+const relacion: ReactivoRelacion = {
+  ...base,
+  tipo: 'relacion',
+  enunciado: 'Relaciona conceptos',
+  columnaIzquierda: ['Planear', 'Organizar'],
+  columnaDerecha: ['Definir objetivos', 'Estructurar recursos', 'Opciones extra'],
+  emparejamientos: [
     [0, 0],
     [1, 1],
   ],
 };
 
-const caseQ: CaseQuestion = {
-  ...baseFields,
-  itemType: 'case',
-  caseStem: 'Caso de estudio sobre empresa XYZ',
-  subQuestions: [
-    {
-      itemType: 'direct',
-      stem: '¿Qué falló?',
-      options: ['Planeación', 'Ejecución', 'Control', 'Todo'],
-      correctIndex: 2,
-    },
-    {
-      itemType: 'completion',
-      stem: 'El fallo se debió a falta de ___',
-      options: ['control', 'recursos', 'personal', 'tiempo'],
-      correctIndex: 0,
-    },
-  ],
+const directoConCaso: ReactivoDirecto = {
+  ...base,
+  tipo: 'directo',
+  caso: 'Contexto del caso compartido.',
+  enunciado: 'Pregunta sobre el caso',
+  opciones: ['A', 'B', 'C', 'D'],
+  correcta: 0,
 };
 
-describe('Question — tipo discriminado', () => {
-  it('direct tiene itemType "direct"', () => {
-    expect(direct.itemType).toBe('direct');
+// ---------------------------------------------------------------------------
+// Tests
+// ---------------------------------------------------------------------------
+
+describe('Reactivo — tipo discriminado (modelo v2)', () => {
+  it('directo tiene tipo "directo"', () => {
+    expect(directo.tipo).toBe('directo');
   });
 
-  it('completion tiene itemType "completion"', () => {
-    expect(completion.itemType).toBe('completion');
+  it('completamiento tiene tipo "completamiento"', () => {
+    expect(completamiento.tipo).toBe('completamiento');
   });
 
-  it('ordering tiene itemType "ordering"', () => {
-    expect(ordering.itemType).toBe('ordering');
+  it('ordenamiento tiene tipo "ordenamiento"', () => {
+    expect(ordenamiento.tipo).toBe('ordenamiento');
   });
 
-  it('match tiene itemType "match"', () => {
-    expect(match.itemType).toBe('match');
-  });
-
-  it('case tiene itemType "case"', () => {
-    expect(caseQ.itemType).toBe('case');
+  it('relacion tiene tipo "relacion"', () => {
+    expect(relacion.tipo).toBe('relacion');
   });
 
   it('switch exhaustivo sobre todos los tipos — sin caer en assertNever', () => {
-    const questions: Question[] = [direct, completion, ordering, match, caseQ];
-    for (const q of questions) {
+    const reactivos: Reactivo[] = [directo, completamiento, ordenamiento, relacion];
+    for (const q of reactivos) {
       let handled = false;
-      switch (q.itemType) {
-        case 'direct':
+      switch (q.tipo) {
+        case 'directo':
           handled = true;
           break;
-        case 'completion':
+        case 'completamiento':
           handled = true;
           break;
-        case 'ordering':
+        case 'ordenamiento':
           handled = true;
           break;
-        case 'match':
-          handled = true;
-          break;
-        case 'case':
+        case 'relacion':
           handled = true;
           break;
         default:
@@ -120,20 +109,19 @@ describe('Question — tipo discriminado', () => {
     }
   });
 
-  it('getItemCount retorna 1 para leaf questions', () => {
-    expect(getItemCount(direct)).toBe(1);
-    expect(getItemCount(completion)).toBe(1);
-    expect(getItemCount(ordering)).toBe(1);
-    expect(getItemCount(match)).toBe(1);
+  it('getItemCount retorna 1 para todos los tipos (casos aplanados en modelo v2)', () => {
+    expect(getItemCount(directo)).toBe(1);
+    expect(getItemCount(completamiento)).toBe(1);
+    expect(getItemCount(ordenamiento)).toBe(1);
+    expect(getItemCount(relacion)).toBe(1);
   });
 
-  it('getItemCount retorna N para CaseQuestion (cantidad de sub-preguntas)', () => {
-    expect(getItemCount(caseQ)).toBe(2);
+  it('reactivo con campo "caso" (aplanado) tiene getItemCount = 1', () => {
+    expect(getItemCount(directoConCaso)).toBe(1);
   });
 
-  it('CaseQuestion con 2 sub-preguntas contribuye 2 al conteo (REQ-01 esc.01-C)', () => {
-    const count = caseQ.subQuestions.length;
-    expect(count).toBe(2);
-    expect(getItemCount(caseQ)).toBe(count);
+  it('campo "caso" es opcional', () => {
+    expect(directo.caso).toBeUndefined();
+    expect(directoConCaso.caso).toBe('Contexto del caso compartido.');
   });
 });

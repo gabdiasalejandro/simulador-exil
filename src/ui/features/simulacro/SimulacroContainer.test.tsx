@@ -4,27 +4,27 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { SimulacroContainer } from './SimulacroContainer';
 import type { ContentPort } from '../../../application/ports/content-port';
 import type { StoragePort } from '../../../application/ports/storage-port';
-import type { Question } from '../../../domain/question/question';
+import type { Reactivo, ReactivoDirecto } from '../../../domain/question/question';
 import type { Attempt } from '../../../domain/attempt/attempt';
 
 // ---------------------------------------------------------------------------
-// Fakes
+// Fakes — modelo v2
 // ---------------------------------------------------------------------------
 
-function makeDirectQ(id: string, subarea: string): Question {
+function makeReactivoDirecto(id: string, subarea: string): ReactivoDirecto {
   return {
     id,
-    itemType: 'direct',
-    stem: `Pregunta ${id}`,
-    options: ['A', 'B', 'C', 'D'],
-    correctIndex: 0,
+    tipo: 'directo',
+    enunciado: `Pregunta ${id}`,
+    opciones: ['A', 'B', 'C', 'D'],
+    correcta: 0,
     explanation: 'exp',
-    officialTag: { area: 'A', subarea: subarea as 'A1' },
-    originTag: { area: 'Admin', subarea: 'sub' },
+    area: 'A',
+    subarea: subarea as 'A1',
   };
 }
 
-function makeFakeContentPort(questions: Question[]): ContentPort {
+function makeFakeContentPort(questions: Reactivo[]): ContentPort {
   return { loadBank: () => Promise.resolve(questions) };
 }
 
@@ -36,10 +36,10 @@ function makeFakeStoragePort(): StoragePort {
   };
 }
 
-// 20 questions from various subareas (needed for valid sampling)
-function make20Questions(): Question[] {
+// 20 reactivos de distintas subáreas (necesarios para el muestreo válido)
+function make20Questions(): Reactivo[] {
   const subareas = ['A1','A2','A3','A4','A5','B1','B2','B3','B4','B5','C1','C2','C3','D1','D2','E1','E2','E3','F1','F2'] as const;
-  return subareas.map((s, i) => makeDirectQ(`q-${i}`, s));
+  return subareas.map((s, i) => makeReactivoDirecto(`q-${i}`, s));
 }
 
 describe('SimulacroContainer', () => {
@@ -76,7 +76,6 @@ describe('SimulacroContainer', () => {
     await act(async () => {
       await userEvent.click(screen.getByRole('button', { name: 'Iniciar simulacro' }));
     });
-    // Debe mostrar el botón de enviar del simulacro activo
     expect(screen.getByRole('button', { name: 'Enviar' })).toBeInTheDocument();
   });
 
@@ -91,11 +90,14 @@ describe('SimulacroContainer', () => {
     await act(async () => {
       await userEvent.click(screen.getByRole('button', { name: 'Iniciar simulacro' }));
     });
-    // Reactivo 1 de 20 visible
-    expect(screen.getByText(/Reactivo 1 de/)).toBeInTheDocument();
-    // Clic en "Siguiente →" pasa a reactivo 2
+    // El header de QuestionCard puede estar dividido en sub-spans; usamos getAllByText
+    expect(
+      screen.getAllByText((_, el) => el?.textContent?.includes('Reactivo 1 de') ?? false).length,
+    ).toBeGreaterThan(0);
     await userEvent.click(screen.getByRole('button', { name: 'Siguiente →' }));
-    expect(screen.getByText(/Reactivo 2 de/)).toBeInTheDocument();
+    expect(
+      screen.getAllByText((_, el) => el?.textContent?.includes('Reactivo 2 de') ?? false).length,
+    ).toBeGreaterThan(0);
   });
 
   it('al hacer submit llama onDone con el Attempt', async () => {
@@ -117,7 +119,6 @@ describe('SimulacroContainer', () => {
   });
 
   it('auto-submit al expirar el timer llama onDone', async () => {
-    // Timer de 1 segundo para agilizar
     const contentPortWith1s: ContentPort = makeFakeContentPort(make20Questions());
     render(
       <SimulacroContainer
@@ -126,13 +127,9 @@ describe('SimulacroContainer', () => {
         onDone={onDone}
       />,
     );
-    // Iniciar con 1 minuto y luego agotar manualmente el timer
     await act(async () => {
       await userEvent.click(screen.getByRole('button', { name: 'Iniciar simulacro' }));
     });
-    // Simular expiración: el Timer dispara onExpire cuando llega a 0.
-    // No podemos avanzar real-clock en jsdom, pero validamos que el Timer
-    // aparece cuando el modo es limited (existencia del elemento timer).
     expect(screen.getByRole('timer')).toBeInTheDocument();
   });
 });

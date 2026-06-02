@@ -1,122 +1,118 @@
 import { describe, it, expect } from 'vitest';
-import { scoreQuestion, scoreCaseQuestion } from './scoring-policy';
-import type { DirectQuestion, CaseQuestion } from '../question/question';
+import { scoreQuestion } from './scoring-policy';
+import type { ReactivoDirecto } from '../question/question';
 import type { Answer } from '../question/answer';
+
+// ---------------------------------------------------------------------------
+// Fixtures — modelo v2
+// ---------------------------------------------------------------------------
 
 const base = {
   id: 'q',
-  officialTag: { area: 'A' as const, subarea: 'A1' as const },
-  originTag: { area: 'a', subarea: 'a' },
+  area: 'A' as const,
+  subarea: 'A1' as const,
   explanation: 'e',
 };
 
-const direct: DirectQuestion = {
+const directo: ReactivoDirecto = {
   ...base,
-  itemType: 'direct',
-  stem: 'Pregunta',
-  options: ['A', 'B', 'C', 'D'],
-  correctIndex: 2,
+  tipo: 'directo',
+  enunciado: 'Pregunta',
+  opciones: ['A', 'B', 'C', 'D'],
+  correcta: 2,
 };
 
-describe('scoreQuestion — leaf questions', () => {
+// ---------------------------------------------------------------------------
+// Tests
+// ---------------------------------------------------------------------------
+
+describe('scoreQuestion — modelo v2 (tipos planos)', () => {
   it('respuesta correcta → 1', () => {
     const ans: Answer = { kind: 'choice', index: 2 };
-    expect(scoreQuestion(direct, ans)).toBe(1);
+    expect(scoreQuestion(directo, ans)).toBe(1);
   });
 
   it('respuesta incorrecta → 0', () => {
     const ans: Answer = { kind: 'choice', index: 0 };
-    expect(scoreQuestion(direct, ans)).toBe(0);
+    expect(scoreQuestion(directo, ans)).toBe(0);
   });
 
   it('sin responder (null) → 0 (REQ-06.4)', () => {
-    expect(scoreQuestion(direct, null)).toBe(0);
+    expect(scoreQuestion(directo, null)).toBe(0);
   });
 
-  it('ordering correcto → 1', () => {
-    const ordering = {
+  it('completamiento correcto → 1', () => {
+    const q = {
       ...base,
-      itemType: 'ordering' as const,
-      stem: 'Ordena',
-      items: ['C', 'A', 'B'],
-      correctOrder: [1, 2, 0],
+      tipo: 'completamiento' as const,
+      enunciado: 'Completa',
+      opciones: ['a', 'b', 'c', 'd'] as [string, string, string, string],
+      correcta: 1 as const,
+    };
+    const ans: Answer = { kind: 'choice', index: 1 };
+    expect(scoreQuestion(q, ans)).toBe(1);
+  });
+
+  it('ordenamiento correcto → 1', () => {
+    const ordenamiento = {
+      ...base,
+      tipo: 'ordenamiento' as const,
+      enunciado: 'Ordena',
+      elementos: ['C', 'A', 'B'],
+      ordenCorrecto: [1, 2, 0],
     };
     const ans: Answer = { kind: 'order', sequence: [1, 2, 0] };
-    expect(scoreQuestion(ordering, ans)).toBe(1);
+    expect(scoreQuestion(ordenamiento, ans)).toBe(1);
   });
 
-  it('ordering incorrecto → 0', () => {
-    const ordering = {
+  it('ordenamiento incorrecto → 0', () => {
+    const ordenamiento = {
       ...base,
-      itemType: 'ordering' as const,
-      stem: 'Ordena',
-      items: ['C', 'A', 'B'],
-      correctOrder: [1, 2, 0],
+      tipo: 'ordenamiento' as const,
+      enunciado: 'Ordena',
+      elementos: ['C', 'A', 'B'],
+      ordenCorrecto: [1, 2, 0],
     };
     const ans: Answer = { kind: 'order', sequence: [0, 1, 2] };
-    expect(scoreQuestion(ordering, ans)).toBe(0);
+    expect(scoreQuestion(ordenamiento, ans)).toBe(0);
   });
 
-  it('match correcto → 1', () => {
-    const match = {
+  it('relacion correcto → 1', () => {
+    const relacion = {
       ...base,
-      itemType: 'match' as const,
-      stem: 'Relaciona',
-      leftColumn: ['A'],
-      rightColumn: ['X', 'Y'],
-      correctMatches: [[0, 1]] as [number, number][],
+      tipo: 'relacion' as const,
+      enunciado: 'Relaciona',
+      columnaIzquierda: ['A'],
+      columnaDerecha: ['X', 'Y'],
+      emparejamientos: [[0, 1]] as [number, number][],
     };
     const ans: Answer = { kind: 'match', pairs: [[0, 1]] };
-    expect(scoreQuestion(match, ans)).toBe(1);
+    expect(scoreQuestion(relacion, ans)).toBe(1);
   });
 
-  it('match incorrecto → 0', () => {
-    const match = {
+  it('relacion incorrecto → 0', () => {
+    const relacion = {
       ...base,
-      itemType: 'match' as const,
-      stem: 'Relaciona',
-      leftColumn: ['A'],
-      rightColumn: ['X', 'Y'],
-      correctMatches: [[0, 1]] as [number, number][],
+      tipo: 'relacion' as const,
+      enunciado: 'Relaciona',
+      columnaIzquierda: ['A'],
+      columnaDerecha: ['X', 'Y'],
+      emparejamientos: [[0, 1]] as [number, number][],
     };
     const ans: Answer = { kind: 'match', pairs: [[0, 0]] };
-    expect(scoreQuestion(match, ans)).toBe(0);
-  });
-});
-
-describe('scoreCaseQuestion', () => {
-  const caseQ: CaseQuestion = {
-    ...base,
-    itemType: 'case',
-    caseStem: 'Caso',
-    subQuestions: [
-      { itemType: 'direct', stem: 'P1', options: ['A', 'B', 'C', 'D'], correctIndex: 0 },
-      { itemType: 'direct', stem: 'P2', options: ['A', 'B', 'C', 'D'], correctIndex: 1 },
-      { itemType: 'direct', stem: 'P3', options: ['A', 'B', 'C', 'D'], correctIndex: 2 },
-    ],
-  };
-
-  // esc.06-C: 3 sub-preguntas, 2 correctas → 2 puntos
-  it('esc.06-C — caso con 3 sub-preguntas y 2 correctas → 2', () => {
-    const answers: Array<Answer | null> = [
-      { kind: 'choice', index: 0 }, // correcta
-      { kind: 'choice', index: 0 }, // incorrecta (correctIndex=1)
-      { kind: 'choice', index: 2 }, // correcta
-    ];
-    expect(scoreCaseQuestion(caseQ, answers)).toBe(2);
+    expect(scoreQuestion(relacion, ans)).toBe(0);
   });
 
-  it('caso con todas correctas → N', () => {
-    const answers: Array<Answer | null> = [
-      { kind: 'choice', index: 0 },
-      { kind: 'choice', index: 1 },
-      { kind: 'choice', index: 2 },
-    ];
-    expect(scoreCaseQuestion(caseQ, answers)).toBe(3);
-  });
-
-  it('caso sin responder ninguna → 0', () => {
-    const answers: Array<Answer | null> = [null, null, null];
-    expect(scoreCaseQuestion(caseQ, answers)).toBe(0);
+  it('reactivo con caso (aplanado) se califica igual que directo → 1', () => {
+    const directoConCaso = {
+      ...base,
+      tipo: 'directo' as const,
+      caso: 'Contexto del caso.',
+      enunciado: 'Pregunta',
+      opciones: ['A', 'B', 'C', 'D'] as [string, string, string, string],
+      correcta: 0 as const,
+    };
+    const ans: Answer = { kind: 'choice', index: 0 };
+    expect(scoreQuestion(directoConCaso, ans)).toBe(1);
   });
 });

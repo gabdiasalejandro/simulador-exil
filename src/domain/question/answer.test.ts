@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { isAnswered } from './answer';
 import type { Answer } from './answer';
 
-describe('answer — isAnswered', () => {
+describe('answer — isAnswered (modelo v2)', () => {
   it('isAnswered(null) devuelve false', () => {
     expect(isAnswered(null)).toBe(false);
   });
@@ -20,15 +20,5 @@ describe('answer — isAnswered', () => {
   it('isAnswered con MatchAnswer devuelve true', () => {
     const a: Answer = { kind: 'match', pairs: [[0, 1]] };
     expect(isAnswered(a)).toBe(true);
-  });
-
-  it('isAnswered con CaseAnswer devuelve true si al menos una sub-respuesta no es null', () => {
-    const a: Answer = { kind: 'case', answers: [{ kind: 'choice', index: 0 }, null] };
-    expect(isAnswered(a)).toBe(true);
-  });
-
-  it('isAnswered con CaseAnswer de todas null devuelve false', () => {
-    const a: Answer = { kind: 'case', answers: [null, null] };
-    expect(isAnswered(a)).toBe(false);
   });
 });

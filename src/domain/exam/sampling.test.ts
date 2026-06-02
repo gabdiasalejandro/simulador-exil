@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { sampleExam } from './sampling';
 import { computeBlueprint } from './blueprint';
-import type { Question, DirectQuestion } from '../question/question';
+import type { Reactivo, ReactivoDirecto } from '../question/question';
 import type { AreaCode, SubareaCode } from '../taxonomy/taxonomy';
 
 // RNG determinista para tests
@@ -13,21 +13,21 @@ const deterministicRng = (() => {
   };
 })();
 
-function makeQuestion(id: string, area: AreaCode, subarea: SubareaCode): DirectQuestion {
+function makeReactivo(id: string, area: AreaCode, subarea: SubareaCode): ReactivoDirecto {
   return {
     id,
-    itemType: 'direct',
-    officialTag: { area, subarea },
-    originTag: { area: 'orig-area', subarea: 'orig-sub' },
+    tipo: 'directo',
+    area,
+    subarea,
     explanation: 'exp',
-    stem: `Pregunta ${id}`,
-    options: ['A', 'B', 'C', 'D'],
-    correctIndex: 0,
+    enunciado: `Pregunta ${id}`,
+    opciones: ['A', 'B', 'C', 'D'],
+    correcta: 0,
   };
 }
 
 // Banco básico: una pregunta por subárea oficial para variante 20
-function makeMinimalBank(): Question[] {
+function makeMinimalBank(): Reactivo[] {
   const subareas: Array<[AreaCode, SubareaCode]> = [
     ['A', 'A1'], ['A', 'A2'], ['A', 'A3'], ['A', 'A4'], ['A', 'A5'],
     ['B', 'B1'], ['B', 'B2'], ['B', 'B3'], ['B', 'B4'], ['B', 'B5'],
@@ -37,17 +37,17 @@ function makeMinimalBank(): Question[] {
     ['F', 'F1'], ['F', 'F2'],
   ];
   return subareas.flatMap(([area, sub]) =>
-    Array.from({ length: 5 }, (_, i) => makeQuestion(`${sub}-${i}`, area, sub)),
+    Array.from({ length: 5 }, (_, i) => makeReactivo(`${sub}-${i}`, area, sub)),
   );
 }
 
-describe('sampleExam', () => {
+describe('sampleExam — modelo v2', () => {
   // esc.03-A: reactivo con subárea inválida se excluye
-  it('esc.03-A — excluye reactivos cuyo officialTag.subarea no es oficial', () => {
-    const bank: Question[] = [
-      makeQuestion('valid', 'A', 'A1'),
+  it('esc.03-A — excluye reactivos cuyo subarea no es oficial', () => {
+    const bank: Reactivo[] = [
+      makeReactivo('valid', 'A', 'A1'),
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      { ...makeQuestion('invalid', 'A', 'A1'), officialTag: { area: 'A' as any, subarea: 'X9' as any } },
+      { ...makeReactivo('invalid', 'A', 'A1'), subarea: 'X9' as any },
     ];
     const bp = computeBlueprint(20);
     const result = sampleExam(bank, bp, deterministicRng);
@@ -58,10 +58,9 @@ describe('sampleExam', () => {
   // esc.04-A: degradación parcial genera bankWarnings
   it('esc.04-A — banco insuficiente para A1 produce bankWarning y usa los disponibles', () => {
     const bank = makeMinimalBank();
-    // Reemplazar preguntas de A1 con solo 2 (el blueprint de 125 pide 5)
-    const filteredBank = bank.filter((q) => q.officialTag.subarea !== 'A1');
-    filteredBank.push(makeQuestion('a1-0', 'A', 'A1'));
-    filteredBank.push(makeQuestion('a1-1', 'A', 'A1'));
+    const filteredBank = bank.filter((q) => q.subarea !== 'A1');
+    filteredBank.push(makeReactivo('a1-0', 'A', 'A1'));
+    filteredBank.push(makeReactivo('a1-1', 'A', 'A1'));
 
     const bp = computeBlueprint(125);
     const result = sampleExam(filteredBank, bp, deterministicRng);
@@ -71,7 +70,7 @@ describe('sampleExam', () => {
     expect(a1Warning?.requested).toBe(5);
     expect(a1Warning?.available).toBe(2);
 
-    const a1Questions = result.questions.filter((q) => q.officialTag.subarea === 'A1');
+    const a1Questions = result.questions.filter((q) => q.subarea === 'A1');
     expect(a1Questions.length).toBe(2);
   });
 
@@ -101,7 +100,6 @@ describe('sampleExam', () => {
   it('con banco vacío de subáreas con assigned=0 no produce bankWarning (cero esperado)', () => {
     const bank = makeMinimalBank();
     const bp = computeBlueprint(20);
-    // D2 probablemente tiene assigned=0 en bp20; no debe generar warning
     const d2assigned = bp.find((e) => e.subarea === 'D2')?.assigned ?? 0;
     if (d2assigned === 0) {
       const result = sampleExam(bank, bp, deterministicRng);
