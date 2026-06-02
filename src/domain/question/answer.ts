@@ -1,4 +1,4 @@
-// Respuestas por tipo de reactivo (union discriminada)
+// Respuestas por tipo de reactivo (union discriminada — modelo v2)
 
 /** T1/T2 — Cuestionamiento directo / Completamiento */
 export interface ChoiceAnswer {
@@ -18,24 +18,11 @@ export interface MatchAnswer {
   readonly pairs: ReadonlyArray<[number, number]>;
 }
 
-/** T5 — Caso: una respuesta por sub-pregunta (puede ser null si no respondió) */
-export interface CaseAnswer {
-  readonly kind: 'case';
-  readonly answers: ReadonlyArray<LeafAnswer | null>;
-}
-
-export type LeafAnswer = ChoiceAnswer | OrderAnswer | MatchAnswer;
-
-export type Answer = LeafAnswer | CaseAnswer;
+export type Answer = ChoiceAnswer | OrderAnswer | MatchAnswer;
 
 /**
- * Indica si el usuario ya respondió la pregunta.
- * Para CaseAnswer: verdadero si al menos una sub-respuesta no es null.
+ * Indica si el usuario ya respondió el reactivo.
  */
 export function isAnswered(a: Answer | null): boolean {
-  if (a === null) return false;
-  if (a.kind === 'case') {
-    return a.answers.some((sub) => sub !== null);
-  }
-  return true;
+  return a !== null;
 }

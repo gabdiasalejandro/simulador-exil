@@ -1,6 +1,6 @@
 import { isValidSubarea } from '../taxonomy/taxonomy';
 import type { SubareaCode } from '../taxonomy/taxonomy';
-import type { Question } from '../question/question';
+import type { Reactivo } from '../question/question';
 import type { BlueprintEntry } from './blueprint';
 
 export type Rng = () => number;
@@ -12,14 +12,14 @@ export interface BankWarning {
 }
 
 export interface SampledExam {
-  readonly questions: ReadonlyArray<Question>;
+  readonly questions: ReadonlyArray<Reactivo>;
   readonly bankWarnings: ReadonlyArray<BankWarning>;
 }
 
 /**
  * Muestrea reactivos del banco según el blueprint.
  *
- * - Filtra por officialTag.subarea válido (REQ-03).
+ * - Filtra por subarea válida (REQ-03).
  * - Muestrea sin reemplazo por subárea.
  * - Si una subárea tiene menos reactivos de los pedidos → usa todos,
  *   agrega BankWarning (REQ-04).
@@ -27,15 +27,13 @@ export interface SampledExam {
  * - rng es inyectado para determinismo en tests.
  */
 export function sampleExam(
-  bank: Question[],
+  bank: Reactivo[],
   blueprint: ReadonlyArray<BlueprintEntry>,
   rng: Rng,
 ): SampledExam {
-  // Filtrar banco: solo reactivos con officialTag oficial válido
+  // Filtrar banco: solo reactivos con subarea oficial válida
   const validBank = bank.filter(
-    (q) =>
-      q.officialTag &&
-      isValidSubarea(q.officialTag.subarea),
+    (q) => q.subarea && isValidSubarea(q.subarea),
   );
 
   if (validBank.length === 0) {
@@ -43,9 +41,9 @@ export function sampleExam(
   }
 
   // Agrupar por subárea
-  const bySubarea = new Map<SubareaCode, Question[]>();
+  const bySubarea = new Map<SubareaCode, Reactivo[]>();
   for (const q of validBank) {
-    const sub = q.officialTag.subarea;
+    const sub = q.subarea;
     const existing = bySubarea.get(sub);
     if (existing) {
       existing.push(q);
@@ -54,7 +52,7 @@ export function sampleExam(
     }
   }
 
-  const sampled: Question[] = [];
+  const sampled: Reactivo[] = [];
   const warnings: BankWarning[] = [];
 
   for (const entry of blueprint) {

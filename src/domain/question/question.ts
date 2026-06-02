@@ -1,7 +1,7 @@
 import type { AreaCode, SubareaCode } from '../taxonomy/taxonomy';
 
 // ---------------------------------------------------------------------------
-// Etiquetas de clasificación
+// Clasificación oficial
 // ---------------------------------------------------------------------------
 
 export interface OfficialTag {
@@ -9,107 +9,91 @@ export interface OfficialTag {
   readonly subarea: SubareaCode;
 }
 
-export interface OriginTag {
-  readonly area: string;
-  readonly subarea: string;
-}
-
 // ---------------------------------------------------------------------------
-// Base común a todos los tipos
+// Base común a todos los tipos (modelo v2)
 // ---------------------------------------------------------------------------
 
-export interface BaseQuestion {
+export interface BaseReactivo {
   readonly id: string;
-  readonly officialTag: OfficialTag;
-  readonly originTag: OriginTag;
+  readonly area: AreaCode;
+  readonly subarea: SubareaCode;
   readonly explanation: string;
+  /** Contexto de caso compartido. Presente cuando el reactivo proviene de un multirreactivo. */
+  readonly caso?: string;
 }
 
 // ---------------------------------------------------------------------------
 // T1 — Cuestionamiento directo
 // ---------------------------------------------------------------------------
 
-export interface DirectQuestion extends BaseQuestion {
-  readonly itemType: 'direct';
-  readonly stem: string;
-  readonly options: [string, string, string, string];
-  readonly correctIndex: 0 | 1 | 2 | 3;
+export interface ReactivoDirecto extends BaseReactivo {
+  readonly tipo: 'directo';
+  readonly enunciado: string;
+  readonly opciones: [string, string, string, string];
+  readonly correcta: 0 | 1 | 2 | 3;
 }
 
 // ---------------------------------------------------------------------------
 // T2 — Completamiento
 // ---------------------------------------------------------------------------
 
-export interface CompletionQuestion extends BaseQuestion {
-  readonly itemType: 'completion';
-  readonly stem: string;
-  readonly options: [string, string, string, string];
-  readonly correctIndex: 0 | 1 | 2 | 3;
+export interface ReactivoCompletamiento extends BaseReactivo {
+  readonly tipo: 'completamiento';
+  readonly enunciado: string;
+  readonly opciones: [string, string, string, string];
+  readonly correcta: 0 | 1 | 2 | 3;
 }
 
 // ---------------------------------------------------------------------------
 // T3 — Ordenamiento
 // ---------------------------------------------------------------------------
 
-export interface OrderingQuestion extends BaseQuestion {
-  readonly itemType: 'ordering';
-  readonly stem: string;
-  readonly items: string[];
-  readonly correctOrder: number[];
+export interface ReactivoOrdenamiento extends BaseReactivo {
+  readonly tipo: 'ordenamiento';
+  readonly enunciado: string;
+  readonly elementos: string[];
+  readonly ordenCorrecto: number[];
 }
 
 // ---------------------------------------------------------------------------
 // T4 — Relación de columnas
 // ---------------------------------------------------------------------------
 
-export interface ColumnMatchQuestion extends BaseQuestion {
-  readonly itemType: 'match';
-  readonly stem: string;
-  readonly leftColumn: string[];
-  readonly rightColumn: string[];
-  readonly correctMatches: ReadonlyArray<[number, number]>;
+export interface ReactivoRelacion extends BaseReactivo {
+  readonly tipo: 'relacion';
+  readonly enunciado: string;
+  readonly columnaIzquierda: string[];
+  readonly columnaDerecha: string[];
+  readonly emparejamientos: ReadonlyArray<[number, number]>;
 }
 
 // ---------------------------------------------------------------------------
-// Hoja (todo tipo excepto T5)
+// Unión discriminada principal (modelo v2 — sin tipo 'caso')
 // ---------------------------------------------------------------------------
 
-export type LeafQuestion =
-  | DirectQuestion
-  | CompletionQuestion
-  | OrderingQuestion
-  | ColumnMatchQuestion;
+export type Reactivo =
+  | ReactivoDirecto
+  | ReactivoCompletamiento
+  | ReactivoOrdenamiento
+  | ReactivoRelacion;
 
-// Sub-pregunta de T5: igual que una LeafQuestion pero sin los campos base
-// (hereda officialTag/originTag/explanation/id del CaseQuestion padre).
-// Se define explícitamente por variante para que TypeScript resuelva bien el
-// narrowing en cada rama del switch dentro de scoring/UI.
-export type DirectSubQuestion = Omit<DirectQuestion, keyof BaseQuestion>;
-export type CompletionSubQuestion = Omit<CompletionQuestion, keyof BaseQuestion>;
-export type OrderingSubQuestion = Omit<OrderingQuestion, keyof BaseQuestion>;
-export type ColumnMatchSubQuestion = Omit<ColumnMatchQuestion, keyof BaseQuestion>;
-
-export type SubQuestion =
-  | DirectSubQuestion
-  | CompletionSubQuestion
-  | OrderingSubQuestion
-  | ColumnMatchSubQuestion;
+// Alias de compatibilidad para código que aún usa 'Question'
+export type Question = Reactivo;
 
 // ---------------------------------------------------------------------------
-// T5 — Multirreactivo / Caso
+// Aliases de compatibilidad para gradual migration
 // ---------------------------------------------------------------------------
 
-export interface CaseQuestion extends BaseQuestion {
-  readonly itemType: 'case';
-  readonly caseStem: string;
-  readonly subQuestions: ReadonlyArray<SubQuestion>;
-}
+/** @deprecated Usar ReactivoDirecto */
+export type DirectQuestion = ReactivoDirecto;
+/** @deprecated Usar ReactivoCompletamiento */
+export type CompletionQuestion = ReactivoCompletamiento;
+/** @deprecated Usar ReactivoOrdenamiento */
+export type OrderingQuestion = ReactivoOrdenamiento;
+/** @deprecated Usar ReactivoRelacion */
+export type ColumnMatchQuestion = ReactivoRelacion;
 
-// ---------------------------------------------------------------------------
-// Unión discriminada principal
-// ---------------------------------------------------------------------------
-
-export type Question = LeafQuestion | CaseQuestion;
+// OfficialTag se usa en compatibility re-export (ya definida al inicio del archivo)
 
 // ---------------------------------------------------------------------------
 // Utilidades
@@ -124,19 +108,9 @@ export function assertNever(x: never): never {
 }
 
 /**
- * Número de reactivos que contribuye esta Question al conteo del examen.
- * Leaf = 1, Case = N sub-preguntas (REQ-01 esc.01-C).
+ * Número de reactivos que contribuye este Reactivo al conteo del examen.
+ * En el modelo v2 siempre es 1 (los casos están aplanados).
  */
-export function getItemCount(q: Question): number {
-  switch (q.itemType) {
-    case 'direct':
-    case 'completion':
-    case 'ordering':
-    case 'match':
-      return 1;
-    case 'case':
-      return q.subQuestions.length;
-    default:
-      return assertNever(q);
-  }
+export function getItemCount(_q: Reactivo): number {
+  return 1;
 }
