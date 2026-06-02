@@ -1,0 +1,409 @@
+{
+  "schemaVersion": 1,
+  "questions": [
+    {
+      "id": "seed-d-a1-001",
+      "itemType": "direct",
+      "stem": "¿Cuál de los siguientes enunciados describe mejor la función de planeación dentro del proceso administrativo?",
+      "options": [
+        "Determinar las tareas y la estructura necesaria para alcanzar los objetivos.",
+        "Definir los objetivos y establecer los cursos de acción para alcanzarlos.",
+        "Guiar y motivar al personal para que realice sus actividades.",
+        "Medir el desempeño real y compararlo con los estándares establecidos."
+      ],
+      "correctIndex": 1,
+      "explanation": "La planeación consiste en fijar objetivos y determinar los cursos de acción necesarios para lograrlos. La organización (opción A) define estructura; la dirección (opción C) motiva al personal; el control (opción D) mide el desempeño.",
+      "officialTag": { "area": "A", "subarea": "A3" },
+      "originTag": { "area": "Administración y gestión", "subarea": "Proceso administrativo" }
+    },
+    {
+      "id": "seed-d-a1-002",
+      "itemType": "direct",
+      "stem": "Según la teoría clásica de Fayol, ¿cuántos principios generales de la administración propuso?",
+      "options": [
+        "7",
+        "10",
+        "14",
+        "20"
+      ],
+      "correctIndex": 2,
+      "explanation": "Henri Fayol formuló 14 principios generales de la administración en su obra 'Administración industrial y general' (1916), entre ellos: división del trabajo, autoridad, disciplina, unidad de mando, etc.",
+      "officialTag": { "area": "A", "subarea": "A2" },
+      "originTag": { "area": "Administración y gestión", "subarea": "Pensamiento administrativo" }
+    },
+    {
+      "id": "seed-d-b1-001",
+      "itemType": "direct",
+      "stem": "¿Cuál estado financiero muestra la situación patrimonial de una empresa en un momento determinado?",
+      "options": [
+        "Estado de resultados",
+        "Estado de flujo de efectivo",
+        "Balance general (Estado de situación financiera)",
+        "Estado de cambios en el capital contable"
+      ],
+      "correctIndex": 2,
+      "explanation": "El balance general o estado de situación financiera presenta en un punto en el tiempo los activos, pasivos y capital de la empresa. El estado de resultados muestra el desempeño en un período; el flujo de efectivo muestra entradas y salidas de caja.",
+      "officialTag": { "area": "B", "subarea": "B1" },
+      "originTag": { "area": "Contabilidad y finanzas", "subarea": "Información financiera" }
+    },
+    {
+      "id": "seed-comp-b5-001",
+      "itemType": "completion",
+      "stem": "El análisis horizontal de estados financieros compara _______________ para identificar tendencias a lo largo del tiempo.",
+      "options": [
+        "el activo contra el pasivo en un mismo período",
+        "cifras de diferentes períodos de la misma empresa",
+        "el desempeño de la empresa contra el promedio de la industria",
+        "razones financieras contra índices macroeconómicos"
+      ],
+      "correctIndex": 1,
+      "explanation": "El análisis horizontal (o de tendencias) compara las cifras financieras de la misma empresa en dos o más períodos consecutivos para identificar variaciones absolutas y porcentuales.",
+      "officialTag": { "area": "B", "subarea": "B5" },
+      "originTag": { "area": "Contabilidad y finanzas", "subarea": "Análisis financiero" }
+    },
+    {
+      "id": "seed-comp-c1-001",
+      "itemType": "completion",
+      "stem": "En el modelo de oferta y demanda, cuando el precio de un bien baja, la cantidad demandada _____________, lo que refleja la ley de la demanda.",
+      "options": [
+        "disminuye",
+        "permanece constante",
+        "aumenta",
+        "se vuelve inelástica"
+      ],
+      "correctIndex": 2,
+      "explanation": "La ley de la demanda establece que, ceteris paribus, existe una relación inversa entre el precio de un bien y la cantidad demandada: a menor precio, mayor cantidad demandada.",
+      "officialTag": { "area": "C", "subarea": "C1" },
+      "originTag": { "area": "Economía", "subarea": "Fundamentos de economía" }
+    },
+    {
+      "id": "seed-d-c2-001",
+      "itemType": "direct",
+      "stem": "En el modelo microeconómico de equilibrio del mercado, el punto de equilibrio se alcanza cuando:",
+      "options": [
+        "la cantidad ofrecida supera a la cantidad demandada.",
+        "la cantidad demandada supera a la cantidad ofrecida.",
+        "la cantidad ofrecida es igual a la cantidad demandada al precio de mercado.",
+        "el gobierno fija un precio máximo igual al costo marginal."
+      ],
+      "correctIndex": 2,
+      "explanation": "El equilibrio de mercado ocurre cuando, al precio vigente, la cantidad que los productores desean vender (oferta) es exactamente igual a la que los consumidores desean comprar (demanda), sin excedentes ni escasez.",
+      "officialTag": { "area": "C", "subarea": "C2" },
+      "originTag": { "area": "Economía", "subarea": "Economía de la empresa" }
+    },
+    {
+      "id": "seed-ord-a4-001",
+      "itemType": "ordering",
+      "stem": "Ordena las siguientes etapas del proceso de toma de decisiones gerenciales de acuerdo con la secuencia lógica correcta:",
+      "items": [
+        "Identificar el problema u oportunidad",
+        "Definir los criterios de decisión",
+        "Generar alternativas de solución",
+        "Evaluar y seleccionar la mejor alternativa",
+        "Implementar la decisión y hacer seguimiento"
+      ],
+      "correctOrder": [0, 1, 2, 3, 4],
+      "explanation": "El proceso racional de toma de decisiones sigue esta secuencia: primero se identifica el problema, luego se definen criterios, se generan alternativas, se evalúan y se elige la mejor, y finalmente se implementa con seguimiento.",
+      "officialTag": { "area": "A", "subarea": "A4" },
+      "originTag": { "area": "Administración y gestión", "subarea": "Entorno organizacional" }
+    },
+    {
+      "id": "seed-ord-e1-001",
+      "itemType": "ordering",
+      "stem": "Para calcular el Valor Presente Neto (VPN) de un proyecto de inversión, ordena los pasos en la secuencia correcta:",
+      "items": [
+        "Estimar los flujos de efectivo futuros del proyecto",
+        "Determinar la tasa de descuento (costo de capital)",
+        "Descontar cada flujo al período 0 usando la tasa elegida",
+        "Sumar todos los flujos descontados y restar la inversión inicial",
+        "Interpretar: VPN > 0 indica que el proyecto agrega valor"
+      ],
+      "correctOrder": [0, 1, 2, 3, 4],
+      "explanation": "El VPN se calcula proyectando los flujos de caja, eligiendo una tasa de descuento que refleje el riesgo, trayendo cada flujo a valor presente, sumándolos y restando la inversión inicial. Un VPN positivo indica que el proyecto genera valor.",
+      "officialTag": { "area": "E", "subarea": "E1" },
+      "originTag": { "area": "Matemáticas y estadística", "subarea": "Matemáticas financieras" }
+    },
+    {
+      "id": "seed-match-d1-001",
+      "itemType": "match",
+      "stem": "Relaciona cada concepto de mercadotecnia (columna izquierda) con su definición correcta (columna derecha):",
+      "leftColumn": [
+        "Segmentación de mercado",
+        "Posicionamiento",
+        "Mezcla de mercadotecnia (4P)",
+        "Ciclo de vida del producto"
+      ],
+      "rightColumn": [
+        "Conjunto de etapas: introducción, crecimiento, madurez y declive.",
+        "División del mercado total en grupos homogéneos con necesidades similares.",
+        "Lugar que ocupa una marca en la mente del consumidor respecto a la competencia.",
+        "Combinación de producto, precio, plaza y promoción.",
+        "Estrategia de distribución exclusiva en un solo canal."
+      ],
+      "correctMatches": [[0, 1], [1, 2], [2, 3], [3, 0]],
+      "explanation": "Segmentación divide el mercado en grupos homogéneos; posicionamiento es la percepción del consumidor; la mezcla de mercadotecnia combina las 4P; el ciclo de vida recorre introducción, crecimiento, madurez y declive.",
+      "officialTag": { "area": "D", "subarea": "D1" },
+      "originTag": { "area": "Mercadotecnia", "subarea": "Mercado y empresa" }
+    },
+    {
+      "id": "seed-match-f2-001",
+      "itemType": "match",
+      "stem": "Relaciona cada figura jurídica del derecho mercantil (columna izquierda) con su característica principal (columna derecha):",
+      "leftColumn": [
+        "Sociedad Anónima (S.A.)",
+        "Sociedad de Responsabilidad Limitada (S. de R.L.)",
+        "Contrato de mutuo mercantil",
+        "Letra de cambio"
+      ],
+      "rightColumn": [
+        "Título de crédito que incorpora una orden incondicional de pago.",
+        "Socios responden solo hasta el monto de sus aportaciones; máximo 50 socios.",
+        "Capital dividido en acciones; responsabilidad limitada al capital aportado.",
+        "Acuerdo por el cual una parte entrega dinero a otra con obligación de devolverlo.",
+        "Contrato por el cual se ceden derechos reales sobre bienes inmuebles."
+      ],
+      "correctMatches": [[0, 2], [1, 1], [2, 3], [3, 0]],
+      "explanation": "La S.A. divide su capital en acciones con responsabilidad limitada; la S. de R.L. limita la responsabilidad y el número de socios; el mutuo mercantil implica préstamo con obligación de devolución; la letra de cambio es un título de crédito con orden de pago.",
+      "officialTag": { "area": "F", "subarea": "F2" },
+      "originTag": { "area": "Derecho", "subarea": "Derecho privado" }
+    },
+    {
+      "id": "seed-case-e1-001",
+      "itemType": "case",
+      "caseStem": "Una empresa solicita un préstamo de $100,000 pesos a una tasa de interés anual del 12%, capitalizable mensualmente, a un plazo de 2 años. Usa esta información para responder las siguientes preguntas.",
+      "subQuestions": [
+        {
+          "itemType": "direct",
+          "stem": "¿Cuál es la tasa de interés mensual equivalente que se aplicará al préstamo?",
+          "options": [
+            "1.00%",
+            "1.50%",
+            "6.00%",
+            "12.00%"
+          ],
+          "correctIndex": 0,
+          "explanation": "Si la tasa anual es 12% capitalizable mensualmente, la tasa mensual es 12%/12 = 1% mensual."
+        },
+        {
+          "itemType": "direct",
+          "stem": "¿Cuántos períodos (meses) abarca el plazo total del préstamo?",
+          "options": [
+            "12 meses",
+            "18 meses",
+            "24 meses",
+            "36 meses"
+          ],
+          "correctIndex": 2,
+          "explanation": "2 años × 12 meses/año = 24 meses."
+        },
+        {
+          "itemType": "completion",
+          "stem": "El monto total a pagar al vencimiento (capital más intereses compuestos) es aproximadamente _______________, calculado con la fórmula M = C(1 + i)^n.",
+          "options": [
+            "$124,000 pesos",
+            "$126,824 pesos",
+            "$126,973 pesos",
+            "$140,000 pesos"
+          ],
+          "correctIndex": 1,
+          "explanation": "M = 100,000 × (1 + 0.01)^24 = 100,000 × 1.26824 ≈ $126,824 pesos. La capitalización mensual produce un monto mayor que el interés simple."
+        }
+      ],
+      "explanation": "Este caso evalúa la comprensión de matemáticas financieras: tasas periódicas, plazos y capitalización compuesta.",
+      "officialTag": { "area": "E", "subarea": "E1" },
+      "originTag": { "area": "Matemáticas y estadística", "subarea": "Matemáticas financieras" }
+    },
+    {
+      "id": "seed-case-c3-001",
+      "itemType": "case",
+      "caseStem": "En el año anterior, el índice nacional de precios al consumidor (INPC) pasó de 110 a 121. Al mismo tiempo, el salario nominal promedio de los trabajadores aumentó de $12,000 a $13,200 mensuales. Usa estos datos para responder.",
+      "subQuestions": [
+        {
+          "itemType": "direct",
+          "stem": "¿Cuál fue la tasa de inflación en ese período?",
+          "options": [
+            "5%",
+            "8%",
+            "10%",
+            "12%"
+          ],
+          "correctIndex": 2,
+          "explanation": "Inflación = ((121 - 110) / 110) × 100 = (11/110) × 100 = 10%."
+        },
+        {
+          "itemType": "direct",
+          "stem": "¿En cuánto aumentó el salario nominal en términos porcentuales?",
+          "options": [
+            "8%",
+            "9%",
+            "10%",
+            "12%"
+          ],
+          "correctIndex": 2,
+          "explanation": "Variación salarial = ((13,200 - 12,000) / 12,000) × 100 = (1,200/12,000) × 100 = 10%."
+        },
+        {
+          "itemType": "completion",
+          "stem": "Con base en los datos anteriores, el poder adquisitivo (salario real) de los trabajadores _______________ durante ese período.",
+          "options": [
+            "aumentó, porque el salario nominal subió más que la inflación",
+            "disminuyó, porque la inflación fue mayor al incremento salarial",
+            "se mantuvo constante, porque ambas tasas fueron iguales",
+            "aumentó, porque la inflación fue menor al 12%"
+          ],
+          "correctIndex": 2,
+          "explanation": "Como la tasa de inflación (10%) fue igual al aumento del salario nominal (10%), el salario real permaneció constante: no hubo ganancia ni pérdida de poder adquisitivo."
+        }
+      ],
+      "explanation": "Este caso evalúa el cálculo de inflación, variaciones nominales y la distinción entre variables reales y nominales en macroeconomía.",
+      "officialTag": { "area": "C", "subarea": "C3" },
+      "originTag": { "area": "Economía", "subarea": "Macroeconomía" }
+    },
+    {
+      "id": "seed-d-f1-001",
+      "itemType": "direct",
+      "stem": "¿Cuál de los siguientes instrumentos jurídicos constituye la norma suprema del ordenamiento jurídico mexicano?",
+      "options": [
+        "El Código Civil Federal",
+        "La Ley Federal del Trabajo",
+        "La Constitución Política de los Estados Unidos Mexicanos",
+        "El Código de Comercio"
+      ],
+      "correctIndex": 2,
+      "explanation": "El artículo 133 de la Constitución establece el principio de supremacía constitucional: la Constitución Política de los Estados Unidos Mexicanos es la Ley Suprema de toda la Unión.",
+      "officialTag": { "area": "F", "subarea": "F1" },
+      "originTag": { "area": "Derecho", "subarea": "Derecho público" }
+    },
+    {
+      "id": "seed-d-a5-001",
+      "itemType": "direct",
+      "stem": "¿Cuál de las siguientes opciones describe mejor el concepto de ERP (Enterprise Resource Planning)?",
+      "options": [
+        "Un software exclusivo de gestión de recursos humanos.",
+        "Un sistema integrado que centraliza y automatiza los procesos de negocio de una organización.",
+        "Una plataforma de comercio electrónico para ventas en línea.",
+        "Un sistema de videoconferencia para trabajo remoto."
+      ],
+      "correctIndex": 1,
+      "explanation": "Un ERP (Sistema de Planificación de Recursos Empresariales) es un software que integra y automatiza los procesos clave de la empresa —finanzas, logística, producción, RRHH— en una sola plataforma centralizada.",
+      "officialTag": { "area": "A", "subarea": "A5" },
+      "originTag": { "area": "Administración y gestión", "subarea": "Tecnologías y sistemas de información" }
+    },
+    {
+      "id": "seed-comp-b4-001",
+      "itemType": "completion",
+      "stem": "El costeo por absorción difiere del costeo variable principalmente en que el costeo por absorción incluye _______________ en el costo del producto.",
+      "options": [
+        "únicamente los costos variables de producción",
+        "los costos fijos de producción",
+        "los gastos de venta y administración",
+        "solo los costos directos de mano de obra"
+      ],
+      "correctIndex": 1,
+      "explanation": "En el costeo por absorción, los costos fijos de manufactura (como depreciación de planta y mano de obra indirecta fija) se incluyen en el costo unitario del producto. El costeo variable solo incluye costos variables de producción.",
+      "officialTag": { "area": "B", "subarea": "B4" },
+      "originTag": { "area": "Contabilidad y finanzas", "subarea": "Costos y presupuestos" }
+    },
+    {
+      "id": "seed-ord-e2-001",
+      "itemType": "ordering",
+      "stem": "Ordena los siguientes pasos para calcular la derivada de una función f(x) usando la definición límite (regla de la primera derivada):",
+      "items": [
+        "Escribir la expresión f(x + h) sustituyendo (x + h) en la función",
+        "Calcular f(x + h) - f(x) y simplificar",
+        "Dividir el resultado entre h",
+        "Aplicar el límite cuando h tiende a cero",
+        "El resultado es f'(x)"
+      ],
+      "correctOrder": [0, 1, 2, 3, 4],
+      "explanation": "La definición formal de derivada sigue este proceso: f'(x) = lim_{h→0} [f(x+h) - f(x)] / h. Se evalúa f(x+h), se resta f(x), se divide entre h, se simplifica y se toma el límite.",
+      "officialTag": { "area": "E", "subarea": "E2" },
+      "originTag": { "area": "Matemáticas y estadística", "subarea": "Fundamentos de cálculo" }
+    },
+    {
+      "id": "seed-match-e3-001",
+      "itemType": "match",
+      "stem": "Relaciona cada medida de tendencia central o dispersión (columna izquierda) con su descripción (columna derecha):",
+      "leftColumn": [
+        "Media aritmética",
+        "Mediana",
+        "Desviación estándar",
+        "Rango"
+      ],
+      "rightColumn": [
+        "Diferencia entre el valor máximo y mínimo del conjunto de datos.",
+        "Valor central que divide la distribución en dos mitades iguales.",
+        "Promedio de todos los valores del conjunto de datos.",
+        "Medida de dispersión que expresa cuánto se alejan los datos de la media."
+      ],
+      "correctMatches": [[0, 2], [1, 1], [2, 3], [3, 0]],
+      "explanation": "La media es el promedio aritmético; la mediana es el valor central; la desviación estándar mide dispersión respecto a la media; el rango es la diferencia entre máximo y mínimo.",
+      "officialTag": { "area": "E", "subarea": "E3" },
+      "originTag": { "area": "Matemáticas y estadística", "subarea": "Estadística descriptiva" }
+    },
+    {
+      "id": "seed-d-d2-001",
+      "itemType": "direct",
+      "stem": "¿Qué herramienta de mercadotecnia permite medir el nivel de satisfacción del cliente y su probabilidad de recomendar un producto o servicio?",
+      "options": [
+        "Análisis FODA",
+        "Net Promoter Score (NPS)",
+        "Mapa de posicionamiento",
+        "Prueba A/B"
+      ],
+      "correctIndex": 1,
+      "explanation": "El Net Promoter Score (NPS) es una métrica que pregunta a los clientes qué tan probable es que recomienden la marca a un conocido (escala 0-10), clasificándolos en promotores, pasivos y detractores.",
+      "officialTag": { "area": "D", "subarea": "D2" },
+      "originTag": { "area": "Mercadotecnia", "subarea": "Técnicas y herramientas" }
+    },
+    {
+      "id": "seed-d-b2-001",
+      "itemType": "direct",
+      "stem": "Las Normas de Información Financiera (NIF) en México son emitidas por:",
+      "options": [
+        "La Secretaría de Hacienda y Crédito Público (SHCP)",
+        "El Instituto Mexicano de Contadores Públicos (IMCP)",
+        "El Consejo Mexicano de Normas de Información Financiera (CINIF)",
+        "La Comisión Nacional Bancaria y de Valores (CNBV)"
+      ],
+      "correctIndex": 2,
+      "explanation": "El CINIF (Consejo Mexicano de Normas de Información Financiera) es el organismo privado encargado de emitir y actualizar las NIF en México, sustituyendo los antiguos Principios de Contabilidad Generalmente Aceptados (PCGA).",
+      "officialTag": { "area": "B", "subarea": "B2" },
+      "originTag": { "area": "Contabilidad y finanzas", "subarea": "Normatividad contable" }
+    },
+    {
+      "id": "seed-case-a1-001",
+      "itemType": "case",
+      "caseStem": "Una empresa de manufactura implementó recientemente un programa de gestión por objetivos (MBO). La dirección estableció metas anuales en conjunto con los empleados y acordó revisiones trimestrales. Al final del año, se compararon los resultados obtenidos con los objetivos pactados. Usa este caso para responder.",
+      "subQuestions": [
+        {
+          "itemType": "direct",
+          "stem": "¿En qué etapa del proceso administrativo se ubica principalmente la gestión por objetivos (MBO)?",
+          "options": [
+            "Organización",
+            "Dirección",
+            "Control",
+            "Planeación y control conjuntamente"
+          ],
+          "correctIndex": 3,
+          "explanation": "La gestión por objetivos (MBO, Management by Objectives) abarca tanto la planeación (fijar objetivos al inicio) como el control (comparar resultados con metas al final del período), por lo que involucra ambas etapas."
+        },
+        {
+          "itemType": "completion",
+          "stem": "La revisión trimestral de resultados que describe el caso corresponde a la función administrativa de _______________.",
+          "options": [
+            "planeación estratégica",
+            "diseño organizacional",
+            "control",
+            "reclutamiento"
+          ],
+          "correctIndex": 2,
+          "explanation": "El control consiste en medir el desempeño real, compararlo con estándares o metas establecidas, y aplicar medidas correctivas si es necesario. Las revisiones trimestrales son actividades de control."
+        }
+      ],
+      "explanation": "El caso ilustra la aplicación del proceso administrativo a través de la gestión por objetivos, integrando planeación y control.",
+      "officialTag": { "area": "A", "subarea": "A1" },
+      "originTag": { "area": "Administración y gestión", "subarea": "Conceptos generales" }
+    }
+  ]
+}
