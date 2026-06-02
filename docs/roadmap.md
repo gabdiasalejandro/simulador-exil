@@ -1,59 +1,50 @@
 # Roadmap
 
-## Cambio en curso: `mvp-simulacro-core`
-
-Corte vertical que demuestra la arquitectura hexagonal de extremo a extremo. Único modo funcional: **Simular**.
-
-### PRs del corte
-
-| PR | Alcance | Estado |
-|----|---------|--------|
-| PR1 — dominio puro | `taxonomy`, `question`, `exam` (blueprint + sampling + session), `scoring`, `attempt` | ✅ Fusionado |
-| PR2 — application + infrastructure | Puertos (`ContentPort`, `StoragePort`), casos de uso (`start-simulacro`, `submit-attempt`), adaptadores (`JsonContentAdapter`, `IndexedDbStorageAdapter`), banco semilla (`seed-bank.json`) | ✅ Fusionado |
-| PR3 — UI | `SimulacroContainer`, `LandingShell`, `QuestionView` (1 renderer por tipo de reactivo), `NavGrid`, `ReportView`, `Timer`; shell React completo; tests RTL | Planeado |
-
-### Fuera del alcance de `mvp-simulacro-core`
-
-- Pipeline de extracción automática del PDF de ejercicios (mapeo 8 áreas → 6 áreas automatizado).
-- Modo Práctica (con retroalimentación y solución paso a paso).
-- Modo Por tema.
-- Modo Revisar / historial de intentos.
-- Sesiones gemelas oficiales (S1=58 / S2=67) y reactivos piloto.
-
-## Cambios futuros planificados
-
-| Cambio | Descripción | Dependencias |
-|--------|-------------|--------------|
-| `extraccion-banco` | Pipeline build-time para parsear el PDF de ejercicios y generar `seed-bank.json` con banco completo | `mvp-simulacro-core` completo |
-| `modo-practica` | Práctica con feedback inmediato y solución por reactivo | `extraccion-banco` |
-| `por-tema-revisar` | Modo Por tema y Modo Revisar (historial de intentos) | `modo-practica` |
-| `guia-md` | Conversión de la guía CENEVAL a Markdown navegable dentro de la PWA | Independiente |
-
-## Cambio completado: `modo-practica`
-
-Playground de estudio por tema con feedback inmediato. Construido encima de `mvp-simulacro-core` (banco YAML v2, modelo de dominio v2).
-
-| Entregable | Descripción | Estado |
-|------------|-------------|--------|
-| `cargarPractica` (use case) | Filtra banco por área/subárea, mezcla con Fisher-Yates | ✅ |
-| `evaluarRespuesta` (use case) | Delega en `scoreQuestion` del dominio para feedback | ✅ |
-| `QuestionCard` modo feedback | Prop `feedback?` revela correcta/incorrecta + explicación | ✅ |
-| `TemaSidebar` | Lista 6 áreas + subáreas, colapsable | ✅ |
-| `PracticaContainer` | Container completo: sidebar + panel + contador de sesión | ✅ |
-| Wiring en `App.tsx` | Vista `practica` + LandingShell botón activo | ✅ |
-| Docs | `docs/modo-practica.md` | ✅ |
-
 ## Estado general
 
 ```
 mvp-simulacro-core
-  PR1 dominio          ✅
-  PR2 app + infra      ✅
-  PR3 ui               ✅ (fusionado)
-  Refactor v2 (YAML)   ✅ (fusionado)
-
-extraccion-banco       [ ] planeado
-modo-practica          ✅ implementado (feat/modo-practica)
-por-tema-revisar       [ ] planeado
-guia-md                [ ] planeado
+  PR1 dominio puro       ✅ fusionado
+  PR2 app + infra        ✅ fusionado
+  PR3 ui                 ✅ fusionado
+refactor-modelo-yaml-ui  ✅ fusionado   (banco YAML v2, casos aplanados, UI mejorada)
+extraccion-banco         ✅ fusionado   (128 reactivos transcritos del PDF)
+modo-practica            ✅ fusionado   (playground por tema, feedback inmediato)
+por-tema                 ↪️ cubierto por el sidebar de Práctica
+modo-revisar             [ ] pendiente  (historial de intentos)
+guia-md                  [ ] pendiente  (guía oficial → Markdown navegable)
 ```
+
+## Modos del simulador
+
+| Modo | Estado | Notas |
+|------|--------|-------|
+| **Simular** | ✅ | 128 reactivos, blueprint oficial (125/60/20, Hamilton), timer configurable, reporte criterial por área/subárea |
+| **Practicar** | ✅ | Playground: sidebar por tema → reactivos aleatorios con feedback y explicación inmediata |
+| **Por tema** | ↪️ | Prácticamente cubierto por el sidebar de Práctica; evaluar si el botón se fusiona o se elimina |
+| **Revisar** | ⏳ | Historial de intentos persistidos (StoragePort ya guarda los `Attempt`); falta la UI |
+
+## Pendientes y siguientes pasos
+
+| Ítem | Descripción | Prioridad |
+|------|-------------|-----------|
+| **Modo Revisar** | UI de historial: listar `Attempt` guardados, ver desempeño por área. El `StoragePort`/IndexedDB ya persiste los intentos. | Alta |
+| **Resaltado en feedback no-choice** | En modo práctica, `ordenamiento` y `relacion` muestran correcto/incorrecto + explicación pero NO resaltan la respuesta correcta (solo `directo`/`completamiento` lo hacen). | Media |
+| **Ampliar banco** | Con 128 reactivos y distribución desigual (C=8, D=11…), un simulacro de 125 todavía muestra "banco insuficiente" en subáreas flacas. Sumar fuentes para cubrir el blueprint completo. | Media |
+| **Tech-debt scoring** | Resuelto al aplanar casos (eliminado el cast `as LeafQuestion`). Sin acción pendiente. | — |
+| **Consolidar "Por tema"** | Decidir si el botón "Por tema" se elimina (cubierto por Práctica) o se reusa para otra cosa. | Baja |
+| **guia-md** | Convertir la guía CENEVAL oficial a Markdown navegable dentro de la PWA. | Baja |
+| **Sesiones gemelas** | Sesiones oficiales S1=58 / S2=67 y reactivos piloto (hoy fuera de alcance; el modelo es extensible). | Baja |
+
+## Distribución actual del banco (128 reactivos)
+
+| Área | Reactivos |
+|------|-----------|
+| A · Administración | 40 |
+| E · Matemáticas y estadística | 41 |
+| B · Contabilidad y finanzas | 17 |
+| D · Mercadotecnia | 11 |
+| F · Derecho | 11 |
+| C · Economía | 8 |
+
+Tipos: `directo` 124, `ordenamiento` 2, `relacion` 2 (los 4 no-`directo` son semilla; el PDF no traía nativos de esos tipos).

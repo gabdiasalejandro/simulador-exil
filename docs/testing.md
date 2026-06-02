@@ -22,17 +22,17 @@ src/domain/exam/
   sampling.test.ts
 ```
 
-No hay directorio `__tests__` separado.
+(El smoke de integración del flujo completo sí vive en `src/__tests__/`.)
 
 ## Capas y su estrategia
 
 | Capa | Qué se prueba | Herramienta | Notas |
 |------|---------------|-------------|-------|
-| Dominio puro | Hamilton (suma=size, cero permitido, determinismo, desempate), sampling (déficit, bankWarnings, sin repetición, EMPTY_BANK), scoring (global/área/subárea, T5 N-pts, null=0), validación de Question | Vitest — funciones puras | `rng` inyectado para tests deterministas |
-| Casos de uso | `startSimulacro` y `submitAttempt` con dobles de puertos | Vitest + `vi.fn()` | El `ContentPort` y `StoragePort` son fakes; nunca se usa JSON real ni IndexedDB |
-| Adaptadores | `JsonContentAdapter` con datos inyectados; `IndexedDbStorageAdapter` con fake-indexeddb | Vitest + `fake-indexeddb` | Cada test usa un `dbName` único para aislar estado |
+| Dominio puro | Hamilton (suma=size, cero permitido, determinismo, desempate), sampling (déficit, bankWarnings, sin repetición, EMPTY_BANK), scoring (global/área/subárea, null=0), validación de `Reactivo` | Vitest — funciones puras | `rng` inyectado para tests deterministas |
+| Casos de uso | `startSimulacro`, `submitAttempt` y `practica` con dobles de puertos | Vitest + `vi.fn()` | El `ContentPort` y `StoragePort` son fakes; nunca se usa el banco real ni IndexedDB |
+| Adaptadores | `YamlContentAdapter` con YAML inyectado; `IndexedDbStorageAdapter` con fake-indexeddb | Vitest + `fake-indexeddb` | Cada test usa un `dbName` único para aislar estado |
 | Lint arquitectónico | Pureza de dominio: cero imports de `react`, `idb` o DOM | ESLint `no-restricted-imports` | Ejecutar con `npm run lint:domain` |
-| UI (planeado, PR3) | `QuestionView` por tipo, `LandingShell` 4 botones, timer, auto-submit | React Testing Library | No implementado aún |
+| UI | `QuestionCard` por tipo (+ modo feedback), `LandingShell`, `SimulacroContainer`, `ReportView`, `Timer`, `PracticaContainer`/`TemaSidebar` | React Testing Library | 167 tests en verde |
 
 ## Patrón de dobles de puerto
 
@@ -40,14 +40,14 @@ Los casos de uso reciben sus dependencias por inyección. Un fake mínimo:
 
 ```ts
 // En start-simulacro.test.ts
-function makeFakePort(questions: DirectQuestion[]): ContentPort {
-  return { loadBank: vi.fn().mockResolvedValue(questions) };
+function makeFakePort(reactivos: Reactivo[]): ContentPort {
+  return { loadBank: vi.fn().mockResolvedValue(reactivos) };
 }
 
 const session = await startSimulacro(config, makeFakePort(bank), rngFixed);
 ```
 
-Nunca se importa `JsonContentAdapter` en tests de casos de uso.
+Nunca se importa `YamlContentAdapter` en tests de casos de uso.
 
 ## Patrón fake-indexeddb
 

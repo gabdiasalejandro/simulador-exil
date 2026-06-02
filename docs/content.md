@@ -4,17 +4,17 @@
 
 ## Decisión central
 
-El banco de reactivos es un archivo `.yaml` comentado y embebido en el bundle via Vite `?raw`. El PDF de ejercicios NUNCA se parsea en runtime — solo en build time (extracción manual hoy, automatizada en un corte futuro).
+El banco de reactivos es un archivo `.yaml` comentado y embebido en el bundle via Vite `?raw`. El PDF de ejercicios NUNCA se parsea en runtime — solo en build/autoría. La extracción ya se realizó (transcripción asistida del PDF): **128 reactivos** en `banco.yaml`.
 
 ## Flujo de contenido
 
 ```
-assets/guia-ceneval.pdf   (fuente oficial — no toca código)
-assets/ejercicios.pdf     (banco origen)
+assets/guia-ceneval.pdf              (fuente oficial — no toca código)
+assets/ejercicios-ejemplos/*.pdf     (banco origen)
          │
-         │  extracción manual → banco.yaml
+         │  transcripción asistida (una vez) → banco.yaml (128 reactivos)
          ▼
-src/infrastructure/content/banco.yaml   ← versionado en git, commentado en español
+src/infrastructure/content/banco.yaml   ← versionado en git, comentado en español
          │
          │  YamlContentAdapter.loadBank()
          ▼
@@ -86,11 +86,7 @@ El YAML usa la clave en español (`explicacion`) para legibilidad del banco. `va
 
 ### Sin tipo 'caso' en el banco
 
-Los multirreactivos del examen se desglosam en reactivos independientes con `caso`. No existe un tipo `caso` anidado. Esto simplifica el modelo, elimina el cast frágil y hace cada reactivo calificable directamente.
-
-## Compatibilidad legacy
-
-`JsonContentAdapter` (mantenido por compatibilidad) sigue funcionando con `seed-bank.json` (formato v1). `validateQuestion` normaliza v1 (`itemType`/`officialTag`/`stem`/etc.) → v2 automáticamente. Los reactivos `itemType: 'case'` del v1 se descartan (no tienen equivalente en v2 — están ya aplanados en banco.yaml).
+Los multirreactivos del examen se desglosan en reactivos independientes con `caso`. No existe un tipo `caso` anidado. Esto simplifica el modelo, elimina el cast frágil y hace cada reactivo calificable directamente.
 
 ## Validación en YamlContentAdapter
 

@@ -8,10 +8,10 @@ El dominio NO importa nada externo. Todo lo que necesita el exterior entra por *
 
 | Capa | Responsabilidad | Ejemplos reales |
 |------|-----------------|-----------------|
-| `domain` | Tipos, reglas de negocio, algoritmos — sin dependencias externas | `question.ts`, `blueprint.ts`, `scoring-policy.ts`, `attempt.ts` |
-| `application` | Puertos (interfaces) y casos de uso que los orquestan | `ContentPort`, `StoragePort`, `start-simulacro.ts`, `submit-attempt.ts` |
-| `infrastructure` | Adaptadores concretos que implementan los puertos | `JsonContentAdapter`, `IndexedDbStorageAdapter`, `seed-bank.json` |
-| `ui` | React — solo render y manejo de eventos, cero reglas de negocio | `App.tsx` (stub hoy; `SimulacroContainer` planeado en PR3) |
+| `domain` | Tipos, reglas de negocio, algoritmos — sin dependencias externas | `question.ts` (`Reactivo`), `blueprint.ts`, `scoring-policy.ts`, `attempt.ts` |
+| `application` | Puertos (interfaces) y casos de uso que los orquestan | `ContentPort`, `StoragePort`, `start-simulacro.ts`, `submit-attempt.ts`, `practica.ts` |
+| `infrastructure` | Adaptadores concretos que implementan los puertos | `YamlContentAdapter`, `IndexedDbStorageAdapter`, `banco.yaml` |
+| `ui` | React — solo render y manejo de eventos, cero reglas de negocio | `App.tsx`, `SimulacroContainer`, `PracticaContainer`, `LandingShell`, `QuestionCard` |
 
 ## Regla de dependencia
 
@@ -38,11 +38,12 @@ ui
 │  │  │  domain (puro — sin imports externos)   │ │   │
 │  │  └─────────────────────────────────────────┘ │   │
 │  │  ports: ContentPort, StoragePort             │   │
-│  │  use-cases: StartSimulacro, SubmitAttempt    │   │
+│  │  use-cases: StartSimulacro, SubmitAttempt,   │   │
+│  │             Practica                         │   │
 │  └──────────────────────────────────────────────┘   │
 │                           ▲                          │
 │  infrastructure           │ implementa puertos       │
-│  JsonContentAdapter ──────┤                          │
+│  YamlContentAdapter ──────┤                          │
 │  IndexedDbStorageAdapter ─┘                          │
 └─────────────────────────────────────────────────────┘
 ```
@@ -67,7 +68,7 @@ Usuario responde → submitAttempt(session, StoragePort)
 
 | Decisión | Elegido | Rechazado | Razón |
 |----------|---------|-----------|-------|
-| Modelo de dominio | Union discriminada + funciones puras | Clases con métodos | Serializable desde JSON, exhaustivo con `assertNever`, sin acoplamiento |
-| Polimorfismo de scoring | Registro por `itemType` inyectable | Método en cada tipo de `Question` | `ScoringPolicy` es política aislada, extensible sin tocar `Question` |
-| Acceso a contenido | `ContentPort` desde el día 1 | Import directo de JSON en dominio/app | Hoy JSON estático, mañana API sin tocar dominio |
+| Modelo de dominio | Union discriminada + funciones puras | Clases con métodos | Serializable desde YAML, exhaustivo con `assertNever`, sin acoplamiento |
+| Polimorfismo de scoring | `scoreQuestion` exhaustivo por `tipo` (assertNever) | Método en cada tipo de `Reactivo` | `ScoringPolicy` es política aislada, extensible sin tocar `Reactivo` |
+| Acceso a contenido | `ContentPort` desde el día 1 | Import directo de datos en dominio/app | Hoy YAML estático, mañana API sin tocar dominio |
 | Migraciones IDB | Ocultas dentro de `IndexedDbStorageAdapter` | Esquema expuesto al dominio | Dominio y app no conocen IndexedDB |
