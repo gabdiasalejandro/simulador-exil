@@ -2,6 +2,10 @@
 # Banco de reactivos — Simulador EXIL-NEGOCIOS (CENEVAL)
 # ============================================================================
 #
+# Reactivos transcritos fielmente del PDF de ejercicios de preparación.
+# Principio rector: TRANSCRIBIR, NO INVENTAR. Enunciados, opciones, respuesta
+# correcta y explicación se copian tal como aparecen en la fuente.
+#
 # tipo: directo | completamiento | ordenamiento | relacion
 #
 # Áreas oficiales:
@@ -12,49 +16,1789 @@
 #   E — Matemáticas y estadística
 #   F — Derecho
 #
-# Formato de campo "caso": se repite en cada reactivo que forme parte
-# de un multirreactivo (contexto compartido). No genera una sub-pregunta
-# anidada; cada reactivo es independiente.
+# Mapeo de las 8 áreas del PDF (preparación) a las 6 áreas oficiales:
+#   Área 1 Matemáticas y cálculo empresarial → E (E1 financieras / E2 cálculo)
+#   Área 2 Economía y contabilidad empresarial → C (economía) o B (contabilidad)
+#   Área 3 Estadística descriptiva → E3
+#   Área 4 Estadística inferencial → E3 (la oficial no distingue inferencial)
+#   Área 5 Habilidades profesionales básicas → A
+#   Área 6 Competencias profesionales empresariales → A
+#   Área 7 Derecho → F (público/fiscal→F1; mercantil/laboral/privado→F2)
+#   Área 8 Mercadotecnia → D (mercado→D1; técnicas/herramientas→D2)
+#
+# "Respuesta correcta A/B/C/D" del PDF → correcta 0/1/2/3.
+#
+# Campo "caso": contexto compartido de un multirreactivo. Se repite en cada
+# reactivo del caso; cada reactivo es independiente (casos aplanados).
+#
+# Nota: los reactivos de tipo "ordenamiento" y "relacion" (4 pares) se
+# conservan del banco semilla anterior porque el PDF no contiene reactivos
+# nativos de esos tipos (sus "relaciona columnas" vienen como opción múltiple
+# de combinaciones de letras, por lo que se transcriben como "directo").
 # ============================================================================
 
 schemaVersion: 2
 
 reactivos:
 
-  # --------------------------------------------------------------------------
-  # A. Administración
-  # --------------------------------------------------------------------------
+  # ==========================================================================
+  # ÁREA 1 (PDF) — Matemáticas y cálculo empresarial → E
+  # ==========================================================================
 
-  - id: A3-001
+  - id: E1-001
     tipo: directo
-    area: A             # Administración
-    subarea: A3         # Proceso administrativo
-    enunciado: "¿Cuál de los siguientes enunciados describe mejor la función de planeación dentro del proceso administrativo?"
+    area: E
+    subarea: E1
+    enunciado: "Tomando como referencia un ejercicio de 2015 en donde se obtuvo una ganancia de $4,800,000 y en 2016 de $5,950,000, determina la variación monetaria y la variación porcentual."
     opciones:
-      - "Determinar las tareas y la estructura necesaria para alcanzar los objetivos."
-      - "Definir los objetivos y establecer los cursos de acción para alcanzarlos."
-      - "Guiar y motivar al personal para que realice sus actividades."
-      - "Medir el desempeño real y compararlo con los estándares establecidos."
-    correcta: 1
-    explicacion: "La planeación consiste en fijar objetivos y determinar los cursos de acción necesarios para lograrlos. La organización (opción A) define estructura; la dirección (opción C) motiva al personal; el control (opción D) mide el desempeño."
+      - "$1,150,000 y 23.96%"
+      - "$1,100,000 y 23.96%"
+      - "$1,150,000 y 29.36%"
+      - "$1,100,000 y 29.36%"
+    correcta: 0
+    explicacion: "La variación monetaria se obtiene restando el año base: $5,950,000 - $4,800,000 = $1,150,000. Tomando como base 2015 ($4,800,000), $1,150,000 equivale al 23.96% de variación porcentual."
 
-  - id: A2-001
+  - id: E1-002
     tipo: directo
-    area: A             # Administración
-    subarea: A2         # Pensamiento administrativo
-    enunciado: "Según la teoría clásica de Fayol, ¿cuántos principios generales de la administración propuso?"
+    area: E
+    subarea: E1
+    enunciado: "Una persona cuenta con un capital de $2,500,000 y desea saber cuánto tendrá en 12 meses, la tasa de interés aplicable es del 3.5% mensual."
     opciones:
-      - "7"
-      - "10"
-      - "14"
-      - "20"
+      - "$3,555,000"
+      - "$3,050,000"
+      - "$3,550,000"
+      - "$3,500,000"
     correcta: 2
-    explicacion: "Henri Fayol formuló 14 principios generales de la administración en su obra 'Administración industrial y general' (1916), entre ellos: división del trabajo, autoridad, disciplina, unidad de mando, etc."
+    explicacion: "Con la fórmula de capitalización simple M = C + (C × (n × i)), sustituyendo: M = $2,500,000 + (2,500,000 × (12 × 0.035)) = $3,550,000."
 
-  - id: A4-001
+  - id: E2-001
+    tipo: directo
+    area: E
+    subarea: E2
+    enunciado: "El ingreso total de una escuela por x alumnos se establece por a = 1500x, los gastos mensuales totales son b = 890x + 2350. ¿Cuántos alumnos se deben tener mensualmente para mantener el punto de equilibrio?"
+    opciones:
+      - "3"
+      - "4"
+      - "5"
+      - "6"
+    correcta: 1
+    explicacion: "En equilibrio a = b: 1500x = 890x + 2350; 610x = 2350; x = 3.85. Se requieren aproximadamente 4 alumnos inscritos mensuales para mantener el punto de equilibrio."
+
+  - id: E1-003
+    tipo: directo
+    area: E
+    subarea: E1
+    enunciado: "Se necesita calcular el monto al cual equivalen 8 pagos anticipados de $23,500 si el interés es del 25% anual."
+    opciones:
+      - "466,283.66"
+      - "476,283.66"
+      - "486,283.66"
+      - "496,283.66"
+    correcta: 0
+    explicacion: "Con la fórmula de monto de una anualidad M = R[((1 + i)^n − 1) / i] y los datos n = 8, R = $23,500, i = 25%, se obtiene M = 466,283.66."
+
+  - id: E2-CASO1-q1
+    tipo: directo
+    area: E
+    subarea: E2
+    caso: "Una empresa de alimentos produce dos tipos de mezclas para sus panes, ambos a base de harina y salvado. La mezcla clásica lleva 8 kg de harina por cada 42 kg de salvado. La mezcla light lleva 4 kg de harina por cada 7 kg de salvado. La fábrica dispone en este momento de 38 kg de harina y 73 kg de salvado."
+    enunciado: "¿Cuántos kg de mezcla light puede fabricar hasta agotar el stock?"
+    opciones:
+      - "115.58 kg mezcla y 11.6 kg sobrante"
+      - "114.58 kg mezcla y 11.6 kg sobrante"
+      - "114.58 kg mezcla y 16.6 kg sobrante"
+      - "115.58 kg mezcla y 16.6 kg sobrante"
+    correcta: 1
+    explicacion: "Planteando el sistema 8/50·x + 4/11·y = 38 y 42/50·x + 7/11·y = 73, y resolviendo por sustitución, se obtiene x = 11.6 kg y y = 114.58 kg de mezcla light."
+
+  - id: E2-CASO2-q1
+    tipo: directo
+    area: E
+    subarea: E2
+    caso: "La empresa Telcel ofrece a sus clientes un plan que incluye celular nuevo en $800 y la tarifa fija mensual de $200, plan todo incluido."
+    enunciado: "¿Cuánto se habrá pagado en el transcurso de 11 meses? (Identifícalo mediante la gráfica)."
+    opciones:
+      - "3600"
+      - "3400"
+      - "3200"
+      - "3000"
+    correcta: 3
+    explicacion: "La ecuación del pago es p(m) = 800 + 200m. Sustituyendo m = 11: 800 + 200 × 11 = $3000."
+
+  - id: E2-CASO2-q2
+    tipo: directo
+    area: E
+    subarea: E2
+    caso: "La empresa Telcel ofrece a sus clientes un plan que incluye celular nuevo en $800 y la tarifa fija mensual de $200, plan todo incluido."
+    enunciado: "En un cuadro de costos de cajas de medicamentos, el usuario 1 compró 2x + 3y = 75 y el usuario 2 compró 4x + 8y = 115, donde x es el costo de una caja de aspirinas y y el de una caja de ibuprofeno. Elabora un sistema de ecuaciones 2×2 y resuelve las incógnitas."
+    opciones:
+      - "caja de aspirina $6.5 y caja de ibuprofeno $10"
+      - "caja de aspirina $6.5 y caja de ibuprofeno $20"
+      - "caja de aspirina $7.5 y caja de ibuprofeno $20"
+      - "caja de aspirina $7.5 y caja de ibuprofeno $10"
+    correcta: 2
+    explicacion: "Resolviendo el sistema 2x + 3y = 75 y 4x + 8y = 115 por reducción: y = 20 e x = 7.5. La caja de aspirinas vale $7.5 y la de ibuprofeno $20."
+
+  - id: E2-002
+    tipo: directo
+    area: E
+    subarea: E2
+    enunciado: "Resuelve la siguiente ecuación de primer grado: 15 − 9z = 13z − 7"
+    opciones:
+      - "z = 0"
+      - "z = 1"
+      - "z = 2"
+      - "z = 3"
+    correcta: 1
+    explicacion: "Pasando términos: -9z - 13z = -7 - 15; -22z = -22; z = 1."
+
+  - id: E2-003
+    tipo: directo
+    area: E
+    subarea: E2
+    enunciado: "De la siguiente ecuación de segundo grado, resuélvela: 2x² + 6x = 0"
+    opciones:
+      - "x1 = 1 y x2 = -3"
+      - "x1 = 0 y x2 = 3"
+      - "x1 = 0 y x2 = -3"
+      - "x1 = 1 y x2 = 3"
+    correcta: 2
+    explicacion: "Con la fórmula general x = (-b ± √(b² − 4ac)) / 2a, sustituyendo a = 2, b = 6, c = 0: x1 = 0 y x2 = -3."
+
+  - id: E2-CASO3-q1
+    tipo: directo
+    area: E
+    subarea: E2
+    caso: "En una empresa se compraron 5 copas de cristal y 4 de plástico por $85 para un evento. Además ya se tenían algunas copas del día anterior, pues se compraron 4 de cristal y 7 de plástico por $95."
+    enunciado: "Determinar el precio de una copa de cristal y de una de plástico."
+    opciones:
+      - "cristal = $15 y plástico = $5"
+      - "cristal = $10 y plástico = $10"
+      - "cristal = $15 y plástico = $10"
+      - "cristal = $5 y plástico = $15"
+    correcta: 3
+    explicacion: "Resolviendo el sistema 5c + 4p = 85 y 4c + 7p = 95 por reducción: p = $15 y c = $5. Una copa de cristal vale $5 y una de plástico $15."
+
+  - id: E2-004
+    tipo: directo
+    area: E
+    subarea: E2
+    enunciado: "Es la representación del área bajo la curva de una función:"
+    opciones:
+      - "Integral indefinida"
+      - "Integrales impropias"
+      - "Integral definida"
+      - "Integrales trigonométricas"
+    correcta: 2
+    explicacion: "La integral definida es el concepto utilizado para determinar la representación del área bajo la curva de una función."
+
+  - id: E2-005
+    tipo: directo
+    area: E
+    subarea: E2
+    enunciado: "La definición de costo marginal de un productor es dm/dx = 0.7x + 5, y la producción actual es x = 96 unidades a la semana. ¿Cuánto más costará incrementar la producción a 230 unidades por semana?"
+    opciones:
+      - "$14,959.4"
+      - "$15,959.4"
+      - "$16,959.4"
+      - "$17,959.4"
+    correcta: 1
+    explicacion: "M(230) − M(96) = ∫[96→230] (0.7x + 5) dx = [0.35x² + 5x] evaluada de 96 a 230 = (18515 + 1150) − (3225.6 + 480) = $15,959.4."
+
+  - id: E2-006
+    tipo: directo
+    area: E
+    subarea: E2
+    enunciado: "El ingreso marginal de una empresa está determinado por C'(x) = 9.4 + 0.08x. Determinar el incremento del ingreso total cuando los niveles de ventas se amplían de 100 a 150 unidades."
+    opciones:
+      - "$950"
+      - "$960"
+      - "$970"
+      - "$980"
+    correcta: 2
+    explicacion: "C(x) = ∫[100→150] (9.4 + 0.08x) dx = [9.4x + 0.04x²] de 100 a 150 = (1410 + 900) − (940 + 400) = $970."
+
+  - id: E2-007
+    tipo: directo
+    area: E
+    subarea: E2
+    enunciado: "Se espera que una nueva máquina genere ahorro en costos de operación. Cuando la máquina tenga x años de uso, la razón de ahorro será de f(x) = 700 + 3500x pesos al año. ¿Cuánto se ahorra en costos de operación durante los primeros cuatro años?"
+    opciones:
+      - "$20800"
+      - "$25800"
+      - "$29800"
+      - "$30800"
+    correcta: 3
+    explicacion: "∫[0→4] (700 + 3500x) dx = [700x + 1750x²] de 0 a 4 = 2800 + 28000 = $30800."
+
+  - id: E2-008
+    tipo: directo
+    area: E
+    subarea: E2
+    enunciado: "La derivada de x⁶ es 6x⁵. ¿Cuál es la antiderivada de 6x⁵?"
+    opciones:
+      - "x⁶"
+      - "x⁵"
+      - "x³⁰"
+      - "5x⁶"
+    correcta: 0
+    explicacion: "La antiderivada (primitiva o integral indefinida) de 6x⁵ es x⁶ + C, ya que su derivada es 6x⁵."
+
+  - id: E2-009
+    tipo: directo
+    area: E
+    subarea: E2
+    enunciado: "Sea f una función real definida por f(x) = 5. ¿Cuál es su dominio?"
+    opciones:
+      - "A = Img(f)"
+      - "A = R"
+      - "A = Img"
+      - "A = B"
+    correcta: 1
+    explicacion: "Al ser una función constante, cualquier número real evaluado en f da un número real (5); por lo tanto, el dominio son todos los números reales: A = R."
+
+  - id: E2-010
+    tipo: directo
+    area: E
+    subarea: E2
+    enunciado: "¿Qué nombre reciben las funciones matemáticas que tienen la forma f(x) = k/x?"
+    opciones:
+      - "Funciones raíz"
+      - "Funciones exponenciales"
+      - "Funciones de proporcionalidad inversa"
+      - "Funciones logarítmicas"
+    correcta: 2
+    explicacion: "Cuando la variable independiente y la dependiente son inversamente proporcionales (al aumentar una, la otra disminuye en la misma proporción), la función que las relaciona es de proporcionalidad inversa."
+
+  - id: E2-CASO4-q1
+    tipo: directo
+    area: E
+    subarea: E2
+    caso: "La Cruz Roja realiza una encuesta a bailarinas de ballet y muestra que está aumentando el número de lesiones que ponen fin a su carrera. En 2017 el número de lesiones fue de 200 y en 2018 fue de 224. Las lesiones aumentan a una tasa lineal."
+    enunciado: "¿Cuál sería la función n = f(t), donde n representa el número de lesiones y t el tiempo en años desde 2010, y cuándo se espera que el número de lesiones rebase las 300?"
+    opciones:
+      - "n = 24t + 32 y 11.16 años"
+      - "n = 32t + 24 y 11.16 años"
+      - "n = 24t + 32 y 12.16 años"
+      - "n = 32t + 24 y 12.16 años"
+    correcta: 0
+    explicacion: "La pendiente m = (224 − 200) / (8 − 7) = 24. Con la ecuación de la recta se obtiene n = 24t + 32. Para n = 300: t = (300 − 32) / 24 = 11.16 años."
+
+  - id: E2-011
+    tipo: directo
+    area: E
+    subarea: E2
+    enunciado: "La población proyectada de una ciudad está dada por p = 250,000(1.16)^(t/22), donde t es el número de años a partir de 2008. ¿Cuál es la población pronosticada para 2019?"
+    opciones:
+      - "259,258.24"
+      - "249,258.24"
+      - "239,258.24"
+      - "269,258.24"
+    correcta: 3
+    explicacion: "Para t = 2019 − 2008 = 11 años: p = 250,000(1.16)^(11/22) = 250,000(1.16)^0.5 = 269,258.24."
+
+  - id: E2-012
+    tipo: directo
+    area: E
+    subarea: E2
+    enunciado: "La ecuación de oferta de un fabricante es p = log(10 + q/4), donde q es el número de unidades al precio unitario p. ¿A qué precio el fabricante ofrecerá 11,980 unidades?"
+    opciones:
+      - "3.47"
+      - "3.57"
+      - "3.67"
+      - "3.77"
+    correcta: 0
+    explicacion: "Sustituyendo q = 11,980: p = log(10 + 11980/4) = log(10 + 2995) = log(3005) = 3.47."
+
+  # ==========================================================================
+  # ÁREA 2 (PDF) — Economía y contabilidad empresarial → C / B
+  # ==========================================================================
+
+  - id: C3-CASO1-q1
+    tipo: directo
+    area: C
+    subarea: C3
+    caso: "Una empresa fabricante de loncheras plásticas ha tenido un importante crecimiento y cree que es momento de incursionar en los mercados internacionales. Dada la volatilidad del tipo de cambio y el riesgo país asociado a algunos estados, la decisión del país de destino no es fácil."
+    enunciado: "Con base en un análisis macroeconómico externo, ¿qué factores son fundamentales revisar antes de empezar los procesos de exportación a un mercado de otro país?"
+    opciones:
+      - "Verificar la existencia de un gobierno amigo del régimen de nuestro país y que no haya competencia en ese mercado para nuestro producto."
+      - "Analizar la tasa de ganancia del mercado del plástico doméstico y externo, las condiciones de intercambio comercial con el país destino y el riesgo económico."
+      - "Verificar que el país destino no tenga barreras no arancelarias y que su industria no sea competitiva con nuestro producto ni el de otros países."
+      - "Encontrar un mercado donde no haya restricciones importantes a la importación y carezca de controles de calidad de los plásticos."
+    correcta: 1
+    explicacion: "La tasa de ganancia por sector es fundamental dentro y fuera del país para determinar el atractivo del mercado y la viabilidad de la exportación. También es fundamental revisar las condiciones de intercambio y evaluar el riesgo."
+
+  - id: C2-CASO2-q1
+    tipo: directo
+    area: C
+    subarea: C2
+    caso: "Un inversionista necesita redirigir parte de sus utilidades a una inversión de bajo riesgo dadas las condiciones de incertidumbre por la desaceleración económica global y la guerra comercial entre Estados Unidos y China."
+    enunciado: "¿Qué elementos debe considerar para invertir estos activos y lograr una rentabilidad adecuada en el largo plazo?"
+    opciones:
+      - "La tasa de interés, la inflación, el riesgo tipo de cambio y el riesgo político de la economía."
+      - "Las declaraciones de las autoridades sobre el crecimiento del PIB al final del periodo."
+      - "Las condiciones de la balanza comercial del país y las inversiones del sector público."
+      - "El crecimiento del PIB, la cartera vencida de las tiendas departamentales y la calificación internacional."
+    correcta: 0
+    explicacion: "La tasa de ganancia, el comportamiento de la inflación y el tipo de cambio son las variables críticas en una inversión de bajo riesgo, cuyo valor futuro depende de la inflación y del riesgo político a largo plazo."
+
+  - id: C2-CASO3-q1
+    tipo: directo
+    area: C
+    subarea: C2
+    caso: "Una empresa fabricante de tabletas observa un crecimiento moderado pero constante y necesita proyectar sus ventas para 2021 con rigor matemático. Sus históricos son: 2018 $235,687; 2019 $369,825; 2020 $412,224."
+    enunciado: "Aplicando el modelo de regresión lineal para el pronóstico de ventas, ¿cuál es el pronóstico para 2021?"
+    opciones:
+      - "$529,879.13"
+      - "$489,996.50"
+      - "$515,782.33"
+      - "$520,782.00"
+    correcta: 2
+    explicacion: "Resolviendo la ecuación de la recta por el método de los mínimos cuadrados, el pronóstico para 2021 es $515,782.33."
+
+  - id: C2-CASO4-q1
+    tipo: directo
+    area: C
+    subarea: C2
+    caso: "Una empresa de lácteos considera incursionar en suplementos para adultos mayores, pero las condiciones de mercado y el índice HH muestran una importante concentración de 2 de los 4 participantes más importantes. Índice HH: 52%; 4 participantes; regulaciones de Cofepris y sector salud; elasticidad de precios relativa."
+    enunciado: "¿A qué situación de mercado se enfrenta la empresa de acuerdo con los datos del caso?"
+    opciones:
+      - "Duopolio puro por la concentración en dos empresas; no se recomienda invertir."
+      - "Oligopolio; pese a dos participantes fuertes, resulta atractivo invertir por el tipo de mercado."
+      - "Libre competencia, porque es un mercado poco explotado; la inversión es atractiva."
+      - "Monopolio, porque una empresa es mayoritaria; no se permite invertir."
+    correcta: 1
+    explicacion: "El índice HH muestra la concentración de la participación, pero al existir más de dos participantes en número limitado, la condición es de oligopolio, en el que aún resulta interesante invertir."
+
+  - id: C2-CASO5-q1
+    tipo: directo
+    area: C
+    subarea: C2
+    caso: "La embotelladora El Milenio trabaja al 92% de su capacidad instalada y el mercado se expande al 3% anual. Tiene competidores trabajando por debajo del 70% y la participación de mercado es medianamente equitativa. Si no realiza inversiones, el equipo empezará a perder por cada nueva unidad producida, aunque pueda venderla."
+    enunciado: "¿Cuál es el principio económico que se está activando en la empresa estudiada?"
+    opciones:
+      - "Ciclo de vida de la empresa."
+      - "Ley de Say."
+      - "Aplicación del costo de oportunidad."
+      - "Ley de rendimientos marginales decrecientes."
+    correcta: 3
+    explicacion: "La ley de los rendimientos marginales decrecientes establece que cuando el costo marginal crece por la fabricación de una unidad adicional, el producto marginal disminuye y se empieza a perder por cada unidad adicional."
+
+  - id: C1-CASO6-q1
+    tipo: directo
+    area: C
+    subarea: C1
+    caso: "Carolina piensa comprar un vehículo con su reparto de utilidades. Con sus fondos puede dar un enganche de hasta el 20% de un auto compacto, pagará mensualidades promedio de $3,000 durante 50 meses y decidió aplazar sus vacaciones al extranjero al menos un año."
+    enunciado: "Con base en lo anterior, ¿qué costo está asumiendo Carolina al decidirse por tener un auto nuevo?"
+    opciones:
+      - "Costo de adquisición."
+      - "Costo marginal."
+      - "Costo financiero."
+      - "Costo de oportunidad."
+    correcta: 3
+    explicacion: "El costo de oportunidad es todo aquello a lo que renuncia Carolina (como su viaje al extranjero) a cambio de tener un auto nuevo que pagará a plazos."
+
+  - id: B2-CASO7-q1
+    tipo: directo
+    area: B
+    subarea: B2
+    caso: "Un grupo de empresarios financieros tradicionalistas diversifica su oferta hacia el mercado del ahorro para el retiro, que está en crecimiento y con oferta competitiva, lo que permite generar fondos importantes para ahorradores y para el mercado bancario."
+    enunciado: "¿Cuál es la instancia que emite la normativa financiera para poder participar en el mercado de las AFORES?"
+    opciones:
+      - "CONSAR"
+      - "CNBV"
+      - "BANXICO"
+      - "CONAC"
+    correcta: 0
+    explicacion: "La Comisión Nacional del Sistema de Ahorro para el Retiro (CONSAR) emite la normativa para todo el sistema de ahorro para el retiro, por lo que es la regulación que debe atenderse."
+
+  - id: B2-CASO8-q1
+    tipo: directo
+    area: B
+    subarea: B2
+    caso: "Un emprendedor arrancará un negocio de venta de accesorios para celulares. La venta al detalle crece al 3% anual en Ayala, Morelos; cuenta con un local de baja renta en una plaza de nueva creación; y una investigación de mercado revela que la facturación electrónica es un factor importante en la decisión de compra."
+    enunciado: "¿Qué esquema normativo es fundamental para atender la demanda de su mercado y trabajar conforme a la norma contable vigente?"
+    opciones:
+      - "Alta ante la SHCP como contribuyente (persona física o moral), según el régimen comercial vigente."
+      - "Contratar un servicio de facturación que emita comprobantes fiscales 3.3 para emitir facturas."
+      - "Buscar gestoría ante la SHCP para facturar por medio de un tercero y trabajar sin emisión de comprobantes."
+      - "Generar permisos ante la autoridad municipal en la ventanilla única para funcionamiento y emisión de facturas."
+    correcta: 0
+    explicacion: "El trámite correcto es el alta ante la SHCP (concretamente el SAT) para poder emitir comprobantes 3.3, funcionar conforme a la ley y atender la emisión de comprobantes a los compradores."
+
+  - id: B2-CASO9-q1
+    tipo: directo
+    area: B
+    subarea: B2
+    caso: "La empresa Los limones franceses fabrica Pay de Limón en Monterrey y, en su aniversario, realizó una carrera atlética costeando todo lo necesario e hizo donaciones económicas a varias casas hogar. El contador indica que las donaciones deben quedar registradas y deducidas conforme a la ley."
+    enunciado: "De acuerdo con la normatividad contable vigente en la Ley del ISR, ¿qué porcentaje de estas donaciones directas es deducible contablemente?"
+    opciones:
+      - "100% a casa hogar y las indirectas no son deducibles."
+      - "50% de las donaciones directas y 10% las indirectas."
+      - "7% sobre los ingresos acumulables."
+      - "100% sobre los ingresos acumulables."
+    correcta: 2
+    explicacion: "Conforme al artículo 27 (fracción I) de la Ley del ISR, el monto total de donativos es deducible hasta por una cantidad que no exceda el 7% de los ingresos acumulables del ejercicio inmediato anterior."
+
+  - id: B1-CASO10-q1
+    tipo: directo
+    area: B
+    subarea: B1
+    caso: "Juan Carlos es emprendedor y se encarga de la contabilidad de su negocio, ya en fase operativa. Las ventas han logrado flujos de efectivo aceptables, pero esto debe demostrarse a los socios capitalistas que pusieron su confianza y su dinero en el emprendimiento."
+    enunciado: "¿Qué informe económico especializado usará Juan Carlos para dar a conocer la situación del negocio cada trimestre y de manera anual?"
+    opciones:
+      - "Estados financieros"
+      - "Reporte de ventas"
+      - "Reporte de utilidad bruta por trimestre y consolidada por año."
+      - "Flujo de caja y estado general de las finanzas."
+    correcta: 0
+    explicacion: "Los estados financieros, de acuerdo con la normatividad del IMCP y la SHCP, son el documento que por excelencia expresa la situación financiera de la empresa."
+
+  - id: B1-CASO11-q1
+    tipo: directo
+    area: B
+    subarea: B1
+    caso: "La empresa Cubos plásticos del norte, donde Yesenia es contadora, inicia inversiones de expansión fabricando cubetas para exportar. Las reservas de capital fueron insuficientes para financiar la nueva maquinaria, por lo que se recurrió a un crédito bancario."
+    enunciado: "¿En qué cuenta debe registrar Yesenia los $569,857 de préstamos que se usaron para la compra de los bienes de capital?"
+    opciones:
+      - "Activos de capital"
+      - "Cuenta corriente de bancos."
+      - "Pasivo no corriente."
+      - "Pasivo circulante."
+    correcta: 0
+    explicacion: "Si se adquiere maquinaria, debe considerarse como un activo fijo (de capital), pues el tiempo que tarda en amortizarse es mayor a un año."
+
+  - id: B1-CASO12-q1
+    tipo: directo
+    area: B
+    subarea: B1
+    caso: "Una empresa vidriera del Golfo de México genera ventas a desarrollos residenciales de interés social, con una facturación anual por este concepto de $2,786,523.52. Las facturas que emite generan IVA, lo que aumenta el monto susceptible de transferencia."
+    enunciado: "De acuerdo con la tasa vigente de IVA en México en 2019, ¿cuál es el monto a transferir por este concepto al SAT antes de compensaciones o acreditaciones?"
+    opciones:
+      - "$442,483.26"
+      - "$445,843.76"
+      - "$417,978.53"
+      - "$465,349.43"
+    correcta: 1
+    explicacion: "El IVA en la región del Golfo de México es del 16% conforme a las regulaciones del SAT; es un impuesto que se transfiere. Sobre $2,786,523.52 corresponde $445,843.76."
+
+  - id: B4-CASO13-q1
+    tipo: directo
+    area: B
+    subarea: B4
+    caso: "Un restaurante yucateco quiere conocer el costo unitario de la orden individual de sopa de lima. Datos: costos variables por orden $30; costos fijos mensuales $19,000; unidades que se esperan vender por mes 1,000."
+    enunciado: "Con base en estos datos y calculándolo por fórmula, ¿cuál es el costo unitario de cada orden de sopa de lima?"
+    opciones:
+      - "$49.00"
+      - "$76.00"
+      - "$39.00"
+      - "$79.00"
+    correcta: 0
+    explicacion: "CU = costo variable + (costos fijos / unidades esperadas) = 30 + (19,000 / 1,000) = 30 + 19 = $49."
+
+  - id: B4-CASO13-q2
+    tipo: directo
+    area: B
+    subarea: B4
+    caso: "Un restaurante yucateco quiere conocer el costo unitario de la orden individual de sopa de lima. Datos: costos variables por orden $30; costos fijos mensuales $19,000; unidades que se esperan vender por mes 1,000."
+    enunciado: "Determina mediante fórmula el precio de venta y el volumen de equilibrio de venta de sopas de lima si se espera un rendimiento sobre ventas del 18%."
+    opciones:
+      - "Precio de venta: $60.10 y volumen de equilibrio: 640.69 unidades."
+      - "Precio de venta: $60.76 y volumen de equilibrio: 1000.00 unidades."
+      - "Precio de venta: $35.40 y volumen de equilibrio: 640.50 unidades."
+      - "Precio de venta: $59.76 y volumen de equilibrio: 638.44 unidades."
+    correcta: 3
+    explicacion: "Precio = costo unitario / (1 − rendimiento) = 49 / (1 − 0.18) = $59.76. Volumen de equilibrio = costos fijos / (precio − costo variable) = 19,000 / (59.76 − 30) = 638.44 unidades."
+
+  - id: B3-CASO15-q1
+    tipo: directo
+    area: B
+    subarea: B3
+    caso: "Una pequeña empresa inicia actividades en Querétaro con capital semilla de una incubadora de fondos mixtos. Para seguir accediendo a recursos, la incubadora le pide registros de las ventas al detalle."
+    enunciado: "Para atender esta obligación contable, ¿qué documento debe generarse para el registro cronológico y diario de las operaciones?"
+    opciones:
+      - "Libro diario."
+      - "Libro de caja."
+      - "Cuentas T."
+      - "Balance general."
+    correcta: 0
+    explicacion: "El libro diario es el documento dentro de los libros de contabilidad que asienta todas las operaciones que se realizan día a día en el negocio."
+
+  - id: B3-CASO16-q1
+    tipo: directo
+    area: B
+    subarea: B3
+    caso: "Toda empresa debe acatar normatividad contable que le permita atender las obligaciones fiscales y generar una relación detallada de las mercancías en existencia susceptibles de vender o usar como materias primas."
+    enunciado: "Dentro de los libros de contabilidad, ¿qué libro registra las entradas, salidas y estancia en bodega de las mercancías, insumos y materias primas?"
+    opciones:
+      - "Libro de inventario."
+      - "Libro de caja."
+      - "Libro de primeras entradas y salidas."
+      - "Libro diario."
+    correcta: 0
+    explicacion: "El libro de inventarios contiene una relación detallada de las existencias finales listas para la venta, valoradas al costo."
+
+  - id: B3-CASO17-q1
+    tipo: directo
+    area: B
+    subarea: B3
+    caso: "Daniel es el pagador de una empresa. Pese a los avances en pagos electrónicos, aún hace algunos pagos por cheque y operaciones en hojas sueltas con diversas entidades. Al final del día, estas operaciones se asientan en el libro diario."
+    enunciado: "Estas hojas sueltas que sirven de apoyo para las operaciones individuales pertenecen a un método conocido como:"
+    opciones:
+      - "Método centralizador."
+      - "Método de pólizas."
+      - "Método de partida doble."
+      - "Método de diario continental."
+    correcta: 1
+    explicacion: "El método de pólizas se basa en el uso de hojas sueltas (pólizas), documento en que se consignan de manera individual las operaciones realizadas por una entidad económica."
+
+  - id: B4-CASO18-q1
+    tipo: directo
+    area: B
+    subarea: B4
+    caso: "Un restaurante de Cuernavaca tiene en su menú una cava de vinos californianos de importación directa. Por la incertidumbre del T-MEC y la amenaza de nuevos aranceles, sus precios pueden aumentar entre 5 y 8%."
+    enunciado: "¿En qué parámetro de costos puede afectar a la empresa este aumento del costo de sus vinos?"
+    opciones:
+      - "Costos fijos."
+      - "Costos variables."
+      - "Costos operativos."
+      - "Costos de venta."
+    correcta: 1
+    explicacion: "El impacto es sobre los costos variables, ya que es un producto de venta al público cuyo ingreso a almacén depende de la demanda; si incrementa el precio por el tipo de cambio, se incrementa el costo variable."
+
+  - id: B4-CASO19-q1
+    tipo: directo
+    area: B
+    subarea: B4
+    caso: "Ismael y Gerardo emprenderán la exportación al mercado europeo de libros gráficos de marquetería. Antes de exportar necesitan calcular el precio por utilidad meta. Datos: costo unitario $3,200; rendimiento esperado de la inversión 21%; unidades a exportar 12,000; inversión inicial $798,000."
+    enunciado: "Calcula el precio por utilidad meta (no el precio de venta final) de los libros mencionados."
+    opciones:
+      - "$3,213.97"
+      - "$3,872.12"
+      - "$4,258.89"
+      - "$3,258.23"
+    correcta: 0
+    explicacion: "Precio por utilidad meta = costo unitario + (retorno deseado × inversión / unidades) = 3,200 + (0.21 × 798,000 / 12,000) = $3,213.97."
+
+  - id: B1-CASO20-q1
+    tipo: directo
+    area: B
+    subarea: B1
+    caso: "Una empresa de banquetes para eventos sociales ha crecido y está obligada a emitir comprobantes fiscales digitales y presentar declaraciones por el portal del SAT. Por ello renovó su equipo de cómputo de oficinas e incorporó dispositivos móviles."
+    enunciado: "¿En qué clasificación de activos se clasifica la adquisición de estos equipos?"
+    opciones:
+      - "Activo fijo"
+      - "Activo diferido"
+      - "Activo circulante"
+      - "Activos e insumos"
+    correcta: 0
+    explicacion: "Dentro del activo fijo se encuentran las cuentas de mobiliario y equipo de oficina y de equipo de cómputo, que agrupan la adquisición de nuevos equipos como los descritos."
+
+  - id: C1-CASO21-q1
+    tipo: directo
+    area: C
+    subarea: C1
+    caso: "Importadora de plásticos industriales exporta embudos automotrices a Chile, posicionándose con éxito. Sin embargo, autoridades chilenas le colocaron cuotas restrictivas de importación para favorecer a una empresa venezolana. Ambas naciones pertenecen a la OMC."
+    enunciado: "¿Qué principio de la OMC puede invocar México para evitar este trato discriminatorio?"
+    opciones:
+      - "Cláusula de la nación más favorecida."
+      - "Trato equitativo y uniforme."
+      - "Fase de solución de mutuo acuerdo de diferencias."
+      - "Acuerdo de la ronda de Uruguay."
+    correcta: 0
+    explicacion: "La cláusula de nación más favorecida establece que el trato preferente que un país concede a otro debe extenderse a todos los países del tratado."
+
+  - id: C1-CASO22-q1
+    tipo: directo
+    area: C
+    subarea: C1
+    caso: "Una importadora de juguetes trae pistolas de pintura desde Estados Unidos. La demanda es tal que tiene pedidos para seis meses, y los clientes pagan por adelantado por la incertidumbre. Sin embargo, su proveedor solo factura los pedidos a la cotización del dólar al día de embarque."
+    enunciado: "Se corre un riesgo de comercio internacional en esta transacción. ¿A qué tipo de riesgo se hace referencia?"
+    opciones:
+      - "Riesgo económico"
+      - "Riesgo país"
+      - "Riesgo tipo de cambio"
+      - "Riesgo político"
+    correcta: 2
+    explicacion: "Si los compromisos financieros están en otra moneda, la empresa queda expuesta a pérdidas por la variación en el tipo de cambio, lo que implica un riesgo tipo de cambio."
+
+  - id: B5-CASO23-q1
+    tipo: directo
+    area: B
+    subarea: B5
+    caso: "Un asesor de un miembro del Congreso analiza un aumento en el impuesto de mayor facilidad relativa de recaudación y mayor monto. En esta etapa no analiza impactos sociales, solo busca, dentro de la normatividad financiera, cómo lograr más fondos para el gobierno."
+    enunciado: "Al buscar incrementos en un impuesto de fácil recaudación y de amplia aplicación, ¿qué impuesto se debería aumentar bajo estos criterios?"
+    opciones:
+      - "IVA (Impuesto al valor agregado)"
+      - "ISR (Impuesto sobre la renta)"
+      - "ISPT (Impuesto sobre el producto del trabajo)"
+      - "Impuestos a alimentos preparados"
+    correcta: 0
+    explicacion: "El IVA es un impuesto que pagan todos los consumidores y es fácil de recaudar porque se transfiere, aunque es sumamente impopular."
+
+  - id: B5-CASO24-q1
+    tipo: directo
+    area: B
+    subarea: B5
+    caso: "En un despacho se pondera el valor presente neto (VPN) de un proyecto de inversión de una panadería tradicional. Los flujos son atractivos, pero los asesores deben tomar una decisión basada en toda la información financiera."
+    enunciado: "Si después de los cálculos obtienen un VPN de 0.5, ¿qué se debe hacer con el proyecto?"
+    opciones:
+      - "Rechazarlo porque es un VPN muy bajo."
+      - "Aceptarlo y revisar en paralelo otros indicadores."
+      - "Recomendar incrementar los flujos o la tasa esperada."
+      - "Recomendar otra rama productiva con mayor rendimiento."
+    correcta: 1
+    explicacion: "Todos los proyectos de inversión cuyo VPN sea mayor que cero se aceptan, independientemente de la revisión posterior de otras variables."
+
+  - id: B5-CASO25-q1
+    tipo: directo
+    area: B
+    subarea: B5
+    caso: "El contralor general de Carnicerías de Occidente analiza la información financiera y observa un gran número de pasivos con proveedores a largo plazo bien financiados, pero una falta de liquidez; su capitalización es muy buena."
+    enunciado: "Considerando estos indicadores, ¿cómo se considera la sobrevivencia y situación de la empresa?"
+    opciones:
+      - "Iliquidez sin problemas de sobrevivencia en el largo plazo."
+      - "La iliquidez detonará incumplimientos que ponen en juego a la empresa."
+      - "Mientras la empresa esté capitalizada, la iliquidez es irrelevante."
+      - "Lo importante es mantener pasivos cubiertos, aunque no haya liquidez."
+    correcta: 1
+    explicacion: "Una empresa correctamente capitalizada y financiada, pero con iliquidez, no sobrevivirá. La disposición de fondos líquidos es fundamental."
+
+  # ==========================================================================
+  # ÁREA 3 (PDF) — Estadística descriptiva → E3
+  # ==========================================================================
+
+  - id: E3-001
+    tipo: directo
+    area: E
+    subarea: E3
+    enunciado: "Relaciona los tipos de variables con su definición. 1 Nominal: variable cualitativa que categoriza según características (sexo, religión). 2 Ordinal: cualitativa que ordena los datos por jerarquía (1.º, 2.º, 3.º lugar). 3 Intervalo: cuantitativa con orden entre la distancia de cantidades (temperatura, distancia). 4 Razón: cuantitativa con ausencia total (0) en su medida (edad, peso, dinero). ¿Cuál es la relación correcta?"
+    opciones:
+      - "1c, 2d, 3b, 4a"
+      - "1a, 2b, 3d, 4c"
+      - "1b, 2a, 3d, 4c"
+      - "1d, 2b, 3c, 4a"
+    correcta: 0
+    explicacion: "Las variables nominales y ordinales son cualitativas, y las de intervalo y razón son cuantitativas. La relación correcta es 1c, 2d, 3b, 4a."
+
+  - id: E3-CASO1-q1
+    tipo: directo
+    area: E
+    subarea: E3
+    caso: "Una empresa refresquera ha disminuido sus ventas por escándalos de contaminación de su producto. Se cuenta con una tabla de ventas de refrescos por sabor (limón, naranja, piña, uva) y por mes (enero a abril), con totales mensuales de 2,250,000; 1,737,000; 1,041,000 y 857,000."
+    enunciado: "¿Cuál de las gráficas muestra correctamente el comportamiento de ventas de la empresa refresquera?"
+    opciones:
+      - "Gráfica a) (número de ventas, sin todos los datos)"
+      - "Gráfica b) (miles de ventas, incompleta)"
+      - "Gráfica c) (ventas por mes, incompleta)"
+      - "Gráfica d) (con nombre, indicadores horizontales y verticales y datos correctos)"
+    correcta: 3
+    explicacion: "Es la única gráfica que posee todos los datos completos: nombre, indicadores horizontales y verticales, y presenta los datos correctamente."
+
+  - id: E3-CASO1-q2
+    tipo: directo
+    area: E
+    subarea: E3
+    caso: "Una empresa refresquera ha disminuido sus ventas por escándalos de contaminación de su producto. Se cuenta con una tabla de ventas de refrescos por sabor (limón, naranja, piña, uva) y por mes (enero a abril), con totales mensuales de 2,250,000; 1,737,000; 1,041,000 y 857,000."
+    enunciado: "El encargado quiere conocer las preferencias de los consumidores en el mes de abril mediante un gráfico de pastel. ¿Cuál es la manera más apropiada de representar dichas ventas?"
+    opciones:
+      - "Gráfica a) (sin porcentajes claros)"
+      - "Gráfica b) (valores sin porcentaje)"
+      - "Gráfica c) (porcentajes parciales)"
+      - "Gráfica d) (datos en porcentaje, identificados por color, con título claro)"
+    correcta: 3
+    explicacion: "Este gráfico contiene los datos en porcentaje y los indica en cada color, además de que el título es claro respecto a la información presentada."
+
+  - id: E3-CASO2-q1
+    tipo: directo
+    area: E
+    subarea: E3
+    caso: "La fábrica Colorina quiere determinar las preferencias de los consumidores por su producto saca-goma. Las ventas en las últimas semanas fueron: semana 1: 13,697; semana 2: 45,930; semana 3: 72,940; semana 4: 89,011; semana 5: 89,820."
+    enunciado: "El encargado quiere saber la media de ventas para estimar las de la siguiente semana. ¿Cuál es la media de los datos presentados?"
+    opciones:
+      - "51,899"
+      - "52,987"
+      - "23,458"
+      - "24,589"
+    correcta: 0
+    explicacion: "La media se obtiene sumando las ventas y dividiendo entre el número de semanas: (13,697 + 45,930 + 72,940 + 89,011 + 89,820) / 5 = 51,899."
+
+  - id: E3-CASO2-q2
+    tipo: directo
+    area: E
+    subarea: E3
+    caso: "La fábrica Colorina quiere determinar las preferencias de los consumidores por su producto saca-goma. Las ventas en las últimas semanas fueron: semana 1: 13,697; semana 2: 45,930; semana 3: 72,940; semana 4: 89,011; semana 5: 89,820."
+    enunciado: "El encargado quiere determinar el rango de las ventas de estos meses. Calcula dicho rango."
+    opciones:
+      - "59,158"
+      - "76,123"
+      - "26,145"
+      - "96,154"
+    correcta: 1
+    explicacion: "El rango es la diferencia entre el dato más alto y el más bajo: 89,820 − 13,697 = 76,123."
+
+  - id: E3-CASO2-q3
+    tipo: directo
+    area: E
+    subarea: E3
+    caso: "La fábrica Colorina quiere determinar las preferencias de los consumidores por su producto saca-goma. Las ventas en las últimas semanas fueron: semana 1: 13,697; semana 2: 45,930; semana 3: 72,940; semana 4: 89,011; semana 5: 89,820."
+    enunciado: "El encargado quiere determinar cuánto se alejan las ventas por día respecto a su media. ¿Qué tipo de análisis estadístico necesita?"
+    opciones:
+      - "Mediana"
+      - "Moda"
+      - "Varianza"
+      - "Rango"
+    correcta: 2
+    explicacion: "La varianza es una medida que indica qué tan dispersos están los datos respecto a la media, mostrando cuánto se acercan o alejan del promedio."
+
+  - id: E3-CASO3-q1
+    tipo: directo
+    area: E
+    subarea: E3
+    caso: "Una empresa de evaluación de atención al cliente trabaja con una distribuidora de helados que ha recibido quejas. Las quejas se presentan en tres estados: Estado de México (15), Ciudad de México (80) y Jalisco (30). Se quiere seleccionar una muestra de 50 quejas, proporcional y simple, de los tres estados."
+    enunciado: "¿Qué tipo de muestreo es el más adecuado para evaluar el número de quejas que presentó la distribuidora?"
+    opciones:
+      - "Aleatorio simple"
+      - "Estratificado"
+      - "Conglomerado"
+      - "Azar"
+    correcta: 1
+    explicacion: "El muestreo estratificado elige proporcionalmente una muestra de acuerdo con el número de personas y las necesidades del investigador."
+
+  - id: E3-CASO4-q1
+    tipo: directo
+    area: E
+    subarea: E3
+    caso: "Una empresa que evalúa la satisfacción de la gente analizará el voto de la población en las próximas elecciones del Estado de Puebla. Por una crisis económica, decide reducir costos seleccionando pequeños grupos en los diferentes municipios del estado."
+    enunciado: "¿Qué tipo de muestreo está utilizando la empresa?"
+    opciones:
+      - "Conglomerados"
+      - "Estratificado"
+      - "Aleatorio simple"
+      - "Por conveniencia"
+    correcta: 0
+    explicacion: "El muestreo por conglomerados divide la población en pequeños grupos para reducir costos, de acuerdo con los intereses que se persiguen."
+
+  - id: E3-CASO5-q1
+    tipo: directo
+    area: E
+    subarea: E3
+    caso: "DHL investigó el envío de 220 paquetes para determinar las tardanzas. Resultados: 2 días de adelanto: 65; 1 día de adelanto: 96; a tiempo: 19; 1 día de retardo: 21; 2 días de retardo: 19."
+    enunciado: "Con estos datos, determina el porcentaje de envíos que llegan retrasados."
+    opciones:
+      - "19%"
+      - "38%"
+      - "84%"
+      - "18%"
+    correcta: 3
+    explicacion: "Los envíos retrasados son 21 + 19 = 40 de 220, lo que equivale aproximadamente al 18%. La mayoría llega a tiempo o adelantada."
+
+  - id: E3-CASO6-q1
+    tipo: directo
+    area: E
+    subarea: E3
+    caso: "Una empresa que fabrica piezas para autos tiene 40 hijos entre todos sus trabajadores y hará un convivio por el Día del Padre. Las edades de los hijos son: 3, 15, 24, 28, 33, 35, 38, 42, 43, 38, 36, 34, 29, 25, 17, 7, 34, 36, 39, 44, 31, 26, 20, 11, 13, 22, 27, 47, 39, 37, 34, 32, 35, 28, 38, 41, 48, 15, 32, 13."
+    enunciado: "¿Cuál es el porcentaje de los hijos que oscilan entre el rango de 0 a 15 años de edad?"
+    opciones:
+      - "12%"
+      - "10%"
+      - "15%"
+      - "20%"
+    correcta: 0
+    explicacion: "El número de hijos menores de 15 años es cinco, lo que corresponde a un porcentaje del 12%, indicando que la mayoría de los hijos son mayores."
+
+  # ==========================================================================
+  # ÁREA 4 (PDF) — Estadística inferencial → E3
+  # ==========================================================================
+
+  - id: E3-CASO7-q1
+    tipo: directo
+    area: E
+    subarea: E3
+    caso: "Un empresario desea estimar, con 99% de confianza, la media del peso de cierto grupo de personas con obesidad. Los valores presentan distribución normal con varianza de 144. Se tomó una muestra de 15 personas con media de 84.3 kg. El valor de z para 0.99 es 2.58 y el error estándar es 3.10."
+    enunciado: "Determina el intervalo de confianza."
+    opciones:
+      - "76.3 y 92.3"
+      - "84.3 y 94.3"
+      - "76.3 y 86.3"
+      - "84.3 y 74.3"
+    correcta: 0
+    explicacion: "El intervalo se obtiene mediante (estimador) ± (coeficiente de confiabilidad × error estándar) = 84.3 ± (2.58 × 3.10), resultando en 76.3 y 92.3."
+
+  - id: E3-CASO8-q1
+    tipo: directo
+    area: E
+    subarea: E3
+    caso: "Una empresa abrirá sucursales en el Estado de México y Morelos y calcula el ingreso familiar. En el Estado de México obtuvo datos de 75 personas con media de $6,800 mensuales; en Morelos, de 80 personas con media de $4,450."
+    enunciado: "Encuentra el intervalo de confianza del 99% para la diferencia de medias, con coeficiente de confiabilidad 2.58 y error estándar 89."
+    opciones:
+      - "$2120 y 2580"
+      - "$2120 y 2180"
+      - "$2350 y 2580"
+      - "$2350 y 2180"
+    correcta: 0
+    explicacion: "El intervalo se obtiene mediante (diferencia de medias) ± (coeficiente de confiabilidad × error estándar) = 2,350 ± (2.58 × 89), resultando en $2120 y $2580."
+
+  - id: E3-CASO9-q1
+    tipo: directo
+    area: E
+    subarea: E3
+    caso: "Una organización abrirá una cadena de comida rápida. Obtuvo datos de 150 personas sobre cuántas veces comieron fuera de casa el último mes: promedio 5.8 con desviación estándar 3.1. Desea saber si la media poblacional es mayor que 5 (hipótesis nula: media menor o igual a 5)."
+    enunciado: "Determina el valor de z."
+    opciones:
+      - "2.1"
+      - "3.2"
+      - "2.3"
+      - "3.4"
+    correcta: 1
+    explicacion: "El valor z se obtiene mediante (media − valor de referencia) / (desviación estándar / √n) = (5.8 − 5) / (3.1 / √150) ≈ 3.2."
+
+  - id: E3-CASO9-q2
+    tipo: directo
+    area: E
+    subarea: E3
+    caso: "Una organización abrirá una cadena de comida rápida. Obtuvo datos de 150 personas sobre cuántas veces comieron fuera de casa el último mes: promedio 5.8 con desviación estándar 3.1. Desea saber si la media poblacional es mayor que 5 (hipótesis nula: media menor o igual a 5)."
+    enunciado: "¿Cuál es la decisión estadística correcta para este caso?"
+    opciones:
+      - "Se rechaza la hipótesis alterna ya que las personas salen a comer más de 5 veces por mes."
+      - "Se rechaza la hipótesis alterna ya que las personas salen a comer menos de 5 veces por mes."
+      - "Se rechaza la hipótesis nula ya que las personas salen a comer más de 5 veces por mes."
+      - "Se rechaza la hipótesis nula ya que las personas salen a comer menos de 5 veces por mes."
+    correcta: 2
+    explicacion: "Como el valor z calculado supera el valor crítico, se rechaza la hipótesis nula: las personas salen a comer más de 5 veces por mes."
+
+  - id: E3-CASO10-q1
+    tipo: directo
+    area: E
+    subarea: E3
+    caso: "Una empresa de tecnología tiene problemas de ventas en sus 10 sucursales y desea predecir las ventas con datos de número de vendedores y ventas en miles por sucursal (de 2 a 26 vendedores, ventas de 58 a 202 mil)."
+    enunciado: "Identifica el diagrama de dispersión adecuado para predecir las ventas correctamente."
+    opciones:
+      - "Gráfica a) (ventas en el eje Y, vendedores en el eje X)"
+      - "Gráfica b) (vendedores en el eje Y)"
+      - "Gráfica c) (número de vendedores en el eje Y, ventas en el eje X)"
+      - "Gráfica d) (ejes invertidos)"
+    correcta: 0
+    explicacion: "En el eje Y va el número de ventas (variable dependiente) y en el eje X el número de vendedores (variable independiente); la gráfica a) lo representa correctamente."
+
+  - id: E3-CASO10-q2
+    tipo: directo
+    area: E
+    subarea: E3
+    caso: "Una empresa de tecnología tiene problemas de ventas en sus 10 sucursales y desea predecir las ventas con datos de número de vendedores y ventas en miles por sucursal (de 2 a 26 vendedores, ventas de 58 a 202 mil)."
+    enunciado: "De acuerdo con los datos anteriores, calcula la pendiente y la ordenada al origen."
+    opciones:
+      - "30 y 6"
+      - "8 y 45"
+      - "5 y 60"
+      - "60 y 4"
+    correcta: 2
+    explicacion: "Aplicando las fórmulas de regresión lineal por mínimos cuadrados, la pendiente es 5 y la ordenada al origen es 60."
+
+  - id: E3-CASO11-q1
+    tipo: directo
+    area: E
+    subarea: E3
+    caso: "Una empresa contratará un gerente para negocios con países árabes, donde por cultura en algunos casos las mujeres no son las más adecuadas. Existen 11 personas en total, de las cuales 6 son mujeres."
+    enunciado: "¿Cuál es la probabilidad de que una mujer sea escogida?"
+    opciones:
+      - ".36"
+      - ".60"
+      - ".54"
+      - ".48"
+    correcta: 2
+    explicacion: "La probabilidad clásica es casos favorables entre casos posibles: 6/11 ≈ 0.54."
+
+  - id: E3-CASO12-q1
+    tipo: directo
+    area: E
+    subarea: E3
+    caso: "En un estudio sobre preferencia de pasta dental, el 60% de las personas prefiere Dentitos y el restante prefiere Limpimax. Se extrae una muestra de 10 personas al azar."
+    enunciado: "¿Cuál es la probabilidad de que 7 de estas personas prefieran Limpimax?"
+    opciones:
+      - ".47"
+      - ".40"
+      - ".38"
+      - ".36"
+    correcta: 2
+    explicacion: "Con la distribución binomial P(x = k) = C(n,k)·p^k·q^(n−k), donde p (Limpimax) = 0.40, n = 10 y k = 7, se obtiene aproximadamente 0.38."
+
+  - id: E3-013
+    tipo: directo
+    area: E
+    subarea: E3
+    enunciado: "Ordena los siguientes conceptos de números índices. Conceptos: 1 Sauerbeck, 2 Brandstreet-Dûtot, 3 Laspeyres, 4 Paasche, 5 Edgeworth, 6 Fisher. Columna A: números compuestos sin ponderar; Columna B: números compuestos ponderados."
+    opciones:
+      - "A: 1, 2  B: 3, 4, 5, 6"
+      - "A: 3, 4, 5  B: 1, 2"
+      - "A: 1, 2, 3  B: 4, 5, 6"
+      - "A: 1, 2, 3, 4  B: 5, 6"
+    correcta: 0
+    explicacion: "Los números compuestos sin ponderar son Sauerbeck y Brandstreet-Dûtot; los ponderados son Laspeyres, Paasche, Edgeworth y Fisher."
+
+  - id: E3-014
+    tipo: directo
+    area: E
+    subarea: E3
+    enunciado: "Indica a qué números índice corresponden las definiciones. A) Precios; B) Cantidades; C) Valores. Definiciones: 1 estudian el conjunto de características de un bien; 2 estudian la evolución del consumo de un conjunto de bienes; 3 estudian la evolución del costo de un conjunto de bienes."
+    opciones:
+      - "A2, B1, C3"
+      - "A3, B2, C1"
+      - "A1, B2, C3"
+      - "A2, B3, C1"
+    correcta: 1
+    explicacion: "Los índices de precios estudian la evolución del costo (3), los de cantidades la evolución del consumo (2) y los de valores el conjunto de características (1): A3, B2, C1."
+
+  # ==========================================================================
+  # ÁREA 5 (PDF) — Habilidades profesionales básicas → A
+  # ==========================================================================
+
+  - id: A1-CASO1-q1
+    tipo: directo
+    area: A
+    subarea: A1
+    caso: "Una empresa de jabón y cosméticos elabora un instrumento para evaluar la calidad del trabajo de sus empleados (satisfacción, dificultad, clima organizacional y ética), un cuestionario de unas 30 preguntas. En una primera prueba piloto la mayoría obtuvo puntajes muy bajos y en una segunda, puntajes muy altos."
+    enunciado: "De acuerdo con las características del instrumento y su proceso de elaboración, ¿cuál es el enfoque que lo caracteriza?"
+    opciones:
+      - "Cualitativo"
+      - "Cuantitativo"
+      - "Mixto"
+      - "Sistemático"
+    correcta: 0
+    explicacion: "El enfoque cuantitativo se caracteriza por la cantidad y la medida de sus variables; en este caso, un cuestionario que mide la calidad del trabajo. (Nota: la fuente marca como correcta la opción A.)"
+
+  - id: A1-CASO1-q2
+    tipo: directo
+    area: A
+    subarea: A1
+    caso: "Una empresa de jabón y cosméticos elabora un instrumento para evaluar la calidad del trabajo de sus empleados (satisfacción, dificultad, clima organizacional y ética), un cuestionario de unas 30 preguntas. En una primera prueba piloto la mayoría obtuvo puntajes muy bajos y en una segunda, puntajes muy altos."
+    enunciado: "En relación con los resultados de las pruebas piloto, ¿qué es necesario ajustar y analizar en el instrumento para resolver la problemática de los puntajes extremos?"
+    opciones:
+      - "Validez"
+      - "Confiabilidad"
+      - "Estandarizar"
+      - "Objetividad"
+    correcta: 1
+    explicacion: "La confiabilidad implica que un instrumento aplicado a diferentes personas obtenga resultados parecidos. Como los resultados fueron muy diferentes, el instrumento no es confiable."
+
+  - id: A2-CASO2-q1
+    tipo: directo
+    area: A
+    subarea: A2
+    caso: "Una empresa de elaboración de páginas web investiga los elementos que más llaman la atención al entrar por primera vez a una página web. Mediante investigación documental encontró que las personas concentran su atención en elementos como el color y el tipo de diseño."
+    enunciado: "¿A qué elemento se hace referencia de acuerdo con la investigación documental de los estudios anteriores?"
+    opciones:
+      - "Hipótesis y objetivo"
+      - "Investigación terciaria"
+      - "Justificación teórica"
+      - "Estado del arte"
+    correcta: 3
+    explicacion: "El estado del arte corresponde a la investigación documental sobre investigaciones y resultados anteriores, para determinar la pertinencia y calidad del estudio."
+
+  - id: A2-CASO2-q2
+    tipo: directo
+    area: A
+    subarea: A2
+    caso: "Una empresa de elaboración de páginas web investiga los elementos que más llaman la atención al entrar por primera vez a una página web. Mediante investigación documental encontró que las personas concentran su atención en elementos como el color y el tipo de diseño."
+    enunciado: "Relaciona las columnas. A) Pregunta de investigación; B) Objetivo; C) Hipótesis. Definiciones: 1 los resultados que se esperan encontrar; 2 responde al planteamiento del problema; 3 indica lo que se quiere alcanzar o lograr."
+    opciones:
+      - "A2, B3, C1"
+      - "A1, B2, C3"
+      - "A3, B1, C2"
+      - "A2, B1, C3"
+    correcta: 0
+    explicacion: "La pregunta de investigación responde al planteamiento del problema (2), el objetivo indica lo que se quiere lograr (3) y la hipótesis los resultados esperados (1): A2, B3, C1."
+
+  - id: A1-CASO3-q1
+    tipo: directo
+    area: A
+    subarea: A1
+    caso: "María, diseñadora, presentó un proyecto a inversionistas alemanes. Durante la presentación se puso nerviosa y expresó sus ideas de manera desorganizada, lo que impidió que los inversionistas entendieran su propuesta de forma fluida."
+    enunciado: "¿Cuál fue la pauta del razonamiento crítico que falló en María?"
+    opciones:
+      - "Conceptos y exactitud"
+      - "Claridad y exactitud"
+      - "Pertinencia y precisión"
+      - "Claridad e interpretación"
+    correcta: 1
+    explicacion: "La claridad y la exactitud permiten comprender de manera fácil y sencilla una información, lo cual falló en María al exponer."
+
+  - id: A1-CASO3-q2
+    tipo: directo
+    area: A
+    subarea: A1
+    caso: "María, diseñadora, presentó un proyecto a inversionistas alemanes. Durante la presentación se puso nerviosa y expresó sus ideas de manera desorganizada, lo que impidió que los inversionistas entendieran su propuesta de forma fluida."
+    enunciado: "Resuelve la siguiente frase: 'Todos los hombres necesitan agua para vivir. Luis es un hombre. Entonces, Luis necesita agua para vivir.' ¿A qué tipo de razonamiento pertenece?"
+    opciones:
+      - "Deductivo"
+      - "Inductivo"
+      - "Hipotético"
+      - "Objetivo"
+    correcta: 0
+    explicacion: "El razonamiento deductivo parte de premisas o argumentos generales para llegar a una conclusión particular."
+
+  - id: A1-CASO4-q1
+    tipo: directo
+    area: A
+    subarea: A1
+    caso: "Juan, empresario exitoso, no pudo asistir al cierre de un trato comercial y dejó a cargo a un supervisor de confianza. Durante la reunión, el supervisor explicó beneficios y limitantes, pero estaba nervioso: movía mucho las manos, hablaba rápido y cruzaba los brazos al responder. Cerraron el trato, pero Juan le llamó la atención en voz alta diciendo que era poco profesional, haciéndolo sentir mal."
+    enunciado: "Que el supervisor cruzara los brazos al responder, ¿qué tipo de lenguaje se considera?"
+    opciones:
+      - "Verbal"
+      - "Comunicativo"
+      - "Escrito"
+      - "No verbal"
+    correcta: 3
+    explicacion: "El lenguaje no verbal son aquellas expresiones corporales; en este caso, cruzarse de brazos es una expresión de reto y provocación."
+
+  - id: A1-CASO4-q2
+    tipo: directo
+    area: A
+    subarea: A1
+    caso: "Juan, empresario exitoso, no pudo asistir al cierre de un trato comercial y dejó a cargo a un supervisor de confianza. Durante la reunión, el supervisor explicó beneficios y limitantes, pero estaba nervioso: movía mucho las manos, hablaba rápido y cruzaba los brazos al responder. Cerraron el trato, pero Juan le llamó la atención en voz alta diciendo que era poco profesional, haciéndolo sentir mal."
+    enunciado: "¿Qué hubiera hecho Juan para decirle al supervisor sus áreas de oportunidad sin herir sus sentimientos ni su trabajo?"
+    opciones:
+      - "Ser asertivo"
+      - "Lenguaje escrito"
+      - "Informarle por otra persona"
+      - "Lenguaje no verbal"
+    correcta: 0
+    explicacion: "La asertividad permite decir lo que nos molesta o una necesidad sin herir los sentimientos de la otra persona, respetando su trabajo y su vida."
+
+  - id: A1-CASO5-q1
+    tipo: directo
+    area: A
+    subarea: A1
+    caso: "Rodrigo, mercadólogo, creó con otros profesionales un producto para reducir el desperdicio de agua. Tuvo diferencias sobre la inversión y abandonó el proyecto sin dejar parte del producto a su nombre. Tiempo después, otra empresa lo convence de crear un producto parecido y él presenta como nuevo el producto ya elaborado con sus compañeros."
+    enunciado: "Con base en el tipo de acto, ¿a qué tipo de ética corresponde lo hecho por Rodrigo?"
+    opciones:
+      - "Profesional"
+      - "Vocacional"
+      - "Laboral"
+      - "De valores"
+    correcta: 0
+    explicacion: "La ética profesional es el conjunto de valores y normas que regulan el desarrollo de una profesión."
+
+  - id: A1-CASO5-q2
+    tipo: directo
+    area: A
+    subarea: A1
+    caso: "Rodrigo, mercadólogo, creó con otros profesionales un producto para reducir el desperdicio de agua. Tuvo diferencias sobre la inversión y abandonó el proyecto sin dejar parte del producto a su nombre. Tiempo después, otra empresa lo convence de crear un producto parecido y él presenta como nuevo el producto ya elaborado con sus compañeros."
+    enunciado: "Al presentar un producto como nuevo a pesar de pertenecer a otra persona, ¿a qué falta corresponde lo hecho por Rodrigo?"
+    opciones:
+      - "Moral"
+      - "Plagio"
+      - "Engaño"
+      - "Laboral"
+    correcta: 1
+    explicacion: "El plagio es la acción de presentar una idea o producto como propio cuando en realidad pertenece a otra persona."
+
+  - id: A2-CASO6-q1
+    tipo: directo
+    area: A
+    subarea: A2
+    caso: "Manuel trabaja en una empresa de tecnología de celulares. Para una reunión con otros empresarios pide ayuda a su amigo Ricardo, que tiene gran capacidad para hablar y convencer. En la reunión, todos concuerdan en que la mejora del producto debe ser innovadora y adaptarse a las necesidades de los clientes; uno de los empresarios genera ideas de manera espontánea."
+    enunciado: "De acuerdo con la mejora del producto que busca la empresa, ¿qué tipo de innovación está realizando?"
+    opciones:
+      - "Individual"
+      - "Proceso"
+      - "Continua"
+      - "Disruptiva"
+    correcta: 1
+    explicacion: "La innovación de proceso se caracteriza por la mejora de un producto que ya existe, el cual debe actualizarse continuamente para no quedar fuera del mercado."
+
+  - id: A2-CASO6-q2
+    tipo: directo
+    area: A
+    subarea: A2
+    caso: "Manuel trabaja en una empresa de tecnología de celulares. Para una reunión con otros empresarios pide ayuda a su amigo Ricardo, que tiene gran capacidad para hablar y convencer. En la reunión, todos concuerdan en que la mejora del producto debe ser innovadora y adaptarse a las necesidades de los clientes; uno de los empresarios genera ideas de manera espontánea."
+    enunciado: "Por poner a su amigo frente a la negociación del producto, ¿qué tipo de inteligencia posee Ricardo?"
+    opciones:
+      - "Kinestésica"
+      - "Corporal"
+      - "Creativa"
+      - "Lingüística"
+    correcta: 3
+    explicacion: "La inteligencia lingüística se caracteriza por la gran capacidad de expresarse oralmente y por escrito, además de una buena comprensión lectora y hacia las personas."
+
+  - id: A2-CASO6-q3
+    tipo: directo
+    area: A
+    subarea: A2
+    caso: "Manuel trabaja en una empresa de tecnología de celulares. Para una reunión con otros empresarios pide ayuda a su amigo Ricardo, que tiene gran capacidad para hablar y convencer. En la reunión, todos concuerdan en que la mejora del producto debe ser innovadora y adaptarse a las necesidades de los clientes; uno de los empresarios genera ideas de manera espontánea."
+    enunciado: "Por la manera en que el empresario generó ideas espontáneas para la mejora del producto, ¿qué tipo de pensamiento puede poseer?"
+    opciones:
+      - "Innovadora"
+      - "Divergente"
+      - "Convergente"
+      - "Creativa"
+    correcta: 1
+    explicacion: "El pensamiento divergente se caracteriza por la innovación y la espontaneidad de ideas creativas, sin un orden lógico, ya que todas las ideas son tomadas en cuenta."
+
+  - id: A5-CASO7-q1
+    tipo: directo
+    area: A
+    subarea: A5
+    caso: "Angélica trabaja en un corporativo y necesita investigar el número de turistas, considerando edad, sexo, lugar de residencia y otras variables, con la finalidad de generar datos estadísticos para lanzar un producto al mercado."
+    enunciado: "¿Qué tipo de fuente de información es la más adecuada para buscar la información que Angélica necesita?"
+    opciones:
+      - "Base de datos en línea"
+      - "Artículo de investigación"
+      - "Revista de divulgación científica"
+      - "Libros y revistas especializadas"
+    correcta: 0
+    explicacion: "Las bases de datos contienen detalles sobre edad, sexo, lugares, preferencias, etc., específicos para los datos que Angélica necesita."
+
+  - id: A1-CASO8-q1
+    tipo: directo
+    area: A
+    subarea: A1
+    caso: "José entregará a su jefe un reporte que cumple con: portada, resumen, índice, introducción, revisión teórica (justificación y objetivos), resultados de costos/inversiones/ganancias, conclusiones y sugerencias, y referencias."
+    enunciado: "¿Qué elemento o apartado de una investigación faltó en el reporte de José?"
+    opciones:
+      - "Agradecimientos"
+      - "Metodología"
+      - "Tablas"
+      - "Gráficos"
+    correcta: 1
+    explicacion: "La metodología es la manera en que se lleva a cabo la investigación, considerando los participantes, el tipo de estudio, los materiales y el procedimiento."
+
+  - id: A5-CASO9-q1
+    tipo: directo
+    area: A
+    subarea: A5
+    caso: "Silvia, dedicada a la gestión empresarial, debe identificar el libro más popular del último mes y las características de quienes lo compran. Cuenta en Excel con información de los clientes, de la orden y del libro."
+    enunciado: "¿Qué tipo de análisis empresarial necesita Silvia para resolver dicha tarea si quiere ocupar Access?"
+    opciones:
+      - "Descriptivo"
+      - "Relacional"
+      - "Exploratorio"
+      - "Sintético"
+    correcta: 1
+    explicacion: "El análisis relacional permite analizar cada uno de los datos y establecer relaciones entre cada una de las variables."
+
+  - id: A5-CASO10-q1
+    tipo: directo
+    area: A
+    subarea: A5
+    caso: "Sarahí, vendedora del área de informática, necesita organizar su información por vendedor y por producto. Cuenta con una tabla de ventas con número de venta, vendedor, producto, precio y semana."
+    enunciado: "¿Qué tipo de formato necesita Sarahí para obtener dicha información?"
+    opciones:
+      - "Gráfico"
+      - "Base de datos"
+      - "Macro"
+      - "Tabla dinámica"
+    correcta: 3
+    explicacion: "Las tablas dinámicas permiten organizar información por filtros y resumirla para que los datos sean más comprensibles."
+
+  - id: A5-CASO11-q1
+    tipo: directo
+    area: A
+    subarea: A5
+    caso: "Gloria emprenderá un minisúper y quiere adaptarse a los cambios globales con nuevas tecnologías. Necesita un recurso que sirva de soporte para almacenar y recibir datos de fuentes externas o internas, analizar y procesar datos, distribuir información de productos y clientes, y gestionar la información de su negocio."
+    enunciado: "¿A qué concepto hace referencia la necesidad de Gloria?"
+    opciones:
+      - "Sistema de información empresarial"
+      - "Sistema computacional estadístico"
+      - "Sistema de información estadístico"
+      - "Sistema computacional empresarial"
+    correcta: 0
+    explicacion: "Un sistema de información empresarial gestiona los datos de una empresa, mejora los procesos y la toma de decisiones."
+
+  - id: A1-CASO12-q1
+    tipo: directo
+    area: A
+    subarea: A1
+    caso: "Ingenia, empresa de tecnología, intenta negociar con un distribuidor en Estados Unidos. Daniel, líder del proyecto, capacita a los empleados, pero se muestra indiferente, solo pide que hagan lo que él indica, descalifica los errores y no es empático en la retroalimentación. El día de la reunión cierra el trato sin considerar la opinión de los demás."
+    enunciado: "De acuerdo con las acciones de Daniel, ¿qué caracteriza su conducta?"
+    opciones:
+      - "Falta de habilidades sociales"
+      - "Falta de liderazgo"
+      - "Poca imagen profesional"
+      - "Pocos valores éticos"
+    correcta: 0
+    explicacion: "Las habilidades sociales son los valores que permiten convivir con otros, tomando en cuenta las necesidades sociales y personales."
+
+  - id: A1-CASO12-q2
+    tipo: directo
+    area: A
+    subarea: A1
+    caso: "Ingenia, empresa de tecnología, intenta negociar con un distribuidor en Estados Unidos. Daniel, líder del proyecto, capacita a los empleados, pero se muestra indiferente, solo pide que hagan lo que él indica, descalifica los errores y no es empático en la retroalimentación. El día de la reunión cierra el trato sin considerar la opinión de los demás."
+    enunciado: "¿Qué debería poner en práctica Daniel para mejorar su autoridad como líder de proyectos?"
+    opciones:
+      - "Trabajo en equipo"
+      - "Autoridad formal"
+      - "Ética profesional"
+      - "Imagen profesional"
+    correcta: 0
+    explicacion: "El trabajo en equipo le permitirá a Daniel escuchar las opiniones de los demás y considerarlas en las decisiones de la empresa."
+
+  # ==========================================================================
+  # ÁREA 6 (PDF) — Competencias profesionales empresariales → A
+  # ==========================================================================
+
+  - id: A1-CASO13-q1
+    tipo: directo
+    area: A
+    subarea: A1
+    caso: "Rafael, empresario exitoso, necesita una mano derecha que lo apoye en el emprendimiento. Busca una persona creativa, capaz de mejorar los productos ya existentes."
+    enunciado: "¿Qué tipo de emprendedor busca Rafael?"
+    opciones:
+      - "Innovador"
+      - "Oportunista"
+      - "Tradicional"
+      - "Administrativo"
+    correcta: 0
+    explicacion: "El emprendedor innovador se caracteriza por ser creativo e innovar productos ya existentes con nuevas mejoras o características."
+
+  - id: A1-CASO14-q1
+    tipo: directo
+    area: A
+    subarea: A1
+    caso: "Una empresa de agua embotellada describe su rumbo con la frase: 'Evolucionar de una respetada y confiable compañía de alimentos a una respetada y confiable compañía de alimentos, nutrición, salud y bienestar.'"
+    enunciado: "¿A qué parte de la descripción de una empresa corresponde la frase realizada?"
+    opciones:
+      - "Valores"
+      - "Misión"
+      - "Visión"
+      - "Objetivos"
+    correcta: 2
+    explicacion: "La visión corresponde a las metas a largo plazo que la empresa desea lograr, respondiendo a la pregunta ¿qué quiero lograr?"
+
+  - id: A4-CASO15-q1
+    tipo: directo
+    area: A
+    subarea: A4
+    caso: "Google es reconocida por la calidad y flexibilidad para sus trabajadores: comida gratis, espacios para dormir, vacaciones, seguros y acceso a la última tecnología. Cada empleado organiza su tiempo, su horario de comida e incluso su siesta, basándose en la felicidad reportada por los trabajadores."
+    enunciado: "De acuerdo con las características mencionadas, ¿a qué concepto hace referencia la descripción anterior?"
+    opciones:
+      - "Cultura organizacional"
+      - "Valores de la empresa"
+      - "Organización empresarial"
+      - "Visión de la empresa"
+    correcta: 0
+    explicacion: "La cultura organizacional se caracteriza por las tradiciones, forma de organización, motivación y valores que destacan a una empresa frente a otras."
+
+  - id: A4-CASO16-q1
+    tipo: directo
+    area: A
+    subarea: A4
+    caso: "Uno de los supermercados más grandes del mundo tiene problemas con sus trabajadores: son aislados, no hay buena comunicación y hay discusiones frecuentes. La empresa decide realizar actividades que favorezcan el compañerismo, mejoren la comunicación y promuevan el trabajo en equipo, los valores y las relaciones de confianza y respeto."
+    enunciado: "¿A qué tipo de cultura organizacional corresponde lo que quiere imponer dicha empresa?"
+    opciones:
+      - "Competitiva"
+      - "Burocrática"
+      - "Humanista"
+      - "Responsable"
+    correcta: 2
+    explicacion: "La cultura organizacional humanista se caracteriza por promover los valores, las relaciones afectivas y la comunicación."
+
+  - id: A1-CASO16-q2
+    tipo: directo
+    area: A
+    subarea: A1
+    enunciado: "Es el organismo en México que se encarga del desarrollo responsable del medio ambiente, de la reforestación, la protección de la flora, la fauna y el control de gases de efecto invernadero."
+    opciones:
+      - "SEMARNAT"
+      - "PFPAM"
+      - "CONAGUA"
+      - "CMF"
+    correcta: 0
+    explicacion: "La Secretaría de Medio Ambiente y Recursos Naturales (SEMARNAT) se encarga del desarrollo y de las acciones responsables de las empresas y de promover políticas de conservación."
+
+  - id: A1-CASO17-q1
+    tipo: directo
+    area: A
+    subarea: A1
+    caso: "Una empresa de alimentos enlatados está en constante cambio por las políticas ambientales. Cumple con todos los requisitos que la ley ordena y desea transmitir un mensaje sobre las acciones responsables que tiene con la comunidad y el medio ambiente."
+    enunciado: "¿A qué acción se hace referencia con lo que quiere lograr la empresa?"
+    opciones:
+      - "Acción empresarial ambiental"
+      - "Desarrollo socialmente efectivo"
+      - "Imagen socialmente responsable"
+      - "Mensaje subliminal empresarial"
+    correcta: 2
+    explicacion: "Una imagen responsable es aquella que permite a la empresa mostrar su preocupación y acciones a favor del medio ambiente."
+
+  - id: A2-CASO17-q2
+    tipo: directo
+    area: A
+    subarea: A2
+    enunciado: "Dentro del análisis FODA, son consideradas factores que desfavorecen a una empresa o proyecto, por ejemplo, salarios bajos, equipamiento viejo y falta de capacitación."
+    opciones:
+      - "Amenazas"
+      - "Fortalezas"
+      - "Debilidades"
+      - "Oportunidades"
+    correcta: 2
+    explicacion: "Las debilidades son aquellos factores del análisis FODA que provocan o desfavorecen la situación interna de una empresa o proyecto."
+
+  - id: A2-CASO18-q1
+    tipo: directo
+    area: A
+    subarea: A2
+    caso: "Una empresa de perfumes desea formular una estrategia que resuma y evalúe las fuerzas y debilidades de las áreas de la empresa, además de evaluar las relaciones entre estas áreas."
+    enunciado: "¿Qué es lo que necesita la empresa para resolver su problemática?"
+    opciones:
+      - "Matriz de evaluación de factores internos"
+      - "Matriz de evaluación de factores externos"
+      - "Integración de valores de factores externos"
+      - "Integración de valores de factores internos"
+    correcta: 0
+    explicacion: "La matriz de evaluación de factores internos (MEFI) toma en cuenta los elementos interiores que conforman la empresa para implementar estrategias que optimicen su administración."
+
+  - id: A4-CASO19-q1
+    tipo: directo
+    area: A
+    subarea: A4
+    caso: "Una empresa de manufactura e impresión de CD, DVD y Blu-ray colocará nuevos responsables departamentales por la alta demanda en el área de impresión. Por ello habrá cambios en la organización y relación entre los empleados, para que cada uno cumpla sus respectivas funciones."
+    enunciado: "¿A qué tipo de cambio organizacional se hace referencia?"
+    opciones:
+      - "Estructura"
+      - "Tecnología"
+      - "Personal"
+      - "Proceso"
+    correcta: 0
+    explicacion: "El cambio de estructura se refiere a la organización de la empresa de acuerdo con las especificaciones de cada trabajo o área."
+
+  - id: A3-CASO20-q1
+    tipo: directo
+    area: A
+    subarea: A3
+    caso: "Manuel, empresario exitoso, expandirá el área de negocios. Necesita a una persona que detecte buenas oportunidades en el mercado, sea directiva, tome riesgos calculados y elija buenas alternativas ante un problema."
+    enunciado: "¿Cuál es la competencia que debe poseer la nueva persona encargada de dicha área?"
+    opciones:
+      - "Lenguaje y expresión"
+      - "Toma de decisiones"
+      - "Habilidades sociales"
+      - "Habilidades personales"
+    correcta: 1
+    explicacion: "La capacidad de tomar decisiones se caracteriza por encontrar soluciones adecuadas y pertinentes ante un problema."
+
+  - id: A3-CASO21-q1
+    tipo: directo
+    area: A
+    subarea: A3
+    caso: "Mauricio, empleado de gran desempeño, recibió un ascenso. En el nuevo puesto se encargará de implementar políticas y planes ejecutivos, supervisando y coordinando todas las acciones para cumplir los objetivos propuestos."
+    enunciado: "¿A qué tipo de administrador pertenece Mauricio?"
+    opciones:
+      - "Gerencial"
+      - "Alto"
+      - "Medio"
+      - "Bajo"
+    correcta: 2
+    explicacion: "El administrador de nivel medio implementa las políticas y planes ejecutivos, supervisando y coordinando las acciones para cumplir los objetivos."
+
+  - id: A3-CASO22-q1
+    tipo: directo
+    area: A
+    subarea: A3
+    caso: "Lucía trabaja en el área de ventas. Es la encargada de interactuar con otras personas y organizaciones para establecer mejores relaciones y mejorar el apoyo de la empresa."
+    enunciado: "¿Qué tipo de rol cumple Lucía en la empresa?"
+    opciones:
+      - "Representante"
+      - "Relacional"
+      - "Líder"
+      - "Informativo"
+    correcta: 1
+    explicacion: "El rol relacional tiene la finalidad de comunicarse y relacionarse con personas y empresas para mejorar las redes de apoyo en la organización."
+
+  - id: A2-CASO23-q1
+    tipo: directo
+    area: A
+    subarea: A2
+    caso: "Markets, empresa de ingeniería de autos, se organiza con tiempos de trabajo muy específicos y de manera jerárquica, donde las órdenes van del gerente al empleado. Con un nuevo gerente propone que todas las tareas se realicen para llegar a un solo objetivo y que la empresa funcione como una familia, donde todos aportan y aprenden unos de otros."
+    enunciado: "De acuerdo con las características de la empresa antes del nuevo gerente, ¿a qué escuela del pensamiento pertenece?"
+    opciones:
+      - "Conductista"
+      - "Clásica"
+      - "Holística"
+      - "Humanista"
+    correcta: 1
+    explicacion: "La escuela clásica se caracteriza por una organización y orden jerárquicos muy específicos con la finalidad de crecer y mejorar."
+
+  - id: A2-CASO23-q2
+    tipo: directo
+    area: A
+    subarea: A2
+    caso: "Markets, empresa de ingeniería de autos, se organiza con tiempos de trabajo muy específicos y de manera jerárquica, donde las órdenes van del gerente al empleado. Con un nuevo gerente propone que todas las tareas se realicen para llegar a un solo objetivo y que la empresa funcione como una familia, donde todos aportan y aprenden unos de otros."
+    enunciado: "¿A qué escuela del pensamiento pertenecen las características de cambio que quiere impartir el nuevo gerente?"
+    opciones:
+      - "Humanista"
+      - "Holística"
+      - "Conductista"
+      - "De proceso"
+    correcta: 1
+    explicacion: "El pensamiento holístico tiene la finalidad de considerar a la empresa como un todo, donde todos los empleados contribuyen al bienestar de la misma."
+
+  - id: A3-CASO23-q3
+    tipo: directo
+    area: A
+    subarea: A3
+    enunciado: "Relaciona las etapas del proceso administrativo con su definición. 1 Planificación: determinación de los objetivos y metas a alcanzar. 2 Organización: forma en que se distribuye el trabajo según las capacidades de cada empleado. 3 Dirección: realización de las indicaciones asignadas a cada área para que se cumplan en tiempo y forma. 4 Control: se observan los resultados, se rectifican y se vigilan los procesos."
+    opciones:
+      - "1b, 2c, 3a, 4d"
+      - "a1, b3, c1, d4"
+      - "a1, b2, c3, d4"
+      - "1d, 2c, 3b, 4a"
+    correcta: 0
+    explicacion: "El proceso administrativo comienza con el planteamiento de los objetivos, sigue con la organización, la dirección (ejecución) y finaliza con el control y la supervisión: 1b, 2c, 3a, 4d (según la fuente, opción A)."
+
+  - id: A3-CASO25-q1
+    tipo: directo
+    area: A
+    subarea: A3
+    caso: "Marco abrirá una empresa de galletas y harinas. Tiene los documentos y materiales en orden, pero le falta personal. Necesita diversos equipos para: ventas de galleta, distribución, elaboración de galletas, fabricación de empaque y manufactura."
+    enunciado: "¿A qué etapa del proceso administrativo pertenece lo que está realizando Marco?"
+    opciones:
+      - "Planificar"
+      - "Organizar"
+      - "Dirigir"
+      - "Controlar"
+    correcta: 1
+    explicacion: "La organización es el proceso mediante el cual se determinan las actividades y funciones de cada área o trabajador en la empresa."
+
+  - id: A4-CASO26-q1
+    tipo: directo
+    area: A
+    subarea: A4
+    caso: "Una empresa que fabrica ropa pasa por una situación que afecta la productividad. Con la llegada del nuevo gerente, los empleados cambiaron: antes tenían buena comunicación, trabajaban con actitud, convivían los fines de semana y eran colaborativos."
+    enunciado: "¿Qué es lo que cambió en dicha empresa con la llegada del gerente?"
+    opciones:
+      - "Comportamiento de los empleados"
+      - "Clima organizacional"
+      - "Las relaciones sociales"
+      - "La comunicación entre empleados"
+    correcta: 1
+    explicacion: "El clima organizacional se refiere a la percepción de los trabajadores respecto a su trabajo, las actitudes, conductas y la forma en que conviven unos con otros."
+
+  - id: A4-CASO27-q1
+    tipo: directo
+    area: A
+    subarea: A4
+    caso: "Una empresa de telefonía evalúa a sus trabajadores por las bajas ventas. Los resultados muestran que están molestos por la baja de sueldos, el aumento de horarios y un nuevo reglamento que les quita prestaciones y salario."
+    enunciado: "De acuerdo con lo anterior, ¿a qué característica del entorno organizacional hace referencia?"
+    opciones:
+      - "Afectividad"
+      - "Satisfacción"
+      - "Motivación"
+      - "Relación"
+    correcta: 1
+    explicacion: "La satisfacción se refiere a qué tan agradable es el trabajo para una persona; en este caso, los trabajadores están insatisfechos con las nuevas normas de la empresa."
+
+  - id: A4-CASO28-q1
+    tipo: directo
+    area: A
+    subarea: A4
+    caso: "La empresa Alekane, de servicios hoteleros, observó una baja en las actividades de los empleados: no llegaban temprano, no alcanzaban metas y faltaban seguido. Cambiar de personal no funcionó. Recursos Humanos sugirió aumentar los salarios; semanas después los empleados cambiaron y aseguraban que les gustaba su trabajo y actuaban con responsabilidad."
+    enunciado: "¿Qué concepto implementó el área de recursos humanos para que los trabajadores tuvieran dicho cambio?"
+    opciones:
+      - "Motivación"
+      - "Afectividad"
+      - "Satisfacción"
+      - "Adaptación"
+    correcta: 3
+    explicacion: "La fuente marca como correcta la opción D (Adaptación). La motivación se refiere a la fuerza y empeño que una persona dedica a su trabajo; al recibir una recompensa económica, los empleados se motivaron a trabajar más esperando otra recompensa."
+
+  # ==========================================================================
+  # ÁREA 7 (PDF) — Derecho → F
+  # ==========================================================================
+
+  - id: F2-CASO1-q1
+    tipo: directo
+    area: F
+    subarea: F2
+    caso: "Un grupo de emprendedores planea conformar una empresa de importación y venta de productos de belleza por internet, sin necesidad de manejar stocks ni alquilar espacios físicos para sus tiendas."
+    enunciado: "Este grupo de emprendedores se reputan comerciantes. ¿Cuál de los siguientes elementos NO corresponde a sus obligaciones?"
+    opciones:
+      - "Crear actos mercantiles como la adquisición de equipo de cómputo y servicios digitales."
+      - "Conservación de su correspondencia, ya sea física o digital."
+      - "Inscripción en el Registro Público de la Propiedad."
+      - "Llevar la contabilidad de sus actividades comerciales por los medios que mejor le convengan."
+    correcta: 0
+    explicacion: "Las personas físicas o morales se reputan comerciantes al efectuar las actividades enumeradas en el Código de Comercio. Crear actos mercantiles no es una obligación del comerciante, sino una actividad que los define."
+
+  - id: F2-CASO1-q2
+    tipo: directo
+    area: F
+    subarea: F2
+    caso: "Un grupo de emprendedores planea conformar una empresa de importación y venta de productos de belleza por internet, sin necesidad de manejar stocks ni alquilar espacios físicos para sus tiendas."
+    enunciado: "Una empresa con actividad principal de manufactura de calzado da facilidades a sus obreros para adquirir sus productos, aunque la mayor parte de su producción se dirige al mercado exterior. ¿Cuál de las siguientes sociedades NO corresponde a esta empresa manufacturera?"
+    opciones:
+      - "Sociedad Anónima."
+      - "Sociedad Cooperativa."
+      - "Sociedad de Responsabilidad Limitada."
+      - "Sociedad Civil."
+    correcta: 3
+    explicacion: "Las sociedades mercantiles están enumeradas en la legislación mercantil, pero la Sociedad Civil está prevista en los Códigos Civiles, por lo que su objetivo y formación no corresponden a una sociedad mercantil."
+
+  - id: F2-CASO2-q1
+    tipo: directo
+    area: F
+    subarea: F2
+    caso: "Los socios y accionistas de la compañía La Perla de Campeche S. A. de C. V. decidieron poner fin a su empresa, debido principalmente a las bajas ventas de los últimos años."
+    enunciado: "Para poner fin a su sociedad mercantil, debe disolverse y liquidarse la empresa. ¿Qué elemento NO es necesario para llegar a tal fin?"
+    opciones:
+      - "Que el administrador siga en funciones hasta el nombramiento de un liquidador."
+      - "Los socios nombren un albacea para que administre los bienes a liquidarse."
+      - "Hacer el pago a acreedores y deudas por pérdidas en ejercicios anteriores."
+      - "Nombrar un liquidador para que se haga cargo de los bienes a liquidar."
+    correcta: 1
+    explicacion: "El nombramiento de un albacea no corresponde a la liquidación de una sociedad mercantil, ya que esa figura legal solo se utiliza en el derecho civil; lo correcto es el liquidador."
+
+  - id: F2-CASO2-q2
+    tipo: directo
+    area: F
+    subarea: F2
+    caso: "Los socios y accionistas de la compañía La Perla de Campeche S. A. de C. V. decidieron poner fin a su empresa, debido principalmente a las bajas ventas de los últimos años."
+    enunciado: "¿Qué efectos tiene la liquidación de la empresa?"
+    opciones:
+      - "Declararse en imposibilidad de pagos a sus acreedores."
+      - "Cambiar su objeto para concluir sus operaciones pendientes."
+      - "La empresa pierde su personalidad jurídica."
+      - "Al disolverse la empresa se cancelan sus deudas."
+    correcta: 1
+    explicacion: "Al liquidarse una sociedad mercantil, esta no pierde su figura jurídica; la administración pasa a un liquidador y cambia su objeto para concluir sus operaciones pendientes y hacer frente a acreedores y obligaciones."
+
+  - id: F2-CASO2-q3
+    tipo: directo
+    area: F
+    subarea: F2
+    caso: "Los socios y accionistas de la compañía La Perla de Campeche S. A. de C. V. decidieron poner fin a su empresa, debido principalmente a las bajas ventas de los últimos años."
+    enunciado: "En la formación de una empresa de bienes agropecuarios se necesitan fuentes de financiamiento para comprar maquinaria y equipo, mediante contratos mercantiles. ¿Qué tipo de contratos deben suscribir para lograr su financiamiento?"
+    opciones:
+      - "Crédito"
+      - "Garantía"
+      - "Traslativo"
+      - "Servicios"
+    correcta: 0
+    explicacion: "Los contratos de crédito incluyen los de habilitación o avío, refaccionario y agropecuario, por lo cual la nueva empresa requiere establecer un contrato de crédito."
+
+  - id: F2-CASO3-q1
+    tipo: directo
+    area: F
+    subarea: F2
+    caso: "En la región de Soconusco, Chiapas, un grupo de emprendedores estableció una empresa de actividades artesanales que requiere de los artesanos locales. Por las características socioeconómicas, decidieron no elaborar contratos de trabajo, aunque sí existirá una relación laboral."
+    enunciado: "¿Qué características debe tener esta relación laboral, aun en ausencia de un contrato de trabajo?"
+    opciones:
+      - "La prestación de un servicio personal con consentimiento de quien lo ofrecerá."
+      - "La prestación de un servicio personal subordinado, continuo, formal y permanente."
+      - "La prestación de un servicio personal subordinado con el pago correspondiente."
+      - "La prestación del servicio personal dirigido por la empresa y por el pago."
+    correcta: 2
+    explicacion: "Para que exista una relación laboral, independientemente de la existencia de un contrato, deben coincidir tres elementos: un servicio personal, que sea subordinado y que se pague por ese servicio."
+
+  - id: F2-CASO3-q2
+    tipo: directo
+    area: F
+    subarea: F2
+    caso: "En la región de Soconusco, Chiapas, un grupo de emprendedores estableció una empresa de actividades artesanales que requiere de los artesanos locales. Por las características socioeconómicas, decidieron no elaborar contratos de trabajo, aunque sí existirá una relación laboral."
+    enunciado: "¿Qué sujetos son indispensables en una relación laboral para llevar a cabo el objetivo de la empresa artesanal?"
+    opciones:
+      - "Artesanos y autoridades"
+      - "Emprendedores y población."
+      - "Autoridades, emprendedores y artesanos."
+      - "Emprendedores y artesanos"
+    correcta: 3
+    explicacion: "Los dos sujetos indispensables en una relación laboral son el patrón y el trabajador; en este caso, los emprendedores y los artesanos."
+
+  - id: F2-CASO4-q1
+    tipo: directo
+    area: F
+    subarea: F2
+    caso: "Un sindicato de trabajadores de una empresa textil declaró la huelga porque la parte patronal no cumplió con cláusulas del contrato colectivo y se negó a negociar el incremento de salarios. Los trabajadores quieren evitar que la huelga sea declarada ilegal, por lo que cumplieron con los requisitos de la ley."
+    enunciado: "¿Cuál de los siguientes requisitos NO corresponde a la petición de huelga?"
+    opciones:
+      - "Aviso al patrón y a la Junta de Conciliación y Arbitraje con al menos 6 días de anticipación a la fecha de inicio."
+      - "Entregar al patrón el pliego de peticiones, anunciando el inicio de huelga si no se satisfacen."
+      - "Que el sindicato sea apoyado por trabajadores de otras empresas del ramo, locales o nacionales."
+      - "Que la huelga sea apoyada por la mayoría de los trabajadores de la empresa textil."
+    correcta: 2
+    explicacion: "No es un requisito de huelga que el sindicato sea apoyado por otras empresas del ramo; los demás elementos sí son requisitos indispensables para que la huelga no sea declarada ilegal."
+
+  - id: F2-CASO4-q2
+    tipo: directo
+    area: F
+    subarea: F2
+    caso: "Un sindicato de trabajadores de una empresa textil declaró la huelga porque la parte patronal no cumplió con cláusulas del contrato colectivo y se negó a negociar el incremento de salarios. Los trabajadores quieren evitar que la huelga sea declarada ilegal, por lo que cumplieron con los requisitos de la ley."
+    enunciado: "¿Cuál de los siguientes requisitos es necesario para que la huelga no sea declarada inexistente?"
+    opciones:
+      - "Que el contrato colectivo de trabajo sea registrado ante la autoridad laboral."
+      - "Que la parte patronal se niegue a reconocer el contrato colectivo de trabajo."
+      - "Que en la empresa solo exista una representación sindical."
+      - "Que los trabajadores no suspendan labores, aunque se declare legal la huelga."
+    correcta: 1
+    explicacion: "Uno de los requisitos para que los trabajadores lleven a cabo su huelga es que el patrón se niegue a reconocer el contrato colectivo de trabajo, sea cual fuere la razón."
+
+  - id: F2-CASO5-q1
+    tipo: directo
+    area: F
+    subarea: F2
+    caso: "En una empresa siderúrgica, un obrero al salir de su trabajo fue atropellado por un conductor que se dio a la fuga. Fue atendido en el IMSS, donde por la gravedad de la lesión tuvieron que amputarle una pierna."
+    enunciado: "¿Qué derechos tiene el trabajador, si el accidente no ocurrió en las instalaciones de la empresa donde trabaja?"
+    opciones:
+      - "Ninguno, porque el accidente ocurrió afuera de su centro de trabajo."
+      - "Indemnización por riesgo de trabajo."
+      - "Incapacidad permanente total o parcial."
+      - "Ser atendido indefinidamente por el IMSS."
+    correcta: 1
+    explicacion: "El riesgo de trabajo incluye los accidentes que ocurren no solo dentro del centro de trabajo, sino también en el trayecto de la casa del trabajador a su centro de trabajo y viceversa; por ello tiene derecho a indemnización por riesgo de trabajo."
+
+  # ==========================================================================
+  # ÁREA 8 (PDF) — Mercadotecnia → D
+  # ==========================================================================
+
+  - id: D1-CASO1-q1
+    tipo: directo
+    area: D
+    subarea: D1
+    caso: "Se creó el Hotel Pet Care, un hotel para mascotas que ofrece baños, cepillado de dientes, área de juegos con alberca, comida, masajes y cuidados exclusivos. La campaña en redes sociales se dirigió a personas entre 25 y 35 años que se definan como 'Pet lovers', además de un flyer en una gaceta quincenal distribuida en Interlomas, Ciudad de México."
+    enunciado: "¿Qué tipos de mercado se ejemplifican en el párrafo anterior?"
+    opciones:
+      - "Mercado competitivo, mercado de industria, mercado de empresa."
+      - "Mercado de nichos, mercado actual, mercado de producto."
+      - "Mercado de servicios, mercado de nicho, mercado particular."
+      - "Mercado gubernamental, mercado real, mercado total."
+    correcta: 2
+    explicacion: "El mercado de servicios aplica esfuerzos humanos o mecánicos a personas, animales u objetos; el mercado de nicho es un grupo específico de compradores con necesidades particulares; y el mercado particular es un grupo con necesidades y comportamientos parecidos en un proceso de intercambio."
+
+  - id: D1-CASO1-q2
+    tipo: directo
+    area: D
+    subarea: D1
+    caso: "Se creó el Hotel Pet Care, un hotel para mascotas que ofrece baños, cepillado de dientes, área de juegos con alberca, comida, masajes y cuidados exclusivos. La campaña en redes sociales se dirigió a personas entre 25 y 35 años que se definan como 'Pet lovers', además de un flyer en una gaceta quincenal distribuida en Interlomas, Ciudad de México."
+    enunciado: "¿Cuál es el texto que más encaja para la descripción de un buyer persona del caso?"
+    opciones:
+      - "José, 32 años, vive cerca de Interlomas, pasea perros y cobra $50 por tarde; ingresos de unos $20,000 mensuales."
+      - "Minerva, 27 años, estudiante de maestría que vive en Interlomas, trabaja en publicidad, gana unos $30,000, viaja al menos 5 veces al mes y no sabe con quién dejar a sus dos husky siberiano."
+      - "Ana, 29 años, casada con dos hijos, tiene una perrita de raza pequeña que cuidan como una hija más; ingresos del hogar de unos $40,000."
+      - "Alma, 65 años, recién jubilada con $30,000 mensuales, tiene dos chihuahuas con problemas en los huesos que lleva a terapia."
+    correcta: 1
+    explicacion: "El texto de Minerva ejemplifica a un posible consumidor (buyer persona) del servicio, mencionando su comportamiento, necesidades, información demográfica y motivaciones."
+
+  - id: D1-CASO2-q1
+    tipo: directo
+    area: D
+    subarea: D1
+    caso: "Una reconocida empresa de comida rápida realizó un análisis de mercado en diferentes ciudades, lo que le permitió reconocer qué platillos son preferidos en distintos países. Esa estrategia fue la clave de su éxito y su expansión empresarial, llevando el mismo bien o servicio a mercados más amplios."
+    enunciado: "¿Qué tipo de marketing llevó a cabo la reconocida empresa?"
+    opciones:
+      - "Marketing internacional"
+      - "Marketing multinacional"
+      - "Marketing global"
+      - "Marketing regional"
+    correcta: 1
+    explicacion: "El marketing multinacional se desprende del internacional, pero se especializa en el desarrollo de estrategias específicas y especializadas para cada país."
+
+  - id: D1-CASO2-q2
+    tipo: directo
+    area: D
+    subarea: D1
+    caso: "Una reconocida empresa de comida rápida realizó un análisis de mercado en diferentes ciudades, lo que le permitió reconocer qué platillos son preferidos en distintos países. Esa estrategia fue la clave de su éxito y su expansión empresarial, llevando el mismo bien o servicio a mercados más amplios."
+    enunciado: "¿Qué objetivos se formulan para un buen nivel de desempeño en un mercado internacional?"
+    opciones:
+      - "Ventas, rentabilidad y posicionamiento."
+      - "Lealtad de clientes, generación de leads y credibilidad."
+      - "Innovación, presencia online y cuota de mercado."
+      - "Inversión, ventas y generación de leads."
+    correcta: 0
+    explicacion: "El objetivo principal se traduce en ventas (participación del mercado), que generan rentabilidad económica y, casi en automático, un posicionamiento; con ello crece la imagen de marca en cada país."
+
+  - id: D2-CASO3-q1
+    tipo: directo
+    area: D
+    subarea: D2
+    caso: "Una empresa nacional de ropa de dama y caballero, con 35 tiendas en México, inició hace cinco años la venta en línea. Para idealizar nuevas estrategias requiere mucha información de sus clientes (saber qué artículo es el más solicitado). Lo que quiere conseguir, además de un mayor nivel de ventas, es fidelización y satisfacción del cliente."
+    enunciado: "¿Qué técnica o herramienta de mercadotecnia es conveniente que implemente dicha empresa?"
+    opciones:
+      - "Investigación de mercados"
+      - "Métodos cualitativos"
+      - "CRM"
+      - "Métodos cuantitativos"
+    correcta: 2
+    explicacion: "El CRM construye relaciones duraderas comprendiendo las necesidades y preferencias de cada cliente de forma individual, para ofrecer el producto que quieran, cuando lo quieran y como lo requieran."
+
+  - id: D2-CASO3-q2
+    tipo: directo
+    area: D
+    subarea: D2
+    caso: "Una empresa nacional de ropa de dama y caballero, con 35 tiendas en México, inició hace cinco años la venta en línea. Para idealizar nuevas estrategias requiere mucha información de sus clientes (saber qué artículo es el más solicitado). Lo que quiere conseguir, además de un mayor nivel de ventas, es fidelización y satisfacción del cliente."
+    enunciado: "¿Qué concepto se refiere a la transformación de datos útiles para la empresa?"
+    opciones:
+      - "Data mining (minería de datos)"
+      - "Gestión de bases de datos"
+      - "Data warehouse (depósito de datos)"
+      - "Recolección de beneficios estratégicos"
+    correcta: 0
+    explicacion: "El data mining se refiere a la búsqueda de los datos, rescatando aquellos que aportan información útil, relevante y no evidente."
+
+  - id: D2-CASO4-q1
+    tipo: directo
+    area: D
+    subarea: D2
+    caso: "Jeriko, marca de alimentos lácteos nueva en el mercado, tiene como público objetivo a menores de entre 5 y 12 años. El director creativo realizará una campaña de neuromarketing, una prueba sensorial, midiendo las reacciones mediante una técnica de resonancia que explora el cerebro e identifica qué zona se activa ante cada estímulo."
+    enunciado: "¿Qué procedimiento específico se aplicará a los sujetos para medir con el resonador?"
+    opciones:
+      - "NeuroScent"
+      - "Neurolinguistics"
+      - "Sensometrics"
+      - "Respuestas faciales"
+    correcta: 2
+    explicacion: "Al ser una prueba sensorial, la sensometría (Sensometrics) permite medir los efectos que causan los sabores, olores e imágenes de un producto; es usada cuando los sujetos son difíciles de entrevistar (niños)."
+
+  - id: D2-CASO5-q1
+    tipo: directo
+    area: D
+    subarea: D2
+    caso: "Saphiro Mish, marca de maquillaje profesional, para lanzar un nuevo producto reunió a 8 maquillistas profesionales de entre 25 y 35 años. Les entregó un cuaderno de anotaciones, tres prototipos y un set de brochas, y por un mes debían documentar a detalle sus experiencias usándolos con sus clientes. Después se reunieron a compartir sus vivencias y eligieron el prototipo 2."
+    enunciado: "¿A qué tipo de método hace referencia el caso expuesto?"
+    opciones:
+      - "Método analítico"
+      - "Método cualitativo"
+      - "Método experimental"
+      - "Método cuantitativo"
+    correcta: 1
+    explicacion: "El método cualitativo permite un acercamiento a las acciones reales y muestra el comportamiento cotidiano de cierto número de individuos."
+
+  - id: D2-CASO5-q2
+    tipo: directo
+    area: D
+    subarea: D2
+    caso: "Saphiro Mish, marca de maquillaje profesional, para lanzar un nuevo producto reunió a 8 maquillistas profesionales de entre 25 y 35 años. Les entregó un cuaderno de anotaciones, tres prototipos y un set de brochas, y por un mes debían documentar a detalle sus experiencias usándolos con sus clientes. Después se reunieron a compartir sus vivencias y eligieron el prototipo 2."
+    enunciado: "¿Cuál es el nombre correcto del tipo de sesión empleada en la estrategia?"
+    opciones:
+      - "Sesión de grupo de pares"
+      - "Sesión de contacto directo"
+      - "Historias de vida"
+      - "Sesión de grupo"
+    correcta: 2
+    explicacion: "Las historias de vida se refieren a datos autobiográficos de los participantes, quienes previo a la reunión llevan un diario donde registran a detalle sus actividades, permitiendo conocer sus hábitos, costumbres y estilos de vida."
+
+  - id: D2-CASO5-q3
+    tipo: directo
+    area: D
+    subarea: D2
+    caso: "Saphiro Mish, marca de maquillaje profesional, para lanzar un nuevo producto reunió a 8 maquillistas profesionales de entre 25 y 35 años. Les entregó un cuaderno de anotaciones, tres prototipos y un set de brochas, y por un mes debían documentar a detalle sus experiencias usándolos con sus clientes. Después se reunieron a compartir sus vivencias y eligieron el prototipo 2."
+    enunciado: "¿Qué parte de la estrategia permite tener un resumen de los aspectos más relevantes?"
+    opciones:
+      - "Objetivos"
+      - "Muestra"
+      - "Cuestionario"
+      - "Análisis"
+    correcta: 3
+    explicacion: "El análisis permite tener la información precisa que impulsa la toma de decisiones, a partir de la transcripción de la sesión y las citas que afirman los comentarios de los asistentes."
+
+  # ==========================================================================
+  # Reactivos semilla conservados (tipos ordenamiento y relacion)
+  # El PDF no contiene reactivos nativos de estos tipos; se conservan del
+  # banco anterior para que la UI de orden y de columnas siga teniendo
+  # contenido funcional.
+  # ==========================================================================
+
+  - id: A3-SEED-001
     tipo: ordenamiento
-    area: A             # Administración
-    subarea: A4         # Entorno organizacional
+    area: A
+    subarea: A3
     enunciado: "Ordena las siguientes etapas del proceso de toma de decisiones gerenciales de acuerdo con la secuencia lógica correcta:"
     elementos:
       - "Identificar el problema u oportunidad"
@@ -65,185 +1809,24 @@ reactivos:
     ordenCorrecto: [0, 1, 2, 3, 4]
     explicacion: "El proceso racional de toma de decisiones sigue esta secuencia: primero se identifica el problema, luego se definen criterios, se generan alternativas, se evalúan y se elige la mejor, y finalmente se implementa con seguimiento."
 
-  - id: A5-001
-    tipo: directo
-    area: A             # Administración
-    subarea: A5         # Tecnologías y sistemas de información
-    enunciado: "¿Cuál de las siguientes opciones describe mejor el concepto de ERP (Enterprise Resource Planning)?"
-    opciones:
-      - "Un software exclusivo de gestión de recursos humanos."
-      - "Un sistema integrado que centraliza y automatiza los procesos de negocio de una organización."
-      - "Una plataforma de comercio electrónico para ventas en línea."
-      - "Un sistema de videoconferencia para trabajo remoto."
-    correcta: 1
-    explicacion: "Un ERP (Sistema de Planificación de Recursos Empresariales) es un software que integra y automatiza los procesos clave de la empresa —finanzas, logística, producción, RRHH— en una sola plataforma centralizada."
+  - id: E1-SEED-001
+    tipo: ordenamiento
+    area: E
+    subarea: E1
+    enunciado: "Para calcular el Valor Presente Neto (VPN) de un proyecto de inversión, ordena los pasos en la secuencia correcta:"
+    elementos:
+      - "Estimar los flujos de efectivo futuros del proyecto"
+      - "Determinar la tasa de descuento (costo de capital)"
+      - "Descontar cada flujo al período 0 usando la tasa elegida"
+      - "Sumar todos los flujos descontados y restar la inversión inicial"
+      - "Interpretar: VPN > 0 indica que el proyecto agrega valor"
+    ordenCorrecto: [0, 1, 2, 3, 4]
+    explicacion: "El VPN se calcula proyectando los flujos de caja, eligiendo una tasa de descuento que refleje el riesgo, trayendo cada flujo a valor presente, sumándolos y restando la inversión inicial."
 
-  # Reactivos de caso A1 — aplanados (multirreactivo sobre MBO)
-  - id: A1-CASO1-q1
-    tipo: directo
-    area: A             # Administración
-    subarea: A1         # Conceptos generales de administración
-    caso: "Una empresa de manufactura implementó recientemente un programa de gestión por objetivos (MBO). La dirección estableció metas anuales en conjunto con los empleados y acordó revisiones trimestrales. Al final del año, se compararon los resultados obtenidos con los objetivos pactados."
-    enunciado: "¿En qué etapa del proceso administrativo se ubica principalmente la gestión por objetivos (MBO)?"
-    opciones:
-      - "Organización"
-      - "Dirección"
-      - "Control"
-      - "Planeación y control conjuntamente"
-    correcta: 3
-    explicacion: "La gestión por objetivos (MBO, Management by Objectives) abarca tanto la planeación (fijar objetivos al inicio) como el control (comparar resultados con metas al final del período), por lo que involucra ambas etapas."
-
-  - id: A1-CASO1-q2
-    tipo: completamiento
-    area: A             # Administración
-    subarea: A1         # Conceptos generales de administración
-    caso: "Una empresa de manufactura implementó recientemente un programa de gestión por objetivos (MBO). La dirección estableció metas anuales en conjunto con los empleados y acordó revisiones trimestrales. Al final del año, se compararon los resultados obtenidos con los objetivos pactados."
-    enunciado: "La revisión trimestral de resultados que describe el caso corresponde a la función administrativa de _______________."
-    opciones:
-      - "planeación estratégica"
-      - "diseño organizacional"
-      - "control"
-      - "reclutamiento"
-    correcta: 2
-    explicacion: "El control consiste en medir el desempeño real, compararlo con estándares o metas establecidas, y aplicar medidas correctivas si es necesario. Las revisiones trimestrales son actividades de control."
-
-  # --------------------------------------------------------------------------
-  # B. Contabilidad y finanzas
-  # --------------------------------------------------------------------------
-
-  - id: B1-001
-    tipo: directo
-    area: B             # Contabilidad y finanzas
-    subarea: B1         # Información financiera
-    enunciado: "¿Cuál estado financiero muestra la situación patrimonial de una empresa en un momento determinado?"
-    opciones:
-      - "Estado de resultados"
-      - "Estado de flujo de efectivo"
-      - "Balance general (Estado de situación financiera)"
-      - "Estado de cambios en el capital contable"
-    correcta: 2
-    explicacion: "El balance general o estado de situación financiera presenta en un punto en el tiempo los activos, pasivos y capital de la empresa."
-
-  - id: B2-001
-    tipo: directo
-    area: B             # Contabilidad y finanzas
-    subarea: B2         # Normatividad contable
-    enunciado: "Las Normas de Información Financiera (NIF) en México son emitidas por:"
-    opciones:
-      - "La Secretaría de Hacienda y Crédito Público (SHCP)"
-      - "El Instituto Mexicano de Contadores Públicos (IMCP)"
-      - "El Consejo Mexicano de Normas de Información Financiera (CINIF)"
-      - "La Comisión Nacional Bancaria y de Valores (CNBV)"
-    correcta: 2
-    explicacion: "El CINIF (Consejo Mexicano de Normas de Información Financiera) es el organismo privado encargado de emitir y actualizar las NIF en México."
-
-  - id: B4-001
-    tipo: completamiento
-    area: B             # Contabilidad y finanzas
-    subarea: B4         # Costos y presupuestos
-    enunciado: "El costeo por absorción difiere del costeo variable principalmente en que el costeo por absorción incluye _______________ en el costo del producto."
-    opciones:
-      - "únicamente los costos variables de producción"
-      - "los costos fijos de producción"
-      - "los gastos de venta y administración"
-      - "solo los costos directos de mano de obra"
-    correcta: 1
-    explicacion: "En el costeo por absorción, los costos fijos de manufactura se incluyen en el costo unitario del producto. El costeo variable solo incluye costos variables de producción."
-
-  - id: B5-001
-    tipo: completamiento
-    area: B             # Contabilidad y finanzas
-    subarea: B5         # Análisis de información financiera
-    enunciado: "El análisis horizontal de estados financieros compara _______________ para identificar tendencias a lo largo del tiempo."
-    opciones:
-      - "el activo contra el pasivo en un mismo período"
-      - "cifras de diferentes períodos de la misma empresa"
-      - "el desempeño de la empresa contra el promedio de la industria"
-      - "razones financieras contra índices macroeconómicos"
-    correcta: 1
-    explicacion: "El análisis horizontal (o de tendencias) compara las cifras financieras de la misma empresa en dos o más períodos consecutivos para identificar variaciones absolutas y porcentuales."
-
-  # --------------------------------------------------------------------------
-  # C. Economía
-  # --------------------------------------------------------------------------
-
-  - id: C1-001
-    tipo: completamiento
-    area: C             # Economía
-    subarea: C1         # Fundamentos de economía
-    enunciado: "En el modelo de oferta y demanda, cuando el precio de un bien baja, la cantidad demandada _____________, lo que refleja la ley de la demanda."
-    opciones:
-      - "disminuye"
-      - "permanece constante"
-      - "aumenta"
-      - "se vuelve inelástica"
-    correcta: 2
-    explicacion: "La ley de la demanda establece que, ceteris paribus, existe una relación inversa entre el precio de un bien y la cantidad demandada: a menor precio, mayor cantidad demandada."
-
-  - id: C2-001
-    tipo: directo
-    area: C             # Economía
-    subarea: C2         # Economía de la empresa
-    enunciado: "En el modelo microeconómico de equilibrio del mercado, el punto de equilibrio se alcanza cuando:"
-    opciones:
-      - "la cantidad ofrecida supera a la cantidad demandada."
-      - "la cantidad demandada supera a la cantidad ofrecida."
-      - "la cantidad ofrecida es igual a la cantidad demandada al precio de mercado."
-      - "el gobierno fija un precio máximo igual al costo marginal."
-    correcta: 2
-    explicacion: "El equilibrio de mercado ocurre cuando, al precio vigente, la cantidad que los productores desean vender es exactamente igual a la que los consumidores desean comprar."
-
-  # Reactivos de caso C3 — aplanados (multirreactivo sobre inflación)
-  - id: C3-CASO1-q1
-    tipo: directo
-    area: C             # Economía
-    subarea: C3         # Macroeconomía
-    caso: "En el año anterior, el índice nacional de precios al consumidor (INPC) pasó de 110 a 121. Al mismo tiempo, el salario nominal promedio de los trabajadores aumentó de $12,000 a $13,200 mensuales."
-    enunciado: "¿Cuál fue la tasa de inflación en ese período?"
-    opciones:
-      - "5%"
-      - "8%"
-      - "10%"
-      - "12%"
-    correcta: 2
-    explicacion: "Inflación = ((121 - 110) / 110) × 100 = (11/110) × 100 = 10%."
-
-  - id: C3-CASO1-q2
-    tipo: directo
-    area: C             # Economía
-    subarea: C3         # Macroeconomía
-    caso: "En el año anterior, el índice nacional de precios al consumidor (INPC) pasó de 110 a 121. Al mismo tiempo, el salario nominal promedio de los trabajadores aumentó de $12,000 a $13,200 mensuales."
-    enunciado: "¿En cuánto aumentó el salario nominal en términos porcentuales?"
-    opciones:
-      - "8%"
-      - "9%"
-      - "10%"
-      - "12%"
-    correcta: 2
-    explicacion: "Variación salarial = ((13,200 - 12,000) / 12,000) × 100 = (1,200/12,000) × 100 = 10%."
-
-  - id: C3-CASO1-q3
-    tipo: completamiento
-    area: C             # Economía
-    subarea: C3         # Macroeconomía
-    caso: "En el año anterior, el índice nacional de precios al consumidor (INPC) pasó de 110 a 121. Al mismo tiempo, el salario nominal promedio de los trabajadores aumentó de $12,000 a $13,200 mensuales."
-    enunciado: "Con base en los datos anteriores, el poder adquisitivo (salario real) de los trabajadores _______________ durante ese período."
-    opciones:
-      - "aumentó, porque el salario nominal subió más que la inflación"
-      - "disminuyó, porque la inflación fue mayor al incremento salarial"
-      - "se mantuvo constante, porque ambas tasas fueron iguales"
-      - "aumentó, porque la inflación fue menor al 12%"
-    correcta: 2
-    explicacion: "Como la tasa de inflación (10%) fue igual al aumento del salario nominal (10%), el salario real permaneció constante: no hubo ganancia ni pérdida de poder adquisitivo."
-
-  # --------------------------------------------------------------------------
-  # D. Mercadotecnia
-  # --------------------------------------------------------------------------
-
-  - id: D1-001
+  - id: D1-SEED-001
     tipo: relacion
-    area: D             # Mercadotecnia
-    subarea: D1         # Mercado y empresa
+    area: D
+    subarea: D1
     enunciado: "Relaciona cada concepto de mercadotecnia (columna izquierda) con su definición correcta (columna derecha):"
     columnaIzquierda:
       - "Segmentación de mercado"
@@ -259,119 +1842,10 @@ reactivos:
     emparejamientos: [[0, 1], [1, 2], [2, 3], [3, 0]]
     explicacion: "Segmentación divide el mercado en grupos homogéneos; posicionamiento es la percepción del consumidor; la mezcla de mercadotecnia combina las 4P; el ciclo de vida recorre introducción, crecimiento, madurez y declive."
 
-  - id: D2-001
-    tipo: directo
-    area: D             # Mercadotecnia
-    subarea: D2         # Técnicas y herramientas de mercadotecnia
-    enunciado: "¿Qué herramienta de mercadotecnia permite medir el nivel de satisfacción del cliente y su probabilidad de recomendar un producto o servicio?"
-    opciones:
-      - "Análisis FODA"
-      - "Net Promoter Score (NPS)"
-      - "Mapa de posicionamiento"
-      - "Prueba A/B"
-    correcta: 1
-    explicacion: "El Net Promoter Score (NPS) es una métrica que pregunta a los clientes qué tan probable es que recomienden la marca a un conocido (escala 0-10), clasificándolos en promotores, pasivos y detractores."
-
-  # --------------------------------------------------------------------------
-  # E. Matemáticas y estadística
-  # --------------------------------------------------------------------------
-
-  # Reactivos de caso E1 — aplanados (multirreactivo sobre préstamo)
-  - id: E1-CASO1-q1
-    tipo: directo
-    area: E             # Matemáticas y estadística
-    subarea: E1         # Matemáticas financieras
-    caso: "Una empresa solicita un préstamo de $100,000 pesos a una tasa de interés anual del 12%, capitalizable mensualmente, a un plazo de 2 años."
-    enunciado: "¿Cuál es la tasa de interés mensual equivalente que se aplicará al préstamo?"
-    opciones:
-      - "1.00%"
-      - "1.50%"
-      - "6.00%"
-      - "12.00%"
-    correcta: 0
-    explicacion: "Si la tasa anual es 12% capitalizable mensualmente, la tasa mensual es 12%/12 = 1% mensual."
-
-  - id: E1-CASO1-q2
-    tipo: directo
-    area: E             # Matemáticas y estadística
-    subarea: E1         # Matemáticas financieras
-    caso: "Una empresa solicita un préstamo de $100,000 pesos a una tasa de interés anual del 12%, capitalizable mensualmente, a un plazo de 2 años."
-    enunciado: "¿Cuántos períodos (meses) abarca el plazo total del préstamo?"
-    opciones:
-      - "12 meses"
-      - "18 meses"
-      - "24 meses"
-      - "36 meses"
-    correcta: 2
-    explicacion: "2 años × 12 meses/año = 24 meses."
-
-  - id: E1-001
-    tipo: ordenamiento
-    area: E             # Matemáticas y estadística
-    subarea: E1         # Matemáticas financieras
-    enunciado: "Para calcular el Valor Presente Neto (VPN) de un proyecto de inversión, ordena los pasos en la secuencia correcta:"
-    elementos:
-      - "Estimar los flujos de efectivo futuros del proyecto"
-      - "Determinar la tasa de descuento (costo de capital)"
-      - "Descontar cada flujo al período 0 usando la tasa elegida"
-      - "Sumar todos los flujos descontados y restar la inversión inicial"
-      - "Interpretar: VPN > 0 indica que el proyecto agrega valor"
-    ordenCorrecto: [0, 1, 2, 3, 4]
-    explicacion: "El VPN se calcula proyectando los flujos de caja, eligiendo una tasa de descuento que refleje el riesgo, trayendo cada flujo a valor presente, sumándolos y restando la inversión inicial."
-
-  - id: E2-001
-    tipo: ordenamiento
-    area: E             # Matemáticas y estadística
-    subarea: E2         # Fundamentos de cálculo
-    enunciado: "Ordena los siguientes pasos para calcular la derivada de una función f(x) usando la definición límite (regla de la primera derivada):"
-    elementos:
-      - "Escribir la expresión f(x + h) sustituyendo (x + h) en la función"
-      - "Calcular f(x + h) - f(x) y simplificar"
-      - "Dividir el resultado entre h"
-      - "Aplicar el límite cuando h tiende a cero"
-      - "El resultado es f'(x)"
-    ordenCorrecto: [0, 1, 2, 3, 4]
-    explicacion: "La definición formal de derivada sigue este proceso: f'(x) = lim_{h→0} [f(x+h) - f(x)] / h. Se evalúa f(x+h), se resta f(x), se divide entre h, se simplifica y se toma el límite."
-
-  - id: E3-001
+  - id: F2-SEED-001
     tipo: relacion
-    area: E             # Matemáticas y estadística
-    subarea: E3         # Estadística descriptiva
-    enunciado: "Relaciona cada medida de tendencia central o dispersión (columna izquierda) con su descripción (columna derecha):"
-    columnaIzquierda:
-      - "Media aritmética"
-      - "Mediana"
-      - "Desviación estándar"
-      - "Rango"
-    columnaDerecha:
-      - "Diferencia entre el valor máximo y mínimo del conjunto de datos."
-      - "Valor central que divide la distribución en dos mitades iguales."
-      - "Promedio de todos los valores del conjunto de datos."
-      - "Medida de dispersión que expresa cuánto se alejan los datos de la media."
-    emparejamientos: [[0, 2], [1, 1], [2, 3], [3, 0]]
-    explicacion: "La media es el promedio aritmético; la mediana es el valor central; la desviación estándar mide dispersión respecto a la media; el rango es la diferencia entre máximo y mínimo."
-
-  # --------------------------------------------------------------------------
-  # F. Derecho
-  # --------------------------------------------------------------------------
-
-  - id: F1-001
-    tipo: directo
-    area: F             # Derecho
-    subarea: F1         # Derecho público
-    enunciado: "¿Cuál de los siguientes instrumentos jurídicos constituye la norma suprema del ordenamiento jurídico mexicano?"
-    opciones:
-      - "El Código Civil Federal"
-      - "La Ley Federal del Trabajo"
-      - "La Constitución Política de los Estados Unidos Mexicanos"
-      - "El Código de Comercio"
-    correcta: 2
-    explicacion: "El artículo 133 de la Constitución establece el principio de supremacía constitucional: la Constitución Política de los Estados Unidos Mexicanos es la Ley Suprema de toda la Unión."
-
-  - id: F2-001
-    tipo: relacion
-    area: F             # Derecho
-    subarea: F2         # Derecho privado
+    area: F
+    subarea: F2
     enunciado: "Relaciona cada figura jurídica del derecho mercantil (columna izquierda) con su característica principal (columna derecha):"
     columnaIzquierda:
       - "Sociedad Anónima (S.A.)"
