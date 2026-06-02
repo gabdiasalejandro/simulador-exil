@@ -22,7 +22,7 @@ describe('Smoke: flujo completo del simulacro', () => {
 
     // --- Paso 1: Landing muestra 4 botones ---
     expect(screen.getByRole('button', { name: 'Simular' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Practicar' })).toBeDisabled();
+    expect(screen.getByRole('button', { name: 'Practicar' })).toBeInTheDocument();
 
     // --- Paso 2: Click en Simular lleva al SizePicker ---
     await userEvent.click(screen.getByRole('button', { name: 'Simular' }));

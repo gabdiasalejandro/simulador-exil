@@ -18,6 +18,18 @@ import { getAreaNombre } from '../../../domain/taxonomy/taxonomy';
 // Props principal
 // ---------------------------------------------------------------------------
 
+/**
+ * Modo feedback/revelado: cuando está activo, el card muestra el resultado
+ * inmediato (correcto/incorrecto), resalta la opción correcta y muestra la
+ * explicación del reactivo. Las opciones quedan deshabilitadas para cambio.
+ */
+export interface FeedbackState {
+  /** Si la respuesta del usuario fue correcta. */
+  correcto: boolean;
+  /** Explicación que se muestra después de responder. */
+  explicacion: string;
+}
+
 export interface QuestionCardProps {
   question: Reactivo;
   answer: Answer | null;
@@ -25,6 +37,11 @@ export interface QuestionCardProps {
   /** Número de orden para mostrar (ej. "Reactivo 3 de 20") */
   index: number;
   total: number;
+  /**
+   * Cuando se provee, el card entra en modo "revelado":
+   * deshabilita cambios, resalta correcta/incorrecta y muestra explicación.
+   */
+  feedback?: FeedbackState;
 }
 
 // ---------------------------------------------------------------------------
@@ -49,13 +66,17 @@ function CasoBlock({ caso }: { caso: string }) {
 function ChoiceRenderer({
   enunciado,
   opciones,
+  correcta,
   answer,
   onChange,
+  revealed,
 }: {
   enunciado: string;
   opciones: [string, string, string, string];
+  correcta: 0 | 1 | 2 | 3;
   answer: ChoiceAnswer | null;
   onChange: (a: ChoiceAnswer) => void;
+  revealed: boolean;
 }) {
   return (
     <div>
@@ -63,21 +84,41 @@ function ChoiceRenderer({
       <ul className="space-y-3">
         {opciones.map((opt, i) => {
           const selected = answer?.index === i;
+          const isCorrect = i === correcta;
+
+          let colorClasses: string;
+          if (revealed) {
+            if (isCorrect) {
+              colorClasses = 'border-green-600 bg-green-50 font-semibold text-green-900';
+            } else if (selected && !isCorrect) {
+              colorClasses = 'border-red-400 bg-red-50 font-semibold text-red-800';
+            } else {
+              colorClasses = 'border-gray-200 bg-white text-gray-500';
+            }
+          } else {
+            colorClasses = selected
+              ? 'border-blue-600 bg-blue-50 font-semibold text-blue-900'
+              : 'border-gray-200 bg-white hover:bg-gray-50 text-gray-800';
+          }
+
           return (
             <li key={i}>
               <button
                 type="button"
-                onClick={() => onChange({ kind: 'choice', index: i })}
-                className={`w-full text-left rounded-xl border px-5 py-3.5 text-base transition-colors ${
-                  selected
-                    ? 'border-blue-600 bg-blue-50 font-semibold text-blue-900'
-                    : 'border-gray-200 bg-white hover:bg-gray-50 text-gray-800'
-                }`}
+                disabled={revealed}
+                onClick={() => !revealed && onChange({ kind: 'choice', index: i })}
+                className={`w-full text-left rounded-xl border px-5 py-3.5 text-base transition-colors ${colorClasses} ${revealed ? 'cursor-default' : 'cursor-pointer'}`}
               >
                 <span className="mr-3 font-bold text-gray-500">
                   {String.fromCharCode(65 + i)}.
                 </span>
                 {opt}
+                {revealed && isCorrect && (
+                  <span className="ml-2 text-green-700 font-bold">✓</span>
+                )}
+                {revealed && selected && !isCorrect && (
+                  <span className="ml-2 text-red-600 font-bold">✗</span>
+                )}
               </button>
             </li>
           );
@@ -231,8 +272,9 @@ function RelacionRenderer({
 // QuestionCard principal
 // ---------------------------------------------------------------------------
 
-export function QuestionCard({ question, answer, onChange, index, total }: QuestionCardProps) {
+export function QuestionCard({ question, answer, onChange, index, total, feedback }: QuestionCardProps) {
   const areaNombre = getAreaNombre(question.area);
+  const revealed = feedback !== undefined;
 
   return (
     <article className="rounded-2xl border border-gray-200 bg-white p-7 shadow-sm">
@@ -247,7 +289,24 @@ export function QuestionCard({ question, answer, onChange, index, total }: Quest
 
       {question.caso && <CasoBlock caso={question.caso} />}
 
-      {renderReactivo(question, answer, onChange)}
+      {renderReactivo(question, answer, onChange, revealed)}
+
+      {feedback && (
+        <div
+          className={`mt-6 rounded-xl border px-5 py-4 ${
+            feedback.correcto
+              ? 'border-green-300 bg-green-50'
+              : 'border-red-300 bg-red-50'
+          }`}
+          role="status"
+          aria-live="polite"
+        >
+          <p className={`mb-2 font-bold text-sm ${feedback.correcto ? 'text-green-700' : 'text-red-700'}`}>
+            {feedback.correcto ? '¡Correcto!' : 'Incorrecto'}
+          </p>
+          <p className="text-sm leading-relaxed text-gray-700">{feedback.explicacion}</p>
+        </div>
+      )}
     </article>
   );
 }
@@ -256,6 +315,7 @@ function renderReactivo(
   question: Reactivo,
   answer: Answer | null,
   onChange: (a: Answer) => void,
+  revealed: boolean,
 ) {
   switch (question.tipo) {
     case 'directo':
@@ -265,8 +325,10 @@ function renderReactivo(
         <ChoiceRenderer
           enunciado={q.enunciado}
           opciones={q.opciones}
+          correcta={q.correcta}
           answer={answer?.kind === 'choice' ? answer : null}
           onChange={onChange}
+          revealed={revealed}
         />
       );
     }

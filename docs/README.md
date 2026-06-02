@@ -10,6 +10,7 @@ PWA de estudio para el examen EXIL-NEGOCIOS (CENEVAL). Frontend puro, sin backen
 | [domain-model.md](./domain-model.md) | Modelo de dominio: `Question`, `ExamBlueprint`, `ScoringPolicy`, `Attempt` |
 | [content.md](./content.md) | Contrato de contenido: banco JSON, validación, IndexedDB |
 | [testing.md](./testing.md) | Estrategia de pruebas: Vitest, dobles de puertos, fake-indexeddb |
+| [modo-practica.md](./modo-practica.md) | Modo práctica: playground con feedback inmediato, caso de uso, componentes UI |
 | [roadmap.md](./roadmap.md) | Cortes SDD: estado de cada PR y próximas iteraciones |
 
 ## Inicio rápido
