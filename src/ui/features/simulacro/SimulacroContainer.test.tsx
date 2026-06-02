@@ -45,7 +45,7 @@ function make20Questions(): Question[] {
 describe('SimulacroContainer', () => {
   let contentPort: ContentPort;
   let storagePort: StoragePort;
-  const onDone = vi.fn<[Attempt], void>();
+  const onDone = vi.fn<(attempt: Attempt) => void>();
 
   beforeEach(() => {
     vi.clearAllMocks();
