@@ -11,15 +11,15 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg', 'icon-192.png', 'icon-512.png'],
       workbox: {
-        // Cachear JS/CSS/HTML y el seed-bank incrustado en el bundle
-        globPatterns: ['**/*.{js,css,html,ico,png,svg,json}'],
+        // Cachear JS/CSS/HTML y el banco YAML incrustado en el bundle
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,yaml}'],
         runtimeCaching: [
           {
-            // Cachear el seed-bank.json en runtime (por si lo sirve Vite en dev)
-            urlPattern: /seed-bank\.json$/,
+            // Cachear el banco.yaml en runtime (por si lo sirve Vite en dev)
+            urlPattern: /banco\.yaml$/,
             handler: 'CacheFirst',
             options: {
-              cacheName: 'seed-bank-cache',
+              cacheName: 'banco-cache',
               expiration: { maxEntries: 1, maxAgeSeconds: 60 * 60 * 24 * 30 },
             },
           },
