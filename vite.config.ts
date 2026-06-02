@@ -9,7 +9,22 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.svg'],
+      includeAssets: ['favicon.svg', 'icon-192.png', 'icon-512.png'],
+      workbox: {
+        // Cachear JS/CSS/HTML y el seed-bank incrustado en el bundle
+        globPatterns: ['**/*.{js,css,html,ico,png,svg,json}'],
+        runtimeCaching: [
+          {
+            // Cachear el seed-bank.json en runtime (por si lo sirve Vite en dev)
+            urlPattern: /seed-bank\.json$/,
+            handler: 'CacheFirst',
+            options: {
+              cacheName: 'seed-bank-cache',
+              expiration: { maxEntries: 1, maxAgeSeconds: 60 * 60 * 24 * 30 },
+            },
+          },
+        ],
+      },
       manifest: {
         name: 'Simulador EXIL',
         short_name: 'SimEXIL',
