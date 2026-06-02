@@ -107,9 +107,7 @@ export function SimulacroContainer({
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
-    // Solo se recrea cuando cambia de fase o remainingSeconds pasa a null
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state.phase]);
+  }, [state.phase]); // Se recrea intencionalmente solo cuando cambia de fase
 
   // ---------------------------------------------------------------------------
   // Submit (manual o automático)
