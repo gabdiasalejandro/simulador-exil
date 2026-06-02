@@ -1,28 +1,25 @@
 import type {
-  Question,
-  DirectQuestion,
-  CompletionQuestion,
-  OrderingQuestion,
-  ColumnMatchQuestion,
-  CaseQuestion,
-  SubQuestion,
+  Reactivo,
+  ReactivoDirecto,
+  ReactivoCompletamiento,
+  ReactivoOrdenamiento,
+  ReactivoRelacion,
 } from '../../../domain/question/question';
 import type {
   Answer,
   ChoiceAnswer,
   OrderAnswer,
   MatchAnswer,
-  CaseAnswer,
-  LeafAnswer,
 } from '../../../domain/question/answer';
 import { assertNever } from '../../../domain/question/question';
+import { getAreaNombre } from '../../../domain/taxonomy/taxonomy';
 
 // ---------------------------------------------------------------------------
 // Props principal
 // ---------------------------------------------------------------------------
 
 export interface QuestionCardProps {
-  question: Question;
+  question: Reactivo;
   answer: Answer | null;
   onChange: (answer: Answer) => void;
   /** Número de orden para mostrar (ej. "Reactivo 3 de 20") */
@@ -31,38 +28,53 @@ export interface QuestionCardProps {
 }
 
 // ---------------------------------------------------------------------------
+// Bloque de contexto de caso
+// ---------------------------------------------------------------------------
+
+function CasoBlock({ caso }: { caso: string }) {
+  return (
+    <div className="mb-6 rounded-xl border border-amber-300 bg-amber-50 p-5">
+      <p className="mb-2 text-xs font-bold text-amber-700 uppercase tracking-widest">
+        Contexto del caso
+      </p>
+      <p className="text-base leading-relaxed text-gray-800">{caso}</p>
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
 // Sub-renderer T1/T2: Cuestionamiento directo / Completamiento
 // ---------------------------------------------------------------------------
 
 function ChoiceRenderer({
-  stem,
-  options,
+  enunciado,
+  opciones,
   answer,
   onChange,
 }: {
-  stem: string;
-  options: [string, string, string, string];
+  enunciado: string;
+  opciones: [string, string, string, string];
   answer: ChoiceAnswer | null;
   onChange: (a: ChoiceAnswer) => void;
 }) {
   return (
     <div>
-      <p className="mb-4 text-gray-800 leading-relaxed">{stem}</p>
-      <ul className="space-y-2">
-        {options.map((opt, i) => {
+      <p className="mb-5 text-lg font-medium leading-relaxed text-gray-900">{enunciado}</p>
+      <ul className="space-y-3">
+        {opciones.map((opt, i) => {
           const selected = answer?.index === i;
           return (
             <li key={i}>
               <button
                 type="button"
                 onClick={() => onChange({ kind: 'choice', index: i })}
-                className={`w-full text-left rounded-lg border px-4 py-3 text-sm transition-colors ${
+                className={`w-full text-left rounded-xl border px-5 py-3.5 text-base transition-colors ${
                   selected
-                    ? 'border-blue-600 bg-blue-50 font-semibold text-blue-800'
-                    : 'border-gray-200 bg-white hover:bg-gray-50 text-gray-700'
+                    ? 'border-blue-600 bg-blue-50 font-semibold text-blue-900'
+                    : 'border-gray-200 bg-white hover:bg-gray-50 text-gray-800'
                 }`}
               >
-                <span className="mr-2 font-bold">
+                <span className="mr-3 font-bold text-gray-500">
                   {String.fromCharCode(65 + i)}.
                 </span>
                 {opt}
@@ -80,27 +92,24 @@ function ChoiceRenderer({
 // ---------------------------------------------------------------------------
 
 function OrderingRenderer({
-  stem,
-  items,
+  enunciado,
+  elementos,
   answer,
   onChange,
 }: {
-  stem: string;
-  items: string[];
+  enunciado: string;
+  elementos: string[];
   answer: OrderAnswer | null;
   onChange: (a: OrderAnswer) => void;
 }) {
-  // Estado: secuencia de índices seleccionados (en el orden elegido por el usuario)
   const sequence = answer?.sequence ?? [];
 
   const handleToggle = (idx: number) => {
     const pos = sequence.indexOf(idx);
     let next: number[];
     if (pos >= 0) {
-      // Des-seleccionar: remover
       next = sequence.filter((_, i) => i !== pos);
     } else {
-      // Agregar al final
       next = [...sequence, idx];
     }
     onChange({ kind: 'order', sequence: next });
@@ -108,12 +117,12 @@ function OrderingRenderer({
 
   return (
     <div>
-      <p className="mb-3 text-gray-800 leading-relaxed">{stem}</p>
-      <p className="mb-3 text-xs text-gray-500">
+      <p className="mb-4 text-lg font-medium leading-relaxed text-gray-900">{enunciado}</p>
+      <p className="mb-4 text-sm text-gray-500">
         Haz clic en los elementos en el orden correcto:
       </p>
       <ul className="space-y-2">
-        {items.map((item, idx) => {
+        {elementos.map((item, idx) => {
           const pos = sequence.indexOf(idx);
           const selected = pos >= 0;
           return (
@@ -121,14 +130,14 @@ function OrderingRenderer({
               <button
                 type="button"
                 onClick={() => handleToggle(idx)}
-                className={`w-full text-left rounded-lg border px-4 py-3 text-sm transition-colors ${
+                className={`w-full text-left rounded-xl border px-5 py-3.5 text-base transition-colors ${
                   selected
-                    ? 'border-blue-600 bg-blue-50 font-semibold text-blue-800'
-                    : 'border-gray-200 bg-white hover:bg-gray-50 text-gray-700'
+                    ? 'border-blue-600 bg-blue-50 font-semibold text-blue-900'
+                    : 'border-gray-200 bg-white hover:bg-gray-50 text-gray-800'
                 }`}
               >
                 {selected && (
-                  <span className="mr-2 inline-flex h-5 w-5 items-center justify-center rounded-full bg-blue-600 text-white text-xs font-bold">
+                  <span className="mr-3 inline-flex h-6 w-6 items-center justify-center rounded-full bg-blue-600 text-white text-xs font-bold">
                     {pos + 1}
                   </span>
                 )}
@@ -143,74 +152,73 @@ function OrderingRenderer({
 }
 
 // ---------------------------------------------------------------------------
-// Sub-renderer T4: Relación de columnas
+// Sub-renderer T4: Relación de columnas — dropdown por fila
 // ---------------------------------------------------------------------------
 
-function MatchRenderer({
-  stem,
-  leftColumn,
-  rightColumn,
+function RelacionRenderer({
+  enunciado,
+  columnaIzquierda,
+  columnaDerecha,
   answer,
   onChange,
 }: {
-  stem: string;
-  leftColumn: string[];
-  rightColumn: string[];
+  enunciado: string;
+  columnaIzquierda: string[];
+  columnaDerecha: string[];
   answer: MatchAnswer | null;
   onChange: (a: MatchAnswer) => void;
 }) {
   const pairs = answer?.pairs ?? [];
 
-  const getRightForLeft = (leftIdx: number): number | undefined =>
+  const getSelectedRight = (leftIdx: number): number | undefined =>
     pairs.find(([l]) => l === leftIdx)?.[1];
 
-  const handleSelect = (leftIdx: number, rightIdx: number) => {
-    // Reemplazar o agregar el par para leftIdx
+  const handleSelect = (leftIdx: number, value: string) => {
+    const rightIdx = parseInt(value, 10);
     const filtered = pairs.filter(([l]) => l !== leftIdx);
-    const current = getRightForLeft(leftIdx);
-    if (current === rightIdx) {
-      // Des-seleccionar
-      onChange({ kind: 'match', pairs: filtered });
-    } else {
-      // También quitar si rightIdx ya está asignado a otro left
-      const clean = filtered.filter(([, r]) => r !== rightIdx);
-      onChange({
-        kind: 'match',
-        pairs: [...clean, [leftIdx, rightIdx]] as [number, number][],
-      });
+
+    if (isNaN(rightIdx)) {
+      // Opción vacía — quitar la selección
+      onChange({ kind: 'match', pairs: filtered as [number, number][] });
+      return;
     }
+
+    // Quitar si rightIdx ya está asignado a otro concepto izquierdo
+    const clean = filtered.filter(([, r]) => r !== rightIdx);
+    onChange({
+      kind: 'match',
+      pairs: [...clean, [leftIdx, rightIdx]] as [number, number][],
+    });
   };
 
   return (
     <div>
-      <p className="mb-4 text-gray-800 leading-relaxed">{stem}</p>
-      <div className="space-y-4">
-        {leftColumn.map((leftItem, leftIdx) => {
-          const selectedRight = getRightForLeft(leftIdx);
+      <p className="mb-5 text-lg font-medium leading-relaxed text-gray-900">{enunciado}</p>
+      <div className="space-y-3">
+        {columnaIzquierda.map((leftItem, leftIdx) => {
+          const selectedRight = getSelectedRight(leftIdx);
           return (
-            <div key={leftIdx} className="rounded-lg border border-gray-200 p-3">
-              <p className="mb-2 text-sm font-semibold text-gray-700">
-                {leftIdx + 1}. {leftItem}
+            <div
+              key={leftIdx}
+              className="flex flex-col gap-2 rounded-xl border border-gray-200 bg-gray-50 p-4 sm:flex-row sm:items-center sm:gap-4"
+            >
+              <p className="flex-1 text-base font-medium text-gray-900">
+                <span className="mr-2 text-gray-400">{leftIdx + 1}.</span>
+                {leftItem}
               </p>
-              <div className="flex flex-wrap gap-2">
-                {rightColumn.map((rightItem, rightIdx) => {
-                  const isSelected = selectedRight === rightIdx;
-                  return (
-                    <button
-                      key={rightIdx}
-                      type="button"
-                      onClick={() => handleSelect(leftIdx, rightIdx)}
-                      className={`rounded border px-3 py-1 text-xs transition-colors ${
-                        isSelected
-                          ? 'border-blue-600 bg-blue-50 font-semibold text-blue-800'
-                          : 'border-gray-200 bg-white hover:bg-gray-50 text-gray-600'
-                      }`}
-                    >
-                      {String.fromCharCode(97 + rightIdx)}. {rightItem}
-                    </button>
-                  );
-                })}
-              </div>
+              <select
+                value={selectedRight !== undefined ? String(selectedRight) : ''}
+                onChange={(e) => handleSelect(leftIdx, e.target.value)}
+                className="rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-800 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 sm:min-w-48"
+                aria-label={`Relación para: ${leftItem}`}
+              >
+                <option value="">— elige una opción —</option>
+                {columnaDerecha.map((rightItem, rightIdx) => (
+                  <option key={rightIdx} value={String(rightIdx)}>
+                    {String.fromCharCode(97 + rightIdx)}. {rightItem}
+                  </option>
+                ))}
+              </select>
             </div>
           );
         })}
@@ -220,188 +228,71 @@ function MatchRenderer({
 }
 
 // ---------------------------------------------------------------------------
-// Sub-renderer para sub-preguntas de T5 (hoja)
-// ---------------------------------------------------------------------------
-
-function SubQuestionRenderer({
-  subQ,
-  subIndex,
-  answer,
-  onChange,
-}: {
-  subQ: SubQuestion;
-  subIndex: number;
-  answer: LeafAnswer | null;
-  onChange: (a: LeafAnswer) => void;
-}) {
-  switch (subQ.itemType) {
-    case 'direct':
-    case 'completion': {
-      const q = subQ as DirectQuestion | CompletionQuestion;
-      return (
-        <div className="mb-4 rounded-lg bg-gray-50 p-3">
-          <p className="mb-2 text-xs font-semibold text-gray-500 uppercase tracking-wide">
-            Sub-pregunta {subIndex + 1}
-          </p>
-          <ChoiceRenderer
-            stem={q.stem}
-            options={q.options}
-            answer={answer?.kind === 'choice' ? answer : null}
-            onChange={onChange}
-          />
-        </div>
-      );
-    }
-    case 'ordering': {
-      const q = subQ as OrderingQuestion;
-      return (
-        <div className="mb-4 rounded-lg bg-gray-50 p-3">
-          <p className="mb-2 text-xs font-semibold text-gray-500 uppercase tracking-wide">
-            Sub-pregunta {subIndex + 1}
-          </p>
-          <OrderingRenderer
-            stem={q.stem}
-            items={q.items}
-            answer={answer?.kind === 'order' ? answer : null}
-            onChange={onChange}
-          />
-        </div>
-      );
-    }
-    case 'match': {
-      const q = subQ as ColumnMatchQuestion;
-      return (
-        <div className="mb-4 rounded-lg bg-gray-50 p-3">
-          <p className="mb-2 text-xs font-semibold text-gray-500 uppercase tracking-wide">
-            Sub-pregunta {subIndex + 1}
-          </p>
-          <MatchRenderer
-            stem={q.stem}
-            leftColumn={q.leftColumn}
-            rightColumn={q.rightColumn}
-            answer={answer?.kind === 'match' ? answer : null}
-            onChange={onChange}
-          />
-        </div>
-      );
-    }
-    default:
-      return assertNever(subQ);
-  }
-}
-
-// ---------------------------------------------------------------------------
-// Sub-renderer T5: Caso / Multirreactivo
-// ---------------------------------------------------------------------------
-
-function CaseRenderer({
-  question,
-  answer,
-  onChange,
-}: {
-  question: CaseQuestion;
-  answer: CaseAnswer | null;
-  onChange: (a: CaseAnswer) => void;
-}) {
-  const subAnswers: Array<LeafAnswer | null> =
-    answer?.answers
-      ? Array.from({ length: question.subQuestions.length }, (_, i) =>
-          answer.answers[i] ?? null,
-        )
-      : Array(question.subQuestions.length).fill(null);
-
-  const handleSubChange = (subIndex: number, subAnswer: LeafAnswer) => {
-    const next = [...subAnswers];
-    next[subIndex] = subAnswer;
-    onChange({ kind: 'case', answers: next });
-  };
-
-  return (
-    <div>
-      <div className="mb-4 rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm text-gray-800 leading-relaxed">
-        <p className="mb-1 text-xs font-semibold text-amber-700 uppercase tracking-wide">
-          Caso
-        </p>
-        {question.caseStem}
-      </div>
-
-      {question.subQuestions.map((subQ, i) => (
-        <SubQuestionRenderer
-          key={i}
-          subQ={subQ}
-          subIndex={i}
-          answer={subAnswers[i] ?? null}
-          onChange={(a) => handleSubChange(i, a)}
-        />
-      ))}
-    </div>
-  );
-}
-
-// ---------------------------------------------------------------------------
 // QuestionCard principal
 // ---------------------------------------------------------------------------
 
 export function QuestionCard({ question, answer, onChange, index, total }: QuestionCardProps) {
+  const areaNombre = getAreaNombre(question.area);
+
   return (
-    <article className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
-      <header className="mb-4 flex items-center justify-between text-xs text-gray-400">
-        <span>
-          Reactivo {index} de {total}
+    <article className="rounded-2xl border border-gray-200 bg-white p-7 shadow-sm">
+      <header className="mb-5 flex items-center justify-between">
+        <span className="text-sm text-gray-500">
+          Reactivo <span className="font-semibold text-gray-700">{index}</span> de {total}
         </span>
-        <span className="uppercase tracking-wide text-gray-300">
-          {question.officialTag.area} · {question.officialTag.subarea}
+        <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700">
+          {areaNombre}
         </span>
       </header>
 
-      {renderQuestion(question, answer, onChange)}
+      {question.caso && <CasoBlock caso={question.caso} />}
+
+      {renderReactivo(question, answer, onChange)}
     </article>
   );
 }
 
-function renderQuestion(
-  question: Question,
+function renderReactivo(
+  question: Reactivo,
   answer: Answer | null,
   onChange: (a: Answer) => void,
 ) {
-  switch (question.itemType) {
-    case 'direct':
-    case 'completion':
+  switch (question.tipo) {
+    case 'directo':
+    case 'completamiento': {
+      const q = question as ReactivoDirecto | ReactivoCompletamiento;
       return (
         <ChoiceRenderer
-          stem={question.stem}
-          options={question.options}
+          enunciado={q.enunciado}
+          opciones={q.opciones}
           answer={answer?.kind === 'choice' ? answer : null}
           onChange={onChange}
         />
       );
-    case 'ordering':
+    }
+    case 'ordenamiento': {
+      const q = question as ReactivoOrdenamiento;
       return (
         <OrderingRenderer
-          stem={question.stem}
-          items={question.items}
+          enunciado={q.enunciado}
+          elementos={q.elementos}
           answer={answer?.kind === 'order' ? answer : null}
           onChange={onChange}
         />
       );
-    case 'match':
+    }
+    case 'relacion': {
+      const q = question as ReactivoRelacion;
       return (
-        <MatchRenderer
-          stem={question.stem}
-          leftColumn={question.leftColumn}
-          rightColumn={question.rightColumn}
+        <RelacionRenderer
+          enunciado={q.enunciado}
+          columnaIzquierda={q.columnaIzquierda}
+          columnaDerecha={q.columnaDerecha}
           answer={answer?.kind === 'match' ? answer : null}
           onChange={onChange}
         />
       );
-    case 'case':
-      return (
-        <CaseRenderer
-          question={question}
-          answer={answer?.kind === 'case' ? answer : null}
-          onChange={onChange}
-        />
-      );
+    }
     default:
       return assertNever(question);
   }
