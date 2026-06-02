@@ -2,20 +2,20 @@ import { describe, it, expect } from 'vitest';
 import { createAttempt } from './attempt';
 import type { ExamSession } from '../exam/session';
 import type { SampledExam } from '../exam/sampling';
-import type { DirectQuestion } from '../question/question';
+import type { ReactivoDirecto } from '../question/question';
 import type { Answer } from '../question/answer';
 import type { AttemptReport } from '../scoring/attempt-report';
 
 function makeSession(id: string, size: 20 | 60 | 125 = 20): ExamSession {
-  const q: DirectQuestion = {
+  const q: ReactivoDirecto = {
     id: 'q1',
-    itemType: 'direct',
-    officialTag: { area: 'A', subarea: 'A1' },
-    originTag: { area: 'o', subarea: 'o' },
+    tipo: 'directo',
+    area: 'A',
+    subarea: 'A1',
     explanation: 'e',
-    stem: 's',
-    options: ['A', 'B', 'C', 'D'],
-    correctIndex: 0,
+    enunciado: 's',
+    opciones: ['A', 'B', 'C', 'D'],
+    correcta: 0,
   };
   const exam: SampledExam = { questions: [q], bankWarnings: [] };
   return {

@@ -1,5 +1,7 @@
 # Modelo de dominio
 
+> **Versión**: modelo v2 (post-refactor). Los casos ya no son tipos anidados; cada reactivo es una unidad independiente.
+
 Todo en `src/domain/`. Sin imports de React, IndexedDB ni ninguna librería externa.
 
 ## Taxonomía oficial
@@ -17,57 +19,65 @@ Fuente: `src/domain/taxonomy/taxonomy.ts`. 6 áreas (A–F), 20 subáreas, 125 r
 
 La constante `OFFICIAL_DISTRIBUTION` es la única fuente de verdad. Las variantes de 60 y 20 reactivos se DERIVAN en runtime; no se hardcodean.
 
-## Question — unión discriminada por `itemType`
+`AREA_NOMBRES` y `getAreaNombre(code)` mapean código → nombre completo. La UI siempre muestra el nombre completo, nunca el código.
+
+## Reactivo — unión discriminada por `tipo` (modelo v2)
 
 Archivo: `src/domain/question/question.ts`.
 
 ```ts
-type Question = LeafQuestion | CaseQuestion;
-
-type LeafQuestion =
-  | DirectQuestion     // T1: cuestionamiento directo
-  | CompletionQuestion // T2: completamiento
-  | OrderingQuestion   // T3: ordenamiento
-  | ColumnMatchQuestion; // T4: relación de columnas
-
-interface CaseQuestion extends BaseQuestion {
-  itemType: 'case'; // T5: multirreactivo
-  caseStem: string;
-  subQuestions: ReadonlyArray<SubQuestion>; // nunca anida otro T5
-}
+type Reactivo =
+  | ReactivoDirecto      // T1: cuestionamiento directo
+  | ReactivoCompletamiento  // T2: completamiento
+  | ReactivoOrdenamiento    // T3: ordenamiento
+  | ReactivoRelacion;       // T4: relación de columnas (con dropdown)
 ```
 
-Todos los tipos comparten `BaseQuestion`:
+Todos los tipos comparten `BaseReactivo`:
 
 ```ts
-interface BaseQuestion {
+interface BaseReactivo {
   id: string;
-  officialTag: { area: AreaCode; subarea: SubareaCode }; // autoridad del blueprint
-  originTag:   { area: string;   subarea: string };       // metadato del PDF (8 áreas)
+  area: AreaCode;        // código oficial para el blueprint (A–F)
+  subarea: SubareaCode;  // código oficial (A1, B3, etc.)
   explanation: string;
+  caso?: string;         // contexto compartido cuando el reactivo proviene de un multirreactivo
 }
 ```
+
+### Casos aplanados (`caso?`)
+
+Los multirreactivos (antes `CaseQuestion` con `subQuestions[]`) ya no existen como tipo separado. Cada sub-pregunta se representa como un reactivo independiente con el campo opcional `caso` que lleva el contexto compartido. Esto elimina la deuda técnica del cast `as LeafQuestion` y el `scoreCaseQuestion`.
 
 ### Por qué unión discriminada (y no clases)
 
-- Serializable desde JSON sin constructores.
-- `switch(q.itemType)` + `assertNever` garantizan exhaustividad en tiempo de compilación.
+- Serializable desde YAML/JSON sin constructores.
+- `switch(q.tipo)` + `assertNever` garantizan exhaustividad en tiempo de compilación.
 - Scoring y rendering viven FUERA del tipo — son políticas inyectables.
+
+### Campos por `tipo`
+
+| `tipo` | Campos adicionales |
+|--------|--------------------|
+| `directo` | `enunciado`, `opciones[4]`, `correcta: 0\|1\|2\|3` |
+| `completamiento` | `enunciado`, `opciones[4]`, `correcta: 0\|1\|2\|3` |
+| `ordenamiento` | `enunciado`, `elementos[]`, `ordenCorrecto[]` |
+| `relacion` | `enunciado`, `columnaIzquierda[]`, `columnaDerecha[]`, `emparejamientos[]` |
+
+Todos pueden tener `caso?: string` de manera optativa.
 
 ### Respuestas (`src/domain/question/answer.ts`)
 
 | Tipo de reactivo | `Answer` |
 |-----------------|----------|
-| T1/T2 (direct/completion) | `{ kind: 'choice'; index: number }` |
-| T3 (ordering) | `{ kind: 'order'; sequence: number[] }` |
-| T4 (match) | `{ kind: 'match'; pairs: [number, number][] }` |
-| T5 (case) | `{ kind: 'case'; answers: (LeafAnswer \| null)[] }` |
+| `directo` / `completamiento` | `{ kind: 'choice'; index: number }` |
+| `ordenamiento` | `{ kind: 'order'; sequence: number[] }` |
+| `relacion` | `{ kind: 'match'; pairs: [number, number][] }` |
 | Sin responder | `null` |
 
-### Conteo de reactivos por `Question`
+### Conteo de reactivos
 
-Un `CaseQuestion` con N sub-preguntas aporta N reactivos al conteo del examen (no 1).
-`getItemCount(q: Question): number` en `question.ts` encapsula esta regla.
+`getItemCount(q: Reactivo)` siempre retorna `1`. Con el modelo v2, cada reactivo es una unidad independiente independientemente de si tiene campo `caso`.
 
 ## ExamBlueprint — muestreo Hamilton
 
@@ -86,10 +96,11 @@ Archivo: `src/domain/exam/blueprint.ts`.
 Archivo: `src/domain/exam/sampling.ts`.
 
 ```ts
-sampleExam(bank: Question[], blueprint, rng: Rng): SampledExam
+sampleExam(bank: Reactivo[], blueprint, rng: Rng): SampledExam
 ```
 
 - Fisher-Yates sin reemplazo por subárea.
+- Filtra por `subarea` directamente (no `officialTag` — modelo v2).
 - `rng` inyectado (default `Math.random`) — permite tests deterministas.
 - Banco insuficiente en una subárea: usa todos los disponibles + agrega `BankWarning`.
 - Banco completamente vacío: lanza `Error('EMPTY_BANK')`.
@@ -113,10 +124,9 @@ El timer es **configurable y opcional**. Default sugerido: `round((size/125) × 
 
 Archivo: `src/domain/scoring/scoring-policy.ts`.
 
-- Cada reactivo vale 1 punto; sin respuesta = 0 (REQ-06.4).
-- `CaseQuestion` con N sub-preguntas aporta hasta N puntos.
-- Funciones puras por tipo: `scoreChoice`, `scoreOrder`, `scoreMatch`.
-- API pública: `scoreQuestion(q, answer)` y `scoreCaseQuestion(q, answers)`.
+- Cada reactivo vale 1 punto (modelo v2 — casos aplanados). Sin respuesta = 0 (REQ-06.4).
+- API pública: `scoreQuestion(q: Reactivo, answer)` — exhaustivo sobre los 4 tipos.
+- `scoreCaseQuestion` eliminado — ya no existe tipo 'caso'.
 
 ## AttemptReport
 

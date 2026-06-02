@@ -59,7 +59,7 @@ export function createAttempt(session: ExamSession, report: AttemptReport): Atte
       (() => {
         const dist = new Map<string, number>();
         for (const q of session.exam.questions) {
-          const sub = q.officialTag.subarea;
+          const sub = q.subarea;
           dist.set(sub, (dist.get(sub) ?? 0) + 1);
         }
         return dist;

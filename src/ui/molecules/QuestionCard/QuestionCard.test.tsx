@@ -2,84 +2,76 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, it, expect, vi } from 'vitest';
 import type {
-  DirectQuestion,
-  OrderingQuestion,
-  ColumnMatchQuestion,
-  CaseQuestion,
+  ReactivoDirecto,
+  ReactivoOrdenamiento,
+  ReactivoRelacion,
 } from '../../../domain/question/question';
 import type { Answer } from '../../../domain/question/answer';
 import { QuestionCard } from './QuestionCard';
 
 // ---------------------------------------------------------------------------
-// Fixtures
+// Fixtures — modelo v2
 // ---------------------------------------------------------------------------
 
-const directQ: DirectQuestion = {
+const base = {
   id: 'q1',
-  itemType: 'direct',
-  stem: '¿Cuál es la función de planeación?',
-  options: ['Opción A', 'Opción B', 'Opción C', 'Opción D'],
-  correctIndex: 1,
+  area: 'A' as const,
+  subarea: 'A1' as const,
   explanation: 'exp',
-  officialTag: { area: 'A', subarea: 'A1' },
-  originTag: { area: 'Admin', subarea: 'Proceso' },
 };
 
-const orderingQ: OrderingQuestion = {
+const directoQ: ReactivoDirecto = {
+  ...base,
+  tipo: 'directo',
+  enunciado: '¿Cuál es la función de planeación?',
+  opciones: ['Opción A', 'Opción B', 'Opción C', 'Opción D'],
+  correcta: 1,
+};
+
+const ordenamientoQ: ReactivoOrdenamiento = {
+  ...base,
   id: 'q3',
-  itemType: 'ordering',
-  stem: 'Ordena los pasos:',
-  items: ['Paso 1', 'Paso 2', 'Paso 3'],
-  correctOrder: [0, 1, 2],
-  explanation: 'exp',
-  officialTag: { area: 'A', subarea: 'A4' },
-  originTag: { area: 'Admin', subarea: 'Entorno' },
+  area: 'A',
+  subarea: 'A4',
+  tipo: 'ordenamiento',
+  enunciado: 'Ordena los pasos:',
+  elementos: ['Paso 1', 'Paso 2', 'Paso 3'],
+  ordenCorrecto: [0, 1, 2],
 };
 
-const matchQ: ColumnMatchQuestion = {
+const relacionQ: ReactivoRelacion = {
+  ...base,
   id: 'q4',
-  itemType: 'match',
-  stem: 'Relaciona cada concepto:',
-  leftColumn: ['Concepto A', 'Concepto B'],
-  rightColumn: ['Def 1', 'Def 2', 'Def 3'],
-  correctMatches: [[0, 0], [1, 1]],
-  explanation: 'exp',
-  officialTag: { area: 'D', subarea: 'D1' },
-  originTag: { area: 'Mercadotecnia', subarea: 'Mercado' },
+  area: 'D',
+  subarea: 'D1',
+  tipo: 'relacion',
+  enunciado: 'Relaciona cada concepto:',
+  columnaIzquierda: ['Concepto A', 'Concepto B'],
+  columnaDerecha: ['Def 1', 'Def 2', 'Def 3'],
+  emparejamientos: [[0, 0], [1, 1]],
 };
 
-const caseQ: CaseQuestion = {
+const casoQ: ReactivoDirecto = {
+  ...base,
   id: 'q5',
-  itemType: 'case',
-  caseStem: 'Texto del caso de estudio.',
-  subQuestions: [
-    {
-      itemType: 'direct',
-      stem: 'Sub-pregunta 1',
-      options: ['SA', 'SB', 'SC', 'SD'],
-      correctIndex: 0,
-    },
-    {
-      itemType: 'direct',
-      stem: 'Sub-pregunta 2',
-      options: ['SA', 'SB', 'SC', 'SD'],
-      correctIndex: 1,
-    },
-  ],
-  explanation: 'exp',
-  officialTag: { area: 'E', subarea: 'E1' },
-  originTag: { area: 'Mat', subarea: 'Fin' },
+  area: 'E',
+  subarea: 'E1',
+  tipo: 'directo',
+  caso: 'Texto del caso de estudio compartido.',
+  enunciado: 'Pregunta derivada del caso',
+  opciones: ['SA', 'SB', 'SC', 'SD'],
+  correcta: 0,
 };
 
 // ---------------------------------------------------------------------------
 // Tests
 // ---------------------------------------------------------------------------
 
-describe('QuestionCard — T1 (direct)', () => {
-  it('renderiza el stem y las 4 opciones', () => {
+describe('QuestionCard — T1 (directo)', () => {
+  it('renderiza el enunciado y las 4 opciones', () => {
     render(
       <QuestionCard
-        question={directQ}
+        question={directoQ}
         answer={null}
         onChange={vi.fn()}
         index={1}
@@ -91,11 +83,25 @@ describe('QuestionCard — T1 (direct)', () => {
     expect(screen.getByText(/Opción D/)).toBeInTheDocument();
   });
 
+  it('muestra el nombre del área, no el código', () => {
+    render(
+      <QuestionCard
+        question={directoQ}
+        answer={null}
+        onChange={vi.fn()}
+        index={1}
+        total={20}
+      />,
+    );
+    expect(screen.getByText('Administración')).toBeInTheDocument();
+    expect(screen.queryByText('A1')).not.toBeInTheDocument();
+  });
+
   it('llama onChange con ChoiceAnswer al seleccionar una opción', async () => {
     const handler = vi.fn();
     render(
       <QuestionCard
-        question={directQ}
+        question={directoQ}
         answer={null}
         onChange={handler}
         index={1}
@@ -110,11 +116,11 @@ describe('QuestionCard — T1 (direct)', () => {
   });
 });
 
-describe('QuestionCard — T3 (ordering)', () => {
-  it('renderiza los ítems para ordenar', () => {
+describe('QuestionCard — T3 (ordenamiento)', () => {
+  it('renderiza los elementos para ordenar', () => {
     render(
       <QuestionCard
-        question={orderingQ}
+        question={ordenamientoQ}
         answer={null}
         onChange={vi.fn()}
         index={2}
@@ -127,60 +133,86 @@ describe('QuestionCard — T3 (ordering)', () => {
   });
 });
 
-describe('QuestionCard — T4 (match)', () => {
-  it('renderiza las columnas de relación', () => {
+describe('QuestionCard — T4 (relacion)', () => {
+  it('renderiza los conceptos izquierdos y los dropdowns', () => {
     render(
       <QuestionCard
-        question={matchQ}
+        question={relacionQ}
         answer={null}
         onChange={vi.fn()}
         index={3}
         total={20}
       />,
     );
-    // Los conceptos de la columna izquierda se muestran como "1. Concepto A"
     expect(screen.getByText(/Concepto A/)).toBeInTheDocument();
     expect(screen.getByText(/Concepto B/)).toBeInTheDocument();
-    // Las definiciones se muestran como botones en ambas filas
-    expect(screen.getAllByText(/Def 1/).length).toBeGreaterThan(0);
+    // Debe haber un <select> por cada concepto izquierdo
+    const selects = screen.getAllByRole('combobox');
+    expect(selects.length).toBe(2);
+  });
+
+  it('las opciones del dropdown incluyen a., b., c.', () => {
+    render(
+      <QuestionCard
+        question={relacionQ}
+        answer={null}
+        onChange={vi.fn()}
+        index={3}
+        total={20}
+      />,
+    );
+    // El primer select debe tener las 3 opciones (Def 1, Def 2, Def 3)
+    const options = screen.getAllByRole('option');
+    // 2 selects × (1 opción vacía + 3 opciones) = 8 opciones totales
+    expect(options.length).toBe(8);
+  });
+
+  it('llama onChange con MatchAnswer al seleccionar opción en dropdown', async () => {
+    const handler = vi.fn();
+    render(
+      <QuestionCard
+        question={relacionQ}
+        answer={null}
+        onChange={handler}
+        index={3}
+        total={20}
+      />,
+    );
+    const selects = screen.getAllByRole('combobox');
+    await userEvent.selectOptions(selects[0]!, '0');
+    expect(handler).toHaveBeenCalledWith<[Answer]>({
+      kind: 'match',
+      pairs: [[0, 0]],
+    });
   });
 });
 
-describe('QuestionCard — T5 (case)', () => {
-  it('renderiza el caseStem y las sub-preguntas', () => {
+describe('QuestionCard — reactivo con caso', () => {
+  it('muestra el bloque de contexto del caso arriba del enunciado', () => {
     render(
       <QuestionCard
-        question={caseQ}
+        question={casoQ}
         answer={null}
         onChange={vi.fn()}
         index={4}
         total={20}
       />,
     );
-    expect(screen.getByText('Texto del caso de estudio.')).toBeInTheDocument();
-    // Hay dos elementos con texto "Sub-pregunta 1": el label del contenedor
-    // y el stem de la sub-pregunta. Verificamos que al menos uno esté presente.
-    expect(screen.getAllByText('Sub-pregunta 1').length).toBeGreaterThanOrEqual(1);
-    expect(screen.getAllByText('Sub-pregunta 2').length).toBeGreaterThanOrEqual(1);
+    expect(screen.getByText('Contexto del caso')).toBeInTheDocument();
+    expect(screen.getByText('Texto del caso de estudio compartido.')).toBeInTheDocument();
+    expect(screen.getByText('Pregunta derivada del caso')).toBeInTheDocument();
   });
 
-  it('llama onChange con CaseAnswer al responder una sub-pregunta', async () => {
-    const handler = vi.fn();
+  it('no muestra el bloque de caso cuando el reactivo no tiene caso', () => {
     render(
       <QuestionCard
-        question={caseQ}
+        question={directoQ}
         answer={null}
-        onChange={handler}
-        index={4}
+        onChange={vi.fn()}
+        index={1}
         total={20}
       />,
     );
-    // Ambas sub-preguntas tienen "SA" como primera opción
-    const saButtons = screen.getAllByText(/^SA$/);
-    await userEvent.click(saButtons[0]!);
-    expect(handler).toHaveBeenCalledWith<[Answer]>({
-      kind: 'case',
-      answers: [{ kind: 'choice', index: 0 }, null],
-    });
+    expect(screen.queryByText('Contexto del caso')).not.toBeInTheDocument();
   });
 });

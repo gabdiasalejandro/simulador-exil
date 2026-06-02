@@ -78,3 +78,21 @@ export function isValidArea(code: string): code is AreaCode {
 export function isValidSubarea(code: string): code is SubareaCode {
   return SUBAREA_SET.has(code);
 }
+
+/** Nombres completos de cada área para mostrar en la UI (nunca usar códigos en pantalla). */
+export const AREA_NOMBRES: Readonly<Record<AreaCode, string>> = {
+  A: 'Administración',
+  B: 'Contabilidad y finanzas',
+  C: 'Economía',
+  D: 'Mercadotecnia',
+  E: 'Matemáticas y estadística',
+  F: 'Derecho',
+} as const;
+
+/**
+ * Retorna el nombre completo de un área a partir de su código.
+ * Si el código no es válido, retorna el propio código como fallback.
+ */
+export function getAreaNombre(code: string): string {
+  return (AREA_NOMBRES as Record<string, string>)[code] ?? code;
+}

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import type { Attempt } from '../domain/attempt/attempt';
-import { JsonContentAdapter } from '../infrastructure/content/json-content-adapter';
+import { YamlContentAdapter } from '../infrastructure/content/yaml-content-adapter';
 import { IndexedDbStorageAdapter } from '../infrastructure/storage/indexeddb-storage-adapter';
 import { LandingShell } from './features/landing/LandingShell';
 import { SimulacroContainer } from './features/simulacro/SimulacroContainer';
@@ -12,7 +12,7 @@ import { ReportView } from './features/simulacro/ReportView';
 // permanezcan puros sin conocer infraestructura.
 // ---------------------------------------------------------------------------
 
-const contentPort = new JsonContentAdapter();
+const contentPort = new YamlContentAdapter();
 const storagePort = new IndexedDbStorageAdapter();
 
 // ---------------------------------------------------------------------------

@@ -1,5 +1,5 @@
 import { isValidArea, isValidSubarea } from '../taxonomy/taxonomy';
-import type { Question } from './question';
+import type { Reactivo } from './question';
 
 // ---------------------------------------------------------------------------
 // Tipos de error y resultado
@@ -25,18 +25,18 @@ const err = <E>(error: E): Result<never, E> => ({ ok: false, error });
 // Validaciones auxiliares
 // ---------------------------------------------------------------------------
 
-function validateOfficialTag(raw: unknown): ValidationError | null {
-  if (!raw || typeof raw !== 'object') {
-    return { code: 'MISSING_OFFICIAL_TAG', message: 'officialTag es requerido' };
+function validateAreaSubarea(raw: Record<string, unknown>): ValidationError | null {
+  // Soporta tanto el modelo v2 (area/subarea en raíz) como el v1 (officialTag)
+  const area = raw['area'] ?? (raw['officialTag'] as Record<string, unknown> | undefined)?.['area'];
+  const subarea = raw['subarea'] ?? (raw['officialTag'] as Record<string, unknown> | undefined)?.['subarea'];
+
+  if (typeof area !== 'string' || !isValidArea(area)) {
+    return { code: 'MISSING_OFFICIAL_TAG', message: `Área oficial no reconocida: ${String(area)}` };
   }
-  const tag = raw as Record<string, unknown>;
-  if (typeof tag['area'] !== 'string' || !isValidArea(tag['area'])) {
-    return { code: 'MISSING_OFFICIAL_TAG', message: `Área oficial no reconocida: ${String(tag['area'])}` };
-  }
-  if (typeof tag['subarea'] !== 'string' || !isValidSubarea(tag['subarea'])) {
+  if (typeof subarea !== 'string' || !isValidSubarea(subarea)) {
     return {
       code: 'MISSING_OFFICIAL_TAG',
-      message: `Subárea oficial no reconocida: ${String(tag['subarea'])}`,
+      message: `Subárea oficial no reconocida: ${String(subarea)}`,
     };
   }
   return null;
@@ -46,7 +46,7 @@ function validateOptions(options: unknown): ValidationError | null {
   if (!Array.isArray(options) || options.length !== 4) {
     return {
       code: 'INVALID_OPTIONS_COUNT',
-      message: `options debe tener exactamente 4 elementos, tiene ${Array.isArray(options) ? options.length : 'N/A'}`,
+      message: `opciones debe tener exactamente 4 elementos, tiene ${Array.isArray(options) ? options.length : 'N/A'}`,
     };
   }
   for (const opt of options) {
@@ -60,63 +60,92 @@ function validateOptions(options: unknown): ValidationError | null {
   return null;
 }
 
-function validateSubQuestion(sub: unknown): ValidationError | null {
-  if (!sub || typeof sub !== 'object') {
-    return { code: 'MISSING_REQUIRED_FIELD', message: 'Sub-pregunta inválida' };
+// ---------------------------------------------------------------------------
+// Normalizador: transforma el objeto crudo al modelo v2
+// ---------------------------------------------------------------------------
+
+function normalizeRaw(raw: Record<string, unknown>): Record<string, unknown> {
+  // Si viene en formato v1 (itemType + officialTag), transformar a v2
+  const officialTag = raw['officialTag'] as Record<string, unknown> | undefined;
+  if (officialTag && !raw['tipo']) {
+    const tipoMap: Record<string, string> = {
+      direct: 'directo',
+      completion: 'completamiento',
+      ordering: 'ordenamiento',
+      match: 'relacion',
+    };
+    const tipo = tipoMap[raw['itemType'] as string] ?? raw['itemType'];
+    const normalized: Record<string, unknown> = {
+      ...raw,
+      tipo,
+      area: officialTag['area'],
+      subarea: officialTag['subarea'],
+    };
+    // Mapear campos v1 → v2
+    if (raw['stem'] !== undefined && normalized['enunciado'] === undefined) {
+      normalized['enunciado'] = raw['stem'];
+    }
+    if (raw['options'] !== undefined && normalized['opciones'] === undefined) {
+      normalized['opciones'] = raw['options'];
+    }
+    if (raw['correctIndex'] !== undefined && normalized['correcta'] === undefined) {
+      normalized['correcta'] = raw['correctIndex'];
+    }
+    if (raw['items'] !== undefined && normalized['elementos'] === undefined) {
+      normalized['elementos'] = raw['items'];
+    }
+    if (raw['correctOrder'] !== undefined && normalized['ordenCorrecto'] === undefined) {
+      normalized['ordenCorrecto'] = raw['correctOrder'];
+    }
+    if (raw['leftColumn'] !== undefined && normalized['columnaIzquierda'] === undefined) {
+      normalized['columnaIzquierda'] = raw['leftColumn'];
+    }
+    if (raw['rightColumn'] !== undefined && normalized['columnaDerecha'] === undefined) {
+      normalized['columnaDerecha'] = raw['rightColumn'];
+    }
+    if (raw['correctMatches'] !== undefined && normalized['emparejamientos'] === undefined) {
+      normalized['emparejamientos'] = raw['correctMatches'];
+    }
+    // Mapear explicacion → explanation dentro del bloque v1 también
+    if (normalized['explicacion'] !== undefined && normalized['explanation'] === undefined) {
+      normalized['explanation'] = normalized['explicacion'];
+    }
+    return normalized;
   }
-  const s = sub as Record<string, unknown>;
-  const leafTypes = ['direct', 'completion', 'ordering', 'match'];
-  if (!leafTypes.includes(s['itemType'] as string)) {
-    return { code: 'INVALID_ITEM_TYPE', message: `itemType de sub-pregunta inválido: ${String(s['itemType'])}` };
+
+  // Mapear explicacion → explanation (YAML v2 usa la clave en español)
+  if (raw['explicacion'] !== undefined && raw['explanation'] === undefined) {
+    return { ...raw, explanation: raw['explicacion'] };
   }
-  if (s['itemType'] === 'direct' || s['itemType'] === 'completion') {
-    const optErr = validateOptions(s['options']);
-    if (optErr) return optErr;
-  }
-  return null;
+  return raw;
 }
 
 // ---------------------------------------------------------------------------
-// Validador principal
+// Validador principal — acepta modelo v2 (YAML) y v1 legacy (JSON)
 // ---------------------------------------------------------------------------
 
-export function validateQuestion(raw: unknown): Result<Question, ValidationError> {
+export function validateQuestion(raw: unknown): Result<Reactivo, ValidationError> {
   if (!raw || typeof raw !== 'object') {
-    return err({ code: 'MISSING_REQUIRED_FIELD', message: 'El objeto Question es null o no es un objeto' });
+    return err({ code: 'MISSING_REQUIRED_FIELD', message: 'El objeto Reactivo es null o no es un objeto' });
   }
 
-  const q = raw as Record<string, unknown>;
+  const normalized = normalizeRaw(raw as Record<string, unknown>);
 
-  // Validar officialTag
-  const tagErr = validateOfficialTag(q['officialTag']);
+  // Validar area/subarea
+  const tagErr = validateAreaSubarea(normalized);
   if (tagErr) return err(tagErr);
 
-  const itemType = q['itemType'];
-  const validTypes = ['direct', 'completion', 'ordering', 'match', 'case'];
-  if (!validTypes.includes(itemType as string)) {
-    return err({ code: 'INVALID_ITEM_TYPE', message: `itemType desconocido: ${String(itemType)}` });
+  const tipo = normalized['tipo'];
+  const validTipos = ['directo', 'completamiento', 'ordenamiento', 'relacion'];
+  if (!validTipos.includes(tipo as string)) {
+    return err({ code: 'INVALID_ITEM_TYPE', message: `tipo desconocido: ${String(tipo)}` });
   }
 
-  // T1 y T2: validar options
-  if (itemType === 'direct' || itemType === 'completion') {
-    const optErr = validateOptions(q['options']);
+  // T1 y T2: validar opciones
+  if (tipo === 'directo' || tipo === 'completamiento') {
+    const optErr = validateOptions(normalized['opciones']);
     if (optErr) return err(optErr);
   }
 
-  // T5: validar sub-preguntas
-  if (itemType === 'case') {
-    const subs = q['subQuestions'];
-    if (!Array.isArray(subs) || subs.length === 0) {
-      return err({
-        code: 'MISSING_REQUIRED_FIELD',
-        message: 'CaseQuestion requiere al menos una sub-pregunta',
-      });
-    }
-    for (const sub of subs) {
-      const subErr = validateSubQuestion(sub);
-      if (subErr) return err(subErr);
-    }
-  }
-
-  return ok(raw as Question);
+  return ok(normalized as unknown as Reactivo);
 }

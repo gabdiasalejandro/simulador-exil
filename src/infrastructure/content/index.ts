@@ -1,2 +1,2 @@
-export { JsonContentAdapter } from './json-content-adapter';
-export type { JsonContentAdapterOptions } from './json-content-adapter';
+export { YamlContentAdapter } from './yaml-content-adapter';
+export type { YamlContentAdapterOptions } from './yaml-content-adapter';

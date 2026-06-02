@@ -1,19 +1,17 @@
 export type {
   OfficialTag,
-  OriginTag,
-  BaseQuestion,
+  BaseReactivo,
+  ReactivoDirecto,
+  ReactivoCompletamiento,
+  ReactivoOrdenamiento,
+  ReactivoRelacion,
+  Reactivo,
+  Question,
+  // Aliases de compatibilidad
   DirectQuestion,
   CompletionQuestion,
   OrderingQuestion,
   ColumnMatchQuestion,
-  LeafQuestion,
-  DirectSubQuestion,
-  CompletionSubQuestion,
-  OrderingSubQuestion,
-  ColumnMatchSubQuestion,
-  SubQuestion,
-  CaseQuestion,
-  Question,
 } from './question';
 export { assertNever, getItemCount } from './question';
 
@@ -21,8 +19,6 @@ export type {
   ChoiceAnswer,
   OrderAnswer,
   MatchAnswer,
-  CaseAnswer,
-  LeafAnswer,
   Answer,
 } from './answer';
 export { isAnswered } from './answer';

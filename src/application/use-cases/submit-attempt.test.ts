@@ -3,30 +3,30 @@ import { submitAttempt } from './submit-attempt';
 import type { StoragePort } from '../ports/storage-port';
 import type { ExamSession } from '../../domain/exam/session';
 import type { SampledExam } from '../../domain/exam/sampling';
-import type { DirectQuestion } from '../../domain/question/question';
+import type { ReactivoDirecto } from '../../domain/question/question';
 import type { Answer } from '../../domain/question/answer';
 import type { Attempt } from '../../domain/attempt/attempt';
 
 // ---------------------------------------------------------------------------
-// Fakes helpers
+// Fakes helpers — modelo v2
 // ---------------------------------------------------------------------------
 
-function makeDirectQuestion(id: string): DirectQuestion {
+function makeReactivoDirecto(id: string): ReactivoDirecto {
   return {
     id,
-    itemType: 'direct',
-    stem: `Pregunta ${id}`,
-    options: ['A', 'B', 'C', 'D'],
-    correctIndex: 0,
+    tipo: 'directo',
+    enunciado: `Pregunta ${id}`,
+    opciones: ['A', 'B', 'C', 'D'],
+    correcta: 0,
     explanation: 'Explicación.',
-    officialTag: { area: 'A', subarea: 'A1' },
-    originTag: { area: 'Administración', subarea: 'Conceptos' },
+    area: 'A',
+    subarea: 'A1',
   };
 }
 
 function makeSampledExam(questionIds: string[]): SampledExam {
   return {
-    questions: questionIds.map(makeDirectQuestion),
+    questions: questionIds.map(makeReactivoDirecto),
     bankWarnings: [],
   };
 }
@@ -106,7 +106,7 @@ describe('submitAttempt', () => {
 
   it('propaga bankWarnings al report cuando el examen los tiene', async () => {
     const exam: SampledExam = {
-      questions: [makeDirectQuestion('q1')],
+      questions: [makeReactivoDirecto('q1')],
       bankWarnings: [{ subarea: 'B1', requested: 6, available: 1 }],
     };
     const session: ExamSession = {
