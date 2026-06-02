@@ -1,7 +1,6 @@
 import type { ExamSize } from './blueprint';
 import type { SampledExam } from './sampling';
 import type { Answer } from '../question/answer';
-import type { SubareaCode } from '../taxonomy/taxonomy';
 
 // ---------------------------------------------------------------------------
 // Timer config

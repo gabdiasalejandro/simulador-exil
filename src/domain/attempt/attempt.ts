@@ -1,4 +1,4 @@
-import type { ExamSession, SessionConfig } from '../exam/session';
+import type { ExamSession } from '../exam/session';
 import type { Answer } from '../question/answer';
 import type { AttemptReport } from '../scoring/attempt-report';
 

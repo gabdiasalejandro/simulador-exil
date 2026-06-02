@@ -1,5 +1,5 @@
 import type { SampledExam } from '../exam/sampling';
-import type { Question, LeafQuestion, CaseQuestion } from '../question/question';
+import type { LeafQuestion, CaseQuestion } from '../question/question';
 import type { Answer, CaseAnswer, LeafAnswer } from '../question/answer';
 import type { AreaCode, SubareaCode } from '../taxonomy/taxonomy';
 import type { BankWarning } from '../exam/sampling';
