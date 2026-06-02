@@ -1,7 +1,7 @@
 /**
  * Smoke test de integración del flujo completo de simulacro.
  *
- * - Usa JsonContentAdapter real sobre seed-bank.json (20 reactivos reales).
+ * - Usa YamlContentAdapter real sobre banco.yaml (20 reactivos reales).
  * - Usa IndexedDbStorageAdapter con fake-indexeddb para aislamiento.
  * - No usa mocks del dominio ni de los casos de uso.
  *
