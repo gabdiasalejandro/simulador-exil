@@ -1,87 +1,115 @@
 # Contrato de contenido
 
+> **Versión**: banco YAML (post-refactor v2). El banco está en formato YAML con comentarios, adapter `YamlContentAdapter`.
+
 ## Decisión central
 
-El banco de preguntas es un archivo `.json` versionado y embebido en el bundle. El PDF de ejercicios NUNCA se parsea en runtime — solo en build time (paso de extracción manual hoy, automatizado en un corte futuro).
+El banco de reactivos es un archivo `.yaml` comentado y embebido en el bundle via Vite `?raw`. El PDF de ejercicios NUNCA se parsea en runtime — solo en build time (extracción manual hoy, automatizada en un corte futuro).
 
 ## Flujo de contenido
 
 ```
-assets/guia-ceneval.pdf  (fuente oficial — no toca código)
-assets/ejercicios.pdf    (banco origen — 8 áreas)
+assets/guia-ceneval.pdf   (fuente oficial — no toca código)
+assets/ejercicios.pdf     (banco origen)
          │
-         │  extracción manual (hoy) / pipeline futuro
+         │  extracción manual → banco.yaml
          ▼
-src/infrastructure/content/seed-bank.json   ← versionado en git
+src/infrastructure/content/banco.yaml   ← versionado en git, commentado en español
          │
-         │  JsonContentAdapter.loadBank()
+         │  YamlContentAdapter.loadBank()
          ▼
-Question[]  (validados, officialTag mapeado)
+Reactivo[]  (validados, modelo v2)
          │
          │  ContentPort (puerto)
          ▼
 casos de uso en application/
 ```
 
-## Esquema del banco JSON
+## Esquema del banco YAML (schemaVersion: 2)
 
-Archivo: `src/infrastructure/content/seed-bank.json`.
+Archivo: `src/infrastructure/content/banco.yaml`.
 
-```json
-{
-  "schemaVersion": 1,
-  "questions": [
-    {
-      "id": "seed-d-a1-001",
-      "itemType": "direct",
-      "stem": "¿Cuál enunciado describe mejor la función de planeación?",
-      "options": ["...", "...", "...", "..."],
-      "correctIndex": 1,
-      "explanation": "La planeación consiste en fijar objetivos...",
-      "officialTag": { "area": "A", "subarea": "A3" },
-      "originTag": { "area": "Administración y gestión", "subarea": "Proceso administrativo" }
-    }
-  ]
-}
+```yaml
+# Banco de reactivos — Simulador EXIL-NEGOCIOS (CENEVAL)
+# tipo: directo | completamiento | ordenamiento | relacion
+# area: A Administración · B Contabilidad y finanzas · ... · F Derecho
+schemaVersion: 2
+
+reactivos:
+  # Reactivo simple
+  - id: A3-001
+    tipo: directo
+    area: A                  # Administración
+    subarea: A3              # Proceso administrativo
+    enunciado: "¿Cuál...?"
+    opciones: ["...", "...", "...", "..."]
+    correcta: 1
+    explicacion: "..."
+
+  # Reactivo de relación (dropdown por fila en la UI)
+  - id: D1-001
+    tipo: relacion
+    area: D
+    subarea: D1
+    enunciado: "Relaciona..."
+    columnaIzquierda: ["Concepto A", "Concepto B"]
+    columnaDerecha: ["Def a", "Def b", "Def c"]
+    emparejamientos: [[0, 1], [1, 2]]
+    explicacion: "..."
+
+  # Reactivo de caso aplanado (multirreactivo desglosado)
+  - id: E1-CASO1-q1
+    tipo: directo
+    area: E
+    subarea: E1
+    caso: "Contexto del caso compartido, repetido en cada reactivo del mismo caso."
+    enunciado: "Pregunta específica del caso"
+    opciones: ["...", "...", "...", "..."]
+    correcta: 0
+    explicacion: "..."
 ```
 
-Campo `schemaVersion` permite detectar migraciones de formato.
+### Campos por `tipo`
 
-### Campos por `itemType`
+| `tipo` | Campos adicionales |
+|--------|--------------------|
+| `directo` | `enunciado`, `opciones[4]`, `correcta: 0-3` |
+| `completamiento` | `enunciado`, `opciones[4]`, `correcta: 0-3` |
+| `ordenamiento` | `enunciado`, `elementos[]`, `ordenCorrecto[]` |
+| `relacion` | `enunciado`, `columnaIzquierda[]`, `columnaDerecha[]`, `emparejamientos[]` |
 
-| `itemType` | Campos adicionales |
-|------------|--------------------|
-| `direct` | `stem`, `options[4]`, `correctIndex` |
-| `completion` | `stem`, `options[4]`, `correctIndex` |
-| `ordering` | `stem`, `items[]`, `correctOrder[]` |
-| `match` | `stem`, `leftColumn[]`, `rightColumn[]`, `correctMatches[]` |
-| `case` | `caseStem`, `subQuestions[]` (cada uno es una LeafQuestion sin campos base) |
+Campo opcional en todos: `caso` (contexto compartido de multirreactivo).
 
-## Mapeo de taxonomía
+### Clave de explicación: `explicacion` en YAML, `explanation` en TypeScript
 
-Cada reactivo tiene dos etiquetas:
+El YAML usa la clave en español (`explicacion`) para legibilidad del banco. `validateQuestion` normaliza automáticamente `explicacion → explanation` al cargar.
 
-| Campo | Significado | Autoridad |
-|-------|-------------|-----------|
-| `officialTag` | Área y subárea según guía CENEVAL (6 áreas / 20 subáreas) | Blueprint del examen |
-| `originTag` | Área y subárea según el PDF de ejercicios (8 áreas) | Metadato de trazabilidad |
+### Sin tipo 'caso' en el banco
 
-El mapeo 8 áreas → 6 áreas ocurre en el adaptador de extracción/contenido, **nunca en el dominio**. En el `seed-bank.json` actual ambas etiquetas ya están alineadas manualmente.
+Los multirreactivos del examen se desglosam en reactivos independientes con `caso`. No existe un tipo `caso` anidado. Esto simplifica el modelo, elimina el cast frágil y hace cada reactivo calificable directamente.
 
-## Validación en JsonContentAdapter
+## Compatibilidad legacy
 
-Archivo: `src/infrastructure/content/json-content-adapter.ts`.
+`JsonContentAdapter` (mantenido por compatibilidad) sigue funcionando con `seed-bank.json` (formato v1). `validateQuestion` normaliza v1 (`itemType`/`officialTag`/`stem`/etc.) → v2 automáticamente. Los reactivos `itemType: 'case'` del v1 se descartan (no tienen equivalente en v2 — están ya aplanados en banco.yaml).
+
+## Validación en YamlContentAdapter
+
+Archivo: `src/infrastructure/content/yaml-content-adapter.ts`.
 
 `validateQuestion(raw)` (del dominio) verifica:
 
 | Error | Causa |
 |-------|-------|
-| `MISSING_OFFICIAL_TAG` | `officialTag` ausente, área o subárea no reconocida |
-| `INVALID_OPTIONS_COUNT` | T1/T2 sin exactamente 4 opciones non-vacías |
-| `INVALID_ITEM_TYPE` | `itemType` fuera del conjunto válido |
+| `MISSING_OFFICIAL_TAG` | `area` o `subarea` ausente o no reconocida |
+| `INVALID_OPTIONS_COUNT` | T1/T2 sin exactamente 4 opciones no vacías |
+| `INVALID_ITEM_TYPE` | `tipo` fuera del conjunto válido |
 | `MISSING_REQUIRED_FIELD` | Objeto nulo o falta campo requerido |
 
 Los reactivos que no pasan se **descartan silenciosamente** con `console.warn` — nunca lanzan excepción. El examen se construye solo con los válidos; si ninguno pasa, `sampleExam` lanza `EMPTY_BANK`.
+
+## PWA / Workbox
+
+`banco.yaml` está incluido en `globPatterns: ['**/*.yaml']` y en `runtimeCaching` para `CacheFirst` offline. Configurado en `vite.config.ts`.
 
 ## Almacenamiento de intentos (StoragePort / IndexedDB)
 
