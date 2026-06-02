@@ -36,7 +36,7 @@ function makeMinimalBank(): Question[] {
     ['E', 'E1'], ['E', 'E2'], ['E', 'E3'],
     ['F', 'F1'], ['F', 'F2'],
   ];
-  return subareas.flatMap(([area, sub], idx) =>
+  return subareas.flatMap(([area, sub]) =>
     Array.from({ length: 5 }, (_, i) => makeQuestion(`${sub}-${i}`, area, sub)),
   );
 }
