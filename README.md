@@ -95,3 +95,8 @@ Detalle vivo en [`docs/roadmap.md`](./docs/roadmap.md) y [`todo.md`](./todo.md).
 
 Vite · TypeScript (strict) · React · Tailwind CSS v4 · Vitest + Testing Library ·
 ESLint + Prettier · PWA (vite-plugin-pwa) · IndexedDB + localStorage.
+
+## Licencia
+
+[MIT](./LICENSE). Material de estudio de uso libre; los reactivos marcados
+`origen: generado` deben revisarse antes de tomarse como definitivos.
