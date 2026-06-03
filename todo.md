@@ -18,18 +18,18 @@ Documentación completa en [`docs/`](./docs/). Memoria del proyecto en Engram (d
 
 | Modo | Estado |
 |------|--------|
-| Simular | ✅ 128 reactivos, blueprint oficial (125/60/20), timer configurable, reporte criterial |
+| Simular | ✅ 185 reactivos, blueprint oficial (125/60/20), timer configurable, reporte criterial con análisis detallado, estado persistido en localStorage (refresh-safe) |
 | Practicar | ✅ playground por tema, feedback + explicación inmediata |
 | Por tema | ↪️ cubierto por el sidebar de Práctica |
 | Revisar | ⏳ pendiente |
 
-Banco: `src/infrastructure/content/banco.yaml` (128 reactivos, YAML comentado, modelo v2).
+Banco: `src/infrastructure/content/banco.yaml` (185 reactivos: 128 transcritos + 57 generados con `origen: generado`, modelo v2).
 
 ## Pendientes (prioridad)
 
 - [ ] **Modo Revisar** (alta) — UI de historial de intentos. El `StoragePort`/IndexedDB ya persiste los `Attempt`; falta la pantalla que los liste y muestre desempeño por área.
 - [ ] **Resaltado en feedback no-choice** (media) — en práctica, `ordenamiento` y `relacion` muestran correcto/incorrecto + explicación pero NO resaltan la opción correcta. Solo `directo`/`completamiento` lo hacen (`ChoiceRenderer`). Extender `OrderingRenderer`/`RelacionRenderer` con la prop `revealed`.
-- [ ] **Ampliar banco** (media) — distribución desigual (C=8, D=11…); un simulacro de 125 todavía muestra "banco insuficiente" en subáreas flacas. Sumar fuentes para cubrir el blueprint oficial completo.
+- [ ] **Revisar reactivos generados** (media) — el banco subió a 185 (+57 con `origen: generado`) para cubrir la cuota oficial por subárea; un simulacro de 125 ya no muestra "banco insuficiente". Falta validación humana del contenido generado (áreas B/C/D/E/F).
 - [ ] **Consolidar "Por tema"** (baja) — decidir si el botón se elimina (cubierto por Práctica) o se reusa.
 - [ ] **guia-md** (baja) — guía CENEVAL oficial → Markdown navegable dentro de la PWA.
 - [ ] **Sesiones gemelas** (baja) — S1=58 / S2=67 y reactivos piloto (modelo ya extensible).
