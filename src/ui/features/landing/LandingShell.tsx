@@ -41,31 +41,33 @@ export function LandingShell({ onSimular, onPracticar }: LandingShellProps) {
         <Logo />
       </header>
 
-      {/* Contenido: título y explicación fuera de la card */}
-      <div className="mx-auto w-full max-w-md flex-1 px-6 py-10">
-        <h1 className="text-3xl font-bold tracking-tight text-gray-900">
-          Simulador EXIL
-        </h1>
-        <p className="mt-3 text-sm leading-relaxed text-gray-600">
-          Plataforma de estudio para el examen EXIL-NEGOCIOS del CENEVAL. Practica por
-          tema o resuelve un simulacro completo bajo la distribución oficial del examen.
-        </p>
+      {/* Contenido centrado vertical y horizontalmente */}
+      <div className="flex flex-1 items-center justify-center px-6 py-10">
+        <div className="w-full max-w-md text-center">
+          <h1 className="text-3xl font-bold tracking-tight text-gray-900">
+            Simulador EXIL
+          </h1>
+          <p className="mt-3 text-sm leading-relaxed text-gray-600">
+            Plataforma de estudio para el examen EXIL-NEGOCIOS del CENEVAL. Practica por
+            tema o resuelve un simulacro completo bajo la distribución oficial del examen.
+          </p>
 
-        {/* Card: solo las acciones */}
-        <section className="mt-6 grid gap-3 rounded-xl border border-stone-300 bg-stone-50 p-6 shadow-sm">
-          <Button
-            label="Simular"
-            variant="primary"
-            onClick={onSimular}
-            className="w-full py-3.5 text-base"
-          />
-          <Button
-            label="Practicar"
-            variant="secondary"
-            onClick={onPracticar}
-            className="w-full py-3.5 text-base"
-          />
-        </section>
+          {/* Card: solo las acciones */}
+          <section className="mt-6 grid gap-3 rounded-xl border border-stone-300 bg-stone-50 p-6 shadow-sm">
+            <Button
+              label="Simular"
+              variant="primary"
+              onClick={onSimular}
+              className="w-full py-3.5 text-base"
+            />
+            <Button
+              label="Practicar"
+              variant="secondary"
+              onClick={onPracticar}
+              className="w-full py-3.5 text-base"
+            />
+          </section>
+        </div>
       </div>
 
       {/* Línea delgada inferior + footer mínimo */}
