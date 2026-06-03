@@ -5,61 +5,75 @@ export interface LandingShellProps {
   onPracticar: () => void;
 }
 
+/** Logo pequeño del simulador: monograma "EX" en azul (mismo que el favicon). */
+function Logo({ className = 'h-7 w-7' }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 64 64" className={className} role="img" aria-label="Simulador EXIL">
+      <rect width="64" height="64" rx="14" fill="#1e40af" />
+      <text
+        x="32"
+        y="34"
+        fontSize="30"
+        fontWeight={700}
+        fill="#ffffff"
+        textAnchor="middle"
+        dominantBaseline="central"
+        letterSpacing="-1"
+      >
+        EX
+      </text>
+    </svg>
+  );
+}
+
 /**
  * Pantalla de inicio del simulador.
  *
- * Muestra 4 modos de estudio:
- * - Simular: activo (inicia flujo completo de simulacro)
- * - Practicar: activo (inicia el playground por tema con feedback inmediato)
- * - Por tema, Revisar: deshabilitados ("próximamente")
- *
- * Cero lógica de negocio — solo presentación y despacho de eventos.
+ * Marca discreta arriba a la izquierda y una card central que encierra los
+ * dos modos activos (Simular y Practicar). Tono sobrio, académico.
+ * Cero lógica de negocio — solo presentación.
  */
 export function LandingShell({ onSimular, onPracticar }: LandingShellProps) {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center gap-8 bg-gray-50 px-4 py-12">
-      <header className="text-center">
-        <h1 className="text-4xl font-bold text-blue-800">Simulador EXIL</h1>
-        <p className="mt-2 text-gray-500">
-          EXIL-NEGOCIOS · CENEVAL · 125 reactivos criteriales
-        </p>
+    <main className="flex min-h-screen flex-col bg-crema">
+      {/* Marca discreta arriba a la izquierda */}
+      <header className="flex items-center gap-2 px-6 py-5">
+        <Logo />
+        <span className="text-sm font-semibold tracking-tight text-gray-400">
+          Simulador EXIL
+        </span>
       </header>
 
-      <section className="grid w-full max-w-md gap-4">
-        <Button
-          label="Simular"
-          variant="primary"
-          onClick={onSimular}
-          className="w-full text-base py-4"
-        />
+      {/* Card central con los modos */}
+      <div className="flex flex-1 items-center justify-center px-6 pb-20">
+        <section className="w-full max-w-sm rounded-xl border border-stone-300 bg-stone-50 p-8 shadow-sm">
+          <h1 className="text-2xl font-bold tracking-tight text-gray-900">
+            Simulador EXIL
+          </h1>
+          <p className="mt-1 text-sm text-gray-500">
+            EXIL-NEGOCIOS · CENEVAL · 125 reactivos criteriales
+          </p>
 
-        <Button
-          label="Practicar"
-          variant="secondary"
-          onClick={onPracticar}
-          className="w-full text-base py-4"
-        />
+          <div className="mt-7 grid gap-3 border-t border-gray-100 pt-6">
+            <Button
+              label="Simular"
+              variant="primary"
+              onClick={onSimular}
+              className="w-full py-3.5 text-base"
+            />
+            <Button
+              label="Practicar"
+              variant="secondary"
+              onClick={onPracticar}
+              className="w-full py-3.5 text-base"
+            />
+          </div>
 
-        <Button
-          label="Por tema"
-          variant="secondary"
-          disabled
-          title="Próximamente"
-          className="w-full text-base py-4"
-        />
-
-        <Button
-          label="Revisar"
-          variant="secondary"
-          disabled
-          title="Próximamente"
-          className="w-full text-base py-4"
-        />
-      </section>
-
-      <p className="text-xs text-gray-400">
-        Los modos "Por tema" y "Revisar" estarán disponibles próximamente.
-      </p>
+          <p className="mt-6 text-center text-xs text-gray-400">
+            185 reactivos · 6 áreas oficiales
+          </p>
+        </section>
+      </div>
     </main>
   );
 }

@@ -41,7 +41,7 @@ export function SizePicker({ onConfirm }: SizePickerProps) {
   };
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center gap-8 bg-gray-50 px-4 py-12">
+    <div className="flex min-h-screen flex-col items-center justify-center gap-8 bg-crema px-4 py-12">
       <header className="text-center">
         <h2 className="text-2xl font-bold text-blue-800">Configurar simulacro</h2>
         <p className="mt-1 text-sm text-gray-500">
@@ -80,7 +80,7 @@ export function SizePicker({ onConfirm }: SizePickerProps) {
         <h3 className="mb-3 text-sm font-semibold text-gray-700 uppercase tracking-wide">
           Tiempo
         </h3>
-        <div className="rounded-xl border border-gray-200 bg-white p-4 space-y-4">
+        <div className="rounded-xl border border-stone-300 bg-stone-50 p-4 space-y-4">
           <label className="flex items-center gap-3 cursor-pointer">
             <input
               type="radio"

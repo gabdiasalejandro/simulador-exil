@@ -38,7 +38,7 @@ export function TemaSidebar({
 }: TemaSidebarProps) {
   return (
     <nav
-      className="w-full rounded-2xl border border-gray-200 bg-white shadow-sm overflow-hidden"
+      className="w-full rounded-2xl border border-stone-300 bg-stone-50 shadow-sm overflow-hidden"
       aria-label="Selección de tema"
     >
       <header className="border-b border-gray-100 px-5 py-4">

@@ -46,15 +46,19 @@ const reportWithWarning: AttemptReport = {
 describe('ReportView', () => {
   it('muestra la puntuación global', () => {
     render(<ReportView attempt={makeAttempt(mockReport)} onReset={vi.fn()} />);
-    expect(screen.getByText('7')).toBeInTheDocument();
+    // "7" aparece en el score global y en el StatCard de aciertos
+    expect(screen.getAllByText('7').length).toBeGreaterThanOrEqual(1);
     expect(screen.getByText('/10')).toBeInTheDocument();
     expect(screen.getByText('70.0% global')).toBeInTheDocument();
   });
 
   it('muestra los valores de área', () => {
     render(<ReportView attempt={makeAttempt(mockReport)} onReset={vi.fn()} />);
-    expect(screen.getByText('A. Administración')).toBeInTheDocument();
-    expect(screen.getByText('B. Contabilidad y finanzas')).toBeInTheDocument();
+    // Los nombres de área aparecen en "Por área" y en la tira de fortaleza/refuerzo
+    expect(screen.getAllByText('A. Administración').length).toBeGreaterThanOrEqual(1);
+    expect(
+      screen.getAllByText('B. Contabilidad y finanzas').length,
+    ).toBeGreaterThanOrEqual(1);
   });
 
   it('muestra la sección bankWarnings cuando está presente', () => {

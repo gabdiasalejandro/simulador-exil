@@ -42,6 +42,8 @@ export interface QuestionCardProps {
    * deshabilita cambios, resalta correcta/incorrecta y muestra explicación.
    */
   feedback?: FeedbackState;
+  /** Clases extra para el contenedor (ej. estirar verticalmente con flex-1). */
+  className?: string;
 }
 
 // ---------------------------------------------------------------------------
@@ -50,8 +52,8 @@ export interface QuestionCardProps {
 
 function CasoBlock({ caso }: { caso: string }) {
   return (
-    <div className="mb-6 rounded-xl border border-amber-300 bg-amber-50 p-5">
-      <p className="mb-2 text-xs font-bold text-amber-700 uppercase tracking-widest">
+    <div className="mb-6 rounded-lg border border-gray-200 border-l-4 border-l-gray-400 bg-gray-50 p-5">
+      <p className="mb-2 text-xs font-bold uppercase tracking-widest text-gray-500">
         Contexto del caso
       </p>
       <p className="text-base leading-relaxed text-gray-800">{caso}</p>
@@ -80,25 +82,29 @@ function ChoiceRenderer({
 }) {
   return (
     <div>
-      <p className="mb-5 text-lg font-medium leading-relaxed text-gray-900">{enunciado}</p>
-      <ul className="space-y-3">
+      <p className="mb-5 text-xl font-semibold leading-relaxed text-gray-900">{enunciado}</p>
+      <ul className="space-y-2.5">
         {opciones.map((opt, i) => {
           const selected = answer?.index === i;
           const isCorrect = i === correcta;
 
           let colorClasses: string;
+          let letterClasses = 'text-gray-400';
           if (revealed) {
             if (isCorrect) {
-              colorClasses = 'border-green-600 bg-green-50 font-semibold text-green-900';
+              colorClasses = 'border-green-600 bg-white font-semibold text-gray-900 ring-1 ring-green-600';
+              letterClasses = 'text-green-700';
             } else if (selected && !isCorrect) {
-              colorClasses = 'border-red-400 bg-red-50 font-semibold text-red-800';
+              colorClasses = 'border-red-500 bg-white font-semibold text-gray-900 ring-1 ring-red-500';
+              letterClasses = 'text-red-600';
             } else {
-              colorClasses = 'border-gray-200 bg-white text-gray-500';
+              colorClasses = 'border-gray-200 bg-white text-gray-400';
             }
           } else {
             colorClasses = selected
-              ? 'border-blue-600 bg-blue-50 font-semibold text-blue-900'
-              : 'border-gray-200 bg-white hover:bg-gray-50 text-gray-800';
+              ? 'border-blue-700 bg-white font-semibold text-gray-900 ring-1 ring-blue-700'
+              : 'border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50 text-gray-800';
+            if (selected) letterClasses = 'text-blue-700';
           }
 
           return (
@@ -107,17 +113,17 @@ function ChoiceRenderer({
                 type="button"
                 disabled={revealed}
                 onClick={() => !revealed && onChange({ kind: 'choice', index: i })}
-                className={`w-full text-left rounded-xl border px-5 py-3.5 text-base transition-colors ${colorClasses} ${revealed ? 'cursor-default' : 'cursor-pointer'}`}
+                className={`w-full text-left rounded-lg border px-5 py-4 text-lg transition-colors ${colorClasses} ${revealed ? 'cursor-default' : 'cursor-pointer'}`}
               >
-                <span className="mr-3 font-bold text-gray-500">
+                <span className={`mr-3 font-bold ${letterClasses}`}>
                   {String.fromCharCode(65 + i)}.
                 </span>
                 {opt}
                 {revealed && isCorrect && (
-                  <span className="ml-2 text-green-700 font-bold">✓</span>
+                  <span className="ml-2 font-bold text-green-700">✓</span>
                 )}
                 {revealed && selected && !isCorrect && (
-                  <span className="ml-2 text-red-600 font-bold">✗</span>
+                  <span className="ml-2 font-bold text-red-600">✗</span>
                 )}
               </button>
             </li>
@@ -158,11 +164,11 @@ function OrderingRenderer({
 
   return (
     <div>
-      <p className="mb-4 text-lg font-medium leading-relaxed text-gray-900">{enunciado}</p>
+      <p className="mb-4 text-xl font-semibold leading-relaxed text-gray-900">{enunciado}</p>
       <p className="mb-4 text-sm text-gray-500">
         Haz clic en los elementos en el orden correcto:
       </p>
-      <ul className="space-y-2">
+      <ul className="space-y-2.5">
         {elementos.map((item, idx) => {
           const pos = sequence.indexOf(idx);
           const selected = pos >= 0;
@@ -171,10 +177,10 @@ function OrderingRenderer({
               <button
                 type="button"
                 onClick={() => handleToggle(idx)}
-                className={`w-full text-left rounded-xl border px-5 py-3.5 text-base transition-colors ${
+                className={`w-full text-left rounded-lg border px-5 py-4 text-lg transition-colors ${
                   selected
-                    ? 'border-blue-600 bg-blue-50 font-semibold text-blue-900'
-                    : 'border-gray-200 bg-white hover:bg-gray-50 text-gray-800'
+                    ? 'border-blue-700 bg-white font-semibold text-gray-900 ring-1 ring-blue-700'
+                    : 'border-gray-200 bg-white hover:border-gray-300 hover:bg-gray-50 text-gray-800'
                 }`}
               >
                 {selected && (
@@ -234,17 +240,17 @@ function RelacionRenderer({
 
   return (
     <div>
-      <p className="mb-5 text-lg font-medium leading-relaxed text-gray-900">{enunciado}</p>
-      <div className="space-y-3">
+      <p className="mb-5 text-xl font-semibold leading-relaxed text-gray-900">{enunciado}</p>
+      <div className="space-y-2.5">
         {columnaIzquierda.map((leftItem, leftIdx) => {
           const selectedRight = getSelectedRight(leftIdx);
           return (
             <div
               key={leftIdx}
-              className="flex flex-col gap-2 rounded-xl border border-gray-200 bg-gray-50 p-4 sm:flex-row sm:items-center sm:gap-4"
+              className="flex flex-col gap-2 rounded-lg border border-gray-200 bg-white p-4 sm:flex-row sm:items-center sm:gap-4"
             >
-              <p className="flex-1 text-base font-medium text-gray-900">
-                <span className="mr-2 text-gray-400">{leftIdx + 1}.</span>
+              <p className="flex-1 text-base font-semibold text-gray-900">
+                <span className="mr-2 font-bold text-gray-400">{leftIdx + 1}.</span>
                 {leftItem}
               </p>
               <select
@@ -272,17 +278,17 @@ function RelacionRenderer({
 // QuestionCard principal
 // ---------------------------------------------------------------------------
 
-export function QuestionCard({ question, answer, onChange, index, total, feedback }: QuestionCardProps) {
+export function QuestionCard({ question, answer, onChange, index, total, feedback, className = '' }: QuestionCardProps) {
   const areaNombre = getAreaNombre(question.area);
   const revealed = feedback !== undefined;
 
   return (
-    <article className="rounded-2xl border border-gray-200 bg-white p-7 shadow-sm">
-      <header className="mb-5 flex items-center justify-between">
+    <article className={`rounded-xl border border-stone-300 bg-stone-50 p-7 shadow-sm sm:p-9 ${className}`}>
+      <header className="mb-5 flex items-center justify-between border-b border-gray-100 pb-4">
         <span className="text-sm text-gray-500">
-          Reactivo <span className="font-semibold text-gray-700">{index}</span> de {total}
+          Reactivo <span className="font-bold text-gray-800">{index}</span> de {total}
         </span>
-        <span className="rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700">
+        <span className="rounded-md border border-gray-300 px-2.5 py-1 text-xs font-semibold uppercase tracking-wide text-gray-600">
           {areaNombre}
         </span>
       </header>
@@ -293,16 +299,14 @@ export function QuestionCard({ question, answer, onChange, index, total, feedbac
 
       {feedback && (
         <div
-          className={`mt-6 rounded-xl border px-5 py-4 ${
-            feedback.correcto
-              ? 'border-green-300 bg-green-50'
-              : 'border-red-300 bg-red-50'
+          className={`mt-6 rounded-lg border border-gray-200 border-l-4 bg-white px-5 py-4 ${
+            feedback.correcto ? 'border-l-green-600' : 'border-l-red-500'
           }`}
           role="status"
           aria-live="polite"
         >
-          <p className={`mb-2 font-bold text-sm ${feedback.correcto ? 'text-green-700' : 'text-red-700'}`}>
-            {feedback.correcto ? '¡Correcto!' : 'Incorrecto'}
+          <p className={`mb-2 text-sm font-bold uppercase tracking-wide ${feedback.correcto ? 'text-green-700' : 'text-red-600'}`}>
+            {feedback.correcto ? 'Correcto' : 'Incorrecto'}
           </p>
           <p className="text-sm leading-relaxed text-gray-700">{feedback.explicacion}</p>
         </div>
