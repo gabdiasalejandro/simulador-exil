@@ -1,5 +1,7 @@
+import { useState } from 'react';
+import type { ReactNode } from 'react';
 import type { Attempt } from '../../../domain/attempt/attempt';
-import type { AreaCode, SubareaCode } from '../../../domain/taxonomy/taxonomy';
+import type { AreaCode } from '../../../domain/taxonomy/taxonomy';
 import type { ScoreEntry } from '../../../domain/scoring/attempt-report';
 import type { Reactivo } from '../../../domain/question/question';
 import type { Answer } from '../../../domain/question/answer';
@@ -92,18 +94,18 @@ function correctaTexto(q: Reactivo): string | null {
   return null;
 }
 
+// ---------------------------------------------------------------------------
+// Piezas de presentación
+// ---------------------------------------------------------------------------
+
 function ScoreBar({ entry }: { entry: ScoreEntry }) {
   const percent = entry.total > 0 ? (entry.correct / entry.total) * 100 : 0;
   const color =
-    percent >= 70
-      ? 'bg-green-500'
-      : percent >= 50
-        ? 'bg-amber-400'
-        : 'bg-red-400';
+    percent >= 70 ? 'bg-green-500' : percent >= 50 ? 'bg-amber-400' : 'bg-red-400';
 
   return (
     <div className="flex items-center gap-3">
-      <div className="h-2 w-full rounded-full bg-gray-100">
+      <div className="h-2 w-full rounded-full bg-stone-200">
         <div
           className={`h-2 rounded-full transition-all ${color}`}
           style={{ width: `${percent}%` }}
@@ -120,7 +122,22 @@ function ScoreBar({ entry }: { entry: ScoreEntry }) {
   );
 }
 
-function StatCard({
+/** Tile base del bento grid. */
+function Tile({
+  children,
+  className = '',
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
+  return (
+    <div className={`rounded-xl border border-stone-200 bg-stone-50 p-4 shadow-sm ${className}`}>
+      {children}
+    </div>
+  );
+}
+
+function StatTile({
   value,
   label,
   tone = 'gray',
@@ -136,27 +153,27 @@ function StatCard({
     amber: 'text-amber-600',
   };
   return (
-    <div className="rounded-xl border border-gray-200 bg-white p-3 text-center">
+    <Tile className="flex flex-col justify-center text-center">
       <p className={`text-2xl font-extrabold tabular-nums ${tones[tone]}`}>{value}</p>
       <p className="mt-0.5 text-xs uppercase tracking-wide text-gray-400">{label}</p>
-    </div>
+    </Tile>
   );
 }
 
+// ---------------------------------------------------------------------------
+// ReportView
+// ---------------------------------------------------------------------------
+
 /**
- * Vista de reporte criterial post-simulacro.
+ * Vista de reporte criterial post-simulacro, organizada como bento grid:
+ * puntuación global + veredicto, aciertos/errores/sin responder/tiempo,
+ * fortaleza y área a reforzar, y desempeño por área.
  *
- * Muestra:
- * - Puntuación global + veredicto
- * - Desglose rápido: aciertos / errores / sin responder / tiempo
- * - Fortaleza y área a reforzar
- * - bankWarnings si hubo banco insuficiente
- * - Desempeño por área (barras) y por subárea (tabla)
- * - Revisión reactivo por reactivo de los fallados (si se reciben los reactivos)
- *
- * Sin comparación entre usuarios (criterial).
+ * La revisión reactivo por reactivo NO es invasiva: vive en una vista aparte
+ * a la que se entra con un botón y desde la que se vuelve al resumen.
  */
 export function ReportView({ attempt, questions = [], onReset }: ReportViewProps) {
+  const [mode, setMode] = useState<'resumen' | 'revision'>('resumen');
   const { report } = attempt;
   const areas: AreaCode[] = ['A', 'B', 'C', 'D', 'E', 'F'];
 
@@ -165,7 +182,6 @@ export function ReportView({ attempt, questions = [], onReset }: ReportViewProps
   const percent = total > 0 ? (aciertos / total) * 100 : 0;
   const v = veredicto(percent);
 
-  // Sin responder: ids del examen sin respuesta registrada
   const sinResponder = attempt.examSnapshot.questionIds.reduce((acc, id) => {
     const ans = attempt.answerMap.get(id) ?? null;
     return ans === null ? acc + 1 : acc;
@@ -175,212 +191,190 @@ export function ReportView({ attempt, questions = [], onReset }: ReportViewProps
 
   const { mejor, peor } = extremosArea(report.byArea);
 
-  // Revisión por reactivo: los fallados (incorrectos o sin responder), en orden de examen
+  // Reactivos fallados (incorrectos o sin responder), en orden de examen.
   const qById = new Map(questions.map((q) => [q.id, q]));
   const fallados = attempt.examSnapshot.questionIds
     .map((id, i) => {
       const q = qById.get(id);
       if (!q) return null;
       const ans = attempt.answerMap.get(id) ?? null;
-      const acierto = scoreQuestion(q, ans) === 1;
-      return acierto ? null : { q, ans, numero: i + 1 };
+      return scoreQuestion(q, ans) === 1 ? null : { q, ans, numero: i + 1 };
     })
     .filter((x): x is { q: Reactivo; ans: Answer | null; numero: number } => x !== null);
 
-  return (
-    <main className="mx-auto flex max-w-2xl flex-col gap-6 px-4 py-10">
-      <header className="text-center">
-        <h2 className="text-2xl font-bold text-blue-800">Resultados del simulacro</h2>
-        <p className="mt-1 text-sm text-gray-400">Evaluación criterial — sin comparación con otros</p>
-      </header>
+  const volverInicio = (
+    <Button label="Volver al inicio" onClick={onReset} variant="primary" className="px-5 py-2.5" />
+  );
 
-      {/* Score global */}
-      <section className="rounded-xl border border-blue-200 bg-blue-50 p-6 text-center">
-        <p className="text-4xl font-extrabold text-blue-800">
-          {aciertos}
-          <span className="text-xl font-normal text-blue-500">/{total}</span>
-        </p>
-        <p className="mt-1 text-lg font-semibold text-blue-700">
-          {pct(report.globalScore)} global
-        </p>
-        <span
-          className={`mt-3 inline-block rounded-full px-3 py-1 text-xs font-semibold ${v.className}`}
-        >
-          {v.label}
-        </span>
-      </section>
+  // -------------------------------------------------------------------------
+  // Vista de revisión (separada, no invasiva)
+  // -------------------------------------------------------------------------
 
-      {/* Desglose rápido */}
-      <section className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-        <StatCard value={aciertos} label="Aciertos" tone="green" />
-        <StatCard value={errores} label="Errores" tone="red" />
-        <StatCard value={sinResponder} label="Sin responder" tone="amber" />
-        <StatCard value={duracion} label="Tiempo" />
-      </section>
+  if (mode === 'revision') {
+    return (
+      <main className="mx-auto flex max-w-2xl flex-col gap-5 px-4 py-8">
+        <header className="sticky top-0 z-10 -mx-4 flex items-center justify-between gap-3 border-b border-stone-200 bg-crema px-4 py-3">
+          <div>
+            <h2 className="text-lg font-bold text-blue-800">Revisión de respuestas</h2>
+            <p className="text-xs text-gray-500">{fallados.length} por corregir</p>
+          </div>
+          <Button
+            label="← Volver al resumen"
+            variant="secondary"
+            shape="square"
+            onClick={() => setMode('resumen')}
+            className="px-3 py-2 text-sm"
+          />
+        </header>
 
-      {/* Fortaleza y área a reforzar */}
-      {(mejor || peor) && (
-        <section className="grid gap-3 sm:grid-cols-2">
-          {mejor && (
-            <div className="rounded-lg border border-green-200 bg-green-50 p-4">
-              <p className="text-xs font-semibold uppercase tracking-wide text-green-600">
-                Tu fortaleza
-              </p>
-              <p className="mt-1 text-sm font-medium text-gray-700">{AREA_LABELS[mejor]}</p>
-              <p className="text-sm text-green-700">{pct(report.byArea.get(mejor)!)}</p>
-            </div>
-          )}
-          {peor && (
-            <div className="rounded-lg border border-red-200 bg-red-50 p-4">
-              <p className="text-xs font-semibold uppercase tracking-wide text-red-600">
-                A reforzar
-              </p>
-              <p className="mt-1 text-sm font-medium text-gray-700">{AREA_LABELS[peor]}</p>
-              <p className="text-sm text-red-700">{pct(report.byArea.get(peor)!)}</p>
-            </div>
-          )}
-        </section>
-      )}
-
-      {/* bankWarnings */}
-      {report.bankWarnings.length > 0 && (
-        <section className="rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800">
-          <p className="mb-2 font-semibold">Aviso de banco insuficiente:</p>
-          <ul className="list-disc pl-5 space-y-1">
-            {report.bankWarnings.map((w) => (
-              <li key={w.subarea}>
-                Subárea <strong>{w.subarea}</strong>: se solicitaron{' '}
-                {w.requested}, disponibles {w.available}
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-
-      {/* Por área */}
-      <section>
-        <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-gray-500">
-          Por área
-        </h3>
         <div className="space-y-3">
-          {areas.map((area) => {
-            const entry = report.byArea.get(area as AreaCode);
-            if (!entry) return null;
+          {fallados.map(({ q, ans, numero }) => {
+            const correcta = correctaTexto(q);
+            const noRespondido = ans === null;
             return (
-              <div key={area} className="rounded-lg border border-gray-200 bg-white p-4">
-                <div className="mb-2 flex items-center justify-between">
-                  <span className="text-sm font-medium text-gray-700">
-                    {AREA_LABELS[area as AreaCode]}
-                  </span>
-                  <span className="text-sm font-semibold text-gray-500">
-                    {pct(entry)}
-                  </span>
+              <article
+                key={q.id}
+                className="rounded-xl border border-stone-200 bg-stone-50 p-5 shadow-sm"
+              >
+                <p className="mb-3 font-semibold text-gray-800">
+                  <span className="text-gray-400">#{numero}</span> {q.enunciado}
+                </p>
+                <div className="space-y-2 text-sm">
+                  <p>
+                    <span className="font-semibold text-gray-500">Tu respuesta: </span>
+                    <span className={noRespondido ? 'text-amber-700' : 'text-red-700'}>
+                      {respuestaTexto(q, ans)}
+                    </span>
+                  </p>
+                  {correcta && (
+                    <p>
+                      <span className="font-semibold text-gray-500">Correcta: </span>
+                      <span className="text-green-700">{correcta}</span>
+                    </p>
+                  )}
+                  <p className="rounded-md bg-white p-3 text-gray-600">{q.explanation}</p>
                 </div>
-                <ScoreBar entry={entry} />
-              </div>
+              </article>
             );
           })}
         </div>
-      </section>
 
-      {/* Por subárea */}
-      <section>
-        <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-gray-500">
-          Por subárea
-        </h3>
-        <div className="rounded-xl border border-gray-200 bg-white">
-          <table className="w-full text-sm">
-            <thead>
-              <tr className="border-b border-gray-100 text-left text-xs font-semibold uppercase tracking-wide text-gray-400">
-                <th className="px-4 py-3">Subárea</th>
-                <th className="px-4 py-3 text-right">Correctas</th>
-                <th className="px-4 py-3 text-right">Total</th>
-                <th className="px-4 py-3 text-right">%</th>
-              </tr>
-            </thead>
-            <tbody>
-              {Array.from(report.bySubarea.entries()).map(([sub, entry]) => (
-                <tr
-                  key={sub as SubareaCode}
-                  className="border-b border-gray-50 last:border-0"
-                >
-                  <td className="px-4 py-2.5 font-mono text-gray-700">{sub}</td>
-                  <td className="px-4 py-2.5 text-right text-gray-700">
-                    {entry.correct}
-                  </td>
-                  <td className="px-4 py-2.5 text-right text-gray-500">
-                    {entry.total}
-                  </td>
-                  <td className="px-4 py-2.5 text-right font-semibold text-gray-700">
-                    {pct(entry)}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="flex justify-center pt-2">{volverInicio}</div>
+      </main>
+    );
+  }
+
+  // -------------------------------------------------------------------------
+  // Resumen (bento grid)
+  // -------------------------------------------------------------------------
+
+  return (
+    <main className="mx-auto flex max-w-3xl flex-col gap-5 px-4 py-8">
+      {/* Encabezado con acción de volver bien visible */}
+      <header className="sticky top-0 z-10 -mx-4 flex items-center justify-between gap-3 border-b border-stone-200 bg-crema px-4 py-3">
+        <div>
+          <h2 className="text-xl font-bold text-blue-800">Resultados del simulacro</h2>
+          <p className="text-xs text-gray-400">Evaluación criterial — sin comparación con otros</p>
         </div>
-      </section>
+        {volverInicio}
+      </header>
 
-      {/* Revisión por reactivo (solo si se reciben los reactivos) */}
-      {fallados.length > 0 && (
-        <section>
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+        {/* Score global — tile destacado */}
+        <Tile className="col-span-2 flex flex-col items-center justify-center text-center">
+          <p className="text-4xl font-extrabold text-blue-800">
+            {aciertos}
+            <span className="text-xl font-normal text-blue-500">/{total}</span>
+          </p>
+          <p className="mt-1 text-base font-semibold text-blue-700">
+            {pct(report.globalScore)} global
+          </p>
+          <span
+            className={`mt-2 inline-block rounded-full px-3 py-1 text-xs font-semibold ${v.className}`}
+          >
+            {v.label}
+          </span>
+        </Tile>
+
+        <StatTile value={aciertos} label="Aciertos" tone="green" />
+        <StatTile value={errores} label="Errores" tone="red" />
+        <StatTile value={sinResponder} label="Sin responder" tone="amber" />
+        <StatTile value={duracion} label="Tiempo" />
+
+        {/* Fortaleza / a reforzar */}
+        {mejor && (
+          <Tile className="border-l-4 border-l-green-500">
+            <p className="text-xs font-semibold uppercase tracking-wide text-green-600">
+              Tu fortaleza
+            </p>
+            <p className="mt-1 text-sm font-medium text-gray-700">{AREA_LABELS[mejor]}</p>
+            <p className="text-sm font-semibold text-green-700">{pct(report.byArea.get(mejor)!)}</p>
+          </Tile>
+        )}
+        {peor && (
+          <Tile className="border-l-4 border-l-red-500">
+            <p className="text-xs font-semibold uppercase tracking-wide text-red-600">A reforzar</p>
+            <p className="mt-1 text-sm font-medium text-gray-700">{AREA_LABELS[peor]}</p>
+            <p className="text-sm font-semibold text-red-700">{pct(report.byArea.get(peor)!)}</p>
+          </Tile>
+        )}
+
+        {/* Por área — tile ancho */}
+        <Tile className="col-span-2 sm:col-span-4">
           <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-gray-500">
-            Revisión de reactivos ({fallados.length} por corregir)
+            Por área
           </h3>
           <div className="space-y-3">
-            {fallados.map(({ q, ans, numero }) => {
-              const correcta = correctaTexto(q);
-              const noRespondido = ans === null;
+            {areas.map((area) => {
+              const entry = report.byArea.get(area);
+              if (!entry) return null;
               return (
-                <details
-                  key={q.id}
-                  className="group rounded-lg border border-gray-200 bg-white"
-                >
-                  <summary className="flex cursor-pointer items-start gap-2 px-4 py-3 text-sm">
-                    <span
-                      className={`mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-xs font-bold ${
-                        noRespondido
-                          ? 'bg-amber-100 text-amber-700'
-                          : 'bg-red-100 text-red-700'
-                      }`}
-                      aria-hidden="true"
-                    >
-                      {noRespondido ? '–' : '✕'}
-                    </span>
-                    <span className="font-medium text-gray-700">
-                      <span className="text-gray-400">#{numero}</span> {q.enunciado}
-                    </span>
-                  </summary>
-                  <div className="space-y-2 border-t border-gray-100 px-4 py-3 text-sm">
-                    <p>
-                      <span className="font-semibold text-gray-500">Tu respuesta: </span>
-                      <span className={noRespondido ? 'text-amber-700' : 'text-red-700'}>
-                        {respuestaTexto(q, ans)}
-                      </span>
-                    </p>
-                    {correcta && (
-                      <p>
-                        <span className="font-semibold text-gray-500">Correcta: </span>
-                        <span className="text-green-700">{correcta}</span>
-                      </p>
-                    )}
-                    <p className="rounded-md bg-gray-50 p-3 text-gray-600">
-                      {q.explanation}
-                    </p>
+                <div key={area}>
+                  <div className="mb-1 flex items-center justify-between">
+                    <span className="text-sm font-medium text-gray-700">{AREA_LABELS[area]}</span>
+                    <span className="text-sm font-semibold text-gray-500">{pct(entry)}</span>
                   </div>
-                </details>
+                  <ScoreBar entry={entry} />
+                </div>
               );
             })}
           </div>
-        </section>
-      )}
+        </Tile>
 
-      <Button
-        label="Nuevo simulacro"
-        onClick={onReset}
-        variant="secondary"
-        className="w-full py-3 text-base"
-      />
+        {/* bankWarnings */}
+        {report.bankWarnings.length > 0 && (
+          <div className="col-span-2 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800 sm:col-span-4">
+            <p className="mb-2 font-semibold">Aviso de banco insuficiente:</p>
+            <ul className="list-disc space-y-1 pl-5">
+              {report.bankWarnings.map((w) => (
+                <li key={w.subarea}>
+                  Subárea <strong>{w.subarea}</strong>: se solicitaron {w.requested}, disponibles{' '}
+                  {w.available}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+
+        {/* Revisar respuestas — acceso a la vista aparte, no invasivo */}
+        {fallados.length > 0 && (
+          <button
+            type="button"
+            onClick={() => setMode('revision')}
+            className="col-span-2 flex items-center justify-between rounded-xl border border-stone-300 bg-white px-5 py-4 text-left shadow-sm transition-colors hover:bg-stone-100 sm:col-span-4"
+          >
+            <span>
+              <span className="block font-semibold text-gray-800">Revisar respuestas</span>
+              <span className="text-sm text-gray-500">
+                {fallados.length} reactivo{fallados.length === 1 ? '' : 's'} por corregir, con explicación
+              </span>
+            </span>
+            <span aria-hidden="true" className="text-xl text-gray-400">
+              →
+            </span>
+          </button>
+        )}
+      </div>
     </main>
   );
 }

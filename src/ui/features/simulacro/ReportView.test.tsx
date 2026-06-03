@@ -81,16 +81,10 @@ describe('ReportView', () => {
     ).not.toBeInTheDocument();
   });
 
-  it('llama onReset al hacer clic en "Nuevo simulacro"', async () => {
+  it('llama onReset al hacer clic en "Volver al inicio"', async () => {
     const handler = vi.fn();
     render(<ReportView attempt={makeAttempt(mockReport)} onReset={handler} />);
-    await userEvent.click(screen.getByRole('button', { name: 'Nuevo simulacro' }));
+    await userEvent.click(screen.getByRole('button', { name: 'Volver al inicio' }));
     expect(handler).toHaveBeenCalledTimes(1);
-  });
-
-  it('muestra las subáreas en la tabla', () => {
-    render(<ReportView attempt={makeAttempt(mockReport)} onReset={vi.fn()} />);
-    expect(screen.getByText('A1')).toBeInTheDocument();
-    expect(screen.getByText('B5')).toBeInTheDocument();
   });
 });

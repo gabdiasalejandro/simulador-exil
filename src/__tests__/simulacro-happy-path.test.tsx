@@ -75,9 +75,9 @@ describe('Smoke: flujo completo del simulacro', () => {
     // La puntuación global debe estar presente (número/total)
     expect(screen.getByText(/global/)).toBeInTheDocument();
 
-    // --- Paso 8: Botón "Nuevo simulacro" regresa al landing ---
+    // --- Paso 8: Botón "Volver al inicio" regresa al landing ---
     await userEvent.click(
-      screen.getByRole('button', { name: 'Nuevo simulacro' }),
+      screen.getByRole('button', { name: 'Volver al inicio' }),
     );
     expect(screen.getByRole('button', { name: 'Simular' })).toBeInTheDocument();
   });
