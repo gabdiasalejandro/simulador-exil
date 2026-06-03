@@ -41,6 +41,8 @@ export interface SimulacroContainerProps {
   contentPort: ContentPort;
   storagePort: StoragePort;
   onDone: (attempt: Attempt, questions: readonly Reactivo[]) => void;
+  /** Volver al inicio (landing). Disponible en la pantalla de configuración. */
+  onVolver?: (() => void) | undefined;
 }
 
 /**
@@ -87,6 +89,7 @@ export function SimulacroContainer({
   contentPort,
   storagePort,
   onDone,
+  onVolver,
 }: SimulacroContainerProps) {
   const [state, setState] = useState<SimulacroState>(() => restoreInitialState().state);
   const [currentIndex, setCurrentIndex] = useState(() => restoreInitialState().currentIndex);
@@ -213,7 +216,7 @@ export function SimulacroContainer({
   // ---------------------------------------------------------------------------
 
   if (state.phase === 'picking') {
-    return <SizePicker onConfirm={handleStart} />;
+    return <SizePicker onConfirm={handleStart} onVolver={onVolver} />;
   }
 
   if (state.phase === 'loading') {

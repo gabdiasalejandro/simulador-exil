@@ -6,6 +6,8 @@ import { Button } from '../../atoms/Button/Button';
 
 export interface SizePickerProps {
   onConfirm: (config: SessionConfig) => void;
+  /** Si se provee, muestra un botón para volver al inicio. */
+  onVolver?: (() => void) | undefined;
 }
 
 const SIZES: ExamSize[] = [20, 60, 125];
@@ -19,7 +21,7 @@ const SIZES: ExamSize[] = [20, 60, 125];
  *
  * Emite SessionConfig al confirmar.
  */
-export function SizePicker({ onConfirm }: SizePickerProps) {
+export function SizePicker({ onConfirm, onVolver }: SizePickerProps) {
   const [size, setSize] = useState<ExamSize>(20);
   const [timerMode, setTimerMode] = useState<'limited' | 'unlimited'>('limited');
   const [minutes, setMinutes] = useState<number>(computeDefaultMinutes(20));
@@ -41,7 +43,19 @@ export function SizePicker({ onConfirm }: SizePickerProps) {
   };
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center gap-8 bg-crema px-4 py-12">
+    <div className="flex min-h-screen flex-col bg-crema">
+      {onVolver && (
+        <div className="px-6 py-4">
+          <Button
+            label="← Volver al inicio"
+            variant="ghost"
+            onClick={onVolver}
+            className="py-1.5 px-3 text-sm"
+          />
+        </div>
+      )}
+
+      <div className="flex flex-1 flex-col items-center justify-center gap-8 px-4 pb-12">
       <header className="text-center">
         <h2 className="text-2xl font-bold text-blue-800">Configurar simulacro</h2>
         <p className="mt-1 text-sm text-gray-500">
@@ -139,6 +153,7 @@ export function SizePicker({ onConfirm }: SizePickerProps) {
         onClick={handleConfirm}
         className="w-full max-w-md py-4 text-base"
       />
+      </div>
     </div>
   );
 }

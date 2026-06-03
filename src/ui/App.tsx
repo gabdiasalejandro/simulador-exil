@@ -68,6 +68,7 @@ export function App() {
           contentPort={contentPort}
           storagePort={storagePort}
           onDone={handleAttemptDone}
+          onVolver={handleReset}
         />
       );
 
