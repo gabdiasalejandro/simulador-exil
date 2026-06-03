@@ -29,54 +29,49 @@ function Logo({ className = 'h-7 w-7' }: { className?: string }) {
 /**
  * Pantalla de inicio del simulador.
  *
- * Marca discreta arriba a la izquierda y una card central con los dos modos
- * activos (Simular y Practicar). La explicación de ambos vive en el párrafo
- * bajo el título. Tono sobrio. Solo presentación.
+ * Líneas delgadas delimitan la vista arriba y abajo. El título y un párrafo
+ * descriptivo van fuera y arriba de la card, que solo contiene las acciones.
+ * Tono sobrio. Solo presentación.
  */
 export function LandingShell({ onSimular, onPracticar }: LandingShellProps) {
   return (
     <main className="flex min-h-screen flex-col bg-crema">
-      {/* Marca discreta arriba a la izquierda */}
-      <header className="flex items-center gap-2 px-6 py-5">
+      {/* Línea delgada superior + marca */}
+      <header className="flex items-center gap-2 border-b border-stone-300 px-6 py-4">
         <Logo />
-        <span className="text-sm font-semibold tracking-tight text-gray-400">
-          Simulador EXIL
-        </span>
       </header>
 
-      {/* Márgenes arriba y abajo de toda la vista (py en el contenedor) */}
-      <div className="flex flex-1 justify-center px-6 py-16">
-        <section className="w-full max-w-sm self-start rounded-xl border border-stone-300 bg-stone-50 p-8 shadow-sm">
-          <h1 className="text-2xl font-bold tracking-tight text-gray-900">
-            Simulador EXIL
-          </h1>
-          <p className="mt-2 text-sm leading-relaxed text-gray-600">
-            <span className="font-semibold text-blue-800">Simular</span> es un examen
-            completo y cronometrado con reporte por área al final;{' '}
-            <span className="font-semibold text-blue-800">Practicar</span> son reactivos
-            por tema, sin tiempo y con explicación inmediata.
-          </p>
+      {/* Contenido: título y explicación fuera de la card */}
+      <div className="mx-auto w-full max-w-md flex-1 px-6 py-10">
+        <h1 className="text-3xl font-bold tracking-tight text-gray-900">
+          Simulador EXIL
+        </h1>
+        <p className="mt-3 text-sm leading-relaxed text-gray-600">
+          Plataforma de estudio para el examen EXIL-NEGOCIOS del CENEVAL. Practica por
+          tema o resuelve un simulacro completo bajo la distribución oficial del examen.
+        </p>
 
-          <div className="mt-6 grid gap-3 border-t border-gray-100 pt-6">
-            <Button
-              label="Simular"
-              variant="primary"
-              onClick={onSimular}
-              className="w-full py-3.5 text-base"
-            />
-            <Button
-              label="Practicar"
-              variant="secondary"
-              onClick={onPracticar}
-              className="w-full py-3.5 text-base"
-            />
-          </div>
-
-          <p className="mt-6 text-center text-xs text-gray-400">
-            EXIL-NEGOCIOS · CENEVAL · 185 reactivos · 6 áreas oficiales
-          </p>
+        {/* Card: solo las acciones */}
+        <section className="mt-6 grid gap-3 rounded-xl border border-stone-300 bg-stone-50 p-6 shadow-sm">
+          <Button
+            label="Simular"
+            variant="primary"
+            onClick={onSimular}
+            className="w-full py-3.5 text-base"
+          />
+          <Button
+            label="Practicar"
+            variant="secondary"
+            onClick={onPracticar}
+            className="w-full py-3.5 text-base"
+          />
         </section>
       </div>
+
+      {/* Línea delgada inferior + footer mínimo */}
+      <footer className="border-t border-stone-300 px-6 py-3 text-center text-xs text-gray-400">
+        EXIL-NEGOCIOS · CENEVAL · 185 reactivos
+      </footer>
     </main>
   );
 }

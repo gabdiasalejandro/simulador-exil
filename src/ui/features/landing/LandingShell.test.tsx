@@ -32,9 +32,11 @@ describe('LandingShell', () => {
     expect(handler).toHaveBeenCalledTimes(1);
   });
 
-  it('explica ambos modos en el párrafo bajo el título', () => {
+  it('muestra el título y un párrafo descriptivo', () => {
     render(<LandingShell onSimular={vi.fn()} onPracticar={vi.fn()} />);
-    expect(screen.getByText(/reporte por área/i)).toBeInTheDocument();
-    expect(screen.getByText(/explicación inmediata/i)).toBeInTheDocument();
+    expect(
+      screen.getByRole('heading', { name: 'Simulador EXIL' }),
+    ).toBeInTheDocument();
+    expect(screen.getByText(/Plataforma de estudio/i)).toBeInTheDocument();
   });
 });
