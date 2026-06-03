@@ -1860,3 +1860,821 @@ reactivos:
       - "Contrato por el cual se ceden derechos reales sobre bienes inmuebles."
     emparejamientos: [[0, 2], [1, 1], [2, 3], [3, 0]]
     explicacion: "La S.A. divide su capital en acciones con responsabilidad limitada; la S. de R.L. limita la responsabilidad y el número de socios; el mutuo mercantil implica préstamo con obligación de devolución; la letra de cambio es un título de crédito con orden de pago."
+
+  # ==========================================================================
+  # REACTIVOS GENERADOS (origen: generado)
+  # --------------------------------------------------------------------------
+  # Redactados con apoyo de IA para cubrir las subáreas con banco insuficiente
+  # respecto a la distribución oficial (taxonomy.ts). NO provienen del PDF de
+  # preparación: deben revisarse antes de tomarse como material definitivo.
+  # Tras esta sección, todas las subáreas alcanzan su cuota oficial.
+  # ==========================================================================
+
+  # ----- B1 · Información financiera (+2) -----------------------------------
+  - id: B1-G01
+    tipo: directo
+    area: B
+    subarea: B1
+    origen: generado
+    enunciado: "¿Cuál estado financiero muestra la situación financiera de una entidad a una fecha determinada?"
+    opciones:
+      - "Estado de resultados"
+      - "Estado de situación financiera (balance general)"
+      - "Estado de flujos de efectivo"
+      - "Estado de cambios en el capital contable"
+    correcta: 1
+    explicacion: "El estado de situación financiera (balance general) presenta los activos, pasivos y capital a una fecha específica; los demás estados cubren un periodo."
+
+  - id: B1-G02
+    tipo: directo
+    area: B
+    subarea: B1
+    origen: generado
+    enunciado: "En la ecuación contable básica, el capital contable es igual a:"
+    opciones:
+      - "Activo + Pasivo"
+      - "Activo − Pasivo"
+      - "Pasivo − Activo"
+      - "Activo × Pasivo"
+    correcta: 1
+    explicacion: "La ecuación contable es Activo = Pasivo + Capital; despejando, Capital = Activo − Pasivo."
+
+  # ----- B2 · Normatividad contable (+1) ------------------------------------
+  - id: B2-G01
+    tipo: directo
+    area: B
+    subarea: B2
+    origen: generado
+    enunciado: "¿Qué organismo emite las Normas de Información Financiera (NIF) en México?"
+    opciones:
+      - "El SAT"
+      - "El CINIF (Consejo Mexicano de Normas de Información Financiera)"
+      - "El IMSS"
+      - "El Banco de México"
+    correcta: 1
+    explicacion: "El CINIF es el organismo independiente encargado de desarrollar y emitir las NIF en México."
+
+  # ----- B3 · Proceso contable (+2) -----------------------------------------
+  - id: B3-G01
+    tipo: directo
+    area: B
+    subarea: B3
+    origen: generado
+    enunciado: "De acuerdo con el principio de partida doble, cada transacción afecta:"
+    opciones:
+      - "Una sola cuenta"
+      - "Al menos dos cuentas, manteniendo la igualdad cargo = abono"
+      - "Únicamente cuentas de activo"
+      - "Solo el estado de resultados"
+    correcta: 1
+    explicacion: "La partida doble exige que todo cargo tenga un abono por igual importe, afectando al menos dos cuentas."
+
+  - id: B3-G02
+    tipo: directo
+    area: B
+    subarea: B3
+    origen: generado
+    enunciado: "La cuenta de activo \"Clientes\" se incrementa mediante un:"
+    opciones:
+      - "Abono"
+      - "Cargo"
+      - "Asiento de cierre"
+      - "Ajuste por inflación"
+    correcta: 1
+    explicacion: "Clientes es una cuenta de activo; las cuentas de activo aumentan por el cargo (debe)."
+
+  # ----- B5 · Análisis de información financiera (+5) -----------------------
+  - id: B5-G01
+    tipo: directo
+    area: B
+    subarea: B5
+    origen: generado
+    enunciado: "La razón circulante (de liquidez) se calcula como:"
+    opciones:
+      - "Activo circulante ÷ Pasivo circulante"
+      - "Pasivo total ÷ Activo total"
+      - "Utilidad neta ÷ Ventas"
+      - "Activo fijo ÷ Capital"
+    correcta: 0
+    explicacion: "La razón circulante = Activo circulante ÷ Pasivo circulante; mide la capacidad de cubrir obligaciones de corto plazo."
+
+  - id: B5-G02
+    tipo: directo
+    area: B
+    subarea: B5
+    origen: generado
+    enunciado: "Una empresa tiene activo circulante de $800,000 y pasivo circulante de $400,000. Su razón circulante es:"
+    opciones:
+      - "0.5"
+      - "1.5"
+      - "2.0"
+      - "3.0"
+    correcta: 2
+    explicacion: "800,000 ÷ 400,000 = 2.0; por cada peso de pasivo de corto plazo hay dos pesos de activo circulante."
+
+  - id: B5-G03
+    tipo: directo
+    area: B
+    subarea: B5
+    origen: generado
+    enunciado: "El margen de utilidad neta se obtiene dividiendo:"
+    opciones:
+      - "Utilidad neta ÷ Ventas netas"
+      - "Ventas ÷ Activo total"
+      - "Utilidad bruta ÷ Costo de ventas"
+      - "Activo ÷ Pasivo"
+    correcta: 0
+    explicacion: "Margen de utilidad neta = Utilidad neta ÷ Ventas netas; indica qué proporción de las ventas se convierte en utilidad."
+
+  - id: B5-G04
+    tipo: directo
+    area: B
+    subarea: B5
+    origen: generado
+    enunciado: "El ROA (rendimiento sobre activos) relaciona:"
+    opciones:
+      - "La utilidad neta con el activo total"
+      - "Las ventas con el pasivo"
+      - "El capital con las ventas"
+      - "La utilidad bruta con el costo"
+    correcta: 0
+    explicacion: "ROA = Utilidad neta ÷ Activo total; mide la eficiencia con que los activos generan utilidad."
+
+  - id: B5-G05
+    tipo: directo
+    area: B
+    subarea: B5
+    origen: generado
+    enunciado: "La prueba del ácido se distingue de la razón circulante porque:"
+    opciones:
+      - "Suma los inventarios al activo circulante"
+      - "Excluye los inventarios del activo circulante"
+      - "Utiliza el activo total"
+      - "Considera únicamente el efectivo en caja"
+    correcta: 1
+    explicacion: "La prueba del ácido = (Activo circulante − Inventarios) ÷ Pasivo circulante, por ser el inventario el activo menos líquido."
+
+  # ----- C1 · Fundamentos de economía (+3) ----------------------------------
+  - id: C1-G01
+    tipo: directo
+    area: C
+    subarea: C1
+    origen: generado
+    enunciado: "El costo de oportunidad de una decisión es:"
+    opciones:
+      - "El valor monetario total gastado"
+      - "El valor de la mejor alternativa a la que se renuncia"
+      - "El costo fijo de producción"
+      - "El impuesto pagado por la operación"
+    correcta: 1
+    explicacion: "El costo de oportunidad es el beneficio de la mejor opción sacrificada al elegir otra."
+
+  - id: C1-G02
+    tipo: directo
+    area: C
+    subarea: C1
+    origen: generado
+    enunciado: "La ley de la demanda establece que, manteniendo lo demás constante:"
+    opciones:
+      - "A mayor precio, mayor cantidad demandada"
+      - "A mayor precio, menor cantidad demandada"
+      - "El precio no afecta la cantidad demandada"
+      - "La demanda depende solo del ingreso"
+    correcta: 1
+    explicacion: "Existe una relación inversa entre precio y cantidad demandada (pendiente negativa de la curva de demanda)."
+
+  - id: C1-G03
+    tipo: directo
+    area: C
+    subarea: C1
+    origen: generado
+    enunciado: "Un bien cuya demanda aumenta cuando se incrementa el ingreso del consumidor se denomina:"
+    opciones:
+      - "Bien inferior"
+      - "Bien normal"
+      - "Bien Giffen"
+      - "Bien libre"
+    correcta: 1
+    explicacion: "En los bienes normales la cantidad demandada crece al aumentar el ingreso; en los inferiores sucede lo contrario."
+
+  # ----- C2 · Economía de la empresa (+4) -----------------------------------
+  - id: C2-G01
+    tipo: directo
+    area: C
+    subarea: C2
+    origen: generado
+    enunciado: "En el punto de equilibrio de una empresa:"
+    opciones:
+      - "Las utilidades son máximas"
+      - "Los ingresos totales igualan a los costos totales"
+      - "Los costos fijos son cero"
+      - "Las ventas son cero"
+    correcta: 1
+    explicacion: "El punto de equilibrio es el nivel de ventas donde ingreso total = costo total, sin utilidad ni pérdida."
+
+  - id: C2-G02
+    tipo: directo
+    area: C
+    subarea: C2
+    origen: generado
+    enunciado: "El costo marginal es:"
+    opciones:
+      - "El costo total dividido entre las unidades producidas"
+      - "El costo de producir una unidad adicional"
+      - "El costo fijo por unidad"
+      - "El costo de la materia prima"
+    correcta: 1
+    explicacion: "El costo marginal es el incremento del costo total al producir una unidad adicional."
+
+  - id: C2-G03
+    tipo: directo
+    area: C
+    subarea: C2
+    origen: generado
+    enunciado: "Los costos fijos se caracterizan por:"
+    opciones:
+      - "Variar proporcionalmente con la producción"
+      - "Permanecer constantes ante cambios en el volumen de producción"
+      - "Ser siempre mayores que los costos variables"
+      - "Desaparecer en el corto plazo"
+    correcta: 1
+    explicacion: "Los costos fijos no cambian con el nivel de producción dentro de un rango relevante (por ejemplo, la renta)."
+
+  - id: C2-G04
+    tipo: directo
+    area: C
+    subarea: C2
+    origen: generado
+    enunciado: "La ley de los rendimientos decrecientes indica que:"
+    opciones:
+      - "Al añadir unidades de un factor variable, llega un punto en que el producto adicional disminuye"
+      - "La producción siempre crece de forma constante"
+      - "Los costos fijos aumentan sin límite"
+      - "La productividad nunca cambia"
+    correcta: 0
+    explicacion: "Al incrementar un factor manteniendo los demás fijos, el producto marginal eventualmente decrece."
+
+  # ----- C3 · Macroeconomía (+8) --------------------------------------------
+  - id: C3-G01
+    tipo: directo
+    area: C
+    subarea: C3
+    origen: generado
+    enunciado: "El Producto Interno Bruto (PIB) mide:"
+    opciones:
+      - "El valor de mercado de los bienes y servicios finales producidos en un país en un periodo"
+      - "Únicamente el valor de las exportaciones"
+      - "El total de impuestos recaudados"
+      - "El monto de la deuda pública"
+    correcta: 0
+    explicacion: "El PIB es el valor de mercado de todos los bienes y servicios finales producidos dentro de un país en un periodo determinado."
+
+  - id: C3-G02
+    tipo: directo
+    area: C
+    subarea: C3
+    origen: generado
+    enunciado: "La inflación se define como:"
+    opciones:
+      - "La caída generalizada de los precios"
+      - "El aumento sostenido y generalizado del nivel de precios"
+      - "El aumento del desempleo"
+      - "La devaluación de la moneda únicamente"
+    correcta: 1
+    explicacion: "La inflación es el incremento sostenido y generalizado de los precios, que reduce el poder adquisitivo del dinero."
+
+  - id: C3-G03
+    tipo: directo
+    area: C
+    subarea: C3
+    origen: generado
+    enunciado: "El organismo encargado de la política monetaria en México es:"
+    opciones:
+      - "La Secretaría de Hacienda (SHCP)"
+      - "El Banco de México (Banxico)"
+      - "El SAT"
+      - "La Cámara de Diputados"
+    correcta: 1
+    explicacion: "Banxico es el banco central autónomo responsable de la política monetaria y de procurar la estabilidad del poder adquisitivo."
+
+  - id: C3-G04
+    tipo: directo
+    area: C
+    subarea: C3
+    origen: generado
+    enunciado: "Una política monetaria restrictiva típicamente implica:"
+    opciones:
+      - "Bajar la tasa de interés de referencia"
+      - "Subir la tasa de interés de referencia para contener la inflación"
+      - "Aumentar el gasto público"
+      - "Reducir los impuestos"
+    correcta: 1
+    explicacion: "Para contener la inflación, el banco central eleva la tasa de interés, encarece el crédito y modera la demanda agregada."
+
+  - id: C3-G05
+    tipo: directo
+    area: C
+    subarea: C3
+    origen: generado
+    enunciado: "El PIB real se diferencia del PIB nominal en que:"
+    opciones:
+      - "El real está valuado a precios constantes y elimina el efecto de la inflación"
+      - "El nominal elimina el efecto de la inflación"
+      - "Son siempre idénticos"
+      - "El real solo incluye las exportaciones"
+    correcta: 0
+    explicacion: "El PIB real se mide a precios constantes de un año base, aislando el crecimiento del efecto de los precios."
+
+  - id: C3-G06
+    tipo: directo
+    area: C
+    subarea: C3
+    origen: generado
+    enunciado: "La tasa de desempleo se calcula como:"
+    opciones:
+      - "Población total ÷ número de desempleados"
+      - "(Población desempleada ÷ Población económicamente activa) × 100"
+      - "Empleados ÷ población total"
+      - "Desempleados ÷ empleados"
+    correcta: 1
+    explicacion: "La tasa de desempleo = (desocupados ÷ PEA) × 100; la PEA incluye a quienes trabajan o buscan empleo activamente."
+
+  - id: C3-G07
+    tipo: directo
+    area: C
+    subarea: C3
+    origen: generado
+    enunciado: "La política fiscal se ejerce principalmente mediante:"
+    opciones:
+      - "La tasa de interés de referencia"
+      - "El gasto público y los impuestos"
+      - "El tipo de cambio"
+      - "La emisión de billetes"
+    correcta: 1
+    explicacion: "La política fiscal utiliza el gasto público y la recaudación tributaria para influir en la actividad económica."
+
+  - id: C3-G08
+    tipo: directo
+    area: C
+    subarea: C3
+    origen: generado
+    enunciado: "Si la moneda nacional se deprecia frente al dólar, las exportaciones tienden a:"
+    opciones:
+      - "Encarecerse en el exterior y disminuir"
+      - "Abaratarse en el exterior y aumentar"
+      - "No registrar ningún cambio"
+      - "Convertirse en importaciones"
+    correcta: 1
+    explicacion: "Una depreciación abarata los productos nacionales en el extranjero, lo que favorece las exportaciones."
+
+  # ----- D1 · Mercado y empresa (+12) ---------------------------------------
+  - id: D1-G01
+    tipo: directo
+    area: D
+    subarea: D1
+    origen: generado
+    enunciado: "La segmentación de mercado consiste en:"
+    opciones:
+      - "Vender al mayor número posible de personas sin distinción"
+      - "Dividir el mercado en grupos homogéneos con características y necesidades similares"
+      - "Eliminar a la competencia"
+      - "Fijar un único precio para todos"
+    correcta: 1
+    explicacion: "Segmentar es dividir el mercado total en grupos homogéneos para dirigir estrategias específicas a cada uno."
+
+  - id: D1-G02
+    tipo: directo
+    area: D
+    subarea: D1
+    origen: generado
+    enunciado: "Las \"4 P\" de la mezcla de mercadotecnia son:"
+    opciones:
+      - "Producto, precio, plaza y promoción"
+      - "Personas, procesos, producto y precio"
+      - "Plaza, publicidad, prensa y promoción"
+      - "Producto, planeación, precio y proveedor"
+    correcta: 0
+    explicacion: "La mezcla de mercadotecnia clásica (McCarthy) se compone de producto, precio, plaza (distribución) y promoción."
+
+  - id: D1-G03
+    tipo: directo
+    area: D
+    subarea: D1
+    origen: generado
+    enunciado: "El posicionamiento de una marca se refiere a:"
+    opciones:
+      - "La ubicación física de la tienda"
+      - "El lugar que ocupa la marca en la mente del consumidor frente a la competencia"
+      - "El precio más bajo del mercado"
+      - "El número de productos del catálogo"
+    correcta: 1
+    explicacion: "Posicionamiento es la percepción distintiva que ocupa la marca en la mente del consumidor respecto a los competidores."
+
+  - id: D1-G04
+    tipo: directo
+    area: D
+    subarea: D1
+    origen: generado
+    enunciado: "El mercado meta (target) de una empresa es:"
+    opciones:
+      - "Cualquier persona que pase por la tienda"
+      - "El segmento de consumidores al que la empresa decide dirigir su oferta"
+      - "El conjunto de sus competidores directos"
+      - "El conjunto de sus proveedores"
+    correcta: 1
+    explicacion: "El mercado meta es el segmento seleccionado al cual la empresa enfoca su mezcla de mercadotecnia."
+
+  - id: D1-G05
+    tipo: directo
+    area: D
+    subarea: D1
+    origen: generado
+    enunciado: "La investigación de mercados sirve principalmente para:"
+    opciones:
+      - "Reducir el precio de venta"
+      - "Obtener información que reduzca la incertidumbre en las decisiones de mercadotecnia"
+      - "Fabricar los productos"
+      - "Pagar menos impuestos"
+    correcta: 1
+    explicacion: "La investigación de mercados recopila y analiza información para apoyar la toma de decisiones de marketing."
+
+  - id: D1-G06
+    tipo: directo
+    area: D
+    subarea: D1
+    origen: generado
+    enunciado: "En el ciclo de vida del producto, la etapa de mayores ventas que luego se estabilizan es la de:"
+    opciones:
+      - "Introducción"
+      - "Crecimiento"
+      - "Madurez"
+      - "Declive"
+    correcta: 2
+    explicacion: "En la madurez las ventas alcanzan su punto más alto y se estabilizan antes de comenzar a declinar."
+
+  - id: D1-G07
+    tipo: directo
+    area: D
+    subarea: D1
+    origen: generado
+    enunciado: "La fijación de precios basada en la demanda toma como referencia principal:"
+    opciones:
+      - "El costo de producción"
+      - "El valor percibido por el consumidor"
+      - "Solo el precio de la competencia"
+      - "El impuesto aplicable"
+    correcta: 1
+    explicacion: "La fijación basada en la demanda parte del valor que el consumidor percibe y está dispuesto a pagar."
+
+  - id: D1-G08
+    tipo: directo
+    area: D
+    subarea: D1
+    origen: generado
+    enunciado: "Un canal de distribución directo se caracteriza por:"
+    opciones:
+      - "Usar varios intermediarios"
+      - "Vender del productor al consumidor sin intermediarios"
+      - "Exportar siempre el producto"
+      - "Operar solo con mayoristas"
+    correcta: 1
+    explicacion: "En el canal directo el productor vende directamente al consumidor final, sin intermediarios."
+
+  - id: D1-G09
+    tipo: directo
+    area: D
+    subarea: D1
+    origen: generado
+    enunciado: "La demanda de un producto es elástica cuando:"
+    opciones:
+      - "La cantidad demandada apenas cambia ante variaciones de precio"
+      - "Un cambio en el precio provoca un cambio proporcionalmente mayor en la cantidad demandada"
+      - "El precio no influye en la cantidad"
+      - "La oferta permanece fija"
+    correcta: 1
+    explicacion: "La demanda elástica reacciona con fuerza al precio: la variación porcentual de la cantidad supera a la del precio."
+
+  - id: D1-G10
+    tipo: directo
+    area: D
+    subarea: D1
+    origen: generado
+    enunciado: "El branding se refiere a:"
+    opciones:
+      - "La gestión y construcción del valor e identidad de una marca"
+      - "La fijación del precio de los productos"
+      - "La logística de entrega"
+      - "El pago de impuestos de la empresa"
+    correcta: 0
+    explicacion: "El branding es el proceso de crear y administrar el valor y la identidad de una marca."
+
+  - id: D1-G11
+    tipo: directo
+    area: D
+    subarea: D1
+    origen: generado
+    enunciado: "Según la matriz de Ansoff, una estrategia de penetración de mercado busca:"
+    opciones:
+      - "Vender productos nuevos en mercados nuevos"
+      - "Aumentar la participación de productos actuales en mercados actuales"
+      - "Abandonar el mercado"
+      - "Subir los precios al máximo"
+    correcta: 1
+    explicacion: "La penetración de mercado incrementa la participación de productos existentes dentro de mercados existentes."
+
+  - id: D1-G12
+    tipo: directo
+    area: D
+    subarea: D1
+    origen: generado
+    enunciado: "La promoción de ventas se distingue de la publicidad porque:"
+    opciones:
+      - "Siempre se difunde por televisión"
+      - "Ofrece incentivos de corto plazo para estimular la compra (cupones, descuentos)"
+      - "Es exclusiva de las grandes empresas"
+      - "No tiene ningún costo"
+    correcta: 1
+    explicacion: "La promoción de ventas emplea incentivos temporales (cupones, 2x1, descuentos) para impulsar la compra inmediata."
+
+  # ----- E1 · Matemáticas financieras (+9) ----------------------------------
+  - id: E1-G01
+    tipo: directo
+    area: E
+    subarea: E1
+    origen: generado
+    enunciado: "El interés simple generado por un capital de $10,000 al 5% anual durante 2 años es:"
+    opciones:
+      - "$500"
+      - "$1,000"
+      - "$1,025"
+      - "$1,100"
+    correcta: 1
+    explicacion: "I = C · i · n = 10,000 × 0.05 × 2 = $1,000."
+
+  - id: E1-G02
+    tipo: directo
+    area: E
+    subarea: E1
+    origen: generado
+    enunciado: "El monto (capital más interés) de $8,000 a interés simple del 4% anual durante 3 años es:"
+    opciones:
+      - "$8,960"
+      - "$9,000"
+      - "$8,320"
+      - "$9,600"
+    correcta: 0
+    explicacion: "I = 8,000 × 0.04 × 3 = $960; M = 8,000 + 960 = $8,960."
+
+  - id: E1-G03
+    tipo: directo
+    area: E
+    subarea: E1
+    origen: generado
+    enunciado: "A interés compuesto, el monto de $5,000 al 10% anual durante 2 años es:"
+    opciones:
+      - "$6,000"
+      - "$6,050"
+      - "$5,500"
+      - "$6,100"
+    correcta: 1
+    explicacion: "M = C(1 + i)^n = 5,000 (1.10)^2 = 5,000 × 1.21 = $6,050."
+
+  - id: E1-G04
+    tipo: directo
+    area: E
+    subarea: E1
+    origen: generado
+    enunciado: "El interés compuesto se diferencia del interés simple en que:"
+    opciones:
+      - "No genera ningún interés"
+      - "Calcula el interés sobre el capital más los intereses ya acumulados"
+      - "Siempre resulta menor que el simple"
+      - "No depende del tiempo"
+    correcta: 1
+    explicacion: "El interés compuesto se calcula sobre el capital y los intereses generados (capitalización), a diferencia del simple."
+
+  - id: E1-G05
+    tipo: directo
+    area: E
+    subarea: E1
+    origen: generado
+    enunciado: "Una tasa nominal anual del 12% capitalizable mensualmente equivale a una tasa mensual de:"
+    opciones:
+      - "12%"
+      - "1%"
+      - "6%"
+      - "0.12%"
+    correcta: 1
+    explicacion: "Tasa mensual = tasa nominal anual ÷ número de periodos = 12% ÷ 12 = 1% mensual."
+
+  - id: E1-G06
+    tipo: directo
+    area: E
+    subarea: E1
+    origen: generado
+    enunciado: "El valor presente de $11,000 que se recibirán en un año, con una tasa del 10% anual, es:"
+    opciones:
+      - "$10,000"
+      - "$9,900"
+      - "$10,100"
+      - "$9,000"
+    correcta: 0
+    explicacion: "VP = VF ÷ (1 + i) = 11,000 ÷ 1.10 = $10,000."
+
+  - id: E1-G07
+    tipo: directo
+    area: E
+    subarea: E1
+    origen: generado
+    enunciado: "A interés simple del 10% anual, ¿en cuánto tiempo se duplica un capital?"
+    opciones:
+      - "5 años"
+      - "10 años"
+      - "20 años"
+      - "2 años"
+    correcta: 1
+    explicacion: "Duplicar implica I = C; entonces n = I ÷ (C · i) = 1 ÷ 0.10 = 10 años."
+
+  - id: E1-G08
+    tipo: directo
+    area: E
+    subarea: E1
+    origen: generado
+    enunciado: "Una anualidad consiste en:"
+    opciones:
+      - "Un solo pago al final del plazo"
+      - "Una serie de pagos iguales a intervalos de tiempo regulares"
+      - "Un pago que cambia de monto cada mes"
+      - "El interés generado en un año"
+    correcta: 1
+    explicacion: "Una anualidad es una sucesión de pagos iguales realizados a intervalos de tiempo regulares."
+
+  - id: E1-G09
+    tipo: directo
+    area: E
+    subarea: E1
+    origen: generado
+    enunciado: "El descuento simple sobre un documento de $20,000 con tasa del 6% a 6 meses es:"
+    opciones:
+      - "$600"
+      - "$1,200"
+      - "$300"
+      - "$1,000"
+    correcta: 0
+    explicacion: "D = M · d · n = 20,000 × 0.06 × 0.5 = $600."
+
+  # ----- F1 · Derecho público (+5) ------------------------------------------
+  - id: F1-G01
+    tipo: directo
+    area: F
+    subarea: F1
+    origen: generado
+    enunciado: "La Constitución Política de los Estados Unidos Mexicanos es:"
+    opciones:
+      - "Una ley secundaria"
+      - "La norma suprema del orden jurídico nacional"
+      - "Un reglamento administrativo"
+      - "Un tratado internacional"
+    correcta: 1
+    explicacion: "La Constitución es la norma fundamental y suprema de la que derivan todas las demás leyes del país."
+
+  - id: F1-G02
+    tipo: directo
+    area: F
+    subarea: F1
+    origen: generado
+    enunciado: "El derecho público regula principalmente:"
+    opciones:
+      - "Las relaciones entre particulares"
+      - "Las relaciones en las que el Estado interviene como ente soberano"
+      - "Solo los contratos privados"
+      - "Exclusivamente la herencia"
+    correcta: 1
+    explicacion: "El derecho público rige las relaciones donde el Estado actúa con imperio (constitucional, fiscal, penal, administrativo)."
+
+  - id: F1-G03
+    tipo: directo
+    area: F
+    subarea: F1
+    origen: generado
+    enunciado: "La obligación de contribuir al gasto público de manera proporcional y equitativa se establece en el artículo:"
+    opciones:
+      - "31, fracción IV, constitucional"
+      - "123 constitucional"
+      - "27 constitucional"
+      - "14 constitucional"
+    correcta: 0
+    explicacion: "El artículo 31, fracción IV, obliga a contribuir al gasto público de forma proporcional y equitativa."
+
+  - id: F1-G04
+    tipo: directo
+    area: F
+    subarea: F1
+    origen: generado
+    enunciado: "Para su ejercicio, el poder público en México se divide en:"
+    opciones:
+      - "Ejecutivo, Legislativo y Judicial"
+      - "Federal, estatal y municipal"
+      - "Civil, penal y mercantil"
+      - "Solo Ejecutivo y Legislativo"
+    correcta: 0
+    explicacion: "El poder público se divide para su ejercicio en Ejecutivo, Legislativo y Judicial."
+
+  - id: F1-G05
+    tipo: directo
+    area: F
+    subarea: F1
+    origen: generado
+    enunciado: "Un impuesto se distingue de un derecho (contribución) en que:"
+    opciones:
+      - "El impuesto es la contraprestación por un servicio específico"
+      - "El derecho se paga por un servicio público específico que recibe el contribuyente"
+      - "Ambos son idénticos"
+      - "Ninguno de los dos es obligatorio"
+    correcta: 1
+    explicacion: "Los derechos se pagan por servicios públicos individualizados; los impuestos no tienen una contraprestación directa."
+
+  # ----- F2 · Derecho privado (+6) ------------------------------------------
+  - id: F2-G01
+    tipo: directo
+    area: F
+    subarea: F2
+    origen: generado
+    enunciado: "Un contrato es:"
+    opciones:
+      - "Un acuerdo de voluntades que crea o transfiere derechos y obligaciones"
+      - "Una orden judicial"
+      - "Una ley emitida por el Congreso"
+      - "Un impuesto"
+    correcta: 0
+    explicacion: "El contrato es el acuerdo de dos o más voluntades para crear o transferir obligaciones y derechos."
+
+  - id: F2-G02
+    tipo: directo
+    area: F
+    subarea: F2
+    origen: generado
+    enunciado: "Los elementos de existencia de un contrato son:"
+    opciones:
+      - "El consentimiento y el objeto"
+      - "El precio y la entrega"
+      - "La forma y el registro"
+      - "La garantía y el aval"
+    correcta: 0
+    explicacion: "Los elementos de existencia son el consentimiento y el objeto posible; sin ellos el contrato no existe jurídicamente."
+
+  - id: F2-G03
+    tipo: directo
+    area: F
+    subarea: F2
+    origen: generado
+    enunciado: "Por regla general, la mayoría de edad y la plena capacidad de ejercicio se adquieren en México a los:"
+    opciones:
+      - "16 años"
+      - "18 años"
+      - "21 años"
+      - "15 años"
+    correcta: 1
+    explicacion: "La mayoría de edad y la plena capacidad de ejercicio se alcanzan a los 18 años cumplidos."
+
+  - id: F2-G04
+    tipo: directo
+    area: F
+    subarea: F2
+    origen: generado
+    enunciado: "Una sociedad anónima se caracteriza porque:"
+    opciones:
+      - "Los socios responden con todo su patrimonio personal"
+      - "El capital se divide en acciones y la responsabilidad se limita al pago de éstas"
+      - "No requiere capital social"
+      - "Solo puede tener un socio"
+    correcta: 1
+    explicacion: "En la S.A. el capital está representado por acciones y la responsabilidad de los socios se limita a su aportación."
+
+  - id: F2-G05
+    tipo: directo
+    area: F
+    subarea: F2
+    origen: generado
+    enunciado: "El pagaré, como título de crédito, contiene:"
+    opciones:
+      - "Una promesa incondicional de pagar una suma de dinero"
+      - "Una orden de embargo"
+      - "Un contrato de arrendamiento"
+      - "Una sentencia judicial"
+    correcta: 0
+    explicacion: "El pagaré es un título de crédito que incorpora la promesa incondicional de pagar una cantidad determinada de dinero."
+
+  - id: F2-G06
+    tipo: directo
+    area: F
+    subarea: F2
+    origen: generado
+    enunciado: "La compraventa mercantil se perfecciona cuando:"
+    opciones:
+      - "Se entrega físicamente la cosa en todos los casos"
+      - "Las partes acuerdan la cosa y el precio"
+      - "Se paga el IVA correspondiente"
+      - "Se inscribe en el registro público"
+    correcta: 1
+    explicacion: "La compraventa se perfecciona por el acuerdo sobre la cosa y el precio, aunque aún no se hayan entregado ni pagado."
