@@ -44,6 +44,33 @@ export interface SimulacroContainerProps {
 }
 
 /**
+ * Construye el estado inicial. Si hay un simulacro inconcluso en localStorage,
+ * arranca directamente en 'active' restaurado en el punto exacto donde estaba;
+ * si no, arranca en 'picking' (configuración).
+ */
+function restoreInitialState(): { state: SimulacroState; currentIndex: number } {
+  const snap = loadSimulacroSnapshot();
+  if (!snap) return { state: { phase: 'picking' }, currentIndex: 0 };
+
+  const exam: SampledExam = {
+    questions: snap.questions,
+    bankWarnings: snap.bankWarnings,
+  };
+  const answers = new Map<string, Answer | null>(snap.answers);
+  const session: ExamSession = {
+    id: snap.sessionId,
+    config: snap.config,
+    exam,
+    answers: new Map(answers),
+    startedAt: snap.startedAt,
+  };
+  return {
+    state: { phase: 'active', session, answers, remainingSeconds: snap.remainingSeconds },
+    currentIndex: Math.min(Math.max(0, snap.currentIndex), snap.questions.length - 1),
+  };
+}
+
+/**
  * Container del flujo completo de simulacro.
  *
  * Fases:
@@ -61,8 +88,8 @@ export function SimulacroContainer({
   storagePort,
   onDone,
 }: SimulacroContainerProps) {
-  const [state, setState] = useState<SimulacroState>({ phase: 'picking' });
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [state, setState] = useState<SimulacroState>(() => restoreInitialState().state);
+  const [currentIndex, setCurrentIndex] = useState(() => restoreInitialState().currentIndex);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   // ---------------------------------------------------------------------------
@@ -115,30 +142,6 @@ export function SimulacroContainer({
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
   }, [state.phase]); // Se recrea intencionalmente solo cuando cambia de fase
-
-  // ---------------------------------------------------------------------------
-  // Restaurar un simulacro en curso al montar (refresh-safe)
-  // ---------------------------------------------------------------------------
-
-  useEffect(() => {
-    const snap = loadSimulacroSnapshot();
-    if (!snap) return;
-    const exam: SampledExam = {
-      questions: snap.questions,
-      bankWarnings: snap.bankWarnings,
-    };
-    const answers = new Map<string, Answer | null>(snap.answers);
-    const session: ExamSession = {
-      id: snap.sessionId,
-      config: snap.config,
-      exam,
-      answers: new Map(answers),
-      startedAt: snap.startedAt,
-    };
-    setState({ phase: 'active', session, answers, remainingSeconds: snap.remainingSeconds });
-    setCurrentIndex(Math.min(Math.max(0, snap.currentIndex), snap.questions.length - 1));
-    // Solo al montar: restaura un simulacro en curso si existe.
-  }, []);
 
   // ---------------------------------------------------------------------------
   // Persistir el estado del simulacro activo (refresh-safe)

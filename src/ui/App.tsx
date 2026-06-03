@@ -3,6 +3,7 @@ import type { Attempt } from '../domain/attempt/attempt';
 import type { Reactivo } from '../domain/question/question';
 import { YamlContentAdapter } from '../infrastructure/content/yaml-content-adapter';
 import { IndexedDbStorageAdapter } from '../infrastructure/storage/indexeddb-storage-adapter';
+import { loadSimulacroSnapshot } from '../infrastructure/storage/simulacro-session-storage';
 import { LandingShell } from './features/landing/LandingShell';
 import { SimulacroContainer } from './features/simulacro/SimulacroContainer';
 import { ReportView } from './features/simulacro/ReportView';
@@ -33,7 +34,10 @@ type AppView = 'landing' | 'simulacro' | 'report' | 'practica';
  * Los adapters se instancian una sola vez y se inyectan en los casos de uso.
  */
 export function App() {
-  const [view, setView] = useState<AppView>('landing');
+  // Si hay un simulacro inconcluso en localStorage, arranca directo en él.
+  const [view, setView] = useState<AppView>(() =>
+    loadSimulacroSnapshot() ? 'simulacro' : 'landing',
+  );
   const [lastAttempt, setLastAttempt] = useState<Attempt | null>(null);
   const [lastQuestions, setLastQuestions] = useState<readonly Reactivo[]>([]);
 

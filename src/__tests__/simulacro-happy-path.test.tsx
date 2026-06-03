@@ -15,6 +15,8 @@ import { render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, it, expect, beforeEach } from 'vitest';
 import { App } from '../ui/App';
+import { saveSimulacroSnapshot } from '../infrastructure/storage/simulacro-session-storage';
+import type { Reactivo } from '../domain/question/question';
 
 describe('Smoke: flujo completo del simulacro', () => {
   beforeEach(() => {
@@ -78,5 +80,36 @@ describe('Smoke: flujo completo del simulacro', () => {
       screen.getByRole('button', { name: 'Nuevo simulacro' }),
     );
     expect(screen.getByRole('button', { name: 'Simular' })).toBeInTheDocument();
+  });
+
+  it('si hay un simulacro inconcluso guardado, App arranca directo en él', async () => {
+    const reactivo: Reactivo = {
+      id: 'qr-1',
+      tipo: 'directo',
+      area: 'A',
+      subarea: 'A1',
+      enunciado: 'Enunciado restaurado del simulacro guardado',
+      opciones: ['op A', 'op B', 'op C', 'op D'],
+      correcta: 1,
+      explanation: 'exp',
+    };
+    saveSimulacroSnapshot({
+      sessionId: 'sess-restaurada',
+      config: { size: 20, timer: { mode: 'unlimited' } },
+      questions: [reactivo],
+      bankWarnings: [],
+      answers: [],
+      remainingSeconds: null,
+      currentIndex: 0,
+      startedAt: Date.now(),
+    });
+
+    render(<App />);
+
+    // Arranca directo en el simulacro activo (no en el landing)
+    expect(
+      await screen.findByText('Enunciado restaurado del simulacro guardado'),
+    ).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Simular' })).not.toBeInTheDocument();
   });
 });
