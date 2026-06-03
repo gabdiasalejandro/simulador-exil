@@ -3,11 +3,18 @@ import type { ContentPort } from '../../../application/ports/content-port';
 import type { StoragePort } from '../../../application/ports/storage-port';
 import type { SessionConfig, ExamSession } from '../../../domain/exam/session';
 import type { Attempt } from '../../../domain/attempt/attempt';
+import type { Reactivo } from '../../../domain/question/question';
 import type { Answer } from '../../../domain/question/answer';
 import type { BankWarning } from '../../../domain/exam/sampling';
 import { startSimulacro } from '../../../application/use-cases/start-simulacro';
 import { submitAttempt } from '../../../application/use-cases/submit-attempt';
 import { isAnswered } from '../../../domain/question/answer';
+import type { SampledExam } from '../../../domain/exam/sampling';
+import {
+  saveSimulacroSnapshot,
+  loadSimulacroSnapshot,
+  clearSimulacroSnapshot,
+} from '../../../infrastructure/storage/simulacro-session-storage';
 import { SizePicker } from './SizePicker';
 import { QuestionCard } from '../../molecules/QuestionCard/QuestionCard';
 import { NavGrid } from '../../molecules/NavGrid/NavGrid';
@@ -33,7 +40,7 @@ type SimulacroState =
 export interface SimulacroContainerProps {
   contentPort: ContentPort;
   storagePort: StoragePort;
-  onDone: (attempt: Attempt) => void;
+  onDone: (attempt: Attempt, questions: readonly Reactivo[]) => void;
 }
 
 /**
@@ -110,6 +117,48 @@ export function SimulacroContainer({
   }, [state.phase]); // Se recrea intencionalmente solo cuando cambia de fase
 
   // ---------------------------------------------------------------------------
+  // Restaurar un simulacro en curso al montar (refresh-safe)
+  // ---------------------------------------------------------------------------
+
+  useEffect(() => {
+    const snap = loadSimulacroSnapshot();
+    if (!snap) return;
+    const exam: SampledExam = {
+      questions: snap.questions,
+      bankWarnings: snap.bankWarnings,
+    };
+    const answers = new Map<string, Answer | null>(snap.answers);
+    const session: ExamSession = {
+      id: snap.sessionId,
+      config: snap.config,
+      exam,
+      answers: new Map(answers),
+      startedAt: snap.startedAt,
+    };
+    setState({ phase: 'active', session, answers, remainingSeconds: snap.remainingSeconds });
+    setCurrentIndex(Math.min(Math.max(0, snap.currentIndex), snap.questions.length - 1));
+    // Solo al montar: restaura un simulacro en curso si existe.
+  }, []);
+
+  // ---------------------------------------------------------------------------
+  // Persistir el estado del simulacro activo (refresh-safe)
+  // ---------------------------------------------------------------------------
+
+  useEffect(() => {
+    if (state.phase !== 'active') return;
+    saveSimulacroSnapshot({
+      sessionId: state.session.id,
+      config: state.session.config,
+      questions: [...state.session.exam.questions],
+      bankWarnings: [...state.session.exam.bankWarnings],
+      answers: [...state.answers.entries()],
+      remainingSeconds: state.remainingSeconds,
+      currentIndex,
+      startedAt: state.session.startedAt,
+    });
+  }, [state, currentIndex]);
+
+  // ---------------------------------------------------------------------------
   // Submit (manual o automático)
   // ---------------------------------------------------------------------------
 
@@ -126,8 +175,9 @@ export function SimulacroContainer({
 
     try {
       const attempt = await submitAttempt(finalSession, storagePort);
+      clearSimulacroSnapshot();
       setState({ phase: 'submitted', attempt });
-      onDone(attempt);
+      onDone(attempt, finalSession.exam.questions);
     } catch (err) {
       const message = err instanceof Error ? err.message : String(err);
       setState({ phase: 'error', message, bankWarnings: [] });
@@ -181,7 +231,10 @@ export function SimulacroContainer({
         </p>
         <Button
           label="Volver al inicio"
-          onClick={() => setState({ phase: 'picking' })}
+          onClick={() => {
+            clearSimulacroSnapshot();
+            setState({ phase: 'picking' });
+          }}
         />
       </div>
     );
@@ -207,21 +260,16 @@ export function SimulacroContainer({
     const answeredCount = navItems.filter((n) => n.status === 'answered').length;
 
     return (
-      <div className="flex min-h-screen flex-col bg-gray-50">
+      <div className="flex min-h-screen flex-col bg-crema">
         {/* Barra superior */}
-        <header className="sticky top-0 z-10 flex items-center justify-between border-b border-gray-200 bg-white px-4 py-3 shadow-sm">
+        <header className="sticky top-0 z-10 flex items-center justify-between border-b border-stone-200 bg-stone-50 px-4 py-3 shadow-sm">
           <span className="text-sm text-gray-500">
-            {answeredCount}/{totalQ} respondidos
+            <span className="font-bold text-gray-800">{answeredCount}</span>/{totalQ}{' '}
+            respondidos
           </span>
           <Timer
             remainingSeconds={remainingSeconds}
             onExpire={handleTimerExpire}
-          />
-          <Button
-            label="Enviar"
-            variant="primary"
-            onClick={() => void handleSubmit()}
-            className="py-1.5 px-4 text-sm"
           />
         </header>
 
@@ -236,7 +284,7 @@ export function SimulacroContainer({
           </aside>
 
           {/* Carta de pregunta */}
-          <div className="flex-1 flex flex-col gap-4">
+          <div className="mx-auto flex w-full max-w-3xl flex-col gap-4">
             {session.exam.bankWarnings.length > 0 && (
               <div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-2 text-sm text-amber-800">
                 <strong>Banco insuficiente:</strong>{' '}
@@ -246,6 +294,26 @@ export function SimulacroContainer({
               </div>
             )}
 
+            {/* Navegación anterior / siguiente — cuadrados, oscuros, arriba */}
+            <div className="flex justify-between">
+              <Button
+                label="← Anterior"
+                variant="dark"
+                shape="square"
+                disabled={currentIndex === 0}
+                onClick={() => setCurrentIndex((i) => i - 1)}
+                className="px-3 py-2 text-sm"
+              />
+              <Button
+                label="Siguiente →"
+                variant="dark"
+                shape="square"
+                disabled={currentIndex >= totalQ - 1}
+                onClick={() => setCurrentIndex((i) => i + 1)}
+                className="px-3 py-2 text-sm"
+              />
+            </div>
+
             <QuestionCard
               question={question}
               answer={currentAnswer}
@@ -254,21 +322,15 @@ export function SimulacroContainer({
               total={totalQ}
             />
 
-            {/* Navegación anterior / siguiente */}
-            <div className="flex justify-between">
+            {/* Enviar — solo en la última pregunta, abajo */}
+            {currentIndex === totalQ - 1 && (
               <Button
-                label="← Anterior"
-                variant="ghost"
-                disabled={currentIndex === 0}
-                onClick={() => setCurrentIndex((i) => i - 1)}
+                label="Revisar examen"
+                variant="primary"
+                onClick={() => void handleSubmit()}
+                className="w-full py-4 text-base"
               />
-              <Button
-                label="Siguiente →"
-                variant="ghost"
-                disabled={currentIndex >= totalQ - 1}
-                onClick={() => setCurrentIndex((i) => i + 1)}
-              />
-            </div>
+            )}
           </div>
         </main>
       </div>

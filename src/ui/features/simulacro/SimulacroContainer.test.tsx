@@ -49,6 +49,7 @@ describe('SimulacroContainer', () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
+    localStorage.clear(); // evitar que el snapshot de un test contamine al siguiente
     contentPort = makeFakeContentPort(make20Questions());
     storagePort = makeFakeStoragePort();
   });
@@ -76,7 +77,8 @@ describe('SimulacroContainer', () => {
     await act(async () => {
       await userEvent.click(screen.getByRole('button', { name: 'Iniciar simulacro' }));
     });
-    expect(screen.getByRole('button', { name: 'Enviar' })).toBeInTheDocument();
+    // En el flujo activo, la primera pregunta muestra el botón "Siguiente →"
+    expect(screen.getByRole('button', { name: 'Siguiente →' })).toBeInTheDocument();
   });
 
   it('cambia currentIndex al navegar con la NavGrid', async () => {
@@ -111,8 +113,11 @@ describe('SimulacroContainer', () => {
     await act(async () => {
       await userEvent.click(screen.getByRole('button', { name: 'Iniciar simulacro' }));
     });
+    // El submit solo aparece en la última pregunta: saltamos a ella con la NavGrid
+    const navButtons = screen.getAllByRole('button', { name: /^Reactivo \d+,/ });
+    await userEvent.click(navButtons[navButtons.length - 1]!);
     await act(async () => {
-      await userEvent.click(screen.getByRole('button', { name: 'Enviar' }));
+      await userEvent.click(screen.getByRole('button', { name: 'Revisar examen' }));
     });
     expect(onDone).toHaveBeenCalledTimes(1);
     expect(storagePort.saveAttempt).toHaveBeenCalledTimes(1);

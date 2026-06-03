@@ -13,14 +13,18 @@
 import 'fake-indexeddb/auto';
 import { render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, beforeEach } from 'vitest';
 import { App } from '../ui/App';
 
 describe('Smoke: flujo completo del simulacro', () => {
+  beforeEach(() => {
+    localStorage.clear(); // sin simulacro en curso persistido
+  });
+
   it('navega de landing a simulacro y muestra el reporte criterial', async () => {
     render(<App />);
 
-    // --- Paso 1: Landing muestra 4 botones ---
+    // --- Paso 1: Landing muestra los modos activos ---
     expect(screen.getByRole('button', { name: 'Simular' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Practicar' })).toBeInTheDocument();
 
@@ -36,9 +40,9 @@ describe('Smoke: flujo completo del simulacro', () => {
       );
     });
 
-    // --- Paso 4: El simulacro activo muestra el botón Enviar ---
+    // --- Paso 4: El simulacro activo muestra la navegación entre reactivos ---
     expect(
-      await screen.findByRole('button', { name: 'Enviar' }),
+      await screen.findByRole('button', { name: 'Siguiente →' }),
     ).toBeInTheDocument();
 
     // --- Paso 5: Responder el primer reactivo (primera opción disponible) ---
@@ -51,9 +55,11 @@ describe('Smoke: flujo completo del simulacro', () => {
       await userEvent.click(optionButtons[0]!);
     }
 
-    // --- Paso 6: Enviar el simulacro ---
+    // --- Paso 6: Saltar a la última pregunta y enviar con "Revisar examen" ---
+    const navButtons = screen.getAllByRole('button', { name: /^Reactivo \d+,/ });
+    await userEvent.click(navButtons[navButtons.length - 1]!);
     await act(async () => {
-      await userEvent.click(screen.getByRole('button', { name: 'Enviar' }));
+      await userEvent.click(screen.getByRole('button', { name: 'Revisar examen' }));
     });
 
     // --- Paso 7: Verificar que aparece el reporte criterial ---

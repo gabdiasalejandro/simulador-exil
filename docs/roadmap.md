@@ -30,21 +30,26 @@ guia-md                  [ ] pendiente  (guía oficial → Markdown navegable)
 |------|-------------|-----------|
 | **Modo Revisar** | UI de historial: listar `Attempt` guardados, ver desempeño por área. El `StoragePort`/IndexedDB ya persiste los intentos. | Alta |
 | **Resaltado en feedback no-choice** | En modo práctica, `ordenamiento` y `relacion` muestran correcto/incorrecto + explicación pero NO resaltan la respuesta correcta (solo `directo`/`completamiento` lo hacen). | Media |
-| **Ampliar banco** | Con 128 reactivos y distribución desigual (C=8, D=11…), un simulacro de 125 todavía muestra "banco insuficiente" en subáreas flacas. Sumar fuentes para cubrir el blueprint completo. | Media |
+| **Ampliar banco** | ✅ Banco a 185 reactivos: +57 generados (`origen: generado`) para llevar cada subárea a su cuota oficial; un simulacro de 125 ya no muestra "banco insuficiente". Pendiente: revisión humana del contenido generado. | Media |
 | **Tech-debt scoring** | Resuelto al aplanar casos (eliminado el cast `as LeafQuestion`). Sin acción pendiente. | — |
 | **Consolidar "Por tema"** | Decidir si el botón "Por tema" se elimina (cubierto por Práctica) o se reusa para otra cosa. | Baja |
 | **guia-md** | Convertir la guía CENEVAL oficial a Markdown navegable dentro de la PWA. | Baja |
 | **Sesiones gemelas** | Sesiones oficiales S1=58 / S2=67 y reactivos piloto (hoy fuera de alcance; el modelo es extensible). | Baja |
 
-## Distribución actual del banco (128 reactivos)
+## Distribución actual del banco (185 reactivos)
 
-| Área | Reactivos |
-|------|-----------|
-| A · Administración | 40 |
-| E · Matemáticas y estadística | 41 |
-| B · Contabilidad y finanzas | 17 |
-| D · Mercadotecnia | 11 |
-| F · Derecho | 11 |
-| C · Economía | 8 |
+| Área | Reactivos | Transcritos | Generados |
+|------|-----------|-------------|-----------|
+| A · Administración | 40 | 40 | 0 |
+| E · Matemáticas y estadística | 50 | 41 | 9 |
+| B · Contabilidad y finanzas | 27 | 17 | 10 |
+| C · Economía | 23 | 8 | 15 |
+| D · Mercadotecnia | 23 | 11 | 12 |
+| F · Derecho | 22 | 11 | 11 |
 
-Tipos: `directo` 124, `ordenamiento` 2, `relacion` 2 (los 4 no-`directo` son semilla; el PDF no traía nativos de esos tipos).
+Todas las subáreas alcanzan o superan su cuota oficial (ver `taxonomy.ts`).
+
+Los 57 reactivos generados llevan `origen: generado` en `banco.yaml`; el resto es transcripción
+fiel del PDF de preparación. Los generados deben revisarse antes de tomarse como definitivos.
+
+Tipos: `directo` 181, `ordenamiento` 2, `relacion` 2 (los 4 no-`directo` son semilla).

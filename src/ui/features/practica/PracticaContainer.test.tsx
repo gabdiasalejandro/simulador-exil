@@ -136,7 +136,7 @@ describe('PracticaContainer — feedback inmediato', () => {
     expect(verificar).not.toBeDisabled();
   });
 
-  it('tras verificar respuesta correcta muestra "¡Correcto!" y la explicación', async () => {
+  it('tras verificar respuesta correcta muestra "Correcto" y la explicación', async () => {
     render(<PracticaContainer contentPort={port} onVolver={vi.fn()} />);
 
     await userEvent.click(screen.getByRole('button', { name: /Administración/ }));
@@ -149,7 +149,7 @@ describe('PracticaContainer — feedback inmediato', () => {
     await userEvent.click(screen.getByText(/Opción B/)); // correcta
     await userEvent.click(screen.getByRole('button', { name: 'Verificar respuesta' }));
 
-    expect(screen.getByText('¡Correcto!')).toBeInTheDocument();
+    expect(screen.getByText('Correcto')).toBeInTheDocument();
     expect(screen.getByText('Explicación del reactivo r1')).toBeInTheDocument();
   });
 
@@ -219,7 +219,7 @@ describe('PracticaContainer — siguiente reactivo', () => {
     // El reactivo mostrado debe ser diferente (o el mismo si solo hay uno y vuelve)
     await waitFor(() => {
       // El feedback debe haberse limpiado
-      expect(screen.queryByText('¡Correcto!')).not.toBeInTheDocument();
+      expect(screen.queryByText('Correcto')).not.toBeInTheDocument();
       expect(screen.queryByText('Incorrecto')).not.toBeInTheDocument();
     });
 

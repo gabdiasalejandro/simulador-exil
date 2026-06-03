@@ -1,1 +1,13 @@
 @import "tailwindcss";
+
+/* Paleta crema/cálida para reducir fatiga visual frente al blanco puro. */
+@theme {
+  --color-crema: #f4f1ea;
+  --color-crema-light: #faf8f3;
+  --color-crema-dark: #ece7d9;
+}
+
+body {
+  background-color: var(--color-crema);
+  color: #1f2937; /* gray-800 */
+}

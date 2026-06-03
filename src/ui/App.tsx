@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { Attempt } from '../domain/attempt/attempt';
+import type { Reactivo } from '../domain/question/question';
 import { YamlContentAdapter } from '../infrastructure/content/yaml-content-adapter';
 import { IndexedDbStorageAdapter } from '../infrastructure/storage/indexeddb-storage-adapter';
 import { LandingShell } from './features/landing/LandingShell';
@@ -34,14 +35,17 @@ type AppView = 'landing' | 'simulacro' | 'report' | 'practica';
 export function App() {
   const [view, setView] = useState<AppView>('landing');
   const [lastAttempt, setLastAttempt] = useState<Attempt | null>(null);
+  const [lastQuestions, setLastQuestions] = useState<readonly Reactivo[]>([]);
 
-  const handleAttemptDone = (attempt: Attempt) => {
+  const handleAttemptDone = (attempt: Attempt, questions: readonly Reactivo[]) => {
     setLastAttempt(attempt);
+    setLastQuestions(questions);
     setView('report');
   };
 
   const handleReset = () => {
     setLastAttempt(null);
+    setLastQuestions([]);
     setView('landing');
   };
 
@@ -65,7 +69,13 @@ export function App() {
 
     case 'report':
       if (!lastAttempt) return null;
-      return <ReportView attempt={lastAttempt} onReset={handleReset} />;
+      return (
+        <ReportView
+          attempt={lastAttempt}
+          questions={lastQuestions}
+          onReset={handleReset}
+        />
+      );
 
     case 'practica':
       return (

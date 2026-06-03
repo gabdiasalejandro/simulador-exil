@@ -4,12 +4,10 @@ import { describe, it, expect, vi } from 'vitest';
 import { LandingShell } from './LandingShell';
 
 describe('LandingShell', () => {
-  it('(esc.08-A) muestra los 4 botones en el DOM', () => {
+  it('(esc.08-A) muestra los dos modos activos en el DOM', () => {
     render(<LandingShell onSimular={vi.fn()} onPracticar={vi.fn()} />);
     expect(screen.getByRole('button', { name: 'Simular' })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Practicar' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Por tema' })).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Revisar' })).toBeInTheDocument();
   });
 
   it('(esc.08-B) Practicar está habilitado e invoca onPracticar al hacer clic', async () => {
@@ -21,10 +19,10 @@ describe('LandingShell', () => {
     expect(onPracticar).toHaveBeenCalledTimes(1);
   });
 
-  it('Por tema y Revisar están deshabilitados', () => {
+  it('ya no muestra "Por tema" ni "Revisar"', () => {
     render(<LandingShell onSimular={vi.fn()} onPracticar={vi.fn()} />);
-    expect(screen.getByRole('button', { name: 'Por tema' })).toBeDisabled();
-    expect(screen.getByRole('button', { name: 'Revisar' })).toBeDisabled();
+    expect(screen.queryByRole('button', { name: 'Por tema' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Revisar' })).not.toBeInTheDocument();
   });
 
   it('click en Simular invoca onSimular', async () => {

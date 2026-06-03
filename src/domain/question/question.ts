@@ -20,6 +20,13 @@ export interface BaseReactivo {
   readonly explanation: string;
   /** Contexto de caso compartido. Presente cuando el reactivo proviene de un multirreactivo. */
   readonly caso?: string;
+  /**
+   * Trazabilidad del origen del reactivo.
+   * - 'oficial' (o ausente): transcrito fielmente de la fuente CENEVAL/preparación.
+   * - 'generado': redactado con apoyo de IA para cubrir subáreas con banco insuficiente.
+   *   Debe revisarse antes de considerarse material de estudio definitivo.
+   */
+  readonly origen?: 'oficial' | 'generado';
 }
 
 // ---------------------------------------------------------------------------

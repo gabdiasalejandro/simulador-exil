@@ -29,7 +29,7 @@ export function NavGrid({ items, currentIndex, onSelect }: NavGridProps) {
   return (
     <nav
       aria-label="Navegación de reactivos"
-      className="flex flex-wrap gap-2 rounded-xl border border-gray-200 bg-gray-50 p-3"
+      className="flex flex-wrap gap-2 rounded-xl border border-stone-200 bg-stone-50 p-3"
     >
       {items.map((item) => {
         const isCurrent = item.index === currentIndex;

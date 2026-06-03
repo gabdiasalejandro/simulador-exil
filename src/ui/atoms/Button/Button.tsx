@@ -1,12 +1,15 @@
 import type { ReactNode } from 'react';
 
-export type ButtonVariant = 'primary' | 'secondary' | 'ghost';
+export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'dark';
+export type ButtonShape = 'default' | 'square';
 
 export interface ButtonProps {
   label: string;
   onClick?: () => void;
   disabled?: boolean;
   variant?: ButtonVariant;
+  /** Forma: 'default' (esquinas redondeadas) o 'square' (más cuadrada). */
+  shape?: ButtonShape;
   /** Contenido adicional (ej. ícono) */
   children?: ReactNode;
   /** Clase CSS adicional */
@@ -22,6 +25,8 @@ const variantClasses: Record<ButtonVariant, string> = {
     'bg-white text-blue-700 border border-blue-700 hover:bg-blue-50 focus-visible:ring-blue-600',
   ghost:
     'bg-transparent text-gray-500 hover:bg-gray-100 focus-visible:ring-gray-400',
+  dark:
+    'bg-gray-900 text-white hover:bg-gray-800 focus-visible:ring-gray-700',
 };
 
 /**
@@ -34,13 +39,16 @@ export function Button({
   onClick,
   disabled = false,
   variant = 'primary',
+  shape = 'default',
   children,
   className = '',
   type = 'button',
   title,
 }: ButtonProps) {
   const base =
-    'inline-flex items-center justify-center gap-2 rounded-lg px-5 py-3 font-semibold text-sm transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2';
+    'inline-flex items-center justify-center gap-2 px-5 py-3 font-semibold text-sm transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2';
+
+  const shapeClass = shape === 'square' ? 'rounded-md' : 'rounded-lg';
 
   const disabledClasses = disabled
     ? 'opacity-40 cursor-not-allowed pointer-events-none'
@@ -51,7 +59,7 @@ export function Button({
       type={type}
       disabled={disabled}
       onClick={!disabled ? onClick : undefined}
-      className={`${base} ${variantClasses[variant]} ${disabledClasses} ${className}`}
+      className={`${base} ${shapeClass} ${variantClasses[variant]} ${disabledClasses} ${className}`}
       title={title}
       aria-disabled={disabled}
     >

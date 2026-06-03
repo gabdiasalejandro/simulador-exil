@@ -285,9 +285,9 @@ export function PracticaContainer({ contentPort, onVolver }: PracticaContainerPr
   };
 
   return (
-    <div className="flex min-h-screen flex-col bg-gray-50">
+    <div className="flex min-h-screen flex-col bg-crema">
       {/* Encabezado */}
-      <header className="sticky top-0 z-10 flex items-center justify-between border-b border-gray-200 bg-white px-4 py-3 shadow-sm">
+      <header className="sticky top-0 z-10 flex items-center justify-between border-b border-stone-200 bg-stone-50 px-4 py-3 shadow-sm">
         <div className="flex items-center gap-3">
           <Button
             label="← Volver"
