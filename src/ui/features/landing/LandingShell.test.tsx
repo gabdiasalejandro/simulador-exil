@@ -32,14 +32,9 @@ describe('LandingShell', () => {
     expect(handler).toHaveBeenCalledTimes(1);
   });
 
-  it('el botón "?" despliega la explicación de cada modo', async () => {
+  it('muestra una explicación fija de cada modo', () => {
     render(<LandingShell onSimular={vi.fn()} onPracticar={vi.fn()} />);
-    // Cerrado por defecto: no hay explicación visible
-    expect(screen.queryByText(/al final ves tu reporte/i)).not.toBeInTheDocument();
-
-    await userEvent.click(screen.getByRole('button', { name: '¿Qué es cada modo?' }));
-
-    expect(screen.getByText(/al final ves tu reporte/i)).toBeInTheDocument();
-    expect(screen.getByText(/sin tiempo/i)).toBeInTheDocument();
+    expect(screen.getByText(/tu reporte por área/i)).toBeInTheDocument();
+    expect(screen.getByText(/explicación inmediata/i)).toBeInTheDocument();
   });
 });
