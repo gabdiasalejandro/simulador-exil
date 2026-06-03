@@ -19,10 +19,9 @@ finanzas, Economía, Mercadotecnia, Matemáticas y estadística, Derecho).
 
 | Modo | Qué hace |
 |------|----------|
-| **Simular** | Examen cronometrado con la distribución oficial (125 / 60 / 20). Sin feedback hasta enviar. Reporte criterial por área y subárea. |
-| **Practicar** | Reactivos con feedback y explicación inmediata después de responder. |
-| **Por tema** | Navega el banco filtrando por área → subárea. |
-| **Revisar** | Historial de intentos y desempeño por área. |
+| **Simular** | Examen cronometrado con la distribución oficial (125 / 60 / 20), sin feedback hasta enviar. Reporte criterial por área en **bento grid**: veredicto, aciertos/errores/sin responder/tiempo, fortaleza y área a reforzar, y revisión reactivo por reactivo en una vista aparte. Si refrescas a mitad de un simulacro, **se reanuda en el punto exacto** donde ibas. |
+| **Practicar** | Reactivos por tema (sidebar por área → subárea) con feedback y explicación inmediata tras cada respuesta. Sin tiempo. |
+| **Revisar** | _(próximamente)_ Historial de intentos y progreso por área a lo largo del tiempo. Los intentos ya se guardan; falta la pantalla. |
 
 ## Cómo correr
 
@@ -51,20 +50,26 @@ React ni a la base de datos; todo lo externo entra por un puerto.
 
 ```
 src/
-  domain/          Lógica pura: Question, ExamBlueprint, sampling, ScoringPolicy, Attempt
+  domain/          Lógica pura: Reactivo (unión por tipo), blueprint + sampling (Hamilton), scoring, Attempt, taxonomy
   application/     Casos de uso + puertos (ContentPort, StoragePort)
-  infrastructure/  Adaptadores: JSON de contenido, IndexedDB de progreso
+  infrastructure/  Adaptadores: contenido YAML, IndexedDB (intentos finalizados),
+                   localStorage (simulacro en curso, refresh-safe)
   ui/              React (atoms/molecules + features)
 ```
 
-**Contrato de contenido — importante:** el banco de preguntas es un **`.json` versionado**
-en el repo, no se extrae del PDF en runtime. El PDF se parsea **una sola vez** con un
-script de build que genera ese JSON; la app desplegada solo lee el JSON (vía
-`ContentPort`). El progreso del usuario vive en IndexedDB (vía `StoragePort`).
+**Contrato de contenido — importante:** el banco de preguntas es un **`.yaml` comentado y
+versionado** (`src/infrastructure/content/banco.yaml`), embebido en el bundle vía Vite
+`?raw`. El PDF **nunca** se parsea en runtime: la transcripción se hizo una sola vez en
+autoría. Hoy el banco tiene **185 reactivos** = 128 transcritos del PDF de preparación +
+57 generados con apoyo de IA (marcados `origen: generado`) para cubrir la cuota oficial
+por subárea. La app solo lee el YAML vía `ContentPort`.
 
 ```
-PDF ──(script dev, una vez)──> bank.json ──(commit)──> app lee JSON ──> dominio
+PDF ──(transcripción asistida, una vez)──> banco.yaml ──(commit)──> app lee YAML ──> dominio
 ```
+
+El progreso del usuario vive en el navegador: los **intentos finalizados** en IndexedDB
+(vía `StoragePort`) y el **simulacro en curso** en localStorage (para sobrevivir un refresh).
 
 La documentación detallada de cómo se organiza todo vive en [`docs/`](./docs/).
 
@@ -74,13 +79,19 @@ Construido con SDD (Spec-Driven Development), en cortes revisables:
 
 | # | Corte | Estado |
 |---|-------|--------|
-| 1 | `mvp-simulacro-core` — toolchain + dominio + modo Simular | 🚧 en progreso |
-| 2 | `extraccion-banco` — script PDF → `bank.json` | ⏳ |
-| 3 | `modo-practica` — feedback + explicación | ⏳ |
-| 4 | `modo-por-tema` y `revisar` | ⏳ |
-| 5 | `guia-md-referencia` — guía oficial → `.md` | ⏳ |
+| 1 | `mvp-simulacro-core` — toolchain + dominio + modo Simular | ✅ |
+| 2 | `extraccion-banco` — transcripción PDF → `banco.yaml` | ✅ |
+| 3 | `modo-practica` — feedback + explicación | ✅ |
+| 4 | `banco-185` — +57 reactivos generados (cuota oficial por subárea) | ✅ |
+| 5 | `reporte-analisis` — análisis detallado en bento grid | ✅ |
+| 6 | `persistencia-simulacro` — localStorage refresh-safe + auto-reanudar | ✅ |
+| 7 | `modo-revisar` — historial de intentos y progreso por área | ⏳ |
+| 8 | `guia-md-referencia` — guía oficial → `.md` navegable | ⏳ |
+
+Detalle vivo en [`docs/roadmap.md`](./docs/roadmap.md) y [`todo.md`](./todo.md). Suite en
+**173 tests** (`npm test`), con `tsc` y `lint` en verde.
 
 ## Stack
 
-Vite · TypeScript (strict) · React · Vitest + Testing Library · ESLint + Prettier ·
-PWA (vite-plugin-pwa) · IndexedDB.
+Vite · TypeScript (strict) · React · Tailwind CSS v4 · Vitest + Testing Library ·
+ESLint + Prettier · PWA (vite-plugin-pwa) · IndexedDB + localStorage.
