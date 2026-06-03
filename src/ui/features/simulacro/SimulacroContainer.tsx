@@ -283,8 +283,8 @@ export function SimulacroContainer({
             />
           </aside>
 
-          {/* Carta de pregunta */}
-          <div className="mx-auto flex w-full max-w-3xl flex-col gap-4">
+          {/* Carta de pregunta — mismo ancho que en práctica (ocupa el panel) */}
+          <div className="flex flex-1 flex-col gap-4">
             {session.exam.bankWarnings.length > 0 && (
               <div className="rounded-lg border border-amber-200 bg-amber-50 px-4 py-2 text-sm text-amber-800">
                 <strong>Banco insuficiente:</strong>{' '}
