@@ -4,7 +4,7 @@
 
 ## Decisión central
 
-El banco de reactivos es un archivo `.yaml` comentado y embebido en el bundle via Vite `?raw`. El PDF de ejercicios NUNCA se parsea en runtime — solo en build/autoría. La extracción ya se realizó (transcripción asistida del PDF): **128 reactivos** en `banco.yaml`.
+El banco de reactivos es un archivo `.yaml` comentado y embebido en el bundle via Vite `?raw`. El PDF de ejercicios NUNCA se parsea en runtime — solo en build/autoría. La extracción ya se realizó (transcripción asistida del PDF): **185 reactivos** en `banco.yaml` = 128 transcritos del PDF + 57 generados con apoyo de IA (`origen: generado`) para cubrir la cuota oficial por subárea. Los generados deben revisarse antes de tomarse como definitivos.
 
 ## Flujo de contenido
 
@@ -12,7 +12,7 @@ El banco de reactivos es un archivo `.yaml` comentado y embebido en el bundle vi
 assets/guia-ceneval.pdf              (fuente oficial — no toca código)
 assets/ejercicios-ejemplos/*.pdf     (banco origen)
          │
-         │  transcripción asistida (una vez) → banco.yaml (128 reactivos)
+         │  transcripción asistida (una vez) → banco.yaml (128 + 57 generados = 185 reactivos)
          ▼
 src/infrastructure/content/banco.yaml   ← versionado en git, comentado en español
          │

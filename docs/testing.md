@@ -30,9 +30,9 @@ src/domain/exam/
 |------|---------------|-------------|-------|
 | Dominio puro | Hamilton (suma=size, cero permitido, determinismo, desempate), sampling (déficit, bankWarnings, sin repetición, EMPTY_BANK), scoring (global/área/subárea, null=0), validación de `Reactivo` | Vitest — funciones puras | `rng` inyectado para tests deterministas |
 | Casos de uso | `startSimulacro`, `submitAttempt` y `practica` con dobles de puertos | Vitest + `vi.fn()` | El `ContentPort` y `StoragePort` son fakes; nunca se usa el banco real ni IndexedDB |
-| Adaptadores | `YamlContentAdapter` con YAML inyectado; `IndexedDbStorageAdapter` con fake-indexeddb | Vitest + `fake-indexeddb` | Cada test usa un `dbName` único para aislar estado |
+| Adaptadores | `YamlContentAdapter` con YAML inyectado; `IndexedDbStorageAdapter` con fake-indexeddb; `simulacro-session-storage` (localStorage, simulacro en curso) | Vitest + `fake-indexeddb` | Cada test de IndexedDB usa un `dbName` único; los de localStorage limpian con `localStorage.clear()` en `beforeEach` |
 | Lint arquitectónico | Pureza de dominio: cero imports de `react`, `idb` o DOM | ESLint `no-restricted-imports` | Ejecutar con `npm run lint:domain` |
-| UI | `QuestionCard` por tipo (+ modo feedback), `LandingShell`, `SimulacroContainer`, `ReportView`, `Timer`, `PracticaContainer`/`TemaSidebar` | React Testing Library | 167 tests en verde |
+| UI | `QuestionCard` por tipo (+ modo feedback), `LandingShell`, `SimulacroContainer`, `ReportView`, `Timer`, `PracticaContainer`/`TemaSidebar` | React Testing Library | 173 tests en verde |
 
 ## Patrón de dobles de puerto
 

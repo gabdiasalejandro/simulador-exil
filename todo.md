@@ -1,6 +1,6 @@
 # TODO — Simulador EXIL
 
-Estado y pendientes para retomar. Última actualización: corte tras `modo-practica`.
+Estado y pendientes para retomar. Última actualización: corte tras banco a 185, reporte en bento grid, persistencia del simulacro (refresh-safe + auto-reanudar) y rediseño sobrio de la landing/UI.
 
 ## Cómo retomar
 
@@ -8,7 +8,7 @@ Estado y pendientes para retomar. Última actualización: corte tras `modo-pract
 git pull            # siempre antes de empezar/pushear
 npm install         # si hay deps nuevas
 npm run dev         # http://localhost:5173
-npm test            # 167 tests
+npm test            # 173 tests
 npm run lint && npm run lint:domain && npx tsc --noEmit
 ```
 
@@ -46,9 +46,18 @@ Banco: `src/infrastructure/content/banco.yaml` (185 reactivos: 128 transcritos +
 src/
   domain/         puro: question (Reactivo v2), exam (blueprint+Hamilton), scoring, attempt, taxonomy
   application/    ports (ContentPort, StoragePort) + use-cases (start-simulacro, submit-attempt, practica)
-  infrastructure/ content (YamlContentAdapter + banco.yaml), storage (IndexedDbStorageAdapter)
-  ui/             atoms, molecules (QuestionCard, NavGrid), features (landing, simulacro, practica)
+  infrastructure/ content (YamlContentAdapter + banco.yaml), storage (IndexedDbStorageAdapter
+                  para intentos finalizados + simulacro-session-storage para el simulacro en curso)
+  ui/             atoms, molecules (QuestionCard unificada, NavGrid), features (landing, simulacro, practica)
 ```
+
+## UI / UX (estado actual)
+
+- **Landing**: sobria, centrada, con líneas delgadas arriba/abajo; título y párrafo descriptivo fuera de la card de acciones (solo botones Simular/Practicar).
+- **Paleta crema/stone** global (`--color-crema` en `index.css`) para reducir fatiga visual; cards en `stone-50`.
+- **QuestionCard** es un único componente compartido por simulacro y práctica (acentos por borde, sin rellenos saturados).
+- **Reporte** en bento grid: score+veredicto, aciertos/errores/sin responder/tiempo, fortaleza/refuerzo, por área; la revisión reactivo-por-reactivo vive en una vista aparte. Botón "Volver al inicio" prominente.
+- **Persistencia del simulacro** en localStorage: si hay uno inconcluso, la app arranca directo en él (punto exacto); al enviar se borra. Botón "Volver al inicio" también en la pantalla de configuración.
 
 ## Convenciones del repo
 

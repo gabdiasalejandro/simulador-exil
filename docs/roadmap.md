@@ -10,6 +10,10 @@ mvp-simulacro-core
 refactor-modelo-yaml-ui  ✅ fusionado   (banco YAML v2, casos aplanados, UI mejorada)
 extraccion-banco         ✅ fusionado   (128 reactivos transcritos del PDF)
 modo-practica            ✅ fusionado   (playground por tema, feedback inmediato)
+banco-185                ✅ fusionado   (+57 reactivos generados, cuota oficial por subárea)
+reporte-analisis         ✅ fusionado   (reporte en bento grid, revisión en vista aparte)
+persistencia-simulacro   ✅ fusionado   (localStorage refresh-safe + auto-reanudar)
+rediseño-ui/landing      ✅ fusionado   (paleta crema, landing sobria, card de pregunta unificada)
 por-tema                 ↪️ cubierto por el sidebar de Práctica
 modo-revisar             [ ] pendiente  (historial de intentos)
 guia-md                  [ ] pendiente  (guía oficial → Markdown navegable)
@@ -19,7 +23,7 @@ guia-md                  [ ] pendiente  (guía oficial → Markdown navegable)
 
 | Modo | Estado | Notas |
 |------|--------|-------|
-| **Simular** | ✅ | 128 reactivos, blueprint oficial (125/60/20, Hamilton), timer configurable, reporte criterial por área/subárea |
+| **Simular** | ✅ | 185 reactivos, blueprint oficial (125/60/20, Hamilton), timer configurable, reporte criterial por área en bento grid (veredicto, aciertos/errores/tiempo, fortaleza/refuerzo, revisión por reactivo en vista aparte). Estado persistido en localStorage: refresh-safe y auto-reanuda al cargar la app |
 | **Practicar** | ✅ | Playground: sidebar por tema → reactivos aleatorios con feedback y explicación inmediata |
 | **Por tema** | ↪️ | Prácticamente cubierto por el sidebar de Práctica; evaluar si el botón se fusiona o se elimina |
 | **Revisar** | ⏳ | Historial de intentos persistidos (StoragePort ya guarda los `Attempt`); falta la UI |
