@@ -32,9 +32,9 @@ describe('LandingShell', () => {
     expect(handler).toHaveBeenCalledTimes(1);
   });
 
-  it('muestra una explicación fija de cada modo', () => {
+  it('explica ambos modos en el párrafo bajo el título', () => {
     render(<LandingShell onSimular={vi.fn()} onPracticar={vi.fn()} />);
-    expect(screen.getByText(/tu reporte por área/i)).toBeInTheDocument();
+    expect(screen.getByText(/reporte por área/i)).toBeInTheDocument();
     expect(screen.getByText(/explicación inmediata/i)).toBeInTheDocument();
   });
 });
