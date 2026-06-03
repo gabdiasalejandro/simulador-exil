@@ -3,12 +3,11 @@ import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 import tailwindcss from '@tailwindcss/vite';
 
-// GitHub Pages sirve el sitio bajo /<repo>/. En build usamos ese subpath;
-// en dev seguimos en la raíz para no ensuciar el flujo local.
-const REPO_BASE = '/simulador-exil/';
+// Con dominio personalizado (CNAME), GitHub Pages sirve el sitio desde la raíz.
+const SITE_BASE = '/';
 
-export default defineConfig(({ command }) => ({
-  base: command === 'build' ? REPO_BASE : '/',
+export default defineConfig(() => ({
+  base: SITE_BASE,
   plugins: [
     tailwindcss(),
     react(),
@@ -37,9 +36,9 @@ export default defineConfig(({ command }) => ({
         theme_color: '#1e40af',
         background_color: '#ffffff',
         display: 'standalone',
-        // scope/start_url deben coincidir con el subpath de GitHub Pages
-        scope: REPO_BASE,
-        start_url: REPO_BASE,
+        // scope/start_url en la raíz del dominio personalizado
+        scope: SITE_BASE,
+        start_url: SITE_BASE,
         icons: [
           {
             src: 'icon-192.png',
