@@ -3,8 +3,8 @@ import react from '@vitejs/plugin-react';
 import { VitePWA } from 'vite-plugin-pwa';
 import tailwindcss from '@tailwindcss/vite';
 
-// Con dominio personalizado (CNAME), GitHub Pages sirve el sitio desde la raíz.
-const SITE_BASE = '/';
+// GitHub Pages sirve el sitio bajo el nombre del repositorio.
+const SITE_BASE = '/simulador-exil/';
 
 export default defineConfig(() => ({
   base: SITE_BASE,
@@ -36,7 +36,7 @@ export default defineConfig(() => ({
         theme_color: '#1e40af',
         background_color: '#ffffff',
         display: 'standalone',
-        // scope/start_url en la raíz del dominio personalizado
+        // scope/start_url bajo la base del repositorio en GitHub Pages
         scope: SITE_BASE,
         start_url: SITE_BASE,
         icons: [
