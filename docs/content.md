@@ -4,7 +4,7 @@
 
 ## Decisión central
 
-El banco de reactivos es un archivo `.yaml` comentado y embebido en el bundle via Vite `?raw`. El PDF de ejercicios NUNCA se parsea en runtime — solo en build/autoría. La extracción ya se realizó (transcripción asistida del PDF): **185 reactivos** en `banco.yaml` = 128 transcritos del PDF + 57 generados con apoyo de IA (`origen: generado`) para cubrir la cuota oficial por subárea. Los generados deben revisarse antes de tomarse como definitivos.
+El banco de reactivos es un archivo `.yaml` comentado y embebido en el bundle via Vite `?raw`. El PDF de ejercicios NUNCA se parsea en runtime — solo en build/autoría. La extracción ya se realizó (transcripción asistida del PDF): **190 reactivos** en `banco.yaml` = 128 transcritos del PDF de preparación + 57 generados con apoyo de IA (`origen: generado`) para cubrir la cuota oficial por subárea + 5 reactivos modelo de la Guía oficial CENEVAL (`origen: generado`, respuesta inferida porque la guía no publica clave). Los reactivos `generado` deben revisarse antes de tomarse como definitivos.
 
 ## Flujo de contenido
 
@@ -78,7 +78,10 @@ reactivos:
 | `ordenamiento` | `enunciado`, `elementos[]`, `ordenCorrecto[]` |
 | `relacion` | `enunciado`, `columnaIzquierda[]`, `columnaDerecha[]`, `emparejamientos[]` |
 
-Campo opcional en todos: `caso` (contexto compartido de multirreactivo).
+Campos opcionales en todos:
+- `caso`: contexto compartido de multirreactivo.
+- `tema`: tema fino free-text (más granular que la subárea), ej. `"Interés simple"`. Alimenta las sugerencias de estudio ("Temas para reforzar") al cierre del simulacro. Un reactivo sin `tema` no rompe nada; solo no contribuye a esas sugerencias.
+- `origen`: `oficial` (por defecto) o `generado` (redactado/inferido con apoyo de IA; revisar antes de tomar como definitivo).
 
 ### Clave de explicación: `explicacion` en YAML, `explanation` en TypeScript
 

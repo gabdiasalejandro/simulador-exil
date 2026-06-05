@@ -8,6 +8,7 @@ import { LandingShell } from './features/landing/LandingShell';
 import { SimulacroContainer } from './features/simulacro/SimulacroContainer';
 import { ReportView } from './features/simulacro/ReportView';
 import { PracticaContainer } from './features/practica/PracticaContainer';
+import { TemarioView } from './features/temario/TemarioView';
 
 // ---------------------------------------------------------------------------
 // Instancias singleton de los adapters
@@ -22,7 +23,7 @@ const storagePort = new IndexedDbStorageAdapter();
 // Vistas de la aplicación (routing sin librería pesada — estado local)
 // ---------------------------------------------------------------------------
 
-type AppView = 'landing' | 'simulacro' | 'report' | 'practica';
+type AppView = 'landing' | 'simulacro' | 'report' | 'practica' | 'temario';
 
 /**
  * Shell principal de la aplicación.
@@ -59,6 +60,7 @@ export function App() {
         <LandingShell
           onSimular={() => setView('simulacro')}
           onPracticar={() => setView('practica')}
+          onTemario={() => setView('temario')}
         />
       );
 
@@ -89,6 +91,9 @@ export function App() {
           onVolver={handleReset}
         />
       );
+
+    case 'temario':
+      return <TemarioView onVolver={handleReset} />;
 
     default:
       return null;

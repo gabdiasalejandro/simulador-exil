@@ -4,6 +4,7 @@ import { describe, it, expect, vi } from 'vitest';
 import { ReportView } from './ReportView';
 import type { Attempt } from '../../../domain/attempt/attempt';
 import type { AttemptReport } from '../../../domain/scoring/attempt-report';
+import type { Reactivo } from '../../../domain/question/question';
 
 // ---------------------------------------------------------------------------
 // Fixture
@@ -79,6 +80,53 @@ describe('ReportView', () => {
     expect(
       screen.queryByText('Aviso de banco insuficiente:'),
     ).not.toBeInTheDocument();
+  });
+
+  // Reactivos fallados (sin responder) con tema y caso para las nuevas vistas.
+  const questions: Reactivo[] = [
+    {
+      id: 'q1',
+      tipo: 'directo',
+      area: 'A',
+      subarea: 'A1',
+      tema: 'Interés simple',
+      caso: 'Contexto compartido del multirreactivo de prueba.',
+      enunciado: 'Pregunta uno',
+      opciones: ['a', 'b', 'c', 'd'],
+      correcta: 0,
+      explanation: 'exp1',
+    },
+    {
+      id: 'q2',
+      tipo: 'directo',
+      area: 'B',
+      subarea: 'B5',
+      tema: 'Punto de equilibrio',
+      enunciado: 'Pregunta dos',
+      opciones: ['a', 'b', 'c', 'd'],
+      correcta: 1,
+      explanation: 'exp2',
+    },
+  ];
+
+  it('sugiere los temas a reforzar de los reactivos fallados', () => {
+    render(
+      <ReportView attempt={makeAttempt(mockReport)} questions={questions} onReset={vi.fn()} />,
+    );
+    expect(screen.getByText('Temas para reforzar')).toBeInTheDocument();
+    expect(screen.getByText('Interés simple')).toBeInTheDocument();
+    expect(screen.getByText('Punto de equilibrio')).toBeInTheDocument();
+  });
+
+  it('muestra el contexto del caso en la revisión de respuestas', async () => {
+    render(
+      <ReportView attempt={makeAttempt(mockReport)} questions={questions} onReset={vi.fn()} />,
+    );
+    await userEvent.click(screen.getByRole('button', { name: /Revisar respuestas/ }));
+    expect(screen.getByText('Contexto del caso')).toBeInTheDocument();
+    expect(
+      screen.getByText('Contexto compartido del multirreactivo de prueba.'),
+    ).toBeInTheDocument();
   });
 
   it('llama onReset al hacer clic en "Volver al inicio"', async () => {

@@ -3,6 +3,7 @@ import { Button } from '../../atoms/Button/Button';
 export interface LandingShellProps {
   onSimular: () => void;
   onPracticar: () => void;
+  onTemario?: () => void;
 }
 
 /** Logo pequeño del simulador: monograma "EX" en azul (mismo que el favicon). */
@@ -33,7 +34,7 @@ function Logo({ className = 'h-7 w-7' }: { className?: string }) {
  * descriptivo van fuera y arriba de la card, que solo contiene las acciones.
  * Tono sobrio. Solo presentación.
  */
-export function LandingShell({ onSimular, onPracticar }: LandingShellProps) {
+export function LandingShell({ onSimular, onPracticar, onTemario }: LandingShellProps) {
   return (
     <main className="flex min-h-screen flex-col bg-crema">
       {/* Línea delgada superior + marca */}
@@ -66,13 +67,20 @@ export function LandingShell({ onSimular, onPracticar }: LandingShellProps) {
               onClick={onPracticar}
               className="w-full py-3.5 text-base"
             />
+            {/* Temario — estructura oficial del examen. */}
+            <Button
+              label="Temario"
+              variant="secondary"
+              onClick={() => onTemario?.()}
+              className="w-full py-3.5 text-base"
+            />
           </section>
         </div>
       </div>
 
       {/* Línea delgada inferior + footer mínimo */}
       <footer className="border-t border-stone-300 px-6 py-3 text-center text-xs text-gray-400">
-        EXIL-NEGOCIOS · CENEVAL · 185 reactivos
+        EXIL-NEGOCIOS · CENEVAL · 190 reactivos
       </footer>
     </main>
   );

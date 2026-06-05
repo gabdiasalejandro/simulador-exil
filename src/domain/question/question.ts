@@ -18,6 +18,13 @@ export interface BaseReactivo {
   readonly area: AreaCode;
   readonly subarea: SubareaCode;
   readonly explanation: string;
+  /**
+   * Tema fino del reactivo (free-text), más granular que la subárea oficial.
+   * Ej.: "Interés simple", "Punto de equilibrio". Alimenta las sugerencias de
+   * estudio ("qué temas reforzar") al final del simulacro. Opcional: un reactivo
+   * sin tema no rompe nada; simplemente no contribuye a las sugerencias finas.
+   */
+  readonly tema?: string;
   /** Contexto de caso compartido. Presente cuando el reactivo proviene de un multirreactivo. */
   readonly caso?: string;
   /**

@@ -202,6 +202,16 @@ export function ReportView({ attempt, questions = [], onReset }: ReportViewProps
     })
     .filter((x): x is { q: Reactivo; ans: Answer | null; numero: number } => x !== null);
 
+  // Temas para reforzar: temas distintos entre los reactivos fallados, con conteo.
+  // Alimenta las sugerencias de estudio del cierre del simulacro.
+  const temaCount = new Map<string, number>();
+  for (const { q } of fallados) {
+    if (q.tema) temaCount.set(q.tema, (temaCount.get(q.tema) ?? 0) + 1);
+  }
+  const temasReforzar = [...temaCount.entries()].sort(
+    (a, b) => b[1] - a[1] || a[0].localeCompare(b[0]),
+  );
+
   const volverInicio = (
     <Button label="Volver al inicio" onClick={onReset} variant="primary" className="px-5 py-2.5" />
   );
@@ -236,6 +246,19 @@ export function ReportView({ attempt, questions = [], onReset }: ReportViewProps
                 key={q.id}
                 className="rounded-xl border border-stone-200 bg-stone-50 p-5 shadow-sm"
               >
+                {q.tema && (
+                  <span className="mb-2 inline-block rounded-full bg-blue-50 px-2.5 py-0.5 text-xs font-medium text-blue-700">
+                    {q.tema}
+                  </span>
+                )}
+                {q.caso && (
+                  <div className="mb-3 rounded-lg border border-l-4 border-gray-200 border-l-gray-400 bg-white p-3 text-sm leading-relaxed text-gray-600">
+                    <p className="mb-1 text-[11px] font-bold uppercase tracking-widest text-gray-400">
+                      Contexto del caso
+                    </p>
+                    {q.caso}
+                  </div>
+                )}
                 <p className="mb-3 font-semibold text-gray-800">
                   <span className="text-gray-400">#{numero}</span> {q.enunciado}
                 </p>
@@ -340,6 +363,33 @@ export function ReportView({ attempt, questions = [], onReset }: ReportViewProps
             })}
           </div>
         </Tile>
+
+        {/* Temas para reforzar — sugerencias de estudio finas (por tema) */}
+        {temasReforzar.length > 0 && (
+          <Tile className="col-span-2 sm:col-span-4">
+            <h3 className="text-sm font-semibold uppercase tracking-wide text-gray-500">
+              Temas para reforzar
+            </h3>
+            <p className="mb-3 mt-0.5 text-xs text-gray-400">
+              Temas en los que fallaste; conviene repasarlos antes de tu próximo intento.
+            </p>
+            <ul className="flex flex-wrap gap-2">
+              {temasReforzar.map(([tema, count]) => (
+                <li
+                  key={tema}
+                  className="inline-flex items-center gap-1.5 rounded-full border border-red-200 bg-red-50 px-3 py-1 text-sm text-red-800"
+                >
+                  {tema}
+                  {count > 1 && (
+                    <span className="rounded-full bg-red-200 px-1.5 text-xs font-semibold tabular-nums">
+                      {count}
+                    </span>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </Tile>
+        )}
 
         {/* bankWarnings */}
         {report.bankWarnings.length > 0 && (

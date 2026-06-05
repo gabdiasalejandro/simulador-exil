@@ -49,6 +49,7 @@ reactivos:
     tipo: directo
     area: E
     subarea: E1
+    tema: "Variación porcentual"
     enunciado: "Tomando como referencia un ejercicio de 2015 en donde se obtuvo una ganancia de $4,800,000 y en 2016 de $5,950,000, determina la variación monetaria y la variación porcentual."
     opciones:
       - "$1,150,000 y 23.96%"
@@ -62,6 +63,7 @@ reactivos:
     tipo: directo
     area: E
     subarea: E1
+    tema: "Interés simple"
     enunciado: "Una persona cuenta con un capital de $2,500,000 y desea saber cuánto tendrá en 12 meses, la tasa de interés aplicable es del 3.5% mensual."
     opciones:
       - "$3,555,000"
@@ -75,6 +77,7 @@ reactivos:
     tipo: directo
     area: E
     subarea: E2
+    tema: "Punto de equilibrio"
     enunciado: "El ingreso total de una escuela por x alumnos se establece por a = 1500x, los gastos mensuales totales son b = 890x + 2350. ¿Cuántos alumnos se deben tener mensualmente para mantener el punto de equilibrio?"
     opciones:
       - "3"
@@ -88,6 +91,7 @@ reactivos:
     tipo: directo
     area: E
     subarea: E1
+    tema: "Anualidades anticipadas"
     enunciado: "Se necesita calcular el monto al cual equivalen 8 pagos anticipados de $23,500 si el interés es del 25% anual."
     opciones:
       - "466,283.66"
@@ -101,6 +105,7 @@ reactivos:
     tipo: directo
     area: E
     subarea: E2
+    tema: "Sistemas de ecuaciones lineales"
     caso: "Una empresa de alimentos produce dos tipos de mezclas para sus panes, ambos a base de harina y salvado. La mezcla clásica lleva 8 kg de harina por cada 42 kg de salvado. La mezcla light lleva 4 kg de harina por cada 7 kg de salvado. La fábrica dispone en este momento de 38 kg de harina y 73 kg de salvado."
     enunciado: "¿Cuántos kg de mezcla light puede fabricar hasta agotar el stock?"
     opciones:
@@ -115,6 +120,7 @@ reactivos:
     tipo: directo
     area: E
     subarea: E2
+    tema: "Funciones lineales (modelo de costos)"
     caso: "La empresa Telcel ofrece a sus clientes un plan que incluye celular nuevo en $800 y la tarifa fija mensual de $200, plan todo incluido."
     enunciado: "¿Cuánto se habrá pagado en el transcurso de 11 meses? (Identifícalo mediante la gráfica)."
     opciones:
@@ -129,7 +135,7 @@ reactivos:
     tipo: directo
     area: E
     subarea: E2
-    caso: "La empresa Telcel ofrece a sus clientes un plan que incluye celular nuevo en $800 y la tarifa fija mensual de $200, plan todo incluido."
+    tema: "Sistemas de ecuaciones lineales"
     enunciado: "En un cuadro de costos de cajas de medicamentos, el usuario 1 compró 2x + 3y = 75 y el usuario 2 compró 4x + 8y = 115, donde x es el costo de una caja de aspirinas y y el de una caja de ibuprofeno. Elabora un sistema de ecuaciones 2×2 y resuelve las incógnitas."
     opciones:
       - "caja de aspirina $6.5 y caja de ibuprofeno $10"
@@ -143,6 +149,7 @@ reactivos:
     tipo: directo
     area: E
     subarea: E2
+    tema: "Ecuaciones de primer grado"
     enunciado: "Resuelve la siguiente ecuación de primer grado: 15 − 9z = 13z − 7"
     opciones:
       - "z = 0"
@@ -156,6 +163,7 @@ reactivos:
     tipo: directo
     area: E
     subarea: E2
+    tema: "Ecuaciones de segundo grado"
     enunciado: "De la siguiente ecuación de segundo grado, resuélvela: 2x² + 6x = 0"
     opciones:
       - "x1 = 1 y x2 = -3"
@@ -169,6 +177,7 @@ reactivos:
     tipo: directo
     area: E
     subarea: E2
+    tema: "Sistemas de ecuaciones lineales"
     caso: "En una empresa se compraron 5 copas de cristal y 4 de plástico por $85 para un evento. Además ya se tenían algunas copas del día anterior, pues se compraron 4 de cristal y 7 de plástico por $95."
     enunciado: "Determinar el precio de una copa de cristal y de una de plástico."
     opciones:
@@ -183,6 +192,7 @@ reactivos:
     tipo: directo
     area: E
     subarea: E2
+    tema: "Integral definida"
     enunciado: "Es la representación del área bajo la curva de una función:"
     opciones:
       - "Integral indefinida"
@@ -196,6 +206,7 @@ reactivos:
     tipo: directo
     area: E
     subarea: E2
+    tema: "Integral definida (costo marginal)"
     enunciado: "La definición de costo marginal de un productor es dm/dx = 0.7x + 5, y la producción actual es x = 96 unidades a la semana. ¿Cuánto más costará incrementar la producción a 230 unidades por semana?"
     opciones:
       - "$14,959.4"
@@ -209,6 +220,7 @@ reactivos:
     tipo: directo
     area: E
     subarea: E2
+    tema: "Integral definida (ingreso marginal)"
     enunciado: "El ingreso marginal de una empresa está determinado por C'(x) = 9.4 + 0.08x. Determinar el incremento del ingreso total cuando los niveles de ventas se amplían de 100 a 150 unidades."
     opciones:
       - "$950"
@@ -222,6 +234,7 @@ reactivos:
     tipo: directo
     area: E
     subarea: E2
+    tema: "Integral definida (acumulación)"
     enunciado: "Se espera que una nueva máquina genere ahorro en costos de operación. Cuando la máquina tenga x años de uso, la razón de ahorro será de f(x) = 700 + 3500x pesos al año. ¿Cuánto se ahorra en costos de operación durante los primeros cuatro años?"
     opciones:
       - "$20800"
@@ -235,6 +248,7 @@ reactivos:
     tipo: directo
     area: E
     subarea: E2
+    tema: "Antiderivadas"
     enunciado: "La derivada de x⁶ es 6x⁵. ¿Cuál es la antiderivada de 6x⁵?"
     opciones:
       - "x⁶"
@@ -248,6 +262,7 @@ reactivos:
     tipo: directo
     area: E
     subarea: E2
+    tema: "Dominio de una función"
     enunciado: "Sea f una función real definida por f(x) = 5. ¿Cuál es su dominio?"
     opciones:
       - "A = Img(f)"
@@ -261,6 +276,7 @@ reactivos:
     tipo: directo
     area: E
     subarea: E2
+    tema: "Tipos de funciones"
     enunciado: "¿Qué nombre reciben las funciones matemáticas que tienen la forma f(x) = k/x?"
     opciones:
       - "Funciones raíz"
@@ -274,6 +290,7 @@ reactivos:
     tipo: directo
     area: E
     subarea: E2
+    tema: "Funciones lineales (modelado)"
     caso: "La Cruz Roja realiza una encuesta a bailarinas de ballet y muestra que está aumentando el número de lesiones que ponen fin a su carrera. En 2017 el número de lesiones fue de 200 y en 2018 fue de 224. Las lesiones aumentan a una tasa lineal."
     enunciado: "¿Cuál sería la función n = f(t), donde n representa el número de lesiones y t el tiempo en años desde 2010, y cuándo se espera que el número de lesiones rebase las 300?"
     opciones:
@@ -288,6 +305,7 @@ reactivos:
     tipo: directo
     area: E
     subarea: E2
+    tema: "Funciones exponenciales"
     enunciado: "La población proyectada de una ciudad está dada por p = 250,000(1.16)^(t/22), donde t es el número de años a partir de 2008. ¿Cuál es la población pronosticada para 2019?"
     opciones:
       - "259,258.24"
@@ -301,6 +319,7 @@ reactivos:
     tipo: directo
     area: E
     subarea: E2
+    tema: "Funciones logarítmicas"
     enunciado: "La ecuación de oferta de un fabricante es p = log(10 + q/4), donde q es el número de unidades al precio unitario p. ¿A qué precio el fabricante ofrecerá 11,980 unidades?"
     opciones:
       - "3.47"
@@ -318,6 +337,7 @@ reactivos:
     tipo: directo
     area: C
     subarea: C3
+    tema: "Comercio internacional"
     caso: "Una empresa fabricante de loncheras plásticas ha tenido un importante crecimiento y cree que es momento de incursionar en los mercados internacionales. Dada la volatilidad del tipo de cambio y el riesgo país asociado a algunos estados, la decisión del país de destino no es fácil."
     enunciado: "Con base en un análisis macroeconómico externo, ¿qué factores son fundamentales revisar antes de empezar los procesos de exportación a un mercado de otro país?"
     opciones:
@@ -332,6 +352,7 @@ reactivos:
     tipo: directo
     area: C
     subarea: C2
+    tema: "Decisiones de inversión y riesgo"
     caso: "Un inversionista necesita redirigir parte de sus utilidades a una inversión de bajo riesgo dadas las condiciones de incertidumbre por la desaceleración económica global y la guerra comercial entre Estados Unidos y China."
     enunciado: "¿Qué elementos debe considerar para invertir estos activos y lograr una rentabilidad adecuada en el largo plazo?"
     opciones:
@@ -346,6 +367,7 @@ reactivos:
     tipo: directo
     area: C
     subarea: C2
+    tema: "Pronóstico de ventas (regresión lineal)"
     caso: "Una empresa fabricante de tabletas observa un crecimiento moderado pero constante y necesita proyectar sus ventas para 2021 con rigor matemático. Sus históricos son: 2018 $235,687; 2019 $369,825; 2020 $412,224."
     enunciado: "Aplicando el modelo de regresión lineal para el pronóstico de ventas, ¿cuál es el pronóstico para 2021?"
     opciones:
@@ -360,6 +382,7 @@ reactivos:
     tipo: directo
     area: C
     subarea: C2
+    tema: "Estructuras de mercado (oligopolio)"
     caso: "Una empresa de lácteos considera incursionar en suplementos para adultos mayores, pero las condiciones de mercado y el índice HH muestran una importante concentración de 2 de los 4 participantes más importantes. Índice HH: 52%; 4 participantes; regulaciones de Cofepris y sector salud; elasticidad de precios relativa."
     enunciado: "¿A qué situación de mercado se enfrenta la empresa de acuerdo con los datos del caso?"
     opciones:
@@ -374,6 +397,7 @@ reactivos:
     tipo: directo
     area: C
     subarea: C2
+    tema: "Ley de rendimientos decrecientes"
     caso: "La embotelladora El Milenio trabaja al 92% de su capacidad instalada y el mercado se expande al 3% anual. Tiene competidores trabajando por debajo del 70% y la participación de mercado es medianamente equitativa. Si no realiza inversiones, el equipo empezará a perder por cada nueva unidad producida, aunque pueda venderla."
     enunciado: "¿Cuál es el principio económico que se está activando en la empresa estudiada?"
     opciones:
@@ -388,6 +412,7 @@ reactivos:
     tipo: directo
     area: C
     subarea: C1
+    tema: "Costo de oportunidad"
     caso: "Carolina piensa comprar un vehículo con su reparto de utilidades. Con sus fondos puede dar un enganche de hasta el 20% de un auto compacto, pagará mensualidades promedio de $3,000 durante 50 meses y decidió aplazar sus vacaciones al extranjero al menos un año."
     enunciado: "Con base en lo anterior, ¿qué costo está asumiendo Carolina al decidirse por tener un auto nuevo?"
     opciones:
@@ -402,6 +427,7 @@ reactivos:
     tipo: directo
     area: B
     subarea: B2
+    tema: "Regulación financiera (CONSAR / AFORES)"
     caso: "Un grupo de empresarios financieros tradicionalistas diversifica su oferta hacia el mercado del ahorro para el retiro, que está en crecimiento y con oferta competitiva, lo que permite generar fondos importantes para ahorradores y para el mercado bancario."
     enunciado: "¿Cuál es la instancia que emite la normativa financiera para poder participar en el mercado de las AFORES?"
     opciones:
@@ -416,6 +442,7 @@ reactivos:
     tipo: directo
     area: B
     subarea: B2
+    tema: "Obligaciones fiscales (alta ante el SAT)"
     caso: "Un emprendedor arrancará un negocio de venta de accesorios para celulares. La venta al detalle crece al 3% anual en Ayala, Morelos; cuenta con un local de baja renta en una plaza de nueva creación; y una investigación de mercado revela que la facturación electrónica es un factor importante en la decisión de compra."
     enunciado: "¿Qué esquema normativo es fundamental para atender la demanda de su mercado y trabajar conforme a la norma contable vigente?"
     opciones:
@@ -430,6 +457,7 @@ reactivos:
     tipo: directo
     area: B
     subarea: B2
+    tema: "Deducción de donativos (ISR)"
     caso: "La empresa Los limones franceses fabrica Pay de Limón en Monterrey y, en su aniversario, realizó una carrera atlética costeando todo lo necesario e hizo donaciones económicas a varias casas hogar. El contador indica que las donaciones deben quedar registradas y deducidas conforme a la ley."
     enunciado: "De acuerdo con la normatividad contable vigente en la Ley del ISR, ¿qué porcentaje de estas donaciones directas es deducible contablemente?"
     opciones:
@@ -444,6 +472,7 @@ reactivos:
     tipo: directo
     area: B
     subarea: B1
+    tema: "Estados financieros"
     caso: "Juan Carlos es emprendedor y se encarga de la contabilidad de su negocio, ya en fase operativa. Las ventas han logrado flujos de efectivo aceptables, pero esto debe demostrarse a los socios capitalistas que pusieron su confianza y su dinero en el emprendimiento."
     enunciado: "¿Qué informe económico especializado usará Juan Carlos para dar a conocer la situación del negocio cada trimestre y de manera anual?"
     opciones:
@@ -458,6 +487,7 @@ reactivos:
     tipo: directo
     area: B
     subarea: B1
+    tema: "Clasificación de activos"
     caso: "La empresa Cubos plásticos del norte, donde Yesenia es contadora, inicia inversiones de expansión fabricando cubetas para exportar. Las reservas de capital fueron insuficientes para financiar la nueva maquinaria, por lo que se recurrió a un crédito bancario."
     enunciado: "¿En qué cuenta debe registrar Yesenia los $569,857 de préstamos que se usaron para la compra de los bienes de capital?"
     opciones:
@@ -472,6 +502,7 @@ reactivos:
     tipo: directo
     area: B
     subarea: B1
+    tema: "Cálculo de IVA"
     caso: "Una empresa vidriera del Golfo de México genera ventas a desarrollos residenciales de interés social, con una facturación anual por este concepto de $2,786,523.52. Las facturas que emite generan IVA, lo que aumenta el monto susceptible de transferencia."
     enunciado: "De acuerdo con la tasa vigente de IVA en México en 2019, ¿cuál es el monto a transferir por este concepto al SAT antes de compensaciones o acreditaciones?"
     opciones:
@@ -486,6 +517,7 @@ reactivos:
     tipo: directo
     area: B
     subarea: B4
+    tema: "Costo unitario"
     caso: "Un restaurante yucateco quiere conocer el costo unitario de la orden individual de sopa de lima. Datos: costos variables por orden $30; costos fijos mensuales $19,000; unidades que se esperan vender por mes 1,000."
     enunciado: "Con base en estos datos y calculándolo por fórmula, ¿cuál es el costo unitario de cada orden de sopa de lima?"
     opciones:
@@ -500,6 +532,7 @@ reactivos:
     tipo: directo
     area: B
     subarea: B4
+    tema: "Precio de venta y punto de equilibrio"
     caso: "Un restaurante yucateco quiere conocer el costo unitario de la orden individual de sopa de lima. Datos: costos variables por orden $30; costos fijos mensuales $19,000; unidades que se esperan vender por mes 1,000."
     enunciado: "Determina mediante fórmula el precio de venta y el volumen de equilibrio de venta de sopas de lima si se espera un rendimiento sobre ventas del 18%."
     opciones:
@@ -514,6 +547,7 @@ reactivos:
     tipo: directo
     area: B
     subarea: B3
+    tema: "Libros de contabilidad (diario)"
     caso: "Una pequeña empresa inicia actividades en Querétaro con capital semilla de una incubadora de fondos mixtos. Para seguir accediendo a recursos, la incubadora le pide registros de las ventas al detalle."
     enunciado: "Para atender esta obligación contable, ¿qué documento debe generarse para el registro cronológico y diario de las operaciones?"
     opciones:
@@ -528,6 +562,7 @@ reactivos:
     tipo: directo
     area: B
     subarea: B3
+    tema: "Libros de contabilidad (inventarios)"
     caso: "Toda empresa debe acatar normatividad contable que le permita atender las obligaciones fiscales y generar una relación detallada de las mercancías en existencia susceptibles de vender o usar como materias primas."
     enunciado: "Dentro de los libros de contabilidad, ¿qué libro registra las entradas, salidas y estancia en bodega de las mercancías, insumos y materias primas?"
     opciones:
@@ -542,6 +577,7 @@ reactivos:
     tipo: directo
     area: B
     subarea: B3
+    tema: "Métodos de registro contable (pólizas)"
     caso: "Daniel es el pagador de una empresa. Pese a los avances en pagos electrónicos, aún hace algunos pagos por cheque y operaciones en hojas sueltas con diversas entidades. Al final del día, estas operaciones se asientan en el libro diario."
     enunciado: "Estas hojas sueltas que sirven de apoyo para las operaciones individuales pertenecen a un método conocido como:"
     opciones:
@@ -556,6 +592,7 @@ reactivos:
     tipo: directo
     area: B
     subarea: B4
+    tema: "Clasificación de costos"
     caso: "Un restaurante de Cuernavaca tiene en su menú una cava de vinos californianos de importación directa. Por la incertidumbre del T-MEC y la amenaza de nuevos aranceles, sus precios pueden aumentar entre 5 y 8%."
     enunciado: "¿En qué parámetro de costos puede afectar a la empresa este aumento del costo de sus vinos?"
     opciones:
@@ -570,6 +607,7 @@ reactivos:
     tipo: directo
     area: B
     subarea: B4
+    tema: "Precio por utilidad meta"
     caso: "Ismael y Gerardo emprenderán la exportación al mercado europeo de libros gráficos de marquetería. Antes de exportar necesitan calcular el precio por utilidad meta. Datos: costo unitario $3,200; rendimiento esperado de la inversión 21%; unidades a exportar 12,000; inversión inicial $798,000."
     enunciado: "Calcula el precio por utilidad meta (no el precio de venta final) de los libros mencionados."
     opciones:
@@ -584,6 +622,7 @@ reactivos:
     tipo: directo
     area: B
     subarea: B1
+    tema: "Clasificación de activos"
     caso: "Una empresa de banquetes para eventos sociales ha crecido y está obligada a emitir comprobantes fiscales digitales y presentar declaraciones por el portal del SAT. Por ello renovó su equipo de cómputo de oficinas e incorporó dispositivos móviles."
     enunciado: "¿En qué clasificación de activos se clasifica la adquisición de estos equipos?"
     opciones:
@@ -598,6 +637,7 @@ reactivos:
     tipo: directo
     area: C
     subarea: C1
+    tema: "Comercio internacional (OMC)"
     caso: "Importadora de plásticos industriales exporta embudos automotrices a Chile, posicionándose con éxito. Sin embargo, autoridades chilenas le colocaron cuotas restrictivas de importación para favorecer a una empresa venezolana. Ambas naciones pertenecen a la OMC."
     enunciado: "¿Qué principio de la OMC puede invocar México para evitar este trato discriminatorio?"
     opciones:
@@ -612,6 +652,7 @@ reactivos:
     tipo: directo
     area: C
     subarea: C1
+    tema: "Riesgos del comercio internacional"
     caso: "Una importadora de juguetes trae pistolas de pintura desde Estados Unidos. La demanda es tal que tiene pedidos para seis meses, y los clientes pagan por adelantado por la incertidumbre. Sin embargo, su proveedor solo factura los pedidos a la cotización del dólar al día de embarque."
     enunciado: "Se corre un riesgo de comercio internacional en esta transacción. ¿A qué tipo de riesgo se hace referencia?"
     opciones:
@@ -626,6 +667,7 @@ reactivos:
     tipo: directo
     area: B
     subarea: B5
+    tema: "Sistema impositivo (IVA)"
     caso: "Un asesor de un miembro del Congreso analiza un aumento en el impuesto de mayor facilidad relativa de recaudación y mayor monto. En esta etapa no analiza impactos sociales, solo busca, dentro de la normatividad financiera, cómo lograr más fondos para el gobierno."
     enunciado: "Al buscar incrementos en un impuesto de fácil recaudación y de amplia aplicación, ¿qué impuesto se debería aumentar bajo estos criterios?"
     opciones:
@@ -640,6 +682,7 @@ reactivos:
     tipo: directo
     area: B
     subarea: B5
+    tema: "Valor presente neto (VPN)"
     caso: "En un despacho se pondera el valor presente neto (VPN) de un proyecto de inversión de una panadería tradicional. Los flujos son atractivos, pero los asesores deben tomar una decisión basada en toda la información financiera."
     enunciado: "Si después de los cálculos obtienen un VPN de 0.5, ¿qué se debe hacer con el proyecto?"
     opciones:
@@ -654,6 +697,7 @@ reactivos:
     tipo: directo
     area: B
     subarea: B5
+    tema: "Análisis de liquidez"
     caso: "El contralor general de Carnicerías de Occidente analiza la información financiera y observa un gran número de pasivos con proveedores a largo plazo bien financiados, pero una falta de liquidez; su capitalización es muy buena."
     enunciado: "Considerando estos indicadores, ¿cómo se considera la sobrevivencia y situación de la empresa?"
     opciones:
@@ -672,6 +716,7 @@ reactivos:
     tipo: directo
     area: E
     subarea: E3
+    tema: "Tipos de variables"
     enunciado: "Relaciona los tipos de variables con su definición. 1 Nominal: variable cualitativa que categoriza según características (sexo, religión). 2 Ordinal: cualitativa que ordena los datos por jerarquía (1.º, 2.º, 3.º lugar). 3 Intervalo: cuantitativa con orden entre la distancia de cantidades (temperatura, distancia). 4 Razón: cuantitativa con ausencia total (0) en su medida (edad, peso, dinero). ¿Cuál es la relación correcta?"
     opciones:
       - "1c, 2d, 3b, 4a"
@@ -685,6 +730,7 @@ reactivos:
     tipo: directo
     area: E
     subarea: E3
+    tema: "Representación gráfica de datos"
     caso: "Una empresa refresquera ha disminuido sus ventas por escándalos de contaminación de su producto. Se cuenta con una tabla de ventas de refrescos por sabor (limón, naranja, piña, uva) y por mes (enero a abril), con totales mensuales de 2,250,000; 1,737,000; 1,041,000 y 857,000."
     enunciado: "¿Cuál de las gráficas muestra correctamente el comportamiento de ventas de la empresa refresquera?"
     opciones:
@@ -699,6 +745,7 @@ reactivos:
     tipo: directo
     area: E
     subarea: E3
+    tema: "Gráfica de pastel"
     caso: "Una empresa refresquera ha disminuido sus ventas por escándalos de contaminación de su producto. Se cuenta con una tabla de ventas de refrescos por sabor (limón, naranja, piña, uva) y por mes (enero a abril), con totales mensuales de 2,250,000; 1,737,000; 1,041,000 y 857,000."
     enunciado: "El encargado quiere conocer las preferencias de los consumidores en el mes de abril mediante un gráfico de pastel. ¿Cuál es la manera más apropiada de representar dichas ventas?"
     opciones:
@@ -713,6 +760,7 @@ reactivos:
     tipo: directo
     area: E
     subarea: E3
+    tema: "Media aritmética"
     caso: "La fábrica Colorina quiere determinar las preferencias de los consumidores por su producto saca-goma. Las ventas en las últimas semanas fueron: semana 1: 13,697; semana 2: 45,930; semana 3: 72,940; semana 4: 89,011; semana 5: 89,820."
     enunciado: "El encargado quiere saber la media de ventas para estimar las de la siguiente semana. ¿Cuál es la media de los datos presentados?"
     opciones:
@@ -727,6 +775,7 @@ reactivos:
     tipo: directo
     area: E
     subarea: E3
+    tema: "Rango"
     caso: "La fábrica Colorina quiere determinar las preferencias de los consumidores por su producto saca-goma. Las ventas en las últimas semanas fueron: semana 1: 13,697; semana 2: 45,930; semana 3: 72,940; semana 4: 89,011; semana 5: 89,820."
     enunciado: "El encargado quiere determinar el rango de las ventas de estos meses. Calcula dicho rango."
     opciones:
@@ -741,6 +790,7 @@ reactivos:
     tipo: directo
     area: E
     subarea: E3
+    tema: "Varianza"
     caso: "La fábrica Colorina quiere determinar las preferencias de los consumidores por su producto saca-goma. Las ventas en las últimas semanas fueron: semana 1: 13,697; semana 2: 45,930; semana 3: 72,940; semana 4: 89,011; semana 5: 89,820."
     enunciado: "El encargado quiere determinar cuánto se alejan las ventas por día respecto a su media. ¿Qué tipo de análisis estadístico necesita?"
     opciones:
@@ -755,6 +805,7 @@ reactivos:
     tipo: directo
     area: E
     subarea: E3
+    tema: "Muestreo estratificado"
     caso: "Una empresa de evaluación de atención al cliente trabaja con una distribuidora de helados que ha recibido quejas. Las quejas se presentan en tres estados: Estado de México (15), Ciudad de México (80) y Jalisco (30). Se quiere seleccionar una muestra de 50 quejas, proporcional y simple, de los tres estados."
     enunciado: "¿Qué tipo de muestreo es el más adecuado para evaluar el número de quejas que presentó la distribuidora?"
     opciones:
@@ -769,6 +820,7 @@ reactivos:
     tipo: directo
     area: E
     subarea: E3
+    tema: "Muestreo por conglomerados"
     caso: "Una empresa que evalúa la satisfacción de la gente analizará el voto de la población en las próximas elecciones del Estado de Puebla. Por una crisis económica, decide reducir costos seleccionando pequeños grupos en los diferentes municipios del estado."
     enunciado: "¿Qué tipo de muestreo está utilizando la empresa?"
     opciones:
@@ -783,6 +835,7 @@ reactivos:
     tipo: directo
     area: E
     subarea: E3
+    tema: "Distribución de frecuencias (porcentajes)"
     caso: "DHL investigó el envío de 220 paquetes para determinar las tardanzas. Resultados: 2 días de adelanto: 65; 1 día de adelanto: 96; a tiempo: 19; 1 día de retardo: 21; 2 días de retardo: 19."
     enunciado: "Con estos datos, determina el porcentaje de envíos que llegan retrasados."
     opciones:
@@ -797,6 +850,7 @@ reactivos:
     tipo: directo
     area: E
     subarea: E3
+    tema: "Distribución de frecuencias (porcentajes)"
     caso: "Una empresa que fabrica piezas para autos tiene 40 hijos entre todos sus trabajadores y hará un convivio por el Día del Padre. Las edades de los hijos son: 3, 15, 24, 28, 33, 35, 38, 42, 43, 38, 36, 34, 29, 25, 17, 7, 34, 36, 39, 44, 31, 26, 20, 11, 13, 22, 27, 47, 39, 37, 34, 32, 35, 28, 38, 41, 48, 15, 32, 13."
     enunciado: "¿Cuál es el porcentaje de los hijos que oscilan entre el rango de 0 a 15 años de edad?"
     opciones:
@@ -815,6 +869,7 @@ reactivos:
     tipo: directo
     area: E
     subarea: E3
+    tema: "Intervalo de confianza"
     caso: "Un empresario desea estimar, con 99% de confianza, la media del peso de cierto grupo de personas con obesidad. Los valores presentan distribución normal con varianza de 144. Se tomó una muestra de 15 personas con media de 84.3 kg. El valor de z para 0.99 es 2.58 y el error estándar es 3.10."
     enunciado: "Determina el intervalo de confianza."
     opciones:
@@ -829,6 +884,7 @@ reactivos:
     tipo: directo
     area: E
     subarea: E3
+    tema: "Intervalo de confianza (diferencia de medias)"
     caso: "Una empresa abrirá sucursales en el Estado de México y Morelos y calcula el ingreso familiar. En el Estado de México obtuvo datos de 75 personas con media de $6,800 mensuales; en Morelos, de 80 personas con media de $4,450."
     enunciado: "Encuentra el intervalo de confianza del 99% para la diferencia de medias, con coeficiente de confiabilidad 2.58 y error estándar 89."
     opciones:
@@ -843,6 +899,7 @@ reactivos:
     tipo: directo
     area: E
     subarea: E3
+    tema: "Prueba de hipótesis (valor z)"
     caso: "Una organización abrirá una cadena de comida rápida. Obtuvo datos de 150 personas sobre cuántas veces comieron fuera de casa el último mes: promedio 5.8 con desviación estándar 3.1. Desea saber si la media poblacional es mayor que 5 (hipótesis nula: media menor o igual a 5)."
     enunciado: "Determina el valor de z."
     opciones:
@@ -857,6 +914,7 @@ reactivos:
     tipo: directo
     area: E
     subarea: E3
+    tema: "Prueba de hipótesis (decisión)"
     caso: "Una organización abrirá una cadena de comida rápida. Obtuvo datos de 150 personas sobre cuántas veces comieron fuera de casa el último mes: promedio 5.8 con desviación estándar 3.1. Desea saber si la media poblacional es mayor que 5 (hipótesis nula: media menor o igual a 5)."
     enunciado: "¿Cuál es la decisión estadística correcta para este caso?"
     opciones:
@@ -871,6 +929,7 @@ reactivos:
     tipo: directo
     area: E
     subarea: E3
+    tema: "Diagrama de dispersión"
     caso: "Una empresa de tecnología tiene problemas de ventas en sus 10 sucursales y desea predecir las ventas con datos de número de vendedores y ventas en miles por sucursal (de 2 a 26 vendedores, ventas de 58 a 202 mil)."
     enunciado: "Identifica el diagrama de dispersión adecuado para predecir las ventas correctamente."
     opciones:
@@ -885,6 +944,7 @@ reactivos:
     tipo: directo
     area: E
     subarea: E3
+    tema: "Regresión lineal (pendiente y ordenada)"
     caso: "Una empresa de tecnología tiene problemas de ventas en sus 10 sucursales y desea predecir las ventas con datos de número de vendedores y ventas en miles por sucursal (de 2 a 26 vendedores, ventas de 58 a 202 mil)."
     enunciado: "De acuerdo con los datos anteriores, calcula la pendiente y la ordenada al origen."
     opciones:
@@ -899,6 +959,7 @@ reactivos:
     tipo: directo
     area: E
     subarea: E3
+    tema: "Probabilidad clásica"
     caso: "Una empresa contratará un gerente para negocios con países árabes, donde por cultura en algunos casos las mujeres no son las más adecuadas. Existen 11 personas en total, de las cuales 6 son mujeres."
     enunciado: "¿Cuál es la probabilidad de que una mujer sea escogida?"
     opciones:
@@ -913,6 +974,7 @@ reactivos:
     tipo: directo
     area: E
     subarea: E3
+    tema: "Distribución binomial"
     caso: "En un estudio sobre preferencia de pasta dental, el 60% de las personas prefiere Dentitos y el restante prefiere Limpimax. Se extrae una muestra de 10 personas al azar."
     enunciado: "¿Cuál es la probabilidad de que 7 de estas personas prefieran Limpimax?"
     opciones:
@@ -927,6 +989,7 @@ reactivos:
     tipo: directo
     area: E
     subarea: E3
+    tema: "Números índice"
     enunciado: "Ordena los siguientes conceptos de números índices. Conceptos: 1 Sauerbeck, 2 Brandstreet-Dûtot, 3 Laspeyres, 4 Paasche, 5 Edgeworth, 6 Fisher. Columna A: números compuestos sin ponderar; Columna B: números compuestos ponderados."
     opciones:
       - "A: 1, 2  B: 3, 4, 5, 6"
@@ -940,6 +1003,7 @@ reactivos:
     tipo: directo
     area: E
     subarea: E3
+    tema: "Números índice"
     enunciado: "Indica a qué números índice corresponden las definiciones. A) Precios; B) Cantidades; C) Valores. Definiciones: 1 estudian el conjunto de características de un bien; 2 estudian la evolución del consumo de un conjunto de bienes; 3 estudian la evolución del costo de un conjunto de bienes."
     opciones:
       - "A2, B1, C3"
@@ -957,6 +1021,7 @@ reactivos:
     tipo: directo
     area: A
     subarea: A1
+    tema: "Enfoques de investigación"
     caso: "Una empresa de jabón y cosméticos elabora un instrumento para evaluar la calidad del trabajo de sus empleados (satisfacción, dificultad, clima organizacional y ética), un cuestionario de unas 30 preguntas. En una primera prueba piloto la mayoría obtuvo puntajes muy bajos y en una segunda, puntajes muy altos."
     enunciado: "De acuerdo con las características del instrumento y su proceso de elaboración, ¿cuál es el enfoque que lo caracteriza?"
     opciones:
@@ -964,13 +1029,14 @@ reactivos:
       - "Cuantitativo"
       - "Mixto"
       - "Sistemático"
-    correcta: 0
-    explicacion: "El enfoque cuantitativo se caracteriza por la cantidad y la medida de sus variables; en este caso, un cuestionario que mide la calidad del trabajo. (Nota: la fuente marca como correcta la opción A.)"
+    correcta: 1
+    explicacion: "El enfoque cuantitativo se caracteriza por la cantidad y la medida de sus variables; en este caso, un cuestionario de ~30 preguntas que arroja puntajes (datos numéricos) para medir la calidad del trabajo."
 
   - id: A1-CASO1-q2
     tipo: directo
     area: A
     subarea: A1
+    tema: "Confiabilidad de instrumentos"
     caso: "Una empresa de jabón y cosméticos elabora un instrumento para evaluar la calidad del trabajo de sus empleados (satisfacción, dificultad, clima organizacional y ética), un cuestionario de unas 30 preguntas. En una primera prueba piloto la mayoría obtuvo puntajes muy bajos y en una segunda, puntajes muy altos."
     enunciado: "En relación con los resultados de las pruebas piloto, ¿qué es necesario ajustar y analizar en el instrumento para resolver la problemática de los puntajes extremos?"
     opciones:
@@ -985,6 +1051,7 @@ reactivos:
     tipo: directo
     area: A
     subarea: A2
+    tema: "Estado del arte"
     caso: "Una empresa de elaboración de páginas web investiga los elementos que más llaman la atención al entrar por primera vez a una página web. Mediante investigación documental encontró que las personas concentran su atención en elementos como el color y el tipo de diseño."
     enunciado: "¿A qué elemento se hace referencia de acuerdo con la investigación documental de los estudios anteriores?"
     opciones:
@@ -999,6 +1066,7 @@ reactivos:
     tipo: directo
     area: A
     subarea: A2
+    tema: "Elementos de la investigación"
     caso: "Una empresa de elaboración de páginas web investiga los elementos que más llaman la atención al entrar por primera vez a una página web. Mediante investigación documental encontró que las personas concentran su atención en elementos como el color y el tipo de diseño."
     enunciado: "Relaciona las columnas. A) Pregunta de investigación; B) Objetivo; C) Hipótesis. Definiciones: 1 los resultados que se esperan encontrar; 2 responde al planteamiento del problema; 3 indica lo que se quiere alcanzar o lograr."
     opciones:
@@ -1013,6 +1081,7 @@ reactivos:
     tipo: directo
     area: A
     subarea: A1
+    tema: "Razonamiento crítico"
     caso: "María, diseñadora, presentó un proyecto a inversionistas alemanes. Durante la presentación se puso nerviosa y expresó sus ideas de manera desorganizada, lo que impidió que los inversionistas entendieran su propuesta de forma fluida."
     enunciado: "¿Cuál fue la pauta del razonamiento crítico que falló en María?"
     opciones:
@@ -1027,6 +1096,7 @@ reactivos:
     tipo: directo
     area: A
     subarea: A1
+    tema: "Razonamiento deductivo"
     caso: "María, diseñadora, presentó un proyecto a inversionistas alemanes. Durante la presentación se puso nerviosa y expresó sus ideas de manera desorganizada, lo que impidió que los inversionistas entendieran su propuesta de forma fluida."
     enunciado: "Resuelve la siguiente frase: 'Todos los hombres necesitan agua para vivir. Luis es un hombre. Entonces, Luis necesita agua para vivir.' ¿A qué tipo de razonamiento pertenece?"
     opciones:
@@ -1041,6 +1111,7 @@ reactivos:
     tipo: directo
     area: A
     subarea: A1
+    tema: "Comunicación no verbal"
     caso: "Juan, empresario exitoso, no pudo asistir al cierre de un trato comercial y dejó a cargo a un supervisor de confianza. Durante la reunión, el supervisor explicó beneficios y limitantes, pero estaba nervioso: movía mucho las manos, hablaba rápido y cruzaba los brazos al responder. Cerraron el trato, pero Juan le llamó la atención en voz alta diciendo que era poco profesional, haciéndolo sentir mal."
     enunciado: "Que el supervisor cruzara los brazos al responder, ¿qué tipo de lenguaje se considera?"
     opciones:
@@ -1055,6 +1126,7 @@ reactivos:
     tipo: directo
     area: A
     subarea: A1
+    tema: "Asertividad"
     caso: "Juan, empresario exitoso, no pudo asistir al cierre de un trato comercial y dejó a cargo a un supervisor de confianza. Durante la reunión, el supervisor explicó beneficios y limitantes, pero estaba nervioso: movía mucho las manos, hablaba rápido y cruzaba los brazos al responder. Cerraron el trato, pero Juan le llamó la atención en voz alta diciendo que era poco profesional, haciéndolo sentir mal."
     enunciado: "¿Qué hubiera hecho Juan para decirle al supervisor sus áreas de oportunidad sin herir sus sentimientos ni su trabajo?"
     opciones:
@@ -1069,6 +1141,7 @@ reactivos:
     tipo: directo
     area: A
     subarea: A1
+    tema: "Ética profesional"
     caso: "Rodrigo, mercadólogo, creó con otros profesionales un producto para reducir el desperdicio de agua. Tuvo diferencias sobre la inversión y abandonó el proyecto sin dejar parte del producto a su nombre. Tiempo después, otra empresa lo convence de crear un producto parecido y él presenta como nuevo el producto ya elaborado con sus compañeros."
     enunciado: "Con base en el tipo de acto, ¿a qué tipo de ética corresponde lo hecho por Rodrigo?"
     opciones:
@@ -1083,6 +1156,7 @@ reactivos:
     tipo: directo
     area: A
     subarea: A1
+    tema: "Plagio y propiedad intelectual"
     caso: "Rodrigo, mercadólogo, creó con otros profesionales un producto para reducir el desperdicio de agua. Tuvo diferencias sobre la inversión y abandonó el proyecto sin dejar parte del producto a su nombre. Tiempo después, otra empresa lo convence de crear un producto parecido y él presenta como nuevo el producto ya elaborado con sus compañeros."
     enunciado: "Al presentar un producto como nuevo a pesar de pertenecer a otra persona, ¿a qué falta corresponde lo hecho por Rodrigo?"
     opciones:
@@ -1097,6 +1171,7 @@ reactivos:
     tipo: directo
     area: A
     subarea: A2
+    tema: "Tipos de innovación"
     caso: "Manuel trabaja en una empresa de tecnología de celulares. Para una reunión con otros empresarios pide ayuda a su amigo Ricardo, que tiene gran capacidad para hablar y convencer. En la reunión, todos concuerdan en que la mejora del producto debe ser innovadora y adaptarse a las necesidades de los clientes; uno de los empresarios genera ideas de manera espontánea."
     enunciado: "De acuerdo con la mejora del producto que busca la empresa, ¿qué tipo de innovación está realizando?"
     opciones:
@@ -1111,6 +1186,7 @@ reactivos:
     tipo: directo
     area: A
     subarea: A2
+    tema: "Inteligencias múltiples"
     caso: "Manuel trabaja en una empresa de tecnología de celulares. Para una reunión con otros empresarios pide ayuda a su amigo Ricardo, que tiene gran capacidad para hablar y convencer. En la reunión, todos concuerdan en que la mejora del producto debe ser innovadora y adaptarse a las necesidades de los clientes; uno de los empresarios genera ideas de manera espontánea."
     enunciado: "Por poner a su amigo frente a la negociación del producto, ¿qué tipo de inteligencia posee Ricardo?"
     opciones:
@@ -1125,6 +1201,7 @@ reactivos:
     tipo: directo
     area: A
     subarea: A2
+    tema: "Pensamiento divergente"
     caso: "Manuel trabaja en una empresa de tecnología de celulares. Para una reunión con otros empresarios pide ayuda a su amigo Ricardo, que tiene gran capacidad para hablar y convencer. En la reunión, todos concuerdan en que la mejora del producto debe ser innovadora y adaptarse a las necesidades de los clientes; uno de los empresarios genera ideas de manera espontánea."
     enunciado: "Por la manera en que el empresario generó ideas espontáneas para la mejora del producto, ¿qué tipo de pensamiento puede poseer?"
     opciones:
@@ -1139,6 +1216,7 @@ reactivos:
     tipo: directo
     area: A
     subarea: A5
+    tema: "Fuentes de información"
     caso: "Angélica trabaja en un corporativo y necesita investigar el número de turistas, considerando edad, sexo, lugar de residencia y otras variables, con la finalidad de generar datos estadísticos para lanzar un producto al mercado."
     enunciado: "¿Qué tipo de fuente de información es la más adecuada para buscar la información que Angélica necesita?"
     opciones:
@@ -1153,6 +1231,7 @@ reactivos:
     tipo: directo
     area: A
     subarea: A1
+    tema: "Estructura del reporte de investigación"
     caso: "José entregará a su jefe un reporte que cumple con: portada, resumen, índice, introducción, revisión teórica (justificación y objetivos), resultados de costos/inversiones/ganancias, conclusiones y sugerencias, y referencias."
     enunciado: "¿Qué elemento o apartado de una investigación faltó en el reporte de José?"
     opciones:
@@ -1167,6 +1246,7 @@ reactivos:
     tipo: directo
     area: A
     subarea: A5
+    tema: "Análisis de datos (bases relacionales)"
     caso: "Silvia, dedicada a la gestión empresarial, debe identificar el libro más popular del último mes y las características de quienes lo compran. Cuenta en Excel con información de los clientes, de la orden y del libro."
     enunciado: "¿Qué tipo de análisis empresarial necesita Silvia para resolver dicha tarea si quiere ocupar Access?"
     opciones:
@@ -1181,6 +1261,7 @@ reactivos:
     tipo: directo
     area: A
     subarea: A5
+    tema: "Tablas dinámicas"
     caso: "Sarahí, vendedora del área de informática, necesita organizar su información por vendedor y por producto. Cuenta con una tabla de ventas con número de venta, vendedor, producto, precio y semana."
     enunciado: "¿Qué tipo de formato necesita Sarahí para obtener dicha información?"
     opciones:
@@ -1195,6 +1276,7 @@ reactivos:
     tipo: directo
     area: A
     subarea: A5
+    tema: "Sistemas de información empresarial"
     caso: "Gloria emprenderá un minisúper y quiere adaptarse a los cambios globales con nuevas tecnologías. Necesita un recurso que sirva de soporte para almacenar y recibir datos de fuentes externas o internas, analizar y procesar datos, distribuir información de productos y clientes, y gestionar la información de su negocio."
     enunciado: "¿A qué concepto hace referencia la necesidad de Gloria?"
     opciones:
@@ -1209,6 +1291,7 @@ reactivos:
     tipo: directo
     area: A
     subarea: A1
+    tema: "Habilidades sociales"
     caso: "Ingenia, empresa de tecnología, intenta negociar con un distribuidor en Estados Unidos. Daniel, líder del proyecto, capacita a los empleados, pero se muestra indiferente, solo pide que hagan lo que él indica, descalifica los errores y no es empático en la retroalimentación. El día de la reunión cierra el trato sin considerar la opinión de los demás."
     enunciado: "De acuerdo con las acciones de Daniel, ¿qué caracteriza su conducta?"
     opciones:
@@ -1223,6 +1306,7 @@ reactivos:
     tipo: directo
     area: A
     subarea: A1
+    tema: "Trabajo en equipo"
     caso: "Ingenia, empresa de tecnología, intenta negociar con un distribuidor en Estados Unidos. Daniel, líder del proyecto, capacita a los empleados, pero se muestra indiferente, solo pide que hagan lo que él indica, descalifica los errores y no es empático en la retroalimentación. El día de la reunión cierra el trato sin considerar la opinión de los demás."
     enunciado: "¿Qué debería poner en práctica Daniel para mejorar su autoridad como líder de proyectos?"
     opciones:
@@ -1241,6 +1325,7 @@ reactivos:
     tipo: directo
     area: A
     subarea: A1
+    tema: "Tipos de emprendedor"
     caso: "Rafael, empresario exitoso, necesita una mano derecha que lo apoye en el emprendimiento. Busca una persona creativa, capaz de mejorar los productos ya existentes."
     enunciado: "¿Qué tipo de emprendedor busca Rafael?"
     opciones:
@@ -1255,6 +1340,7 @@ reactivos:
     tipo: directo
     area: A
     subarea: A1
+    tema: "Misión, visión y valores"
     caso: "Una empresa de agua embotellada describe su rumbo con la frase: 'Evolucionar de una respetada y confiable compañía de alimentos a una respetada y confiable compañía de alimentos, nutrición, salud y bienestar.'"
     enunciado: "¿A qué parte de la descripción de una empresa corresponde la frase realizada?"
     opciones:
@@ -1269,6 +1355,7 @@ reactivos:
     tipo: directo
     area: A
     subarea: A4
+    tema: "Cultura organizacional"
     caso: "Google es reconocida por la calidad y flexibilidad para sus trabajadores: comida gratis, espacios para dormir, vacaciones, seguros y acceso a la última tecnología. Cada empleado organiza su tiempo, su horario de comida e incluso su siesta, basándose en la felicidad reportada por los trabajadores."
     enunciado: "De acuerdo con las características mencionadas, ¿a qué concepto hace referencia la descripción anterior?"
     opciones:
@@ -1283,6 +1370,7 @@ reactivos:
     tipo: directo
     area: A
     subarea: A4
+    tema: "Cultura organizacional"
     caso: "Uno de los supermercados más grandes del mundo tiene problemas con sus trabajadores: son aislados, no hay buena comunicación y hay discusiones frecuentes. La empresa decide realizar actividades que favorezcan el compañerismo, mejoren la comunicación y promuevan el trabajo en equipo, los valores y las relaciones de confianza y respeto."
     enunciado: "¿A qué tipo de cultura organizacional corresponde lo que quiere imponer dicha empresa?"
     opciones:
@@ -1297,6 +1385,7 @@ reactivos:
     tipo: directo
     area: A
     subarea: A1
+    tema: "Responsabilidad ambiental (SEMARNAT)"
     enunciado: "Es el organismo en México que se encarga del desarrollo responsable del medio ambiente, de la reforestación, la protección de la flora, la fauna y el control de gases de efecto invernadero."
     opciones:
       - "SEMARNAT"
@@ -1310,6 +1399,7 @@ reactivos:
     tipo: directo
     area: A
     subarea: A1
+    tema: "Responsabilidad social empresarial"
     caso: "Una empresa de alimentos enlatados está en constante cambio por las políticas ambientales. Cumple con todos los requisitos que la ley ordena y desea transmitir un mensaje sobre las acciones responsables que tiene con la comunidad y el medio ambiente."
     enunciado: "¿A qué acción se hace referencia con lo que quiere lograr la empresa?"
     opciones:
@@ -1324,6 +1414,7 @@ reactivos:
     tipo: directo
     area: A
     subarea: A2
+    tema: "Análisis FODA"
     enunciado: "Dentro del análisis FODA, son consideradas factores que desfavorecen a una empresa o proyecto, por ejemplo, salarios bajos, equipamiento viejo y falta de capacitación."
     opciones:
       - "Amenazas"
@@ -1337,6 +1428,7 @@ reactivos:
     tipo: directo
     area: A
     subarea: A2
+    tema: "Matriz de evaluación de factores internos (MEFI)"
     caso: "Una empresa de perfumes desea formular una estrategia que resuma y evalúe las fuerzas y debilidades de las áreas de la empresa, además de evaluar las relaciones entre estas áreas."
     enunciado: "¿Qué es lo que necesita la empresa para resolver su problemática?"
     opciones:
@@ -1351,6 +1443,7 @@ reactivos:
     tipo: directo
     area: A
     subarea: A4
+    tema: "Cambio organizacional"
     caso: "Una empresa de manufactura e impresión de CD, DVD y Blu-ray colocará nuevos responsables departamentales por la alta demanda en el área de impresión. Por ello habrá cambios en la organización y relación entre los empleados, para que cada uno cumpla sus respectivas funciones."
     enunciado: "¿A qué tipo de cambio organizacional se hace referencia?"
     opciones:
@@ -1365,6 +1458,7 @@ reactivos:
     tipo: directo
     area: A
     subarea: A3
+    tema: "Toma de decisiones"
     caso: "Manuel, empresario exitoso, expandirá el área de negocios. Necesita a una persona que detecte buenas oportunidades en el mercado, sea directiva, tome riesgos calculados y elija buenas alternativas ante un problema."
     enunciado: "¿Cuál es la competencia que debe poseer la nueva persona encargada de dicha área?"
     opciones:
@@ -1379,6 +1473,7 @@ reactivos:
     tipo: directo
     area: A
     subarea: A3
+    tema: "Niveles administrativos"
     caso: "Mauricio, empleado de gran desempeño, recibió un ascenso. En el nuevo puesto se encargará de implementar políticas y planes ejecutivos, supervisando y coordinando todas las acciones para cumplir los objetivos propuestos."
     enunciado: "¿A qué tipo de administrador pertenece Mauricio?"
     opciones:
@@ -1393,6 +1488,7 @@ reactivos:
     tipo: directo
     area: A
     subarea: A3
+    tema: "Roles gerenciales"
     caso: "Lucía trabaja en el área de ventas. Es la encargada de interactuar con otras personas y organizaciones para establecer mejores relaciones y mejorar el apoyo de la empresa."
     enunciado: "¿Qué tipo de rol cumple Lucía en la empresa?"
     opciones:
@@ -1407,6 +1503,7 @@ reactivos:
     tipo: directo
     area: A
     subarea: A2
+    tema: "Escuelas del pensamiento administrativo"
     caso: "Markets, empresa de ingeniería de autos, se organiza con tiempos de trabajo muy específicos y de manera jerárquica, donde las órdenes van del gerente al empleado. Con un nuevo gerente propone que todas las tareas se realicen para llegar a un solo objetivo y que la empresa funcione como una familia, donde todos aportan y aprenden unos de otros."
     enunciado: "De acuerdo con las características de la empresa antes del nuevo gerente, ¿a qué escuela del pensamiento pertenece?"
     opciones:
@@ -1421,6 +1518,7 @@ reactivos:
     tipo: directo
     area: A
     subarea: A2
+    tema: "Escuelas del pensamiento administrativo"
     caso: "Markets, empresa de ingeniería de autos, se organiza con tiempos de trabajo muy específicos y de manera jerárquica, donde las órdenes van del gerente al empleado. Con un nuevo gerente propone que todas las tareas se realicen para llegar a un solo objetivo y que la empresa funcione como una familia, donde todos aportan y aprenden unos de otros."
     enunciado: "¿A qué escuela del pensamiento pertenecen las características de cambio que quiere impartir el nuevo gerente?"
     opciones:
@@ -1435,6 +1533,7 @@ reactivos:
     tipo: directo
     area: A
     subarea: A3
+    tema: "Proceso administrativo"
     enunciado: "Relaciona las etapas del proceso administrativo con su definición. 1 Planificación: determinación de los objetivos y metas a alcanzar. 2 Organización: forma en que se distribuye el trabajo según las capacidades de cada empleado. 3 Dirección: realización de las indicaciones asignadas a cada área para que se cumplan en tiempo y forma. 4 Control: se observan los resultados, se rectifican y se vigilan los procesos."
     opciones:
       - "1b, 2c, 3a, 4d"
@@ -1448,6 +1547,7 @@ reactivos:
     tipo: directo
     area: A
     subarea: A3
+    tema: "Proceso administrativo (organización)"
     caso: "Marco abrirá una empresa de galletas y harinas. Tiene los documentos y materiales en orden, pero le falta personal. Necesita diversos equipos para: ventas de galleta, distribución, elaboración de galletas, fabricación de empaque y manufactura."
     enunciado: "¿A qué etapa del proceso administrativo pertenece lo que está realizando Marco?"
     opciones:
@@ -1462,6 +1562,7 @@ reactivos:
     tipo: directo
     area: A
     subarea: A4
+    tema: "Clima organizacional"
     caso: "Una empresa que fabrica ropa pasa por una situación que afecta la productividad. Con la llegada del nuevo gerente, los empleados cambiaron: antes tenían buena comunicación, trabajaban con actitud, convivían los fines de semana y eran colaborativos."
     enunciado: "¿Qué es lo que cambió en dicha empresa con la llegada del gerente?"
     opciones:
@@ -1476,6 +1577,7 @@ reactivos:
     tipo: directo
     area: A
     subarea: A4
+    tema: "Satisfacción laboral"
     caso: "Una empresa de telefonía evalúa a sus trabajadores por las bajas ventas. Los resultados muestran que están molestos por la baja de sueldos, el aumento de horarios y un nuevo reglamento que les quita prestaciones y salario."
     enunciado: "De acuerdo con lo anterior, ¿a qué característica del entorno organizacional hace referencia?"
     opciones:
@@ -1490,6 +1592,7 @@ reactivos:
     tipo: directo
     area: A
     subarea: A4
+    tema: "Motivación laboral"
     caso: "La empresa Alekane, de servicios hoteleros, observó una baja en las actividades de los empleados: no llegaban temprano, no alcanzaban metas y faltaban seguido. Cambiar de personal no funcionó. Recursos Humanos sugirió aumentar los salarios; semanas después los empleados cambiaron y aseguraban que les gustaba su trabajo y actuaban con responsabilidad."
     enunciado: "¿Qué concepto implementó el área de recursos humanos para que los trabajadores tuvieran dicho cambio?"
     opciones:
@@ -1508,6 +1611,7 @@ reactivos:
     tipo: directo
     area: F
     subarea: F2
+    tema: "Obligaciones del comerciante"
     caso: "Un grupo de emprendedores planea conformar una empresa de importación y venta de productos de belleza por internet, sin necesidad de manejar stocks ni alquilar espacios físicos para sus tiendas."
     enunciado: "Este grupo de emprendedores se reputan comerciantes. ¿Cuál de los siguientes elementos NO corresponde a sus obligaciones?"
     opciones:
@@ -1522,6 +1626,7 @@ reactivos:
     tipo: directo
     area: F
     subarea: F2
+    tema: "Sociedades mercantiles"
     caso: "Un grupo de emprendedores planea conformar una empresa de importación y venta de productos de belleza por internet, sin necesidad de manejar stocks ni alquilar espacios físicos para sus tiendas."
     enunciado: "Una empresa con actividad principal de manufactura de calzado da facilidades a sus obreros para adquirir sus productos, aunque la mayor parte de su producción se dirige al mercado exterior. ¿Cuál de las siguientes sociedades NO corresponde a esta empresa manufacturera?"
     opciones:
@@ -1536,6 +1641,7 @@ reactivos:
     tipo: directo
     area: F
     subarea: F2
+    tema: "Disolución y liquidación de sociedades"
     caso: "Los socios y accionistas de la compañía La Perla de Campeche S. A. de C. V. decidieron poner fin a su empresa, debido principalmente a las bajas ventas de los últimos años."
     enunciado: "Para poner fin a su sociedad mercantil, debe disolverse y liquidarse la empresa. ¿Qué elemento NO es necesario para llegar a tal fin?"
     opciones:
@@ -1550,6 +1656,7 @@ reactivos:
     tipo: directo
     area: F
     subarea: F2
+    tema: "Disolución y liquidación de sociedades"
     caso: "Los socios y accionistas de la compañía La Perla de Campeche S. A. de C. V. decidieron poner fin a su empresa, debido principalmente a las bajas ventas de los últimos años."
     enunciado: "¿Qué efectos tiene la liquidación de la empresa?"
     opciones:
@@ -1564,6 +1671,7 @@ reactivos:
     tipo: directo
     area: F
     subarea: F2
+    tema: "Contratos mercantiles (crédito)"
     caso: "Los socios y accionistas de la compañía La Perla de Campeche S. A. de C. V. decidieron poner fin a su empresa, debido principalmente a las bajas ventas de los últimos años."
     enunciado: "En la formación de una empresa de bienes agropecuarios se necesitan fuentes de financiamiento para comprar maquinaria y equipo, mediante contratos mercantiles. ¿Qué tipo de contratos deben suscribir para lograr su financiamiento?"
     opciones:
@@ -1578,6 +1686,7 @@ reactivos:
     tipo: directo
     area: F
     subarea: F2
+    tema: "Relación laboral"
     caso: "En la región de Soconusco, Chiapas, un grupo de emprendedores estableció una empresa de actividades artesanales que requiere de los artesanos locales. Por las características socioeconómicas, decidieron no elaborar contratos de trabajo, aunque sí existirá una relación laboral."
     enunciado: "¿Qué características debe tener esta relación laboral, aun en ausencia de un contrato de trabajo?"
     opciones:
@@ -1592,6 +1701,7 @@ reactivos:
     tipo: directo
     area: F
     subarea: F2
+    tema: "Sujetos de la relación laboral"
     caso: "En la región de Soconusco, Chiapas, un grupo de emprendedores estableció una empresa de actividades artesanales que requiere de los artesanos locales. Por las características socioeconómicas, decidieron no elaborar contratos de trabajo, aunque sí existirá una relación laboral."
     enunciado: "¿Qué sujetos son indispensables en una relación laboral para llevar a cabo el objetivo de la empresa artesanal?"
     opciones:
@@ -1606,6 +1716,7 @@ reactivos:
     tipo: directo
     area: F
     subarea: F2
+    tema: "Derecho de huelga"
     caso: "Un sindicato de trabajadores de una empresa textil declaró la huelga porque la parte patronal no cumplió con cláusulas del contrato colectivo y se negó a negociar el incremento de salarios. Los trabajadores quieren evitar que la huelga sea declarada ilegal, por lo que cumplieron con los requisitos de la ley."
     enunciado: "¿Cuál de los siguientes requisitos NO corresponde a la petición de huelga?"
     opciones:
@@ -1620,6 +1731,7 @@ reactivos:
     tipo: directo
     area: F
     subarea: F2
+    tema: "Derecho de huelga"
     caso: "Un sindicato de trabajadores de una empresa textil declaró la huelga porque la parte patronal no cumplió con cláusulas del contrato colectivo y se negó a negociar el incremento de salarios. Los trabajadores quieren evitar que la huelga sea declarada ilegal, por lo que cumplieron con los requisitos de la ley."
     enunciado: "¿Cuál de los siguientes requisitos es necesario para que la huelga no sea declarada inexistente?"
     opciones:
@@ -1634,6 +1746,7 @@ reactivos:
     tipo: directo
     area: F
     subarea: F2
+    tema: "Riesgos de trabajo"
     caso: "En una empresa siderúrgica, un obrero al salir de su trabajo fue atropellado por un conductor que se dio a la fuga. Fue atendido en el IMSS, donde por la gravedad de la lesión tuvieron que amputarle una pierna."
     enunciado: "¿Qué derechos tiene el trabajador, si el accidente no ocurrió en las instalaciones de la empresa donde trabaja?"
     opciones:
@@ -1652,6 +1765,7 @@ reactivos:
     tipo: directo
     area: D
     subarea: D1
+    tema: "Tipos de mercado"
     caso: "Se creó el Hotel Pet Care, un hotel para mascotas que ofrece baños, cepillado de dientes, área de juegos con alberca, comida, masajes y cuidados exclusivos. La campaña en redes sociales se dirigió a personas entre 25 y 35 años que se definan como 'Pet lovers', además de un flyer en una gaceta quincenal distribuida en Interlomas, Ciudad de México."
     enunciado: "¿Qué tipos de mercado se ejemplifican en el párrafo anterior?"
     opciones:
@@ -1666,6 +1780,7 @@ reactivos:
     tipo: directo
     area: D
     subarea: D1
+    tema: "Buyer persona"
     caso: "Se creó el Hotel Pet Care, un hotel para mascotas que ofrece baños, cepillado de dientes, área de juegos con alberca, comida, masajes y cuidados exclusivos. La campaña en redes sociales se dirigió a personas entre 25 y 35 años que se definan como 'Pet lovers', además de un flyer en una gaceta quincenal distribuida en Interlomas, Ciudad de México."
     enunciado: "¿Cuál es el texto que más encaja para la descripción de un buyer persona del caso?"
     opciones:
@@ -1680,6 +1795,7 @@ reactivos:
     tipo: directo
     area: D
     subarea: D1
+    tema: "Marketing internacional"
     caso: "Una reconocida empresa de comida rápida realizó un análisis de mercado en diferentes ciudades, lo que le permitió reconocer qué platillos son preferidos en distintos países. Esa estrategia fue la clave de su éxito y su expansión empresarial, llevando el mismo bien o servicio a mercados más amplios."
     enunciado: "¿Qué tipo de marketing llevó a cabo la reconocida empresa?"
     opciones:
@@ -1694,6 +1810,7 @@ reactivos:
     tipo: directo
     area: D
     subarea: D1
+    tema: "Objetivos de marketing"
     caso: "Una reconocida empresa de comida rápida realizó un análisis de mercado en diferentes ciudades, lo que le permitió reconocer qué platillos son preferidos en distintos países. Esa estrategia fue la clave de su éxito y su expansión empresarial, llevando el mismo bien o servicio a mercados más amplios."
     enunciado: "¿Qué objetivos se formulan para un buen nivel de desempeño en un mercado internacional?"
     opciones:
@@ -1708,6 +1825,7 @@ reactivos:
     tipo: directo
     area: D
     subarea: D2
+    tema: "CRM"
     caso: "Una empresa nacional de ropa de dama y caballero, con 35 tiendas en México, inició hace cinco años la venta en línea. Para idealizar nuevas estrategias requiere mucha información de sus clientes (saber qué artículo es el más solicitado). Lo que quiere conseguir, además de un mayor nivel de ventas, es fidelización y satisfacción del cliente."
     enunciado: "¿Qué técnica o herramienta de mercadotecnia es conveniente que implemente dicha empresa?"
     opciones:
@@ -1722,6 +1840,7 @@ reactivos:
     tipo: directo
     area: D
     subarea: D2
+    tema: "Minería de datos"
     caso: "Una empresa nacional de ropa de dama y caballero, con 35 tiendas en México, inició hace cinco años la venta en línea. Para idealizar nuevas estrategias requiere mucha información de sus clientes (saber qué artículo es el más solicitado). Lo que quiere conseguir, además de un mayor nivel de ventas, es fidelización y satisfacción del cliente."
     enunciado: "¿Qué concepto se refiere a la transformación de datos útiles para la empresa?"
     opciones:
@@ -1736,6 +1855,7 @@ reactivos:
     tipo: directo
     area: D
     subarea: D2
+    tema: "Neuromarketing"
     caso: "Jeriko, marca de alimentos lácteos nueva en el mercado, tiene como público objetivo a menores de entre 5 y 12 años. El director creativo realizará una campaña de neuromarketing, una prueba sensorial, midiendo las reacciones mediante una técnica de resonancia que explora el cerebro e identifica qué zona se activa ante cada estímulo."
     enunciado: "¿Qué procedimiento específico se aplicará a los sujetos para medir con el resonador?"
     opciones:
@@ -1750,6 +1870,7 @@ reactivos:
     tipo: directo
     area: D
     subarea: D2
+    tema: "Métodos de investigación cualitativa"
     caso: "Saphiro Mish, marca de maquillaje profesional, para lanzar un nuevo producto reunió a 8 maquillistas profesionales de entre 25 y 35 años. Les entregó un cuaderno de anotaciones, tres prototipos y un set de brochas, y por un mes debían documentar a detalle sus experiencias usándolos con sus clientes. Después se reunieron a compartir sus vivencias y eligieron el prototipo 2."
     enunciado: "¿A qué tipo de método hace referencia el caso expuesto?"
     opciones:
@@ -1764,6 +1885,7 @@ reactivos:
     tipo: directo
     area: D
     subarea: D2
+    tema: "Historias de vida"
     caso: "Saphiro Mish, marca de maquillaje profesional, para lanzar un nuevo producto reunió a 8 maquillistas profesionales de entre 25 y 35 años. Les entregó un cuaderno de anotaciones, tres prototipos y un set de brochas, y por un mes debían documentar a detalle sus experiencias usándolos con sus clientes. Después se reunieron a compartir sus vivencias y eligieron el prototipo 2."
     enunciado: "¿Cuál es el nombre correcto del tipo de sesión empleada en la estrategia?"
     opciones:
@@ -1778,6 +1900,7 @@ reactivos:
     tipo: directo
     area: D
     subarea: D2
+    tema: "Análisis de investigación de mercados"
     caso: "Saphiro Mish, marca de maquillaje profesional, para lanzar un nuevo producto reunió a 8 maquillistas profesionales de entre 25 y 35 años. Les entregó un cuaderno de anotaciones, tres prototipos y un set de brochas, y por un mes debían documentar a detalle sus experiencias usándolos con sus clientes. Después se reunieron a compartir sus vivencias y eligieron el prototipo 2."
     enunciado: "¿Qué parte de la estrategia permite tener un resumen de los aspectos más relevantes?"
     opciones:
@@ -1799,6 +1922,7 @@ reactivos:
     tipo: ordenamiento
     area: A
     subarea: A3
+    tema: "Toma de decisiones"
     enunciado: "Ordena las siguientes etapas del proceso de toma de decisiones gerenciales de acuerdo con la secuencia lógica correcta:"
     elementos:
       - "Identificar el problema u oportunidad"
@@ -1813,6 +1937,7 @@ reactivos:
     tipo: ordenamiento
     area: E
     subarea: E1
+    tema: "Valor presente neto (VPN)"
     enunciado: "Para calcular el Valor Presente Neto (VPN) de un proyecto de inversión, ordena los pasos en la secuencia correcta:"
     elementos:
       - "Estimar los flujos de efectivo futuros del proyecto"
@@ -1827,6 +1952,7 @@ reactivos:
     tipo: relacion
     area: D
     subarea: D1
+    tema: "Conceptos de mercadotecnia"
     enunciado: "Relaciona cada concepto de mercadotecnia (columna izquierda) con su definición correcta (columna derecha):"
     columnaIzquierda:
       - "Segmentación de mercado"
@@ -1846,6 +1972,7 @@ reactivos:
     tipo: relacion
     area: F
     subarea: F2
+    tema: "Figuras jurídicas mercantiles"
     enunciado: "Relaciona cada figura jurídica del derecho mercantil (columna izquierda) con su característica principal (columna derecha):"
     columnaIzquierda:
       - "Sociedad Anónima (S.A.)"
@@ -1875,6 +2002,7 @@ reactivos:
     tipo: directo
     area: B
     subarea: B1
+    tema: "Estados financieros"
     origen: generado
     enunciado: "¿Cuál estado financiero muestra la situación financiera de una entidad a una fecha determinada?"
     opciones:
@@ -1889,6 +2017,7 @@ reactivos:
     tipo: directo
     area: B
     subarea: B1
+    tema: "Ecuación contable"
     origen: generado
     enunciado: "En la ecuación contable básica, el capital contable es igual a:"
     opciones:
@@ -1904,6 +2033,7 @@ reactivos:
     tipo: directo
     area: B
     subarea: B2
+    tema: "Normas de Información Financiera (NIF)"
     origen: generado
     enunciado: "¿Qué organismo emite las Normas de Información Financiera (NIF) en México?"
     opciones:
@@ -1919,6 +2049,7 @@ reactivos:
     tipo: directo
     area: B
     subarea: B3
+    tema: "Partida doble"
     origen: generado
     enunciado: "De acuerdo con el principio de partida doble, cada transacción afecta:"
     opciones:
@@ -1933,6 +2064,7 @@ reactivos:
     tipo: directo
     area: B
     subarea: B3
+    tema: "Naturaleza de las cuentas"
     origen: generado
     enunciado: "La cuenta de activo \"Clientes\" se incrementa mediante un:"
     opciones:
@@ -1948,6 +2080,7 @@ reactivos:
     tipo: directo
     area: B
     subarea: B5
+    tema: "Razones de liquidez"
     origen: generado
     enunciado: "La razón circulante (de liquidez) se calcula como:"
     opciones:
@@ -1962,6 +2095,7 @@ reactivos:
     tipo: directo
     area: B
     subarea: B5
+    tema: "Razones de liquidez"
     origen: generado
     enunciado: "Una empresa tiene activo circulante de $800,000 y pasivo circulante de $400,000. Su razón circulante es:"
     opciones:
@@ -1976,6 +2110,7 @@ reactivos:
     tipo: directo
     area: B
     subarea: B5
+    tema: "Margen de utilidad"
     origen: generado
     enunciado: "El margen de utilidad neta se obtiene dividiendo:"
     opciones:
@@ -1990,6 +2125,7 @@ reactivos:
     tipo: directo
     area: B
     subarea: B5
+    tema: "Rentabilidad (ROA)"
     origen: generado
     enunciado: "El ROA (rendimiento sobre activos) relaciona:"
     opciones:
@@ -2004,6 +2140,7 @@ reactivos:
     tipo: directo
     area: B
     subarea: B5
+    tema: "Prueba del ácido"
     origen: generado
     enunciado: "La prueba del ácido se distingue de la razón circulante porque:"
     opciones:
@@ -2019,6 +2156,7 @@ reactivos:
     tipo: directo
     area: C
     subarea: C1
+    tema: "Costo de oportunidad"
     origen: generado
     enunciado: "El costo de oportunidad de una decisión es:"
     opciones:
@@ -2033,6 +2171,7 @@ reactivos:
     tipo: directo
     area: C
     subarea: C1
+    tema: "Ley de la demanda"
     origen: generado
     enunciado: "La ley de la demanda establece que, manteniendo lo demás constante:"
     opciones:
@@ -2047,6 +2186,7 @@ reactivos:
     tipo: directo
     area: C
     subarea: C1
+    tema: "Tipos de bienes"
     origen: generado
     enunciado: "Un bien cuya demanda aumenta cuando se incrementa el ingreso del consumidor se denomina:"
     opciones:
@@ -2062,6 +2202,7 @@ reactivos:
     tipo: directo
     area: C
     subarea: C2
+    tema: "Punto de equilibrio"
     origen: generado
     enunciado: "En el punto de equilibrio de una empresa:"
     opciones:
@@ -2076,6 +2217,7 @@ reactivos:
     tipo: directo
     area: C
     subarea: C2
+    tema: "Costo marginal"
     origen: generado
     enunciado: "El costo marginal es:"
     opciones:
@@ -2090,6 +2232,7 @@ reactivos:
     tipo: directo
     area: C
     subarea: C2
+    tema: "Costos fijos y variables"
     origen: generado
     enunciado: "Los costos fijos se caracterizan por:"
     opciones:
@@ -2104,6 +2247,7 @@ reactivos:
     tipo: directo
     area: C
     subarea: C2
+    tema: "Ley de rendimientos decrecientes"
     origen: generado
     enunciado: "La ley de los rendimientos decrecientes indica que:"
     opciones:
@@ -2119,6 +2263,7 @@ reactivos:
     tipo: directo
     area: C
     subarea: C3
+    tema: "Producto Interno Bruto (PIB)"
     origen: generado
     enunciado: "El Producto Interno Bruto (PIB) mide:"
     opciones:
@@ -2133,6 +2278,7 @@ reactivos:
     tipo: directo
     area: C
     subarea: C3
+    tema: "Inflación"
     origen: generado
     enunciado: "La inflación se define como:"
     opciones:
@@ -2147,6 +2293,7 @@ reactivos:
     tipo: directo
     area: C
     subarea: C3
+    tema: "Política monetaria"
     origen: generado
     enunciado: "El organismo encargado de la política monetaria en México es:"
     opciones:
@@ -2161,6 +2308,7 @@ reactivos:
     tipo: directo
     area: C
     subarea: C3
+    tema: "Política monetaria"
     origen: generado
     enunciado: "Una política monetaria restrictiva típicamente implica:"
     opciones:
@@ -2175,6 +2323,7 @@ reactivos:
     tipo: directo
     area: C
     subarea: C3
+    tema: "PIB real vs. nominal"
     origen: generado
     enunciado: "El PIB real se diferencia del PIB nominal en que:"
     opciones:
@@ -2189,6 +2338,7 @@ reactivos:
     tipo: directo
     area: C
     subarea: C3
+    tema: "Tasa de desempleo"
     origen: generado
     enunciado: "La tasa de desempleo se calcula como:"
     opciones:
@@ -2203,6 +2353,7 @@ reactivos:
     tipo: directo
     area: C
     subarea: C3
+    tema: "Política fiscal"
     origen: generado
     enunciado: "La política fiscal se ejerce principalmente mediante:"
     opciones:
@@ -2217,6 +2368,7 @@ reactivos:
     tipo: directo
     area: C
     subarea: C3
+    tema: "Tipo de cambio y exportaciones"
     origen: generado
     enunciado: "Si la moneda nacional se deprecia frente al dólar, las exportaciones tienden a:"
     opciones:
@@ -2232,6 +2384,7 @@ reactivos:
     tipo: directo
     area: D
     subarea: D1
+    tema: "Segmentación de mercado"
     origen: generado
     enunciado: "La segmentación de mercado consiste en:"
     opciones:
@@ -2246,6 +2399,7 @@ reactivos:
     tipo: directo
     area: D
     subarea: D1
+    tema: "Mezcla de mercadotecnia (4P)"
     origen: generado
     enunciado: "Las \"4 P\" de la mezcla de mercadotecnia son:"
     opciones:
@@ -2260,6 +2414,7 @@ reactivos:
     tipo: directo
     area: D
     subarea: D1
+    tema: "Posicionamiento"
     origen: generado
     enunciado: "El posicionamiento de una marca se refiere a:"
     opciones:
@@ -2274,6 +2429,7 @@ reactivos:
     tipo: directo
     area: D
     subarea: D1
+    tema: "Mercado meta"
     origen: generado
     enunciado: "El mercado meta (target) de una empresa es:"
     opciones:
@@ -2288,6 +2444,7 @@ reactivos:
     tipo: directo
     area: D
     subarea: D1
+    tema: "Investigación de mercados"
     origen: generado
     enunciado: "La investigación de mercados sirve principalmente para:"
     opciones:
@@ -2302,6 +2459,7 @@ reactivos:
     tipo: directo
     area: D
     subarea: D1
+    tema: "Ciclo de vida del producto"
     origen: generado
     enunciado: "En el ciclo de vida del producto, la etapa de mayores ventas que luego se estabilizan es la de:"
     opciones:
@@ -2316,6 +2474,7 @@ reactivos:
     tipo: directo
     area: D
     subarea: D1
+    tema: "Fijación de precios"
     origen: generado
     enunciado: "La fijación de precios basada en la demanda toma como referencia principal:"
     opciones:
@@ -2330,6 +2489,7 @@ reactivos:
     tipo: directo
     area: D
     subarea: D1
+    tema: "Canales de distribución"
     origen: generado
     enunciado: "Un canal de distribución directo se caracteriza por:"
     opciones:
@@ -2344,6 +2504,7 @@ reactivos:
     tipo: directo
     area: D
     subarea: D1
+    tema: "Elasticidad de la demanda"
     origen: generado
     enunciado: "La demanda de un producto es elástica cuando:"
     opciones:
@@ -2358,6 +2519,7 @@ reactivos:
     tipo: directo
     area: D
     subarea: D1
+    tema: "Branding"
     origen: generado
     enunciado: "El branding se refiere a:"
     opciones:
@@ -2372,6 +2534,7 @@ reactivos:
     tipo: directo
     area: D
     subarea: D1
+    tema: "Matriz de Ansoff"
     origen: generado
     enunciado: "Según la matriz de Ansoff, una estrategia de penetración de mercado busca:"
     opciones:
@@ -2386,6 +2549,7 @@ reactivos:
     tipo: directo
     area: D
     subarea: D1
+    tema: "Promoción de ventas"
     origen: generado
     enunciado: "La promoción de ventas se distingue de la publicidad porque:"
     opciones:
@@ -2401,6 +2565,7 @@ reactivos:
     tipo: directo
     area: E
     subarea: E1
+    tema: "Interés simple"
     origen: generado
     enunciado: "El interés simple generado por un capital de $10,000 al 5% anual durante 2 años es:"
     opciones:
@@ -2415,6 +2580,7 @@ reactivos:
     tipo: directo
     area: E
     subarea: E1
+    tema: "Interés simple (monto)"
     origen: generado
     enunciado: "El monto (capital más interés) de $8,000 a interés simple del 4% anual durante 3 años es:"
     opciones:
@@ -2429,6 +2595,7 @@ reactivos:
     tipo: directo
     area: E
     subarea: E1
+    tema: "Interés compuesto"
     origen: generado
     enunciado: "A interés compuesto, el monto de $5,000 al 10% anual durante 2 años es:"
     opciones:
@@ -2443,6 +2610,7 @@ reactivos:
     tipo: directo
     area: E
     subarea: E1
+    tema: "Interés compuesto"
     origen: generado
     enunciado: "El interés compuesto se diferencia del interés simple en que:"
     opciones:
@@ -2457,6 +2625,7 @@ reactivos:
     tipo: directo
     area: E
     subarea: E1
+    tema: "Tasas de interés"
     origen: generado
     enunciado: "Una tasa nominal anual del 12% capitalizable mensualmente equivale a una tasa mensual de:"
     opciones:
@@ -2471,6 +2640,7 @@ reactivos:
     tipo: directo
     area: E
     subarea: E1
+    tema: "Valor presente"
     origen: generado
     enunciado: "El valor presente de $11,000 que se recibirán en un año, con una tasa del 10% anual, es:"
     opciones:
@@ -2485,6 +2655,7 @@ reactivos:
     tipo: directo
     area: E
     subarea: E1
+    tema: "Interés simple (tiempo)"
     origen: generado
     enunciado: "A interés simple del 10% anual, ¿en cuánto tiempo se duplica un capital?"
     opciones:
@@ -2499,6 +2670,7 @@ reactivos:
     tipo: directo
     area: E
     subarea: E1
+    tema: "Anualidades"
     origen: generado
     enunciado: "Una anualidad consiste en:"
     opciones:
@@ -2513,6 +2685,7 @@ reactivos:
     tipo: directo
     area: E
     subarea: E1
+    tema: "Descuento simple"
     origen: generado
     enunciado: "El descuento simple sobre un documento de $20,000 con tasa del 6% a 6 meses es:"
     opciones:
@@ -2528,6 +2701,7 @@ reactivos:
     tipo: directo
     area: F
     subarea: F1
+    tema: "Jerarquía de las leyes (Constitución)"
     origen: generado
     enunciado: "La Constitución Política de los Estados Unidos Mexicanos es:"
     opciones:
@@ -2542,6 +2716,7 @@ reactivos:
     tipo: directo
     area: F
     subarea: F1
+    tema: "Derecho público"
     origen: generado
     enunciado: "El derecho público regula principalmente:"
     opciones:
@@ -2556,6 +2731,7 @@ reactivos:
     tipo: directo
     area: F
     subarea: F1
+    tema: "Obligaciones fiscales constitucionales"
     origen: generado
     enunciado: "La obligación de contribuir al gasto público de manera proporcional y equitativa se establece en el artículo:"
     opciones:
@@ -2570,6 +2746,7 @@ reactivos:
     tipo: directo
     area: F
     subarea: F1
+    tema: "División de poderes"
     origen: generado
     enunciado: "Para su ejercicio, el poder público en México se divide en:"
     opciones:
@@ -2584,6 +2761,7 @@ reactivos:
     tipo: directo
     area: F
     subarea: F1
+    tema: "Impuestos y derechos"
     origen: generado
     enunciado: "Un impuesto se distingue de un derecho (contribución) en que:"
     opciones:
@@ -2599,6 +2777,7 @@ reactivos:
     tipo: directo
     area: F
     subarea: F2
+    tema: "Concepto de contrato"
     origen: generado
     enunciado: "Un contrato es:"
     opciones:
@@ -2613,6 +2792,7 @@ reactivos:
     tipo: directo
     area: F
     subarea: F2
+    tema: "Elementos del contrato"
     origen: generado
     enunciado: "Los elementos de existencia de un contrato son:"
     opciones:
@@ -2627,6 +2807,7 @@ reactivos:
     tipo: directo
     area: F
     subarea: F2
+    tema: "Capacidad jurídica"
     origen: generado
     enunciado: "Por regla general, la mayoría de edad y la plena capacidad de ejercicio se adquieren en México a los:"
     opciones:
@@ -2641,6 +2822,7 @@ reactivos:
     tipo: directo
     area: F
     subarea: F2
+    tema: "Sociedad anónima"
     origen: generado
     enunciado: "Una sociedad anónima se caracteriza porque:"
     opciones:
@@ -2655,6 +2837,7 @@ reactivos:
     tipo: directo
     area: F
     subarea: F2
+    tema: "Títulos de crédito (pagaré)"
     origen: generado
     enunciado: "El pagaré, como título de crédito, contiene:"
     opciones:
@@ -2669,6 +2852,7 @@ reactivos:
     tipo: directo
     area: F
     subarea: F2
+    tema: "Compraventa mercantil"
     origen: generado
     enunciado: "La compraventa mercantil se perfecciona cuando:"
     opciones:
@@ -2678,3 +2862,94 @@ reactivos:
       - "Se inscribe en el registro público"
     correcta: 1
     explicacion: "La compraventa se perfecciona por el acuerdo sobre la cosa y el precio, aunque aún no se hayan entregado ni pagado."
+
+  # ==========================================================================
+  # REACTIVOS MODELO DE LA GUÍA OFICIAL CENEVAL (origen: generado)
+  # --------------------------------------------------------------------------
+  # Enunciados transcritos de los ejemplos de la "Guía para el sustentante"
+  # (assets/guia-ceneval.pdf, sección "Cómo responder los reactivos"). La guía
+  # ilustra el FORMATO de cada tipo de reactivo pero NO publica la clave de
+  # respuestas: por ello la opción correcta y la explicación están INFERIDAS por
+  # razonamiento (origen: generado) y deben revisarse antes de tomarse como
+  # definitivas. El multirreactivo de matemáticas de la guía se omite porque sus
+  # datos transcritos no reproducen las opciones (no es resoluble con fidelidad).
+  # ==========================================================================
+
+  - id: GUIA-C1-001
+    tipo: directo
+    area: C
+    subarea: C1
+    tema: "Clasificación de la economía"
+    origen: generado
+    enunciado: "El mercado de pan se encontraba en una situación de equilibrio; simultáneamente se da un aumento en el precio de la harina, un aumento de los salarios de los trabajadores de la rama de la panificación y una mejora tecnológica. Con base en el supuesto anterior, identifique el área de la economía a la que se suscribe."
+    opciones:
+      - "Descriptiva con análisis macroeconómico"
+      - "Política económica con análisis macroeconómico"
+      - "Política económica con análisis microeconómico"
+      - "Descriptiva con análisis microeconómico"
+    correcta: 3
+    explicacion: "Respuesta inferida (la guía no publica clave). El supuesto describe el comportamiento de un solo mercado (el del pan) sin prescribir medidas de gobierno, por lo que corresponde a la economía descriptiva (positiva); al tratarse de un mercado específico, el análisis es microeconómico."
+
+  - id: GUIA-B5-001
+    tipo: completamiento
+    area: B
+    subarea: B5
+    tema: "Análisis financiero horizontal"
+    origen: generado
+    enunciado: "El método de análisis financiero horizontal se caracteriza por ____, representar linealmente un indicador determinado y propiciar inferencias o pronósticos."
+    opciones:
+      - "formular porcentualmente los estados financieros"
+      - "comparar la situación financiera con otras empresas"
+      - "analizar la posición financiera"
+      - "estimar la tendencia de alguna razón en particular"
+    correcta: 3
+    explicacion: "Respuesta inferida (la guía no publica clave). El análisis horizontal compara cifras de un mismo indicador a lo largo de varios periodos, por lo que su rasgo distintivo es estimar la tendencia de alguna razón en particular para inferir pronósticos."
+
+  - id: GUIA-D1-001
+    tipo: directo
+    area: D
+    subarea: D1
+    tema: "Proceso de investigación de mercados"
+    origen: generado
+    enunciado: "Una nueva comercializadora de plásticos que está incursionando en el mercado mexicano no tiene identificado el segmento meta, por lo que llevará a cabo un proceso mercadológico. De las siguientes fases (1. Planteamiento del problema, 2. Hipótesis, 3. Objetivo, 4. Selección de la información, 5. Conclusión, 6. Análisis de resultados), ¿cuáles forman parte del proceso de investigación de mercados para esta empresa?"
+    opciones:
+      - "1, 2, 4"
+      - "1, 3, 5"
+      - "2, 5, 6"
+      - "3, 4, 6"
+    correcta: 0
+    explicacion: "Respuesta inferida (la guía no publica clave). El proceso de investigación de mercados arranca con el planteamiento del problema (1), formula hipótesis (2) y selecciona/recolecta la información (4); las demás combinaciones omiten el problema o mezclan etapas finales sin el arranque."
+
+  - id: GUIA-A2-001
+    tipo: ordenamiento
+    area: A
+    subarea: A2
+    tema: "Enfoque de sistemas"
+    origen: generado
+    enunciado: "Con base en el siguiente listado de elementos, ordénelos por entradas, procesos, salidas y retroalimentación de acuerdo con el enfoque de Sistemas."
+    elementos:
+      - "Maquinaria, equipo o ambos"
+      - "Evaluación de procedimientos de trabajo"
+      - "Materia prima, información o ambos"
+      - "Bienes, servicios o ambos"
+    ordenCorrecto: [2, 0, 3, 1]
+    explicacion: "Respuesta inferida (la guía no publica clave). En el enfoque de sistemas las entradas son la materia prima/información, los procesos son la maquinaria/equipo que la transforma, las salidas son los bienes/servicios y la retroalimentación es la evaluación de los procedimientos de trabajo."
+
+  - id: GUIA-A5-001
+    tipo: relacion
+    area: A
+    subarea: A5
+    tema: "Sistemas de información estratégicos"
+    origen: generado
+    enunciado: "Una gran cadena de autoservicio contrata a una consultora de tecnología para identificar las funciones de cada sistema de información estratégico. Relacione cada tipo de sistema con su función correspondiente."
+    columnaIzquierda:
+      - "ERP"
+      - "CRM"
+      - "SCM"
+    columnaDerecha:
+      - "Cadena de suministro"
+      - "Comunicación e integración de áreas"
+      - "Inteligencia de negocio"
+      - "Seguimiento de clientes"
+    emparejamientos: [[0, 1], [1, 3], [2, 0]]
+    explicacion: "Respuesta inferida (la guía no publica clave). El ERP integra y comunica las áreas de la empresa; el CRM da seguimiento a los clientes; y el SCM administra la cadena de suministro. 'Inteligencia de negocio' queda como distractor."
