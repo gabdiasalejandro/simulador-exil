@@ -364,33 +364,6 @@ export function ReportView({ attempt, questions = [], onReset }: ReportViewProps
           </div>
         </Tile>
 
-        {/* Temas para reforzar — sugerencias de estudio finas (por tema) */}
-        {temasReforzar.length > 0 && (
-          <Tile className="col-span-2 sm:col-span-4">
-            <h3 className="text-sm font-semibold uppercase tracking-wide text-gray-500">
-              Temas para reforzar
-            </h3>
-            <p className="mb-3 mt-0.5 text-xs text-gray-400">
-              Temas en los que fallaste; conviene repasarlos antes de tu próximo intento.
-            </p>
-            <ul className="flex flex-wrap gap-2">
-              {temasReforzar.map(([tema, count]) => (
-                <li
-                  key={tema}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-red-200 bg-red-50 px-3 py-1 text-sm text-red-800"
-                >
-                  {tema}
-                  {count > 1 && (
-                    <span className="rounded-full bg-red-200 px-1.5 text-xs font-semibold tabular-nums">
-                      {count}
-                    </span>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </Tile>
-        )}
-
         {/* bankWarnings */}
         {report.bankWarnings.length > 0 && (
           <div className="col-span-2 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800 sm:col-span-4">
@@ -423,6 +396,32 @@ export function ReportView({ attempt, questions = [], onReset }: ReportViewProps
               →
             </span>
           </button>
+        )}
+
+        {/* Temas a reforzar — sugerencias de estudio finas (por tema) */}
+        {temasReforzar.length > 0 && (
+          <Tile className="col-span-2 sm:col-span-4">
+            <h3 className="text-sm font-semibold uppercase tracking-wide text-gray-500">
+              Temas a reforzar
+            </h3>
+            <p className="mb-3 mt-0.5 text-xs text-gray-400">
+              Contenidos no acertados, agrupados por tema. Se recomienda su repaso
+              antes de un nuevo intento.
+            </p>
+            <ul className="divide-y divide-stone-200 border-t border-stone-200">
+              {temasReforzar.map(([tema, count]) => (
+                <li
+                  key={tema}
+                  className="flex items-baseline justify-between gap-4 py-2"
+                >
+                  <span className="text-sm text-gray-700">{tema}</span>
+                  <span className="shrink-0 text-xs tabular-nums text-gray-400">
+                    {count} {count === 1 ? 'reactivo' : 'reactivos'}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </Tile>
         )}
       </div>
     </main>

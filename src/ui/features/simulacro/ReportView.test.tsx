@@ -113,7 +113,7 @@ describe('ReportView', () => {
     render(
       <ReportView attempt={makeAttempt(mockReport)} questions={questions} onReset={vi.fn()} />,
     );
-    expect(screen.getByText('Temas para reforzar')).toBeInTheDocument();
+    expect(screen.getByText('Temas a reforzar')).toBeInTheDocument();
     expect(screen.getByText('Interés simple')).toBeInTheDocument();
     expect(screen.getByText('Punto de equilibrio')).toBeInTheDocument();
   });
